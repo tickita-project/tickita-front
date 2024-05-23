@@ -10,5 +10,6 @@ jobs:
     steps:
       - uses: hkusu/review-assign-action@v1
         with:
+          github-token: ${{ secrets.GH_TOKEN }} # 깃허브 토큰
           assignees: ${{ github.actor }} # assign - PR 만든 사람
           reviewers: wo-o29, NJ97S, jae6269, tead7 # 리뷰어 추가
