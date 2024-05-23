@@ -15,32 +15,32 @@ jobs:
         if: github.event_name == 'issues'
         id: check_issue_title
         run: |
-          if [[ "${{ github.event.issue.title }}" =~ \[(refactor|fix)\] ]]; then
-            echo "TITLE_CONTAINS_REFIX=true" >> $GITHUB_ENV
+          if [[ "${{ github.event.issue.title }}" =~ \[fix\] ]]; then
+            echo "TITLE_CONTAINS_FIX=true" >> $GITHUB_ENV
           else
-            echo "TITLE_CONTAINS_REFIX=false" >> $GITHUB_ENV
+            echo "TITLE_CONTAINS_FIX=false" >> $GITHUB_ENV
           fi
 
-      - name: Add 'refactor' or 'fix' label to Issues if title contains '[refactor]' or '[fix]'
-        if: github.event_name == 'issues' && env.TITLE_CONTAINS_REFIX == 'true'
+      - name: Add 'fix' label to Issues if title contains '[fix]'
+        if: github.event_name == 'issues' && env.TITLE_CONTAINS_FIX == 'true'
         uses: actions-ecosystem/action-add-labels@v1
         with:
           github_token: ${{ secrets.GH_TOKEN }}
-          labels: "refactor, fix"
+          labels: "fix"
 
       - name: Check Title for Pull Requests
         if: github.event_name == 'pull_request'
         id: check_pr_title
         run: |
-          if [[ "${{ github.event.pull_request.title }}" =~ \[(refactor|fix)\] ]]; then
-            echo "TITLE_CONTAINS_REFIX=true" >> $GITHUB_ENV
+          if [[ "${{ github.event.pull_request.title }}" =~ \[fix\] ]]; then
+            echo "TITLE_CONTAINS_FIX=true" >> $GITHUB_ENV
           else
-            echo "TITLE_CONTAINS_REFIX=false" >> $GITHUB_ENV
+            echo "TITLE_CONTAINS_FIX=false" >> $GITHUB_ENV
           fi
 
-      - name: Add 'refactor' or 'fix' label to Pull Requests if title contains '[refactor]' or '[fix]'
-        if: github.event_name == 'pull_request' && env.TITLE_CONTAINS_REFIX == 'true'
+      - name: Add 'fix' label to Pull Requests if title contains '[fix]'
+        if: github.event_name == 'pull_request' && env.TITLE_CONTAINS_FIX == 'true'
         uses: actions-ecosystem/action-add-labels@v1
         with:
           github_token: ${{ secrets.GH_TOKEN }}
-          labels: "refactor, fix"
+          labels: "fix"
