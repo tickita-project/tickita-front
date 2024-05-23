@@ -25,7 +25,7 @@ jobs:
         if: github.event_name == 'issues' && env.TITLE_CONTAINS_REFIX == 'true'
         uses: actions-ecosystem/action-add-labels@v1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GH_TOKEN }}
           labels: "refactor, fix"
 
       - name: Check Title for Pull Requests
@@ -42,5 +42,5 @@ jobs:
         if: github.event_name == 'pull_request' && env.TITLE_CONTAINS_REFIX == 'true'
         uses: actions-ecosystem/action-add-labels@v1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GH_TOKEN }}
           labels: "refactor, fix"
