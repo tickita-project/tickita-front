@@ -1,8 +1,8 @@
 ---
-name: "⚙️feat"
+name: "⚙️ feat"
 about: 작업 사항을 알려주세요
 title: "[feat]"
-labels: "feat"
+labels: "⚙️ feat"
 assignees: ""
 ---
 

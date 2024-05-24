@@ -1,0 +1,21 @@
+filters:
+  - label: ⚙️ feat
+    regexs:
+      - /feat/i
+    events: [issues, pull_request]
+    targets: [title]
+  - label: 🛠️ fix
+    regexs:
+      - /fix/i
+    events: [issues, pull_request]
+    targets: [title]
+  - label: 🔨 refactor
+    regexs:
+      - /refactor/i
+    events: [issues, pull_request]
+    targets: [title]
+  - label: 🚀 deploy
+    regexs:
+      - /deploy/i
+    events: [issues, pull_request]
+    targets: [title]
