@@ -1,0 +1,23 @@
+name: Build Test
+
+on: [push, pull_request] # push, pull_request 이벤트 발생 시 실행
+
+jobs:
+  build-test:
+    name: Build Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18.x"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run build
+        run: npm run build
