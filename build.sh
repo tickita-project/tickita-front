@@ -1,9 +1,9 @@
 #!/bin/sh
 
-cd ../
+#cd ../
 
-mkdir output
+#mkdir output
 
-cp -R ./calander-front/* ./output
+#cp -R ./calander-front/* ./output
 
-cp -R ./output ./calander-front/
+#cp -R ./output ./calander-front/
