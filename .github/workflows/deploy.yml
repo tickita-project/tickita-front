@@ -11,13 +11,13 @@ jobs:
     container: pandoc/latex
 
     steps:
-      - name: Checkout source repository
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
       - name: Install mustache (to update the date)
-        run: sudo apt-get update && sudo apt-get install -y ruby-full && gem install mustache
 
-      - name: Run build script
+        run: apk add ruby && gem install mustache
+
+      - name: creates output
         run: chmod +x ./build.sh && sh ./build.sh
 
       - name: Pushes to another repository
