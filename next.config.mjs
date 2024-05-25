@@ -4,6 +4,7 @@ import path from "path";
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
 const nextConfig = {
+  output: "export",
   reactStrictMode: true,
   pageExtensions: ["page.tsx", "page.ts", "page.jsx", "page.js"],
   sassOptions: {
