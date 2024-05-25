@@ -14,7 +14,7 @@ export default function Home({ result }: any) {
       <div>{`ID: ${result.id}`}</div>
       <div>{`제목: ${result.title}`}</div>
       <div>{`상태: ${result.completed}`}</div>
-      <div>최종 배포 테스트</div>
+      <div>최종최종 배포 테스트</div>
     </>
   );
 }
