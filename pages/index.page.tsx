@@ -14,7 +14,7 @@ export default function Home({ result }: any) {
       <div>{`ID: ${result.id}`}</div>
       <div>{`제목: ${result.title}`}</div>
       <div>{`상태: ${result.completed}`}</div>
-      <div>제발 제발 이제 마지막이야</div>
+      <div>테스트</div>
     </>
   );
 }
