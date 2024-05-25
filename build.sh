@@ -4,6 +4,6 @@ cd ../
 
 mkdir output
 
-cp -R ./calander-front/* ./output
+cp -R ./tickita-front/* ./output
 
-cp -R ./output ./calander-front/
+cp -R ./output ./tickita-front/
