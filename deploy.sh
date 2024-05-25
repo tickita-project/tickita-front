@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /home/ubuntu/nextjs-ec2-test 
+cd /home/ubuntu/calander-front
 git pull origin main
 sudo npm install
 sudo npm run build
