@@ -14,7 +14,7 @@ export default function Home({ result }: any) {
       <div>{`ID: ${result?.id}`}</div>
       <div>{`제목: ${result?.title}`}</div>
       <div>{`상태: ${result?.completed}`}</div>
-      <div>aws 자동화 테스트 ssr</div>
+      <div>aws 자동화 테스트 distDir 추가</div>
     </>
   );
 }
