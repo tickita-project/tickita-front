@@ -1,0 +1,23 @@
+/*
+사용 방법
+@include tablet {
+  height: 9.4rem;
+  max-width: 86.3rem;
+}
+*/
+
+/* PC : 1201px ~ */
+
+/* Tablet : 601px ~ 1200px */
+@mixin tablet {
+  @media (min-width: 601px) and (max-width: 1200px) {
+    @content;
+  }
+}
+
+/* Mobile : 0px ~ 600px */
+@mixin mobile {
+  @media (max-width: 600px) {
+    @content;
+  }
+}
