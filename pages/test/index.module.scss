@@ -1,14 +1,14 @@
 .test {
   font-weight: 800;
-  color: red;
+  color: $red500;
 
   @include tablet {
     font-weight: 600;
-    color: blue;
+    color: $blue500;
   }
 
   @include mobile {
     font-weight: 400;
-    color: black;
+    color: $black;
   }
 }

@@ -10,7 +10,7 @@ const nextConfig = {
     // @import 사용 시 styles 폴더를 기본으로 설정
     includePaths: [path.join(__dirname, "styles")],
     // 매번 가져올 파일 추가
-    prependData: `@import "styles/global.scss";`,
+    prependData: `@import "styles/globals.scss";`,
   },
   // images: {
   //   remotePatterns: [
