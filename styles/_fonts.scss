@@ -30,6 +30,16 @@
 
 @font-face {
   font-family: "Pretendard";
+  font-weight: 700;
+  font-style: normal;
+  src:
+    url("https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Bold.woff2") format("woff2"),
+    url("https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Bold.woff") format("woff");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Pretendard";
   font-weight: 800;
   font-style: normal;
   src:
