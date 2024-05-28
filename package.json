@@ -13,6 +13,7 @@
     "@tanstack/react-query-devtools": "^5.37.1",
     "axios": "^1.7.2",
     "classnames": "^2.5.1",
+    "eslint-plugin-import": "^2.29.1",
     "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18",
