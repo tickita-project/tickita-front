@@ -6,7 +6,7 @@
       "error",
       {
         "newlines-between": "always",
-        "groups": ["builtin", "external", "internal"],
+        "groups": ["builtin", "external", "internal", "unknown"],
         "pathGroups": [
           {
             "pattern": "react",
@@ -27,8 +27,21 @@
             "position": "after"
           },
           {
-            "pattern": "@/**",
+            "pattern": "./components/**",
             "group": "internal"
+          },
+          {
+            "pattern": "@/types/**",
+            "group": "unknown"
+          },
+          {
+            "pattern": "./types/**",
+            "group": "unknown"
+          },
+          {
+            "pattern": "*.scss",
+            "group": "unknown",
+            "position": "after"
           }
         ],
         "pathGroupsExcludedImportTypes": [],
