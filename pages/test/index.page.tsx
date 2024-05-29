@@ -1,3 +1,4 @@
+import { QueryClient, dehydrate, useQuery } from "@tanstack/react-query";
 import styles from "./index.module.scss";
 
 interface UserInfoType {
@@ -7,27 +8,39 @@ interface UserInfoType {
   completed: boolean;
 }
 
-interface TestProps {
-  result: UserInfoType;
-}
+const fetchTodo = async (): Promise<UserInfoType> => {
+  try {
+    const res = await fetch("https://jsonplaceholder.typicode.com/todos/1");
+    if (!res.ok) {
+      throw new Error("ㅇ_ㅇ");
+    }
+    return res.json();
+  } catch (e: any) {
+    throw new Error(e);
+  }
+};
 
 export const getServerSideProps = async () => {
-  const res = await fetch("https://jsonplaceholder.typicode.com/todos/1");
-  const result = await res.json();
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery({
+    queryKey: ["todos", "1"],
+    queryFn: fetchTodo,
+  });
 
   return {
-    props: { result },
+    props: { dehydratedState: dehydrate(queryClient) },
   };
 };
 
-export default function Test({ result }: TestProps) {
+export default function Test() {
+  const { data } = useQuery({ queryKey: ["todos", "1"], queryFn: fetchTodo });
+
   return (
     <>
-      <div className={styles.test}>{`유저 ID: ${result?.userId}`}</div>
-      <div>{`ID: ${result?.id}`}</div>
-      <div>{`제목: ${result?.title}`}</div>
-      <div>{`상태: ${result?.completed}`}</div>
-      <div>https 빌드 테스트</div>
+      <div className={styles.test}>{`유저 ID: ${data?.userId}`}</div>
+      <div>{`ID: ${data?.id}`}</div>
+      <div>{`제목: ${data?.title}`}</div>
+      <div>{`상태: ${data?.completed}`}</div>
     </>
   );
 }
