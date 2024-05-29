@@ -1,4 +1,5 @@
 import { QueryClient, dehydrate, useQuery } from "@tanstack/react-query";
+
 import styles from "./index.module.scss";
 
 interface UserInfoType {
