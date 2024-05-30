@@ -1,0 +1,75 @@
+.wrap {
+  width: 15rem;
+  height: 100vh;
+  background-color: $blue50;
+  margin-top: 5rem;
+  border: 1px solid $gray200;
+
+  .button-box {
+    padding: 0 1rem;
+
+    .button {
+      width: 13rem;
+      height: 3rem;
+      display: flex;
+      gap: 0.25rem;
+      margin: 3.5rem 0 4rem;
+      padding: 0.75rem 1.5rem;
+      background-color: $blue500;
+      border-radius: 8px;
+      color: $white;
+      font-weight: 700;
+      font-size: 1.0625rem;
+      letter-spacing: -0.02656rem;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .group-box {
+    padding: 0 1rem 0 1.75rem;
+    color: $gray700;
+    font-size: 0.875rem;
+    letter-spacing: -0.02188rem;
+
+    .group-info {
+      display: inline-block;
+      margin-bottom: 0.5rem;
+    }
+
+    .group-list {
+      color: $black;
+      font-weight: 500;
+      letter-spacing: -0.02188rem;
+      width: 13rem;
+      height: 2.5rem;
+      padding: 0.75rem 1.5rem 0.75rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      .group-color {
+        width: 1.25rem;
+        height: 1.25rem;
+        border-radius: 4px;
+
+        appearance: none; // 기본 스타일 제거
+        -webkit-appearance: none; // 사파리
+        cursor: default;
+
+        &:checked {
+          border: 1px solid $gray900;
+          background-color: $blue500;
+        }
+      }
+
+      .group-title {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}
