@@ -1,21 +1,22 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "./datePicker.module.scss";
+import classNames from "classnames";
 
 interface DatePickerProps {
   selectedDay: Date;
   setSelectedDay: (date: Date) => void;
-  isPrevMonth: boolean;
-  isNextMonth: boolean;
+  hasArrowButton: boolean;
 }
+
+const cn = classNames.bind(styles);
 
 export default function DatePicker({
   selectedDay,
   setSelectedDay,
-  isPrevMonth,
-  isNextMonth,
+  hasArrowButton = true,
 }: DatePickerProps) {
   const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
-  const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
+  const [currentMonth, setCurrentMonth] = useState<Date>(selectedDay);
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -86,27 +87,7 @@ export default function DatePicker({
 
   const buildCalendarTag = (calendarDays: Date[]) => {
     return calendarDays.map((day: Date, i: number) => {
-      if (day.getMonth() < currentMonth.getMonth()) {
-        return (
-          <td key={i} className="prevMonthDay">
-            {isPrevMonth ? day.getDate() : ""}
-          </td>
-        );
-      }
-      if (day.getMonth() > currentMonth.getMonth()) {
-        return (
-          <td key={i} className="nextMonthDay">
-            {isNextMonth ? day.getDate() : ""}
-          </td>
-        );
-      }
-      if (day < today) {
-        return (
-          <td key={i} className="prevDay">
-            {day.getDate()}
-          </td>
-        );
-      }
+      const isToday = day === currentMonth;
       return (
         <td
           key={i}
@@ -137,14 +118,16 @@ export default function DatePicker({
         <span className={styles.calendarMonth}>
           {currentMonth.getFullYear()}년 {currentMonth.getMonth() + 1}월
         </span>
-        <div className={styles.calendarNavigation}>
-          <button onClick={prevCalendar} className={styles.calendarButton}>
-            &lt;
-          </button>
-          <button onClick={nextCalendar} className={styles.calendarButton}>
-            &gt;
-          </button>
-        </div>
+        {hasArrowButton && (
+          <div className={styles.calendarNavigation}>
+            <button onClick={prevCalendar} className={styles.calendarButton}>
+              &lt;
+            </button>
+            <button onClick={nextCalendar} className={styles.calendarButton}>
+              &gt;
+            </button>
+          </div>
+        )}
       </div>
       <table className={styles.calendarTable}>
         <thead>
