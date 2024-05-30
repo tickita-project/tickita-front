@@ -1,20 +1,21 @@
-import { useState } from "react";
-
 import Image from "next/image";
 
 import classNames from "classnames/bind";
 
 import GroupColor from "@/components/GroupColor";
+import { useModalStore } from "@/store/useModalStore";
 
 import styles from "./GroupList.module.scss";
 
 const cn = classNames.bind(styles);
 
 export default function GroupList() {
+  const { openModal } = useModalStore();
+
   return (
     <div className={cn("wrap")}>
       <div className={cn("button-box")}>
-        <button type="button" className={cn("button")}>
+        <button type="button" className={cn("button")} onClick={() => openModal("CREATE_GROUP")}>
           <Image
             src="/icons/plus-icon.svg"
             width={20}
@@ -30,66 +31,6 @@ export default function GroupList() {
         <li className={cn("group-list")}>
           <GroupColor color="#FFAF8C" readOnly />
           <span className={cn("group-title")}> 엄청 엄청 엄청 엄청 엄청 엄청 긴 이름</span>
-        </li>
-        <li className={cn("group-list")}>
-          <GroupColor color="#D688EA" readOnly />
-          <span className={cn("group-title")}> 엄청 엄청 엄청 엄청 엄청 엄청 긴 이름111111</span>
-        </li>
-        <li className={cn("group-list")}>
-          <GroupColor color="#D688EA" readOnly />
-          <span className={cn("group-title")}> 엄청 엄청 엄청 엄청 엄청 엄청 긴 이름111111</span>
-        </li>
-        <li className={cn("group-list")}>
-          <GroupColor color="#D688EA" readOnly />
-          <span className={cn("group-title")}> 엄청 엄청 엄청 엄청 엄청 엄청 긴 이름111111</span>
-        </li>
-        <li className={cn("group-list")}>
-          <GroupColor color="#D688EA" readOnly />
-          <span className={cn("group-title")}> 엄청 엄청 엄청 엄청 엄청 엄청 긴 이름111111</span>
-        </li>
-        <li className={cn("group-list")}>
-          <GroupColor color="#D688EA" readOnly />
-          <span className={cn("group-title")}> 엄청 엄청 엄청 엄청 엄청 엄청 긴 이름111111</span>
-        </li>
-        <li className={cn("group-list")}>
-          <GroupColor color="#D688EA" readOnly />
-          <span className={cn("group-title")}> 엄청 엄청 엄청 엄청 엄청 엄청 긴 이름111111</span>
-        </li>
-        <li className={cn("group-list")}>
-          <GroupColor color="#D688EA" readOnly />
-          <span className={cn("group-title")}> 엄청 엄청 엄청 엄청 엄청 엄청 긴 이름111111</span>
-        </li>
-        <li className={cn("group-list")}>
-          <GroupColor color="#D688EA" readOnly />
-          <span className={cn("group-title")}> 엄청 엄청 엄청 엄청 엄청 엄청 긴 이름111111</span>
-        </li>
-        <li className={cn("group-list")}>
-          <GroupColor color="#D688EA" readOnly />
-          <span className={cn("group-title")}> 엄청 엄청 엄청 엄청 엄청 엄청 긴 이름111111</span>
-        </li>
-        <li className={cn("group-list")}>
-          <GroupColor color="#D688EA" readOnly />
-          <span className={cn("group-title")}> 엄청 엄청 엄청 엄청 엄청 엄청 긴 이름111111</span>
-        </li>
-        <li className={cn("group-list")}>
-          <GroupColor color="#D688EA" readOnly />
-          <span className={cn("group-title")}> 엄청 엄청 엄청 엄청 엄청 엄청 긴 이름111111</span>
-        </li>
-        <li className={cn("group-list")}>
-          <GroupColor color="#D688EA" readOnly />
-          <span className={cn("group-title")}> 엄청 엄청 엄청 엄청 엄청 엄청 긴 이름111111</span>
-        </li>
-        <li className={cn("group-list")}>
-          <GroupColor color="#D688EA" readOnly />
-          <span className={cn("group-title")}> 엄청 엄청 엄청 엄청 엄청 엄청 긴 이름111111</span>
-        </li>
-        <li className={cn("group-list")}>
-          <GroupColor color="#D688EA" readOnly />
-          <span className={cn("group-title")}> 엄청 엄청 엄청 엄청 엄청 엄청 긴 이름111111</span>
-        </li>
-        <li className={cn("group-list")}>
-          <GroupColor color="#D688EA" readOnly />
-          <span className={cn("group-title")}> 엄청 엄청 엄청 엄청 엄청 엄청 긴 이름111111</span>
         </li>
         <li className={cn("group-list")}>
           <GroupColor color="#D688EA" readOnly />
