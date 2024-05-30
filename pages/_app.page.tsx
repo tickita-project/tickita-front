@@ -1,8 +1,11 @@
-import type { AppProps } from "next/app";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import "@/styles/reset.scss";
 import { useState } from "react";
+
+import type { AppProps } from "next/app";
+
+import { HydrationBoundary, QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
+import "@/styles/reset.scss";
 
 export default function App({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(
@@ -16,10 +19,13 @@ export default function App({ Component, pageProps }: AppProps) {
         },
       }),
   );
+
   return (
     <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools initialIsOpen={false} />
-      <Component {...pageProps} />
+      <HydrationBoundary state={pageProps.dehydratedState}>
+        <ReactQueryDevtools initialIsOpen={false} />
+        <Component {...pageProps} />
+      </HydrationBoundary>
     </QueryClientProvider>
   );
 }
