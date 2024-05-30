@@ -25,16 +25,35 @@
       justify-content: center;
     }
   }
-
-  .group-box {
-    padding: 0 1rem 0 1.75rem;
+  .group-info {
+    display: inline-block;
+    margin-bottom: 0.7rem;
     color: $gray700;
     font-size: 0.875rem;
     letter-spacing: -0.02188rem;
+    padding: 0 1rem 0 1.75rem;
+  }
 
-    .group-info {
-      display: inline-block;
-      margin-bottom: 0.5rem;
+  .group-box {
+    padding: 0 1rem 0 1.75rem;
+    height: 40rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 0.75rem;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $blue100;
+      border: 2px solid $blue200;
+      border-radius: 5px;
+      min-height: 3.75rem;
+    }
+
+    &::-webkit-scrollbar-track {
+      border-radius: 100px;
+      background: $blue200;
     }
 
     .group-list {
