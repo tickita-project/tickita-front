@@ -1,6 +1,8 @@
 import { useState } from "react";
 import styles from "./datePicker.module.scss";
-import classNames from "classnames";
+import classNames from "classnames/bind";
+
+const cn = classNames.bind(styles);
 
 interface DatePickerProps {
   selectedDay: Date;
@@ -8,12 +10,10 @@ interface DatePickerProps {
   hasArrowButton: boolean;
 }
 
-const cn = classNames.bind(styles);
-
 export default function DatePicker({
   selectedDay,
   setSelectedDay,
-  hasArrowButton = true,
+  hasArrowButton,
 }: DatePickerProps) {
   const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
   const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
@@ -50,39 +50,35 @@ export default function DatePicker({
   };
 
   const buildCalendarDays = () => {
-    const curMonthStartDate = new Date(
-      currentMonth.getFullYear(),
-      currentMonth.getMonth(),
-      1,
-    ).getDay();
-    const curMonthEndDate = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 0);
+    const startOfMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 1);
+    const endOfMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 0);
+
+    const startDay = startOfMonth.getDay();
+    const endDay = endOfMonth.getDate();
+
     const prevMonthEndDate = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 0);
-    const nextMonthStartDate = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1);
-    const days: Date[] = Array.from({ length: curMonthStartDate }, (_, i) => {
-      return new Date(
-        currentMonth.getFullYear(),
-        currentMonth.getMonth() - 1,
-        prevMonthEndDate.getDate() - i,
-      );
-    }).reverse();
+    const days: Date[] = [];
 
-    days.push(
-      ...Array.from(
-        { length: curMonthEndDate.getDate() },
-        (_, i) => new Date(currentMonth.getFullYear(), currentMonth.getMonth(), i + 1),
-      ),
-    );
-
-    const remainingDays = 7 - (days.length % 7);
-    if (remainingDays < 7) {
+    for (let i = startDay - 1; i >= 0; i--) {
       days.push(
-        ...Array.from(
-          { length: remainingDays },
-          (_, i) =>
-            new Date(nextMonthStartDate.getFullYear(), nextMonthStartDate.getMonth(), i + 1),
+        new Date(
+          currentMonth.getFullYear(),
+          currentMonth.getMonth() - 1,
+          prevMonthEndDate.getDate() - i,
         ),
       );
     }
+
+    for (let i = 1; i <= endDay; i++) {
+      days.push(new Date(currentMonth.getFullYear(), currentMonth.getMonth(), i));
+    }
+
+    const nextMonthStartDate = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1);
+    while (days.length < 42) {
+      days.push(new Date(nextMonthStartDate));
+      nextMonthStartDate.setDate(nextMonthStartDate.getDate() + 1);
+    }
+
     return days;
   };
 
@@ -90,11 +86,7 @@ export default function DatePicker({
     return calendarDays.map((day: Date, i: number) => {
       const isToday = day === currentMonth;
       return (
-        <td
-          key={i}
-          className={`futureDay ${isSameDay(day, selectedDay) && "choiceDay"}`}
-          onClick={() => onClickDay(day)}
-        >
+        <td key={i} className={cn("date")} onClick={() => onClickDay(day)}>
           {day.getDate()}
         </td>
       );
@@ -114,30 +106,27 @@ export default function DatePicker({
   const calendarRows = divideWeek(calendarTags);
 
   return (
-    <div className={styles.calendar}>
-      <div className={styles.calendarHeader}>
-        <span className={styles.calendarMonth}>
+    <div className={cn("container")}>
+      <div className={cn("header")}>
+        <span className={cn("month")}>
           {currentMonth.getFullYear()}년 {currentMonth.getMonth() + 1}월
         </span>
         {hasArrowButton && (
-          <div className={styles.calendarNavigation}>
-            <button onClick={prevCalendar} className={styles.calendarButton}>
+          <div className={cn("navigation")}>
+            <button onClick={prevCalendar} className={cn("arrow-button")}>
               &lt;
             </button>
-            <button onClick={nextCalendar} className={styles.calendarButton}>
+            <button onClick={nextCalendar} className={cn("arrow-button")}>
               &gt;
             </button>
           </div>
         )}
       </div>
-      <table className={styles.calendarTable}>
+      <table className={cn("calendar-table")}>
         <thead>
           <tr>
             {daysOfWeek.map((day, i) => (
-              <th
-                key={i}
-                className={`${styles.calendarDay} ${day === "토" ? styles.saturday : day === "일" ? styles.sunday : ""}`}
-              >
+              <th key={i} className={cn("day")}>
                 {day}
               </th>
             ))}
