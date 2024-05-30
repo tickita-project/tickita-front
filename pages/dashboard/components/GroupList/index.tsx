@@ -11,12 +11,6 @@ import styles from "./GroupList.module.scss";
 const cn = classNames.bind(styles);
 
 export default function GroupList() {
-  const [isChecked, setIsChecked] = useState(false);
-
-  const handleCheckboxChange = (event: any) => {
-    setIsChecked(event.target.checked);
-  };
-
   return (
     <div className={cn("wrap")}>
       <div className={cn("button-box")}>
@@ -33,15 +27,13 @@ export default function GroupList() {
       </div>
       <ul className={cn("group-box")}>
         <span className={cn("group-info")}>현재 가입된 그룹</span>
-
         <li className={cn("group-list")}>
           <GroupColor color="#FFAF8C" readOnly />
           <span className={cn("group-title")}> 엄청 엄청 엄청 엄청 엄청 엄청 긴 이름</span>
         </li>
-
         <li className={cn("group-list")}>
-          <GroupColor color="#D688EA" checked={isChecked} onChange={handleCheckboxChange} />
-          <span className={cn("group-title")}> 엄청 엄청 엄청 엄청 엄청 엄청 긴 이름</span>
+          <GroupColor color="#D688EA" readOnly />
+          <span className={cn("group-title")}> 엄청 엄청 엄청 엄청 엄청 엄청 긴 이름111111</span>
         </li>
       </ul>
     </div>

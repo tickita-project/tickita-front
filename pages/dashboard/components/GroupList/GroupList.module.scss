@@ -1,6 +1,6 @@
 .wrap {
   width: 15rem;
-  height: 100vh;
+  height: calc(100vh - 5rem);
   background-color: $blue50;
   margin-top: 5rem;
   border: 1px solid $gray200;
