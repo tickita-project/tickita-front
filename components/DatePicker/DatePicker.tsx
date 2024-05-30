@@ -16,7 +16,7 @@ export default function DatePicker({
   hasArrowButton = true,
 }: DatePickerProps) {
   const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
-  const [currentMonth, setCurrentMonth] = useState<Date>(selectedDay);
+  const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -34,6 +34,7 @@ export default function DatePicker({
 
   const onClickDay = (day: Date) => {
     setSelectedDay(day);
+    setCurrentMonth(day);
   };
 
   const prevCalendar = () => {
