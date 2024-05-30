@@ -1,8 +1,7 @@
 .wrap {
   width: 15rem;
-  height: calc(100vh - 5rem);
+  height: calc(100vh - 5rem - 1px);
   background-color: $blue50;
-  margin-top: 5rem;
   border: 1px solid $gray200;
 
   .button-box {

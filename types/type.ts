@@ -1,11 +1,19 @@
 export type GroupColorType =
-  | "#FFAF8C"
-  | "#FF8585"
+  | "#FF7940"
+  | "#ff3333"
   | "#D688EA"
-  | "#85A0FF"
-  | "#7AE68B"
-  | "#85E9FF"
-  | "#696969"
+  | "#3360FF"
+  | "#21D53E"
+  | "#33DAFF"
+  | "#4F4F4F"
   | "#F380B7"
-  | "#FFD47B"
-  | "#84F4D2";
+  | "#FFB723"
+  | "#32ECB4";
+
+export interface UserInfoType {
+  id: number;
+  nickname: string;
+  email: string;
+  profileImageUrl: string | null;
+  phoneNumber: string | null;
+}

@@ -4,11 +4,12 @@ import { createPortal } from "react-dom";
 import { useModalStore } from "@/store/useModalStore";
 
 import styles from "./Portal.module.scss";
+import CreateGroupModal from "../CreateGroup";
 
 const cn = classNames.bind(styles);
 
 const MODAL_TYPE: Record<string, JSX.Element> = {
-  CREATE_GROUP: <div>각자 모달 컴포넌트 만들어서 넣기!</div>,
+  CREATE_GROUP: <CreateGroupModal />,
 };
 
 export default function Portal() {
