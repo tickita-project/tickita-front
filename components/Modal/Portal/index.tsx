@@ -1,5 +1,3 @@
-import { useEffect, useRef } from "react";
-
 import classNames from "classnames/bind";
 import { createPortal } from "react-dom";
 
