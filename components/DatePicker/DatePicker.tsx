@@ -18,34 +18,23 @@ export default function DatePicker({
   hasArrowButton,
 }: DatePickerProps) {
   const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
-  const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
+  const [currentMonth, setCurrentMonth] = useState<Date>(selectedDay);
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
-  const isSameDay = (toDay: Date, compareDay?: Date | null) => {
-    if (
-      toDay.getFullYear() === compareDay?.getFullYear() &&
-      toDay.getMonth() === compareDay?.getMonth() &&
-      toDay.getDate() === compareDay?.getDate()
-    ) {
-      return true;
-    }
-    return false;
-  };
-
-  const onClickDay = (day: Date) => {
+  const handleDateClick = (day: Date) => {
     setSelectedDay(day);
     setCurrentMonth(day);
   };
 
-  const prevCalendar = () => {
+  const handlePrevButtonClick = () => {
     setCurrentMonth(
       new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, currentMonth.getDate()),
     );
   };
 
-  const nextCalendar = () => {
+  const handleNextButtonClick = () => {
     setCurrentMonth(
       new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, currentMonth.getDate()),
     );
@@ -96,7 +85,7 @@ export default function DatePicker({
         <td
           key={i}
           className={cn("date", { today: isToday }, { otherMonth: isThisMonthDay })}
-          onClick={() => onClickDay(day)}
+          onClick={() => handleDateClick(day)}
         >
           {day.getDate()}
         </td>
@@ -124,10 +113,10 @@ export default function DatePicker({
         </span>
         {hasArrowButton && (
           <div className={cn("navigation")}>
-            <button onClick={prevCalendar} className={cn("arrow-button")}>
+            <button onClick={handlePrevButtonClick} className={cn("arrow-button")}>
               &lt;
             </button>
-            <button onClick={nextCalendar} className={cn("arrow-button")}>
+            <button onClick={handleNextButtonClick} className={cn("arrow-button")}>
               &gt;
             </button>
           </div>
