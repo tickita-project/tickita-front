@@ -84,9 +84,13 @@ export default function DatePicker({
 
   const buildCalendarTag = (calendarDays: Date[]) => {
     return calendarDays.map((day: Date, i: number) => {
-      const isToday = day === currentMonth;
+      const isToday =
+        day.getFullYear() === selectedDay.getFullYear() &&
+        day.getMonth() === selectedDay.getMonth() &&
+        day.getDate() === selectedDay.getDate();
+
       return (
-        <td key={i} className={cn("date")} onClick={() => onClickDay(day)}>
+        <td key={i} className={cn("date", { today: isToday })} onClick={() => onClickDay(day)}>
           {day.getDate()}
         </td>
       );
