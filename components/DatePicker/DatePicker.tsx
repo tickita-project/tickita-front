@@ -1,6 +1,8 @@
 import { useState } from "react";
-import styles from "./datePicker.module.scss";
+
 import classNames from "classnames/bind";
+
+import styles from "./datePicker.module.scss";
 
 const cn = classNames.bind(styles);
 
@@ -84,13 +86,18 @@ export default function DatePicker({
 
   const buildCalendarTag = (calendarDays: Date[]) => {
     return calendarDays.map((day: Date, i: number) => {
+      const isThisMonthDay = day.getMonth() !== selectedDay.getMonth();
       const isToday =
         day.getFullYear() === selectedDay.getFullYear() &&
         day.getMonth() === selectedDay.getMonth() &&
         day.getDate() === selectedDay.getDate();
 
       return (
-        <td key={i} className={cn("date", { today: isToday })} onClick={() => onClickDay(day)}>
+        <td
+          key={i}
+          className={cn("date", { today: isToday }, { otherMonth: isThisMonthDay })}
+          onClick={() => onClickDay(day)}
+        >
           {day.getDate()}
         </td>
       );
