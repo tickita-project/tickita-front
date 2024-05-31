@@ -1,6 +1,102 @@
-.today {
-  color: blue;
-}
-.otherMonth{
-  color: gray;
+.container {
+  margin-left: 100px;
+  margin-top: 100px;
+  display: inline-flex;
+  padding: 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: 8px;
+  background: var(--neutral-white, #FFF);
+
+  /* Elevation/Normal */
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.12), 0px 0px 1px 0px rgba(0, 0, 0, 0.08), 0px 0px 1px 0px rgba(0, 0, 0, 0.08);
+
+  .header {
+    display: flex;
+    width: 196px;
+    padding: 0px 8px 8px 8px;
+    justify-content: space-between;
+    align-items: center;
+
+    &.no-buttons {
+      justify-content: center;
+    }
+
+    .today-button {
+      display: inline-flex;
+      padding: 3px 8px;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      border-radius: 4px;
+      background: var(--blue-blue-900, #152868);
+      @include caption2-medium(white);
+    }
+
+    .year-month {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      span {
+        @include body2-medium;
+      }
+    }
+
+    .navigation-button {
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-start;
+      gap: 4px;
+
+      .arrow-button {
+        cursor: pointer;
+        padding: 0;
+      }
+    }
+  }
+
+  .calendar-table {
+    width: 100%;
+    /* 테이블이 컨테이너의 전체 너비를 차지하도록 설정 */
+
+    .table-header {
+      /* display: flex; display 속성을 제거하여 기본 테이블 레이아웃 사용 */
+      align-items: flex-start;
+
+      .day {
+        width: 28px;
+        height: 28px;
+        padding: 8px;
+        gap: 8px;
+        @include caption2-medium($gray700);
+      }
+    }
+
+    .date {
+      width: 28px;
+      height: 28px;
+      padding: 8px;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      @include body2-medium;
+
+      &:hover {
+        border-radius: 1000px;
+        background-color: $blue500;
+        @include body2-medium(white);
+      }
+
+      &.today {
+        border-radius: 1000px;
+        background-color: $blue500;
+        @include body2-medium(white);
+      }
+
+      &.other-month {
+        @include body2-medium($gray600);
+      }
+    }
+  }
 }
