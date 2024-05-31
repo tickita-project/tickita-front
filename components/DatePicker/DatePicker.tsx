@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import classNames from "classnames/bind";
 
 import styles from "./datePicker.module.scss";
@@ -18,53 +16,51 @@ export default function DatePicker({
   hasArrowButton,
 }: DatePickerProps) {
   const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
-  const [currentMonth, setCurrentMonth] = useState<Date>(selectedDay);
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
   const handleDateClick = (day: Date) => {
     setSelectedDay(day);
-    setCurrentMonth(day);
   };
 
   const handlePrevButtonClick = () => {
-    setCurrentMonth(
-      new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, currentMonth.getDate()),
+    setSelectedDay(
+      new Date(selectedDay.getFullYear(), selectedDay.getMonth() - 1, selectedDay.getDate()),
     );
   };
 
   const handleNextButtonClick = () => {
-    setCurrentMonth(
-      new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, currentMonth.getDate()),
+    setSelectedDay(
+      new Date(selectedDay.getFullYear(), selectedDay.getMonth() + 1, selectedDay.getDate()),
     );
   };
 
   const buildCalendarDays = () => {
-    const startOfMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 1);
-    const endOfMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 0);
+    const startOfMonth = new Date(selectedDay.getFullYear(), selectedDay.getMonth(), 1);
+    const endOfMonth = new Date(selectedDay.getFullYear(), selectedDay.getMonth() + 1, 0);
 
     const startDay = startOfMonth.getDay();
     const endDay = endOfMonth.getDate();
 
-    const prevMonthEndDate = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 0);
+    const prevMonthEndDate = new Date(selectedDay.getFullYear(), selectedDay.getMonth(), 0);
     const days: Date[] = [];
 
     for (let i = startDay - 1; i >= 0; i--) {
       days.push(
         new Date(
-          currentMonth.getFullYear(),
-          currentMonth.getMonth() - 1,
+          selectedDay.getFullYear(),
+          selectedDay.getMonth() - 1,
           prevMonthEndDate.getDate() - i,
         ),
       );
     }
 
     for (let i = 1; i <= endDay; i++) {
-      days.push(new Date(currentMonth.getFullYear(), currentMonth.getMonth(), i));
+      days.push(new Date(selectedDay.getFullYear(), selectedDay.getMonth(), i));
     }
 
-    const nextMonthStartDate = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1);
+    const nextMonthStartDate = new Date(selectedDay.getFullYear(), selectedDay.getMonth() + 1, 1);
     while (days.length < 42) {
       days.push(new Date(nextMonthStartDate));
       nextMonthStartDate.setDate(nextMonthStartDate.getDate() + 1);
@@ -109,7 +105,7 @@ export default function DatePicker({
     <div className={cn("container")}>
       <div className={cn("header")}>
         <span className={cn("month")}>
-          {currentMonth.getFullYear()}년 {currentMonth.getMonth() + 1}월
+          {selectedDay.getFullYear()}년 {selectedDay.getMonth() + 1}월
         </span>
         {hasArrowButton && (
           <div className={cn("navigation")}>
