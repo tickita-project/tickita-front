@@ -1,3 +1,5 @@
+import Header from "@/components/Header";
+
 export default function Home() {
-  return <>초기 설정</>;
+  return <Header />;
 }

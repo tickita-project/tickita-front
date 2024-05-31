@@ -23,11 +23,15 @@ export default function GroupList() {
       <span className={cn("group-info")}>현재 가입된 그룹</span>
       <ul className={cn("group-box")}>
         <li className={cn("group-list")}>
-          <GroupColor color="#3360FF" readOnly />
+          <div className={cn("color-box")}>
+            <GroupColor color="#3360FF" checked readOnly />
+          </div>
           <span className={cn("group-title")}> 엄청 엄청 엄청 엄청 엄청 엄청 긴 이름</span>
         </li>
         <li className={cn("group-list")}>
-          <GroupColor color="#D688EA" readOnly />
+          <div className={cn("color-box")}>
+            <GroupColor color="#D688EA" checked readOnly />
+          </div>
           <span className={cn("group-title")}> 엄청 엄청 엄청 엄청 엄청 엄청 긴 이름</span>
         </li>
       </ul>

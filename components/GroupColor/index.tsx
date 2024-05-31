@@ -13,13 +13,11 @@ interface GroupColorProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export default function GroupColor({ color, ...rest }: GroupColorProps) {
-  const isFillColor = rest.checked || rest.checked === undefined;
-
   return (
     <input
       style={{
-        backgroundColor: isFillColor ? color : "white",
-        border: isFillColor ? "1.5px solid rgba(44, 44, 44, 0.28)" : "1px solid black",
+        backgroundColor: rest.checked ? color : "white",
+        border: rest.checked ? "1.5px solid rgba(44, 44, 44, 0.28)" : "1px solid black",
       }}
       type="checkbox"
       className={cn("group-color")}

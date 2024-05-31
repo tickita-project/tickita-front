@@ -1,4 +1,6 @@
 import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 import classNames from "classnames/bind";
 
@@ -8,10 +10,22 @@ const cn = classNames.bind(styles);
 
 // 로그인 정보에 따라 닉네임, 프로필 이미지 변경
 export default function Header() {
+  const router = useRouter();
+  const isDashboard = router.pathname === "/dashboard";
+
   return (
     <header className={cn("header")}>
       <nav className={cn("nav")}>
         <Image src="/icons/tickita-logo.svg" width={60} height={22} alt="티키타 로고" />
+
+        <div className={cn("nav-tap")}>
+          <Link href="/dashboard" className={cn("nav-tap-item", { active: isDashboard })}>
+            대시보드
+          </Link>
+          <Link href="/" className={cn("nav-tap-item", { active: !isDashboard })}>
+            캘린더
+          </Link>
+        </div>
 
         <div className={cn("profile-box")}>
           <div className={cn("nickname-box")}>

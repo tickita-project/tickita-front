@@ -66,19 +66,9 @@
       align-items: center;
       gap: 0.5rem;
 
-      .group-color {
-        width: 1.25rem;
+      .color-box {
+        width: 1.75rem;
         height: 1.25rem;
-        border-radius: 4px;
-
-        appearance: none; // 기본 스타일 제거
-        -webkit-appearance: none; // 사파리
-        cursor: default;
-
-        &:checked {
-          border: 1px solid $gray900;
-          background-color: $blue500;
-        }
       }
 
       .group-title {
