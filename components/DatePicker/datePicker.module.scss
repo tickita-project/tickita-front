@@ -1,6 +1,4 @@
 .container {
-  margin-left: 100px;
-  margin-top: 100px;
   display: inline-flex;
   padding: 16px;
   flex-direction: column;
@@ -13,7 +11,7 @@
 
   .header {
     display: flex;
-    width: 196px;
+    width: 100%;
     padding: 0px 8px 8px 8px;
     justify-content: space-between;
     align-items: center;

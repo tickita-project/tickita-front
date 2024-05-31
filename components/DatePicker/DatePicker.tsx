@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import classNames from "classnames/bind";
 
+import { DAYS } from "@/constants/calendarConstants";
 import ArrowLeft from "@/public/Icons/arrow-left-icon.svg";
 import ArrowRight from "@/public/Icons/arrow-right-icon.svg";
 import VerticalDivider from "@/public/Icons/vertical-divider-logo.svg";
@@ -17,11 +18,6 @@ interface DatePickerProps {
 }
 
 export default function DatePicker({ selectedDay, setSelectedDay, hasButtons }: DatePickerProps) {
-  const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
-
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-
   const handleDateClick = (day: Date) => {
     setSelectedDay(day);
   };
@@ -93,8 +89,11 @@ export default function DatePicker({ selectedDay, setSelectedDay, hasButtons }: 
 
   const divideWeek = (calendarTags: JSX.Element[]) => {
     return calendarTags.reduce((acc: JSX.Element[][], day: JSX.Element, i: number) => {
-      if (i % 7 === 0) acc.push([day]);
-      else acc[acc.length - 1].push(day);
+      if (i % 7 === 0) {
+        acc.push([day]);
+      } else {
+        acc[acc.length - 1].push(day);
+      }
       return acc;
     }, []);
   };
@@ -134,7 +133,7 @@ export default function DatePicker({ selectedDay, setSelectedDay, hasButtons }: 
       <table className={cn("calendar-table")}>
         <thead className={cn("table-header")}>
           <tr>
-            {daysOfWeek.map((day, i) => (
+            {DAYS.map((day, i) => (
               <th key={i} className={cn("day")}>
                 {day}
               </th>
