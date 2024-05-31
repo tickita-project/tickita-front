@@ -13,6 +13,7 @@ interface GroupListProps {
   // props
 }
 
+// 추후 props 추가 예정
 export default function GroupList() {
   const { openModal } = useModalStore();
 
