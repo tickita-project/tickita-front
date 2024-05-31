@@ -9,6 +9,10 @@ import styles from "./GroupList.module.scss";
 
 const cn = classNames.bind(styles);
 
+interface GroupListProps {
+  // props
+}
+
 export default function GroupList() {
   const { openModal } = useModalStore();
 
