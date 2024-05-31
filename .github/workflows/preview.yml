@@ -8,6 +8,14 @@ jobs:
   vercel-preview:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+      pages: write
+      deployments: write
+      id-token: write
+      issues: write
+      pull-requests: write
+
     env:
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
       VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
@@ -27,11 +35,11 @@ jobs:
       - name: Deploy Project Artifacts to Vercel
         id: deploy
         run: |
-          DEPLOY_URL=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }} --prod)
-          echo "preview_url=${DEPLOY_URL}" >> $GITHUB_ENV
+          vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }} > vercel-output.txt
+          echo "preview_url=$(cat vercel-output.txt)" >> $GITHUB_OUTPUT
 
       - name: Comment PR with Preview URL
         uses: thollander/actions-comment-pull-request@v2
         with:
           message: |
-            🎉 구현한 기능 Preview: ${{ env.preview_url }}
+            🎉 구현한 기능 Preview: ${{ steps.deploy.outputs.preview_url }}
