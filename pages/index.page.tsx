@@ -1,3 +1,10 @@
+import MetaData from "@/components/MetaData";
+
 export default function Home() {
-  return <>초기 설정</>;
+  return (
+    <>
+      <MetaData title="Tickita" />
+      초기 페이지
+    </>
+  );
 }
