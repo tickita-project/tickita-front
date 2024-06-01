@@ -1,13 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-import dayjs from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 
 import DatePicker from "@/components/DatePicker/DatePicker";
 
 export default function CalendarPage() {
-  const [focusDate, setFocusDate] = useState<Date>(new Date());
-  useEffect(() => {
-    console.log(focusDate);
-  }, []);
+  const [focusDate, setFocusDate] = useState<Dayjs>(dayjs());
+
   return <DatePicker selectedDay={focusDate} setSelectedDay={setFocusDate} hasButtons={true} />;
 }
