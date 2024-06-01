@@ -27,19 +27,18 @@
   letter-spacing: -0.0313rem;
 }
 
-.login-button {
+.login-button-container {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-}
 
-.login-button {
-  button {
+  .login-button {
     display: flex;
     gap: 0.25rem;
     justify-content: center;
     align-items: center;
     width: 22.875rem;
+
     height: 4rem;
     padding: 0.75rem 1.5rem;
     border-radius: 8px;
@@ -49,12 +48,12 @@
     line-height: 1.875rem;
     letter-spacing: -0.0344rem;
   }
-}
 
-.login-button .kakao-login-button {
-  background-color: $kakao-bg-yellow;
-}
+  .kakao-login-button {
+    background-color: $kakao-bg-yellow;
+  }
 
-.login-button .google-login-button {
-  border: 1px solid $black;
+  .google-login-button {
+    border: 1px solid $black;
+  }
 }

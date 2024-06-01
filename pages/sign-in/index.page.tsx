@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useRouter } from "next/router";
+import Link from "next/link";
 
 import classNames from "classnames/bind";
 
@@ -11,12 +11,6 @@ const KAKAO_REDIRECT_URI = "http://localhost:3000/sign-in/kakao";
 const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_REST_API_KEY}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`;
 
 export default function SignIn() {
-  const router = useRouter();
-
-  const handleKakaoButtonClick = () => {
-    router.push(KAKAO_AUTH_URL);
-  };
-
   return (
     <>
       <header className={cn("header")}>
@@ -36,19 +30,15 @@ export default function SignIn() {
               height={44}
             />
           </div>
-          <div className={cn(["login-button"])}>
-            <button
-              type="button"
-              onClick={handleKakaoButtonClick}
-              className={cn("kakao-login-button")}
-            >
+          <div className={cn("login-button-container")}>
+            <Link href={KAKAO_AUTH_URL} className={cn("login-button", "kakao-login-button")}>
               <Image src="/icons/kakao-icon.svg" alt="카카오톡 아이콘" width={20} height={20} />
               카카오로 로그인
-            </button>
-            <button type="button" className={cn("google-login-button")}>
+            </Link>
+            <Link href="/" className={cn("login-button", "google-login-button")}>
               <Image src="/icons/google-icon.svg" alt="구글 아이콘" width={20} height={20} />
               구글로 로그인
-            </button>
+            </Link>
           </div>
         </div>
       </main>
