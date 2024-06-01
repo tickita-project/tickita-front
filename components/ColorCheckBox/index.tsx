@@ -32,7 +32,7 @@ export default function ColorCheckBox({ color, title }: ColorCheckBoxProps) {
         }}
         type="checkbox"
         checked={isChecked}
-        onChange={() => handleCheckBoxChange()}
+        onChange={handleCheckBoxChange}
       />
       <label htmlFor={`color-check-box-${unquieId}`} className={cn("group-title")}>
         {title}
