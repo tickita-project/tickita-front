@@ -12,8 +12,7 @@ const cn = classNames.bind(styles);
 
 // 로그인 정보에 따라 닉네임, 프로필 이미지 변경(유저 정보 전역 상태 관리?)
 export default function Header() {
-  const router = useRouter();
-  const isDashboard = router.pathname === PAGE_PATH.DASHBOARD;
+  const { pathname } = useRouter();
 
   return (
     <header className={cn("header")}>
@@ -23,13 +22,23 @@ export default function Header() {
         </Link>
 
         <div className={cn("nav-tap")}>
-          <Link href={PAGE_PATH.DASHBOARD} className={cn("nav-tap-item", { active: isDashboard })}>
+          <Link
+            href={PAGE_PATH.DASHBOARD}
+            className={cn("nav-tap-item", { active: pathname === PAGE_PATH.DASHBOARD })}
+          >
             대시보드
           </Link>
-          <Link href={PAGE_PATH.CALENDER} className={cn("nav-tap-item", { active: !isDashboard })}>
+          <Link
+            href={PAGE_PATH.CALENDER}
+            className={cn("nav-tap-item", { active: pathname === PAGE_PATH.CALENDER })}
+          >
             캘린더
           </Link>
-          <div className={cn("active-effect", { "effect-position": !isDashboard })} />
+          <div
+            className={cn("active-effect", {
+              "effect-position-right": pathname === PAGE_PATH.CALENDER,
+            })}
+          />
         </div>
 
         <div className={cn("profile-box")}>
