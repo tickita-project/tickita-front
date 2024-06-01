@@ -18,47 +18,42 @@ interface DatePickerProps {
 }
 
 export default function DatePicker({ selectedDay, setSelectedDay, hasButtons }: DatePickerProps) {
+  const [viewDate, setViewDate] = useState(selectedDay);
+
   const handleDateClick = (day: Date) => {
     setSelectedDay(day);
+    setViewDate(day);
   };
 
   const handlePrevButtonClick = () => {
-    setSelectedDay(
-      new Date(selectedDay.getFullYear(), selectedDay.getMonth() - 1, selectedDay.getDate()),
-    );
+    setViewDate(new Date(viewDate.getFullYear(), viewDate.getMonth() - 1, viewDate.getDate()));
   };
 
   const handleNextButtonClick = () => {
-    setSelectedDay(
-      new Date(selectedDay.getFullYear(), selectedDay.getMonth() + 1, selectedDay.getDate()),
-    );
+    setViewDate(new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, viewDate.getDate()));
   };
 
   const buildCalendarDays = () => {
-    const startOfMonth = new Date(selectedDay.getFullYear(), selectedDay.getMonth(), 1);
-    const endOfMonth = new Date(selectedDay.getFullYear(), selectedDay.getMonth() + 1, 0);
+    const startOfMonth = new Date(viewDate.getFullYear(), viewDate.getMonth(), 1);
+    const endOfMonth = new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, 0);
 
     const startDay = startOfMonth.getDay();
     const endDay = endOfMonth.getDate();
 
-    const prevMonthEndDate = new Date(selectedDay.getFullYear(), selectedDay.getMonth(), 0);
+    const prevMonthEndDate = new Date(viewDate.getFullYear(), viewDate.getMonth(), 0);
     const days: Date[] = [];
 
     for (let i = startDay - 1; i >= 0; i--) {
       days.push(
-        new Date(
-          selectedDay.getFullYear(),
-          selectedDay.getMonth() - 1,
-          prevMonthEndDate.getDate() - i,
-        ),
+        new Date(viewDate.getFullYear(), viewDate.getMonth() - 1, prevMonthEndDate.getDate() - i),
       );
     }
 
     for (let i = 1; i <= endDay; i++) {
-      days.push(new Date(selectedDay.getFullYear(), selectedDay.getMonth(), i));
+      days.push(new Date(viewDate.getFullYear(), viewDate.getMonth(), i));
     }
 
-    const nextMonthStartDate = new Date(selectedDay.getFullYear(), selectedDay.getMonth() + 1, 1);
+    const nextMonthStartDate = new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, 1);
     while (days.length < 42) {
       days.push(new Date(nextMonthStartDate));
       nextMonthStartDate.setDate(nextMonthStartDate.getDate() + 1);
@@ -69,7 +64,7 @@ export default function DatePicker({ selectedDay, setSelectedDay, hasButtons }: 
 
   const buildCalendarTag = (calendarDays: Date[]) => {
     return calendarDays.map((day: Date, i: number) => {
-      const isThisMonthDay = day.getMonth() !== selectedDay.getMonth();
+      const isThisMonthDay = day.getMonth() !== viewDate.getMonth();
       const isToday =
         day.getFullYear() === selectedDay.getFullYear() &&
         day.getMonth() === selectedDay.getMonth() &&
@@ -109,15 +104,15 @@ export default function DatePicker({ selectedDay, setSelectedDay, hasButtons }: 
           <button
             className={cn("today-button")}
             type="button"
-            onClick={() => setSelectedDay(new Date())}
+            onClick={() => setViewDate(new Date())}
           >
             오늘
           </button>
         )}
         <div className={cn("year-month")}>
-          <span>{selectedDay.getFullYear()}</span>
+          <span>{viewDate.getFullYear()}</span>
           <Image src="/Icons/vertical-divider-logo.svg" alt="divider" width={1} height={10} />
-          <span>{selectedDay.getMonth() + 1}</span>
+          <span>{viewDate.getMonth() + 1}</span>
         </div>
         {hasButtons && (
           <div className={cn("navigation-button")}>
