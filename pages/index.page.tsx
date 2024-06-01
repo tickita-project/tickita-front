@@ -1,5 +1,10 @@
-import Image from "next/image";
+import MetaData from "@/components/MetaData";
 
 export default function Home() {
-  return <Image src="/icons/logo.svg" alt="test" width={100} height={100} />;
+  return (
+    <>
+      <MetaData title="Tickita" />
+      초기 페이지
+    </>
+  );
 }
