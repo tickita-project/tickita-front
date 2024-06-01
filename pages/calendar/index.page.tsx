@@ -7,5 +7,5 @@ import DatePicker from "@/components/DatePicker/DatePicker";
 export default function CalendarPage() {
   const [focusDate, setFocusDate] = useState<Dayjs>(dayjs());
 
-  return <DatePicker selectedDay={focusDate} setSelectedDay={setFocusDate} hasButtons={true} />;
+  return <DatePicker selectedDay={focusDate} setSelectedDay={setFocusDate} hasNavigation={true} />;
 }

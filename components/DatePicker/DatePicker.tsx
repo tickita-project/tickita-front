@@ -14,10 +14,14 @@ const cn = classNames.bind(styles);
 interface DatePickerProps {
   selectedDay: Dayjs;
   setSelectedDay: (date: Dayjs) => void;
-  hasButtons: boolean;
+  hasNavigation: boolean;
 }
 
-export default function DatePicker({ selectedDay, setSelectedDay, hasButtons }: DatePickerProps) {
+export default function DatePicker({
+  selectedDay,
+  setSelectedDay,
+  hasNavigation,
+}: DatePickerProps) {
   const [viewDate, setViewDate] = useState(selectedDay);
 
   const handleDateClick = (day: Dayjs) => {
@@ -40,7 +44,6 @@ export default function DatePicker({ selectedDay, setSelectedDay, hasButtons }: 
     const startDay = startOfMonth.day();
     const endDay = endOfMonth.date();
 
-    const prevMonthEndDate = startOfMonth.subtract(1, "day");
     const days: Dayjs[] = [];
 
     for (let i = startDay - 1; i >= 0; i--) {
@@ -67,7 +70,11 @@ export default function DatePicker({ selectedDay, setSelectedDay, hasButtons }: 
       return (
         <td
           key={i}
-          className={cn("date", { today: isToday }, { "other-month": isThisMonthDay })}
+          className={cn(
+            { date: !hasNavigation, "date-hover": hasNavigation },
+            { today: isToday },
+            { "other-month": isThisMonthDay },
+          )}
           onClick={() => handleDateClick(day)}
         >
           {day.date()}
@@ -93,8 +100,8 @@ export default function DatePicker({ selectedDay, setSelectedDay, hasButtons }: 
 
   return (
     <div className={cn("container")}>
-      <div className={cn("header", { "no-buttons": !hasButtons })}>
-        {hasButtons && (
+      <div className={cn("header", { "no-buttons": !hasNavigation })}>
+        {hasNavigation && (
           <button
             className={cn("today-button")}
             type="button"
@@ -108,7 +115,7 @@ export default function DatePicker({ selectedDay, setSelectedDay, hasButtons }: 
           <Image src="/Icons/vertical-divider-logo.svg" alt="divider" width={1} height={10} />
           <span>{viewDate.month() + 1}</span>
         </div>
-        {hasButtons && (
+        {hasNavigation && (
           <div className={cn("navigation-button")}>
             <button onClick={handlePrevButtonClick} className={cn("arrow-button")} type="button">
               <Image src="/icons/arrow-left-icon.svg" alt="이전달" width={20} height={20} />

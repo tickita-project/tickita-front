@@ -1,3 +1,22 @@
+@mixin table-element {
+  width: 28px;
+  height: 28px;
+  padding: 8px;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+
+  &.today {
+    border-radius: 1000px;
+    background-color: $blue500;
+    @include body2-medium(white);
+  }
+
+  &.other-month {
+    @include body2-medium($gray600);
+  }
+}
+
 .container {
   display: inline-flex;
   padding: 16px;
@@ -63,21 +82,18 @@
       align-items: flex-start;
 
       .day {
-        width: 28px;
-        height: 28px;
-        padding: 8px;
-        gap: 8px;
+        @include table-element;
         @include caption2-medium($gray700);
       }
     }
 
     .date {
-      width: 28px;
-      height: 28px;
-      padding: 8px;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
+      @include table-element;
+      @include body2-medium;
+    }
+
+    .date-hover {
+      @include table-element;
       @include body2-medium;
 
       &:hover {
@@ -86,15 +102,6 @@
         @include body2-medium(white);
       }
 
-      &.today {
-        border-radius: 1000px;
-        background-color: $blue500;
-        @include body2-medium(white);
-      }
-
-      &.other-month {
-        @include body2-medium($gray600);
-      }
     }
   }
 }
