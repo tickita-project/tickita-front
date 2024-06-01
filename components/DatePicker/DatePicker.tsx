@@ -1,11 +1,11 @@
+import { useState } from "react";
+
 import Image from "next/image";
 
 import classNames from "classnames/bind";
+import dayjs from "dayjs";
 
 import { DAYS } from "@/constants/calendarConstants";
-import ArrowLeft from "@/public/Icons/arrow-left-icon.svg";
-import ArrowRight from "@/public/Icons/arrow-right-icon.svg";
-import VerticalDivider from "@/public/Icons/vertical-divider-logo.svg";
 
 import styles from "./datePicker.module.scss";
 
@@ -116,16 +116,16 @@ export default function DatePicker({ selectedDay, setSelectedDay, hasButtons }: 
         )}
         <div className={cn("year-month")}>
           <span>{selectedDay.getFullYear()}</span>
-          <Image src={VerticalDivider} alt="divider" />
+          <Image src="/Icons/vertical-divider-logo.svg" alt="divider" width={1} height={10} />
           <span>{selectedDay.getMonth() + 1}</span>
         </div>
         {hasButtons && (
           <div className={cn("navigation-button")}>
             <button onClick={handlePrevButtonClick} className={cn("arrow-button")} type="button">
-              <Image src={ArrowLeft} alt="arrow-left" />
+              <Image src="/icons/arrow-left-icon.svg" alt="이전달" width={20} height={20} />
             </button>
             <button onClick={handleNextButtonClick} className={cn("arrow-button")} type="button">
-              <Image src={ArrowRight} alt="arrow-right" />
+              <Image src="/icons/arrow-right-icon.svg" alt="다음달" width={20} height={20} />
             </button>
           </div>
         )}

@@ -48,11 +48,8 @@
 @mixin caption2-medium($color: black) {
   color: $color;
   text-align: center;
-
   /* Caption 2/Medium */
-  font-family: "Pretendard Variable";
-  font-size: 11px;
-  font-style: normal;
+  font-size: .6875rem;
   font-weight: 500;
   line-height: 127.3%;
   /* 14.003px */
@@ -64,9 +61,7 @@
   text-align: center;
 
   /* Body 2/Medium */
-  font-family: "Pretendard Variable";
-  font-size: 14px;
-  font-style: normal;
+  font-size: .875rem;
   font-weight: 500;
   line-height: 142.9%;
   /* 20.006px */
