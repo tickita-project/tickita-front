@@ -1,3 +1,21 @@
+@keyframes rightToLeft {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes leftToRight {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+
 .header {
   border-bottom: 1px solid $gray200;
 
@@ -30,10 +48,18 @@
         position: absolute;
         bottom: -1.6rem;
         left: 0;
-        width: 4.8rem;
+        width: 5rem;
         height: 0.5rem;
         border-radius: 62.5rem 62.5rem 0rem 0rem;
         background-color: $blue500;
+      }
+
+      .animation-effect-dashboard {
+        animation: rightToLeft 0.2s ease forwards;
+      }
+
+      .animation-effect-calender {
+        animation: leftToRight 0.2s ease forwards;
       }
 
       .effect-position-right {

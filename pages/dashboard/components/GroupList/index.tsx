@@ -18,7 +18,7 @@ export default function GroupList() {
   const { openModal } = useModalStore();
 
   return (
-    <div className={cn("wrap")}>
+    <div className={cn("container")}>
       <div className={cn("button-box")}>
         <button
           type="button"

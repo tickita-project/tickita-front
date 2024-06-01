@@ -10,9 +10,32 @@ import styles from "./Header.module.scss";
 
 const cn = classNames.bind(styles);
 
+const isAnimation = {
+  dashboard: false,
+  calender: false,
+};
+
 // 로그인 정보에 따라 닉네임, 프로필 이미지 변경(유저 정보 전역 상태 관리?)
 export default function Header() {
   const { pathname } = useRouter();
+
+  const handleDashboardTapClick = () => {
+    isAnimation.dashboard = true;
+
+    // 애니메이션 초기화
+    setTimeout(() => {
+      isAnimation.dashboard = false;
+    }, 100);
+  };
+
+  const handleCalenderTapClick = () => {
+    isAnimation.calender = true;
+
+    // 애니메이션 초기화
+    setTimeout(() => {
+      isAnimation.calender = false;
+    }, 100);
+  };
 
   return (
     <header className={cn("header")}>
@@ -23,12 +46,14 @@ export default function Header() {
 
         <div className={cn("nav-tap")}>
           <Link
+            onClick={handleDashboardTapClick}
             href={PAGE_PATH.DASHBOARD}
             className={cn("nav-tap-item", { active: pathname === PAGE_PATH.DASHBOARD })}
           >
             대시보드
           </Link>
           <Link
+            onClick={handleCalenderTapClick}
             href={PAGE_PATH.CALENDER}
             className={cn("nav-tap-item", { active: pathname === PAGE_PATH.CALENDER })}
           >
@@ -36,6 +61,8 @@ export default function Header() {
           </Link>
           <div
             className={cn("active-effect", {
+              "animation-effect-dashboard": isAnimation.dashboard,
+              "animation-effect-calender": isAnimation.calender,
               "effect-position-right": pathname === PAGE_PATH.CALENDER,
             })}
           />
