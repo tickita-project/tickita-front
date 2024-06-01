@@ -6,7 +6,7 @@ interface MetaDataProps {
   title?: string; // 각 페이지에 보여질 제목 추가
 }
 
-export default function MetaData({ title = "Tickita" }: MetaDataProps) {
+export default function MetaData({ title = "간편한 일정 조율/관리 서비스 티키타" }: MetaDataProps) {
   const currentUrl = `https://tickita.net${useCurrentPath()}`;
 
   return (
