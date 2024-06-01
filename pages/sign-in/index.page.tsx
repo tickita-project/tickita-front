@@ -20,7 +20,7 @@ export default function SignIn() {
   return (
     <>
       <header className={cn("header")}>
-        <Image src="/icons/tickita-logo.svg" alt="logo" width={60} height={22} />
+        <Image src="/icons/tickita-logo.svg" alt="로고 이미지" width={60} height={22} />
       </header>
       <main>
         <div className={cn("container")}>
@@ -31,7 +31,7 @@ export default function SignIn() {
             </p>
             <Image
               src="/icons/tickita-fullname-logo.svg"
-              alt="fullname logo"
+              alt="풀네임 로고 이미지"
               width={132}
               height={44}
             />
@@ -42,11 +42,11 @@ export default function SignIn() {
               onClick={handleKakaoButtonClick}
               className={cn("kakao-login-button")}
             >
-              <Image src="/icons/kakao-icon.svg" alt="kakao icon" width={20} height={20} />
+              <Image src="/icons/kakao-icon.svg" alt="카카오톡 아이콘" width={20} height={20} />
               카카오로 로그인
             </button>
             <button type="button" className={cn("google-login-button")}>
-              <Image src="/icons/google-icon.svg" alt="kakao icon" width={20} height={20} />
+              <Image src="/icons/google-icon.svg" alt="구글 아이콘" width={20} height={20} />
               구글로 로그인
             </button>
           </div>
