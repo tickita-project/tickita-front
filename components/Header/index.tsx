@@ -29,6 +29,7 @@ export default function Header() {
           <Link href={PAGE_PATH.CALENDER} className={cn("nav-tap-item", { active: !isDashboard })}>
             캘린더
           </Link>
+          <div className={cn("active-effect", { "effect-position": !isDashboard })} />
         </div>
 
         <div className={cn("profile-box")}>
