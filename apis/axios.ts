@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const instance = axios.create({
-  baseURL: "", // 추후 base url 설정
+export const instance = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_BASE_API_URL,
 });
 
 // 인터셉터 req 설정(헤더 Authorization 추가 등)
