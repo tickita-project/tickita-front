@@ -24,7 +24,7 @@ export default function SignIn() {
       </header>
       <main>
         <div className={cn("container")}>
-          <div className={cn(["tickita-logo"])}>
+          <div className={cn("tickita-logo")}>
             <p>
               복잡한 일정조율, 고민 없이
               <br /> 바로 약속 잡고 싶을 땐
@@ -40,12 +40,12 @@ export default function SignIn() {
             <button
               type="button"
               onClick={handleKakaoButtonClick}
-              className={cn(["kakao-login-button"])}
+              className={cn("kakao-login-button")}
             >
               <Image src="/icons/kakao-icon.svg" alt="kakao icon" width={20} height={20} />
               카카오로 로그인
             </button>
-            <button type="button" className={cn(["google-login-button"])}>
+            <button type="button" className={cn("google-login-button")}>
               <Image src="/icons/google-icon.svg" alt="kakao icon" width={20} height={20} />
               구글로 로그인
             </button>
