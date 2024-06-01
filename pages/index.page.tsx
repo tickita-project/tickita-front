@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function Home() {
-  return <>초기 설정</>;
+  return <Image src="/icons/logo.svg" alt="test" width={100} height={100} />;
 }
