@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 
 import classNames from "classnames/bind";
 
-import { PAGE_PATH } from "@/constants/\bpagePath";
+import { PAGE_PATH } from "@/constants/pagePath";
 
 import styles from "./Header.module.scss";
 

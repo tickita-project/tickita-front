@@ -1,6 +1,6 @@
 export const PAGE_PATH = {
   MAIN: "/",
-  ["SIGN-IN"]: "/sign-in",
+  SIGN_IN: "/sign-in",
   DASHBOARD: "/dashboard",
   CALENDER: "/calender",
   GROUP: "/group",
