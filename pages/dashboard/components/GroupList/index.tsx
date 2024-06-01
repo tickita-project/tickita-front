@@ -2,7 +2,6 @@ import Image from "next/image";
 
 import classNames from "classnames/bind";
 
-import ColorCheckBox from "@/components/ColorCheckBox";
 import { useModalStore } from "@/store/useModalStore";
 
 import styles from "./GroupList.module.scss";
@@ -25,13 +24,11 @@ export default function GroupList() {
           그룹 새로 만들기
         </button>
       </div>
-      <span className={cn("group-info")}>현재 가입된 그룹</span>
+      <span className={cn("group-guide-text")}>현재 가입된 그룹</span>
       <ul className={cn("group-box")}>
         <li className={cn("group-list")}>
-          <ColorCheckBox color="#3360FF" title="엄청 엄청 엄청 엄청 엄청 엄청 긴 이름" />
-        </li>
-        <li className={cn("group-list")}>
-          <ColorCheckBox color="#D688EA" title="엄청 엄청 엄청 엄청 엄청 엄청 긴 이름" />
+          <div className={cn("group-color")} style={{ backgroundColor: "#3360FF" }} />
+          <span className={cn("group-title")}>엄청 엄청 엄청 엄청 엄청 엄청 긴 이름</span>
         </li>
       </ul>
     </div>
