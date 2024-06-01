@@ -104,7 +104,7 @@ export default function DatePicker({ selectedDay, setSelectedDay, hasButtons }: 
           <button
             className={cn("today-button")}
             type="button"
-            onClick={() => setViewDate(new Date())}
+            onClick={() => handleDateClick(new Date())}
           >
             오늘
           </button>
