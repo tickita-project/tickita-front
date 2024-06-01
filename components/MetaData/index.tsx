@@ -1,13 +1,13 @@
 import Head from "next/head";
 
-import useCurrentUrl from "@/hooks/useCurrentUrl";
+import useCurrentPath from "@/hooks/useCurrentPath";
 
 interface MetaDataProps {
   title?: string; // 각 페이지에 보여질 제목 추가
 }
 
 export default function MetaData({ title = "Tickita" }: MetaDataProps) {
-  const currentUrl = useCurrentUrl();
+  const currentUrl = `https://tickita.net${useCurrentPath()}`;
 
   return (
     <Head>
@@ -21,7 +21,7 @@ export default function MetaData({ title = "Tickita" }: MetaDataProps) {
       <meta property="og:title" content="Tickita" />
       <meta property="og:description" content="간편한 일정 조율/관리 서비스 Tickita" />
       <meta property="og:type" content="website" />
-      <meta property="og:url" content={`https://tickita.net${currentUrl}`} />
+      <meta property="og:url" content={currentUrl} />
       <meta property="og:image" content="추후 OG 이미지 추가 예정" />
       <meta property="og:image:alt" content="Tickita 로고 이미지" />
       <meta property="og:locale" content="ko_KR" />
@@ -30,7 +30,7 @@ export default function MetaData({ title = "Tickita" }: MetaDataProps) {
       <meta property="twitter:title" content="Tickita" />
       <meta name="twitter:description" content="간편한 일정 조율/관리 서비스 Tickita" />
       <meta name="twitter:card" content="website" />
-      <meta property="twitter:site" content={`https://tickita.net${currentUrl}`} />
+      <meta property="twitter:site" content={currentUrl} />
       <meta name="twitter:image" content="추후 OG 이미지 추가 예정" />
       <meta property="twitter:image:alt" content="Tickita 로고 이미지" />
     </Head>
