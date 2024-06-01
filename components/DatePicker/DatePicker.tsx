@@ -26,11 +26,11 @@ export default function DatePicker({ selectedDay, setSelectedDay, hasButtons }: 
   };
 
   const handlePrevButtonClick = () => {
-    setViewDate(new Date(viewDate.getFullYear(), viewDate.getMonth() - 1, viewDate.getDate()));
+    setViewDate(new Date(viewDate.getFullYear(), viewDate.getMonth() - 1, 1));
   };
 
   const handleNextButtonClick = () => {
-    setViewDate(new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, viewDate.getDate()));
+    setViewDate(new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, 1));
   };
 
   const buildCalendarDays = () => {
