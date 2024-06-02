@@ -15,7 +15,14 @@ const mockData = [
       "테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스테스트테스트테스트트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스테스트테스트테스트트",
     color: "#ff7940",
     date: "24.05.28 16:30",
-    daysRemaining: "D-99",
+    daysRemaining: "D-DAY",
+  },
+  {
+    title:
+      "테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스테스트테스트테스트트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스테스트테스트테스트트",
+    color: "#32ecb4",
+    date: "24.05.28 16:30",
+    daysRemaining: "D-DAY",
   },
   {
     title:
@@ -34,16 +41,37 @@ const mockData = [
   {
     title:
       "테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스테스트테스트테스트트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스테스트테스트테스트트",
-    color: "#32ecb4",
+    color: "#3360FF",
+    date: "24.05.28 16:30",
+    daysRemaining: "D-Day",
+  },
+  {
+    title:
+      "테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스테스트테스트테스트트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스테스트테스트테스트트",
+    color: "#21d53e",
     date: "24.05.28 16:30",
     daysRemaining: "D-99",
   },
   {
     title:
       "테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스테스트테스트테스트트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스테스트테스트테스트트",
-    color: "#3360FF",
+    color: "#21d53e",
     date: "24.05.28 16:30",
-    daysRemaining: "D-Day",
+    daysRemaining: "D-99",
+  },
+  {
+    title:
+      "테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스테스트테스트테스트트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스테스트테스트테스트트",
+    color: "#21d53e",
+    date: "24.05.28 16:30",
+    daysRemaining: "D-99",
+  },
+  {
+    title:
+      "테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스테스트테스트테스트트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스테스트테스트테스트트",
+    color: "#21d53e",
+    date: "24.05.28 16:30",
+    daysRemaining: "D-99",
   },
 ];
 
@@ -54,19 +82,21 @@ export default function UpcomingScheduleList() {
         <Image src="/icons/dashboard-calender.svg" width={24} height={24} alt="달력 아이콘" />
         다가오는 일정
       </h2>
-      {mockData.length > 0 ? (
-        mockData.map((item, idx) => (
-          <UpcomingSchedule
-            key={idx}
-            title={item.title}
-            color={item.color}
-            date={item.date}
-            daysRemaining={item.daysRemaining}
-          />
-        ))
-      ) : (
-        <EmptyNotification title="다가오는 일정이 없습니다." />
-      )}
+      <div className={cn("box")}>
+        {mockData.length > 0 ? (
+          mockData.map((item, idx) => (
+            <UpcomingSchedule
+              key={idx}
+              title={item.title}
+              color={item.color}
+              date={item.date}
+              daysRemaining={item.daysRemaining}
+            />
+          ))
+        ) : (
+          <EmptyNotification title="다가오는 일정이 없습니다." />
+        )}
+      </div>
     </div>
   );
 }

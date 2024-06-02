@@ -19,7 +19,7 @@ export default function UpcomingSchedule({
   date,
   daysRemaining,
 }: UpcomingScheduleProps) {
-  const isDday = daysRemaining === "D-Day";
+  const isDday = daysRemaining === "D-DAY";
 
   return (
     <div className={cn("container")}>

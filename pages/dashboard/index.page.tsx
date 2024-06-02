@@ -16,14 +16,16 @@ export default function Dashboard() {
       <MetaData title="대시보드 | 티키타" />
       <Header />
       <main className={cn("container")}>
-        <GroupList />
-        <section className={cn("wrap")}>
-          <div className={cn("calender")}>미니 달력</div>
-          <div className={cn("box")}>
-            <UpcomingScheduleList />
-            <NotificationCenter />
-          </div>
-        </section>
+        <div className={cn("wrap")}>
+          <GroupList />
+          <section className={cn("content")}>
+            <div className={cn("calender")}>미니 달력</div>
+            <div className={cn("box")}>
+              <UpcomingScheduleList />
+              <NotificationCenter />
+            </div>
+          </section>
+        </div>
       </main>
     </>
   );

@@ -35,6 +35,74 @@ export default function GroupList() {
           <div className={cn("group-color")} style={{ backgroundColor: "#3360FF" }} />
           <span className={cn("group-title")}>엄청 엄청 엄청 엄청 엄청 엄청 긴 이름</span>
         </li>
+        <li className={cn("group-list")}>
+          <div className={cn("group-color")} style={{ backgroundColor: "#3360FF" }} />
+          <span className={cn("group-title")}>엄청 엄청 엄청 엄청 엄청 엄청 긴 이름</span>
+        </li>
+        <li className={cn("group-list")}>
+          <div className={cn("group-color")} style={{ backgroundColor: "#3360FF" }} />
+          <span className={cn("group-title")}>엄청 엄청 엄청 엄청 엄청 엄청 긴 이름</span>
+        </li>
+        <li className={cn("group-list")}>
+          <div className={cn("group-color")} style={{ backgroundColor: "#3360FF" }} />
+          <span className={cn("group-title")}>엄청 엄청 엄청 엄청 엄청 엄청 긴 이름</span>
+        </li>
+        <li className={cn("group-list")}>
+          <div className={cn("group-color")} style={{ backgroundColor: "#3360FF" }} />
+          <span className={cn("group-title")}>엄청 엄청 엄청 엄청 엄청 엄청 긴 이름</span>
+        </li>
+        <li className={cn("group-list")}>
+          <div className={cn("group-color")} style={{ backgroundColor: "#3360FF" }} />
+          <span className={cn("group-title")}>엄청 엄청 엄청 엄청 엄청 엄청 긴 이름</span>
+        </li>
+        <li className={cn("group-list")}>
+          <div className={cn("group-color")} style={{ backgroundColor: "#3360FF" }} />
+          <span className={cn("group-title")}>엄청 엄청 엄청 엄청 엄청 엄청 긴 이름</span>
+        </li>
+        <li className={cn("group-list")}>
+          <div className={cn("group-color")} style={{ backgroundColor: "#3360FF" }} />
+          <span className={cn("group-title")}>엄청 엄청 엄청 엄청 엄청 엄청 긴 이름</span>
+        </li>
+        <li className={cn("group-list")}>
+          <div className={cn("group-color")} style={{ backgroundColor: "#3360FF" }} />
+          <span className={cn("group-title")}>엄청 엄청 엄청 엄청 엄청 엄청 긴 이름</span>
+        </li>
+        <li className={cn("group-list")}>
+          <div className={cn("group-color")} style={{ backgroundColor: "#3360FF" }} />
+          <span className={cn("group-title")}>엄청 엄청 엄청 엄청 엄청 엄청 긴 이름</span>
+        </li>
+        <li className={cn("group-list")}>
+          <div className={cn("group-color")} style={{ backgroundColor: "#3360FF" }} />
+          <span className={cn("group-title")}>엄청 엄청 엄청 엄청 엄청 엄청 긴 이름</span>
+        </li>
+        <li className={cn("group-list")}>
+          <div className={cn("group-color")} style={{ backgroundColor: "#3360FF" }} />
+          <span className={cn("group-title")}>엄청 엄청 엄청 엄청 엄청 엄청 긴 이름</span>
+        </li>
+        <li className={cn("group-list")}>
+          <div className={cn("group-color")} style={{ backgroundColor: "#3360FF" }} />
+          <span className={cn("group-title")}>엄청 엄청 엄청 엄청 엄청 엄청 긴 이름</span>
+        </li>
+        <li className={cn("group-list")}>
+          <div className={cn("group-color")} style={{ backgroundColor: "#3360FF" }} />
+          <span className={cn("group-title")}>엄청 엄청 엄청 엄청 엄청 엄청 긴 이름</span>
+        </li>
+        <li className={cn("group-list")}>
+          <div className={cn("group-color")} style={{ backgroundColor: "#3360FF" }} />
+          <span className={cn("group-title")}>엄청 엄청 엄청 엄청 엄청 엄청 긴 이름</span>
+        </li>
+        <li className={cn("group-list")}>
+          <div className={cn("group-color")} style={{ backgroundColor: "#3360FF" }} />
+          <span className={cn("group-title")}>엄청 엄청 엄청 엄청 엄청 엄청 긴 이름</span>
+        </li>
+        <li className={cn("group-list")}>
+          <div className={cn("group-color")} style={{ backgroundColor: "#3360FF" }} />
+          <span className={cn("group-title")}>엄청 엄청 엄청 엄청 엄청 엄청 긴 이름</span>
+        </li>
+        <li className={cn("group-list")}>
+          <div className={cn("group-color")} style={{ backgroundColor: "#3360FF" }} />
+          <span className={cn("group-title")}>엄청 엄청 엄청 엄청 엄청 엄청 긴 이름</span>
+        </li>
       </ul>
     </section>
   );

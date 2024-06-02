@@ -1,25 +1,31 @@
 .container {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
   background-color: $gray100;
   height: calc(100vh - 5rem - 1px);
-  display: flex;
-  gap: 2rem;
 
   .wrap {
+    width: 100vw;
+    max-width: 120rem;
+    margin: 0 auto;
     display: flex;
-    margin-top: 4rem;
 
-    .calender {
-      width: 20rem;
-      height: 22rem;
-      border: 1px solid $black;
-    }
-
-    .box {
+    .content {
+      margin: 2rem 2rem 0;
       display: flex;
-      gap: 1.25rem;
-      margin-left: 2rem;
+      justify-content: space-between;
+      width: 100%;
+      gap: 2rem;
+
+      .calender {
+        width: 26rem;
+        height: 28rem;
+        border: 1px solid $black;
+      }
+
+      .box {
+        display: flex;
+        gap: 2rem;
+      }
     }
   }
 }
