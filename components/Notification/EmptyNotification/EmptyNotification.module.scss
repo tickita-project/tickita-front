@@ -1,0 +1,19 @@
+.empty {
+  background-color: $gray200;
+  border-radius: 0.5rem;
+  height: 8.25rem;
+  border: 1px solid $gray300;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  color: $gray800;
+  font-weight: 500;
+  font-size: 1.1rem;
+
+  .ghost-icon {
+    position: absolute;
+    bottom: 0;
+    right: 6.75rem;
+  }
+}

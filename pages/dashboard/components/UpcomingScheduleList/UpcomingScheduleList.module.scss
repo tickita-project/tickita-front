@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 31.3rem;
+
+  .title {
+    background-color: $white;
+    border: 1px solid $gray300;
+    border-radius: 0.5rem;
+    box-shadow:
+      0px 1px 2px 0px rgba(0, 0, 0, 0.12),
+      0px 0px 1px 0px rgba(0, 0, 0, 0.08),
+      0px 0px 1px 0px rgba(0, 0, 0, 0.08);
+    padding: 0.5rem;
+    display: flex;
+    gap: 0.5rem;
+    font-size: 1.0625rem;
+    font-weight: 700;
+    align-items: center;
+  }
+}

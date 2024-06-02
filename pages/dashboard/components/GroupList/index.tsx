@@ -18,7 +18,7 @@ export default function GroupList() {
   const { openModal } = useModalStore();
 
   return (
-    <div className={cn("container")}>
+    <section className={cn("container")}>
       <div className={cn("button-box")}>
         <button
           type="button"
@@ -36,6 +36,6 @@ export default function GroupList() {
           <span className={cn("group-title")}>엄청 엄청 엄청 엄청 엄청 엄청 긴 이름</span>
         </li>
       </ul>
-    </div>
+    </section>
   );
 }
