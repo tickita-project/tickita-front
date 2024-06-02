@@ -1,0 +1,17 @@
+.box {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  cursor: pointer;
+
+  .group-title {
+    @include text-overflow-ellipsis(1);
+  }
+
+  .group-color {
+    width: 1.75rem;
+    height: 1.25rem;
+    border-radius: 4px;
+    appearance: none; // 기본 스타일 제거
+  }
+}

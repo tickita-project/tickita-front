@@ -1,0 +1,5 @@
+export const MODAL_TYPE = {
+  CREATE_GROUP: "CREATE_GROUP", // 그룹 만들기
+  SCHEDULE_COORDINATION: "SCHEDULE_COORDINATION", // 일정 조율
+  SCHEDULE_DETAILS: "SCHEDULE_DETAILS", // 일정 상세
+} as const;
