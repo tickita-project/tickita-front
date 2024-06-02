@@ -1,0 +1,107 @@
+@mixin table-element {
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: .5rem;
+  gap: .5rem;
+  justify-content: center;
+  align-items: center;
+
+  &.today {
+    border-radius: 62.5rem;
+    background-color: $blue500;
+    @include body2-medium(white);
+  }
+
+  &.other-month {
+    @include body2-medium($gray600);
+  }
+}
+
+.container {
+  display: inline-flex;
+  padding: 1rem;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: .5rem;
+  background: var(--neutral-white, #FFF);
+
+  /* Elevation/Normal */
+  box-shadow: 0rem .0625rem .125rem 0rem rgba(0, 0, 0, 0.12), 0rem 0rem .0625rem 0rem rgba(0, 0, 0, 0.08), 0rem 0rem .0625rem 0rem rgba(0, 0, 0, 0.08);
+
+  .header {
+    display: flex;
+    width: 100%;
+    padding: 0rem .5rem .5rem .5rem;
+    justify-content: space-between;
+    align-items: center;
+
+    &.no-buttons {
+      justify-content: center;
+    }
+
+    .today-button {
+      display: inline-flex;
+      padding: .1875rem .5rem;
+      justify-content: center;
+      align-items: center;
+      gap: .5rem;
+      border-radius: .25rem;
+      background: var(--blue-blue-900, #152868);
+      @include caption2-medium(white);
+    }
+
+    .year-month {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+
+      span {
+        @include body2-medium;
+      }
+    }
+
+    .navigation-button {
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-start;
+      gap: .25rem;
+
+      .arrow-button {
+        cursor: pointer;
+        padding: 0;
+      }
+    }
+  }
+
+  .calendar-table {
+    width: 100%;
+    /* 테이블이 컨테이너의 전체 너비를 차지하도록 설정 */
+
+    .table-header {
+      /* display: flex; display 속성을 제거하여 기본 테이블 레이아웃 사용 */
+      align-items: flex-start;
+
+      .day {
+        @include table-element;
+        @include caption2-medium($gray700);
+      }
+    }
+
+    .date {
+      @include table-element;
+      @include body2-medium;
+    }
+
+    .date-hover {
+      @include table-element;
+      @include body2-medium;
+
+      &:hover {
+        border-radius: 62.5rem;
+        background-color: $blue500;
+        @include body2-medium(white);
+      }
+
+    }
+  }
+}
