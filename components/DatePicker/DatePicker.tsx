@@ -6,6 +6,7 @@ import classNames from "classnames/bind";
 import dayjs, { Dayjs } from "dayjs";
 
 import { DAYS } from "@/constants/calendarConstants";
+import { calculateMonthDates } from "@/utils/calculateCalendarDates";
 
 import styles from "./datePicker.module.scss";
 
@@ -35,31 +36,6 @@ export default function DatePicker({
 
   const handleNextButtonClick = () => {
     setViewDate(viewDate.add(1, "month"));
-  };
-
-  const buildCalendarDays = () => {
-    const startOfMonth = viewDate.startOf("month");
-    const endOfMonth = viewDate.endOf("month");
-
-    const startDay = startOfMonth.day();
-    const endDay = endOfMonth.date();
-
-    const days: Dayjs[] = [];
-
-    for (let i = startDay - 1; i >= 0; i--) {
-      days.push(startOfMonth.subtract(i + 1, "day"));
-    }
-
-    for (let i = 1; i <= endDay; i++) {
-      days.push(startOfMonth.date(i));
-    }
-
-    const nextMonthStartDate = endOfMonth.add(1, "day");
-    while (days.length < 42) {
-      days.push(nextMonthStartDate.add(days.length - endDay, "day"));
-    }
-
-    return days;
   };
 
   const buildCalendarTag = (calendarDays: Dayjs[]) => {
@@ -94,7 +70,7 @@ export default function DatePicker({
     }, []);
   };
 
-  const calendarDays = buildCalendarDays();
+  const calendarDays = calculateMonthDates(viewDate);
   const calendarTags = buildCalendarTag(calendarDays);
   const calendarRows = divideWeek(calendarTags);
 

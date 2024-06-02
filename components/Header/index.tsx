@@ -54,8 +54,8 @@ export default function Header() {
           </Link>
           <Link
             onClick={handleCalenderTapClick}
-            href={PAGE_PATH.CALENDER}
-            className={cn("nav-tap-item", { active: pathname === PAGE_PATH.CALENDER })}
+            href={PAGE_PATH.CALENDAR}
+            className={cn("nav-tap-item", { active: pathname === PAGE_PATH.CALENDAR })}
           >
             캘린더
           </Link>
@@ -63,7 +63,7 @@ export default function Header() {
             className={cn("active-effect", {
               "animation-effect-dashboard": isAnimation.dashboard,
               "animation-effect-calender": isAnimation.calender,
-              "effect-position-right": pathname === PAGE_PATH.CALENDER,
+              "effect-position-right": pathname === PAGE_PATH.CALENDAR,
             })}
           />
         </div>
