@@ -79,7 +79,7 @@ export default function UpcomingScheduleList() {
   return (
     <div className={cn("container")}>
       <h2 className={cn("title")}>
-        <Image src="/icons/dashboard-calender.svg" width={24} height={24} alt="달력 아이콘" />
+        <Image src="/icons/dashboard-calendar.svg" width={24} height={24} alt="달력 아이콘" />
         다가오는 일정
       </h2>
       <div className={cn("box")}>
