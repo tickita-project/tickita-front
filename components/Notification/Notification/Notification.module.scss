@@ -1,3 +1,12 @@
+@keyframes opacityButton {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .container {
   width: 99%;
   padding: 1rem;
@@ -11,31 +20,42 @@
     0px 0px 1px 0px rgba(0, 0, 0, 0.08);
 
   &:hover {
-    background-color: $gray300;
+    background-color: $gray200;
     transition: 0.5s;
   }
 
-  .label-box {
+  .header {
     display: flex;
-    gap: 0.5rem;
-    margin-bottom: 0.5rem;
+    justify-content: space-between;
 
-    .group-name {
-      padding: 0.25rem 0.5rem;
-      border-radius: 0.25rem;
-      background-color: $blue50;
-      color: $blue800;
-      font-size: 0.875rem;
-      font-weight: 500;
+    .label-box {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+
+      .group-name {
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.25rem;
+        background-color: $blue50;
+        color: $blue800;
+        font-size: 0.875rem;
+        font-weight: 500;
+      }
+
+      .new-label {
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.25rem;
+        background-color: $red100;
+        color: $red800;
+        font-size: 0.875rem;
+        font-weight: 500;
+      }
     }
 
-    .checked {
-      padding: 0.25rem 0.5rem;
-      border-radius: 0.25rem;
-      background-color: $red100;
-      color: $red800;
-      font-size: 0.875rem;
-      font-weight: 500;
+    .close-button {
+      padding: 0;
+      height: 1.5rem;
+      animation: opacityButton 0.5s forwards;
     }
   }
 
@@ -59,4 +79,8 @@
     font-size: 0.875rem;
     font-weight: 500;
   }
+}
+
+.checked {
+  opacity: 0.5;
 }

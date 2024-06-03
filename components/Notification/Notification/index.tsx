@@ -1,3 +1,7 @@
+import { useState } from "react";
+
+import Image from "next/image";
+
 import classNames from "classnames/bind";
 
 import styles from "./Notification.module.scss";
@@ -6,26 +10,45 @@ const cn = classNames.bind(styles);
 
 interface NotificationProps {
   groupName: string;
-  groupColor: string;
   text: string;
   schduleInfo: string;
   notificationDate: string;
   isChecked: boolean;
+  onClick: () => void;
 }
 
-export default function Notification() {
+export default function Notification({
+  groupName,
+  text,
+  schduleInfo,
+  notificationDate,
+  isChecked,
+  onClick,
+}: NotificationProps) {
+  const [isOver, setIsOver] = useState(false);
+
   return (
-    <div className={cn("container")}>
-      <div className={cn("label-box")}>
-        <p className={cn("group-name")}>코드잇 4기 11팀</p>
-        <p className={cn("checked")}>NEW</p>
+    <div
+      className={cn("container", { checked: isChecked })}
+      onMouseOver={() => setIsOver(true)}
+      onMouseLeave={() => setIsOver(false)}
+      onClick={() => onClick()}
+    >
+      <div className={cn("header")}>
+        <div className={cn("label-box")}>
+          <p className={cn("group-name")}>{groupName}</p>
+          {isChecked && <p className={cn("new-label")}>NEW</p>}
+        </div>
+        {isOver && (
+          <button type="button" className={cn("close-button")}>
+            <Image src="/icons/notification-close.svg" width={24} height={24} alt="알림 삭제" />
+          </button>
+        )}
       </div>
-      <p className={cn("text")}>
-        그룹 참여가 확정되었습니다.그룹 참여가 확정되었습니다.그룹 참여가 확정되었습니다.그룹 참여가
-        확정되었습니다.그룹 참여가 확정되었습니다.확정되었습니다.그룹 참여가 확정되었습니다.
-      </p>
-      <p className={cn("schdule-info")}>24.05.23 (금) 14:00, 하남돼지집</p>
-      <p className={cn("notification-date")}>24.06.02 (일)</p>
+
+      <p className={cn("text")}>{text}</p>
+      <p className={cn("schdule-info")}>{schduleInfo}</p>
+      <p className={cn("notification-date")}>{notificationDate}</p>
     </div>
   );
 }

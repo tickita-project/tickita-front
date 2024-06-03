@@ -2,13 +2,63 @@ import Image from "next/image";
 
 import classNames from "classnames/bind";
 
+import EmptyNotification from "@/components/Notification/EmptyNotification";
 import Notification from "@/components/Notification/Notification";
 
 import styles from "./NotificationCenter.module.scss";
 
 const cn = classNames.bind(styles);
 
+const mockData = [
+  {
+    groupName: "코드잇 4기 11팀",
+    text: "테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림알림테스트알림테스트",
+    schduleInfo: "24.05.23 (금) 14:00, 하남돼지집",
+    notificationDate: "24.05.23 (금)",
+    isChecked: true,
+  },
+  {
+    groupName: "코드잇 4기 11팀",
+    text: "테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림",
+    schduleInfo: "24.05.23 (금) 14:00, 하남돼지집",
+    notificationDate: "24.05.23 (금)",
+    isChecked: false,
+  },
+  {
+    groupName: "코드잇 4기 11팀",
+    text: "테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림",
+    schduleInfo: "24.05.23 (금) 14:00, 하남돼지집",
+    notificationDate: "24.05.23 (금)",
+    isChecked: false,
+  },
+  {
+    groupName: "코드잇 4기 11팀",
+    text: "테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림",
+    schduleInfo: "24.05.23 (금) 14:00, 하남돼지집",
+    notificationDate: "24.05.23 (금)",
+    isChecked: false,
+  },
+  {
+    groupName: "코드잇 4기 11팀",
+    text: "테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림",
+    schduleInfo: "24.05.23 (금) 14:00, 하남돼지집",
+    notificationDate: "24.05.23 (금)",
+    isChecked: false,
+  },
+  {
+    groupName: "코드잇 4기 11팀",
+    text: "테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림",
+    schduleInfo: "24.05.23 (금) 14:00, 하남돼지집",
+    notificationDate: "24.05.23 (금)",
+    isChecked: false,
+  },
+];
+
 export default function NotificationCenter() {
+  const onClick = () => {
+    console.log("1");
+  };
+
   return (
     <div className={cn("container")}>
       <h2 className={cn("title")}>
@@ -16,26 +66,21 @@ export default function NotificationCenter() {
         알림
       </h2>
       <div className={cn("box")}>
-        <Notification />
-        <Notification />
-        <Notification />
-        <Notification />
-        <Notification />
-        <Notification />
-        <Notification />
-        {/* {mockData.length > 0 ? (
+        {mockData.length > 0 ? (
           mockData.map((item, idx) => (
-            <UpcomingSchedule
+            <Notification
               key={idx}
-              title={item.title}
-              color={item.color}
-              date={item.date}
-              daysRemaining={item.daysRemaining}
+              groupName={item.groupName}
+              text={item.text}
+              schduleInfo={item.schduleInfo}
+              notificationDate={item.notificationDate}
+              isChecked={item.isChecked}
+              onClick={onClick}
             />
           ))
         ) : (
-          <EmptyNotification title="다가오는 일정이 없습니다." />
-        )} */}
+          <EmptyNotification title="아직 수신된 알람이 없어요." />
+        )}
       </div>
     </div>
   );
