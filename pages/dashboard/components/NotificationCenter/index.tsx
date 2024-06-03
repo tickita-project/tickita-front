@@ -2,8 +2,8 @@ import Image from "next/image";
 
 import classNames from "classnames/bind";
 
+import BaseNotification from "@/components/Notification/BaseNotification";
 import EmptyNotification from "@/components/Notification/EmptyNotification";
-import Notification from "@/components/Notification/Notification";
 
 import styles from "./NotificationCenter.module.scss";
 
@@ -68,7 +68,7 @@ export default function NotificationCenter() {
       <div className={cn("box")}>
         {mockData.length > 0 ? (
           mockData.map((item, idx) => (
-            <Notification
+            <BaseNotification
               key={idx}
               groupName={item.groupName}
               text={item.text}

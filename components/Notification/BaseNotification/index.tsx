@@ -17,7 +17,7 @@ interface NotificationProps {
   onClick: () => void;
 }
 
-export default function Notification({
+export default function BaseNotification({
   groupName,
   text,
   schduleInfo,
