@@ -4,17 +4,17 @@ import Image from "next/image";
 
 import classNames from "classnames/bind";
 
-import styles from "./Notification.module.scss";
+import styles from "./BaseNotification.module.scss";
 
 const cn = classNames.bind(styles);
 
-interface NotificationProps {
+interface BaseNotificationProps {
   groupName: string;
   text: string;
   schduleInfo: string;
   notificationDate: string;
   isChecked: boolean;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 export default function BaseNotification({
@@ -24,7 +24,7 @@ export default function BaseNotification({
   notificationDate,
   isChecked,
   onClick,
-}: NotificationProps) {
+}: BaseNotificationProps) {
   const [isOver, setIsOver] = useState(false);
 
   return (
@@ -32,7 +32,7 @@ export default function BaseNotification({
       className={cn("container", { checked: isChecked })}
       onMouseOver={() => setIsOver(true)}
       onMouseLeave={() => setIsOver(false)}
-      onClick={() => onClick()}
+      onClick={() => onClick && onClick()}
     >
       <div className={cn("header")}>
         <div className={cn("label-box")}>
