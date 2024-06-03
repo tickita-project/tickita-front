@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { MouseEvent, useRef, useState } from "react";
 
 import Image from "next/image";
 
@@ -26,13 +26,27 @@ export default function BaseNotification({
   onClick,
 }: BaseNotificationProps) {
   const [isOver, setIsOver] = useState(false);
+  const closeRef = useRef<HTMLButtonElement>(null);
+
+  const handleNotificationClick = (e: MouseEvent<HTMLElement>) => {
+    if (closeRef.current && closeRef.current.contains(e.target as Node)) {
+      // 알림 삭제
+      alert("추후 알림 삭제 로직 추가 예정");
+      return;
+    }
+
+    if (onClick) {
+      // 각 알림마다 다른 이벤트 처리
+      onClick();
+    }
+  };
 
   return (
     <div
       className={cn("container", { checked: isChecked })}
       onMouseOver={() => setIsOver(true)}
       onMouseLeave={() => setIsOver(false)}
-      onClick={() => onClick && onClick()}
+      onClick={(e) => handleNotificationClick(e)}
     >
       <div className={cn("header")}>
         <div className={cn("label-box")}>
@@ -40,7 +54,7 @@ export default function BaseNotification({
           {!isChecked && <p className={cn("new-label")}>NEW</p>}
         </div>
         {isOver && (
-          <button type="button" className={cn("close-button")}>
+          <button ref={closeRef} type="button" className={cn("close-button")}>
             <Image src="/icons/notification-close.svg" width={24} height={24} alt="알림 삭제" />
           </button>
         )}
