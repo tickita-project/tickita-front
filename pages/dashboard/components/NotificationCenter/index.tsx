@@ -37,7 +37,7 @@ const mockData: SchduleInfoType[] = [
     id: 2,
     type: "coordination",
     groupName: "코드잇 4기 11팀",
-    text: "클릭 시 일정 조율 링크 or 주최자가 일정 선택하는 페이지 링크로 이동, 알림 삭제 가능",
+    text: "클릭 시 일정 조율 링크 or 주최자가 일정 선택하는 페이지 링크로 이동, 알림 삭제 가능 / 텍스트 길어지는 경우 확인텍스트 길어지는 경우 확인텍스트 길어지는 경우 확인텍스트 길어지는 경우 확인텍스트 길어지는 경우 확인텍스트 길어지는 경우 확인",
     notificationDate: "24.05.23 (금)",
     isChecked: false,
     link: "일정 조율 링크 or 주최자가 일정 선택하는 페이지 링크",
