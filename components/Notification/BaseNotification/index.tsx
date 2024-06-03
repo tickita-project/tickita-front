@@ -37,7 +37,7 @@ export default function BaseNotification({
       <div className={cn("header")}>
         <div className={cn("label-box")}>
           <p className={cn("group-name")}>{groupName}</p>
-          {isChecked && <p className={cn("new-label")}>NEW</p>}
+          {!isChecked && <p className={cn("new-label")}>NEW</p>}
         </div>
         {isOver && (
           <button type="button" className={cn("close-button")}>
