@@ -5,7 +5,6 @@ import classNames from "classnames/bind";
 import BaseNotification from "@/components/Notification/BaseNotification";
 import CoordinationNotification from "@/components/Notification/CoordinationNotification";
 import EmptyNotification from "@/components/Notification/EmptyNotification";
-import InviteNotification from "@/components/Notification/InviteNotification";
 import SchduleInfoNotification from "@/components/Notification/SchduleInfoNotification";
 
 import styles from "./NotificationCenter.module.scss";
@@ -79,20 +78,9 @@ export default function NotificationCenter() {
               return <CoordinationNotification key={item.id} schduleDetail={item} />;
             }
 
-            if (item.type === "invite") {
-              return (
-                <InviteNotification
-                  key={item.id}
-                  groupName={item.groupName}
-                  text={item.text}
-                  notificationDate={item.notificationDate}
-                  isChecked={item.isChecked}
-                />
-              );
-            }
-
             return (
               <BaseNotification
+                type={item.type}
                 key={item.id}
                 groupName={item.groupName}
                 text={item.text}

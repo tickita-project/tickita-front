@@ -9,6 +9,7 @@ import styles from "./BaseNotification.module.scss";
 const cn = classNames.bind(styles);
 
 interface BaseNotificationProps {
+  type: string;
   groupName: string;
   text: string;
   schduleInfo?: string;
@@ -18,6 +19,7 @@ interface BaseNotificationProps {
 }
 
 export default function BaseNotification({
+  type,
   groupName,
   text,
   schduleInfo,
@@ -42,6 +44,10 @@ export default function BaseNotification({
     }
   };
 
+  const handleInviteAcceptClick = () => {
+    alert("TODO: 그룹 초대 수락 로직 추가 예정");
+  };
+
   return (
     <div
       className={cn("container", { checked: isChecked })}
@@ -63,7 +69,14 @@ export default function BaseNotification({
 
       <p className={cn("text")}>{text}</p>
       <p className={cn("schdule-info")}>{schduleInfo}</p>
-      <p className={cn("notification-date")}>{notificationDate}</p>
+      <div className={cn("button-box")}>
+        {type === "invite" && (
+          <button className={cn("accept-button")} type="button" onClick={handleInviteAcceptClick}>
+            초대 수락
+          </button>
+        )}
+        <p className={cn("notification-date")}>{notificationDate}</p>
+      </div>
     </div>
   );
 }

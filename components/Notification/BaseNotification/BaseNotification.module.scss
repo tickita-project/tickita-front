@@ -76,12 +76,37 @@
     font-size: 0.875rem;
   }
 
-  .notification-date {
-    width: 100%;
-    text-align: right;
-    color: $gray800;
-    font-size: 0.875rem;
-    font-weight: 500;
+  .button-box {
+    display: flex;
+    justify-content: right;
+    gap: 1rem;
+    align-self: center;
+
+    .accept-button {
+      height: 2rem;
+      padding: 0.375rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0.375rem;
+      border: 1px solid $blue500;
+      font-size: 0.875rem;
+      color: $blue500;
+
+      &:hover {
+        background-color: $blue500;
+        color: $white;
+        transition: 0.5s;
+      }
+    }
+
+    .notification-date {
+      display: flex;
+      align-items: center;
+      color: $gray800;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
   }
 }
 

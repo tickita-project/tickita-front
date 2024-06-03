@@ -26,6 +26,7 @@ export default function SchduleInfoNotification({ schduleDetail }: SchduleInfoNo
 
   return (
     <BaseNotification
+      type={schduleDetail.type}
       groupName={schduleDetail.groupName}
       text={schduleDetail.text}
       schduleInfo={schduleDetail.schduleInfo}
