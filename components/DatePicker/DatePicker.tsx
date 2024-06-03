@@ -6,7 +6,7 @@ import classNames from "classnames/bind";
 import dayjs, { Dayjs } from "dayjs";
 
 import { DAYS } from "@/constants/calendarConstants";
-import { calculateMonthDates } from "@/utils/calculateCalendarDates";
+import { calculateMonthDates, divideWeek } from "@/utils/calculateCalendarDates";
 
 import styles from "./datePicker.module.scss";
 
@@ -59,20 +59,7 @@ export default function DatePicker({
     });
   };
 
-  const divideWeek = (calendarTags: JSX.Element[]) => {
-    return calendarTags.reduce((acc: JSX.Element[][], day: JSX.Element, i: number) => {
-      if (i % 7 === 0) {
-        acc.push([day]);
-      } else {
-        acc[acc.length - 1].push(day);
-      }
-      return acc;
-    }, []);
-  };
-
-  const calendarDays = calculateMonthDates(viewDate);
-  const calendarTags = buildCalendarTag(calendarDays);
-  const calendarRows = divideWeek(calendarTags);
+  const calendarRows = divideWeek(buildCalendarTag(calculateMonthDates(viewDate)));
 
   return (
     <div className={cn("container")}>
