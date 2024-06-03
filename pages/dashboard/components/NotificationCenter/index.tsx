@@ -3,6 +3,7 @@ import Image from "next/image";
 import classNames from "classnames/bind";
 
 import BaseNotification from "@/components/Notification/BaseNotification";
+import CoordinationNotification from "@/components/Notification/CoordinationNotification";
 import EmptyNotification from "@/components/Notification/EmptyNotification";
 import SchduleInfoNotification from "@/components/Notification/SchduleInfoNotification";
 
@@ -10,12 +11,23 @@ import styles from "./NotificationCenter.module.scss";
 
 const cn = classNames.bind(styles);
 
+interface SchduleInfoType {
+  id: number;
+  type: string;
+  groupName: string;
+  text: string;
+  schduleInfo: string;
+  notificationDate: string;
+  isChecked: boolean;
+  link?: string;
+}
+
 const mockData = [
   {
     id: 1,
     type: "default",
     groupName: "코드잇 4기 11팀",
-    text: "테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림알림테스트알림테스트",
+    text: "기본 알림 이벤트 X, 알림 삭제만 가능",
     schduleInfo: "24.05.23 (금) 14:00, 하남돼지집",
     notificationDate: "24.05.23 (금)",
     isChecked: true,
@@ -24,16 +36,17 @@ const mockData = [
     id: 2,
     type: "coordination",
     groupName: "코드잇 4기 11팀",
-    text: "테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림",
+    text: "클릭 시 일정 조율 링크 or 주최자가 일정 선택하는 페이지 링크로 이동, 알림 삭제 가능",
     schduleInfo: "24.05.23 (금) 14:00, 하남돼지집",
     notificationDate: "24.05.23 (금)",
     isChecked: false,
+    link: "일정 조율 링크 or 주최자가 일정 선택하는 페이지 링크",
   },
   {
     id: 3,
     type: "schduleInfo",
     groupName: "코드잇 4기 11팀",
-    text: "테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림",
+    text: "클릭 시 일정 상세 모달 열기, 알림 삭제 가능",
     schduleInfo: "24.05.23 (금) 14:00, 하남돼지집",
     notificationDate: "24.05.23 (금)",
     isChecked: false,
@@ -51,7 +64,7 @@ const mockData = [
     id: 5,
     type: "default",
     groupName: "코드잇 4기 11팀",
-    text: "테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림",
+    text: "기본 알림 이벤트 X, 알림 삭제만 가능",
     schduleInfo: "24.05.23 (금) 14:00, 하남돼지집",
     notificationDate: "24.05.23 (금)",
     isChecked: false,
@@ -60,7 +73,7 @@ const mockData = [
     id: 6,
     type: "default",
     groupName: "코드잇 4기 11팀",
-    text: "테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림테스트 알림",
+    text: "기본 알림 이벤트 X, 알림 삭제만 가능",
     schduleInfo: "24.05.23 (금) 14:00, 하남돼지집",
     notificationDate: "24.05.23 (금)",
     isChecked: false,
@@ -91,6 +104,10 @@ export default function NotificationCenter() {
             }
             if (item.type === "schduleInfo") {
               return <SchduleInfoNotification key={item.id} schduleDetail={item} />;
+            }
+
+            if (item.type === "coordination") {
+              return <CoordinationNotification key={item.id} schduleDetail={item} />;
             }
           })
         ) : (

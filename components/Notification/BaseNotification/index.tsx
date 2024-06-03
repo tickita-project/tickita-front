@@ -31,13 +31,14 @@ export default function BaseNotification({
   const handleNotificationClick = (e: MouseEvent<HTMLElement>) => {
     if (closeRef.current && closeRef.current.contains(e.target as Node)) {
       // 알림 삭제
-      alert("추후 알림 삭제 로직 추가 예정");
+      alert("TODO: 추후 알림 삭제 로직 추가 예정");
       return;
     }
 
     if (onClick) {
       // 각 알림마다 다른 이벤트 처리
       onClick();
+      // TODO: isChecked 상태 변경 하는 함수 추가 예정
     }
   };
 
