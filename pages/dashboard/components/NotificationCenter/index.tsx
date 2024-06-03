@@ -28,7 +28,7 @@ const mockData: SchduleInfoType[] = [
     id: 1,
     type: "default",
     groupName: "코드잇 4기 11팀",
-    text: "기본 알림 이벤트 X, 알림 삭제만 가능",
+    text: "기본 알림 클릭 이벤트 X, 알림 삭제만 가능",
     schduleInfo: "24.05.23 (금) 14:00, 하남돼지집",
     notificationDate: "24.05.23 (금)",
     isChecked: true,
