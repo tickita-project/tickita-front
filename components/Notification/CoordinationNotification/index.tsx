@@ -1,7 +1,5 @@
 import { useRouter } from "next/router";
 
-import { useModalStore } from "@/store/useModalStore";
-
 import BaseNotification from "../BaseNotification";
 
 interface SchduleInfoType {
