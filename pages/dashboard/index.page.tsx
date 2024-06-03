@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import Link from "next/link";
+
 import classNames from "classnames/bind";
 import dayjs, { Dayjs } from "dayjs";
 
@@ -9,6 +11,7 @@ import UpcomingScheduleList from "./components/UpcomingScheduleList";
 import DatePicker from "@/components/DatePicker/DatePicker";
 import Header from "@/components/Header";
 import MetaData from "@/components/MetaData";
+import { PAGE_PATH } from "@/constants/pagePath";
 
 import styles from "./Dashboard.module.scss";
 
@@ -25,13 +28,13 @@ export default function Dashboard() {
         <div className={cn("wrap")}>
           <GroupList />
           <section className={cn("content")}>
-            <div className={cn("calendar")}>
+            <Link href={PAGE_PATH.CALENDAR} className={cn("calendar")}>
               <DatePicker
                 selectedDay={focusDate}
                 setSelectedDay={setFocusDate}
                 hasNavigation={false}
               />
-            </div>
+            </Link>
             <div className={cn("box")}>
               <UpcomingScheduleList />
               <NotificationCenter />
