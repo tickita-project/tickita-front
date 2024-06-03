@@ -7,7 +7,7 @@ interface SchduleInfoType {
   type: string;
   groupName: string;
   text: string;
-  schduleInfo: string;
+  schduleInfo?: string;
   notificationDate: string;
   isChecked: boolean;
   link?: string;
