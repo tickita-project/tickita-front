@@ -6,6 +6,7 @@ import { HydrationBoundary, QueryClient, QueryClientProvider } from "@tanstack/r
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import "@/styles/reset.scss";
+import Portal from "@/components/Modal/Portal";
 
 export default function App({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(
@@ -25,6 +26,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <HydrationBoundary state={pageProps.dehydratedState}>
         <ReactQueryDevtools initialIsOpen={false} />
         <Component {...pageProps} />
+        <Portal />
       </HydrationBoundary>
     </QueryClientProvider>
   );
