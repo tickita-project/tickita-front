@@ -20,7 +20,7 @@ export default function UpcomingSchedule({
   daysRemaining,
 }: UpcomingScheduleProps) {
   const { openModal } = useModalStore();
-  const isDday = daysRemaining === "D-DAY";
+  const isToday = daysRemaining === "D-DAY";
 
   const handleUpcomingScheduleClick = () => {
     openModal("일정 상세 모달", "일정 데이터");
@@ -33,14 +33,14 @@ export default function UpcomingSchedule({
       <div className={cn("box")}>
         <div
           className={cn("date", {
-            "date-d-day": isDday,
+            "date-d-day": isToday,
           })}
         >
           {date}
         </div>
         <div
           className={cn("day-day", {
-            "d-day": isDday,
+            "d-day": isToday,
           })}
         >
           {daysRemaining}

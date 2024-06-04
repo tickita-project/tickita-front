@@ -1,4 +1,4 @@
-import { MouseEvent, useRef, useState } from "react";
+import { MouseEvent, useRef } from "react";
 
 import Image from "next/image";
 
@@ -27,7 +27,6 @@ export default function BaseNotification({
   isChecked,
   onClick,
 }: BaseNotificationProps) {
-  const [isOver, setIsOver] = useState(false);
   const closeRef = useRef<HTMLButtonElement>(null);
 
   const handleNotificationClick = (e: MouseEvent<HTMLElement>) => {
@@ -51,8 +50,6 @@ export default function BaseNotification({
   return (
     <div
       className={cn("container", { checked: isChecked })}
-      onMouseOver={() => setIsOver(true)}
-      onMouseLeave={() => setIsOver(false)}
       onClick={(e) => handleNotificationClick(e)}
     >
       <div className={cn("header")}>
@@ -60,11 +57,10 @@ export default function BaseNotification({
           <p className={cn("group-name")}>{groupName}</p>
           {!isChecked && <p className={cn("new-label")}>NEW</p>}
         </div>
-        {isOver && (
-          <button ref={closeRef} type="button" className={cn("close-button")}>
-            <Image src="/icons/notification-close.svg" width={24} height={24} alt="알림 삭제" />
-          </button>
-        )}
+
+        <button ref={closeRef} type="button" className={cn("close-button")}>
+          <Image src="/icons/notification-close.svg" width={24} height={24} alt="알림 삭제" />
+        </button>
       </div>
 
       <p className={cn("text")}>{text}</p>

@@ -52,13 +52,14 @@
     }
 
     .close-button {
+      display: none;
       padding: 0;
       height: 1.5rem;
       animation: opacityButton 0.5s forwards;
       transition: transform 0.5s ease;
 
       &:hover {
-        transform: rotate(90deg);
+        transform: rotate(180deg);
       }
     }
   }
@@ -107,6 +108,10 @@
       font-size: 0.875rem;
       font-weight: 500;
     }
+  }
+
+  &:hover .close-button {
+    display: block;
   }
 }
 
