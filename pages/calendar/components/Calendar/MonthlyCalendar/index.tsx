@@ -27,31 +27,5 @@ export default function MonthlyCalendar({ viewDate }: MonthlyCalendarProps) {
 
   const calendarRows = divideWeek(buildCalendarTag(calculateMonthDates(viewDate)));
 
-  return (
-    <div className={cn("container")}>
-      <div className={cn("header")}>
-        <div className={cn("year-month")}>
-          <span>{viewDate.year()}</span>
-
-          <span>{viewDate.month() + 1}</span>
-        </div>
-      </div>
-      <table className={cn("calendar-table")}>
-        <thead className={cn("table-header")}>
-          <tr>
-            {DAYS.map((day, i) => (
-              <th key={i} className={cn("day")}>
-                {day}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {calendarRows.map((row, i) => (
-            <tr key={i}>{row}</tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
+  return <div className={cn("container")}>월간캘린더</div>;
 }

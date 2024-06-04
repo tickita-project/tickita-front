@@ -12,7 +12,7 @@ import styles from "./datePicker.module.scss";
 
 const cn = classNames.bind(styles);
 
-interface DatePickerProps {
+export interface DatePickerProps {
   selectedDay: Dayjs;
   setSelectedDay: (date: Dayjs) => void;
   hasNavigation: boolean;
