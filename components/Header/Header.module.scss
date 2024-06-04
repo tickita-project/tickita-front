@@ -78,32 +78,6 @@
       .nickname {
         color: $blue600;
       }
-
-      .profile-image-container {
-        position: relative;
-        display: inline-block; /* 이미지 크기에 맞추어 컨테이너 크기 조정 */
-      }
-
-      .profile-image-background {
-        border-radius: 50%;
-        width: 2.75rem;
-        height: 2.75rem;
-        background-color: $gray200;
-      }
-
-      .profile-image-container::before {
-        content: "";
-        position: absolute;
-        inset: -2px;
-        border-radius: 50%;
-        background: linear-gradient(
-          90deg,
-          rgba(51, 96, 255, 1) 0%,
-          rgba(50, 236, 180, 1) 50%,
-          rgba(38, 163, 191, 1) 100%
-        );
-        z-index: -1; /* 이미지 뒤에 배치 */
-      }
     }
   }
 }
