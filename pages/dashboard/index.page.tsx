@@ -1,15 +1,14 @@
-import { useState } from "react";
+import { useState, ReactElement } from "react";
 
 import Link from "next/link";
 
 import classNames from "classnames/bind";
 import dayjs, { Dayjs } from "dayjs";
 
-import GroupList from "./components/GroupList";
 import NotificationCenter from "./components/NotificationCenter";
 import UpcomingScheduleList from "./components/UpcomingScheduleList";
 import DatePicker from "@/components/DatePicker/DatePicker";
-import Header from "@/components/Header";
+import Layout from "@/components/Layout";
 import MetaData from "@/components/MetaData";
 import { PAGE_PATH } from "@/constants/pagePath";
 
@@ -23,25 +22,19 @@ export default function Dashboard() {
   return (
     <>
       <MetaData title="대시보드 | 티키타" />
-      <Header />
-      <main className={cn("container")}>
-        <div className={cn("wrap")}>
-          <GroupList />
-          <section className={cn("content")}>
-            <Link href={PAGE_PATH.CALENDAR} className={cn("calendar")}>
-              <DatePicker
-                selectedDay={focusDate}
-                setSelectedDay={setFocusDate}
-                hasNavigation={false}
-              />
-            </Link>
-            <div className={cn("box")}>
-              <UpcomingScheduleList />
-              <NotificationCenter />
-            </div>
-          </section>
+      <section className={cn("content")}>
+        <Link href={PAGE_PATH.CALENDAR} className={cn("calendar")}>
+          <DatePicker selectedDay={focusDate} setSelectedDay={setFocusDate} hasNavigation={false} />
+        </Link>
+        <div className={cn("box")}>
+          <UpcomingScheduleList />
+          <NotificationCenter />
         </div>
-      </main>
+      </section>
     </>
   );
 }
+
+Dashboard.getLayout = function getLayout(page: ReactElement) {
+  return <Layout>{page}</Layout>;
+};
