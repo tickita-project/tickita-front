@@ -1,0 +1,62 @@
+.container {
+  width: 99%;
+  padding: 1rem;
+  border: 1px solid $gray400;
+  background-color: $white;
+  border-radius: 0.5rem;
+  box-shadow:
+    0px 1px 2px 0px rgba(0, 0, 0, 0.12),
+    0px 0px 1px 0px rgba(0, 0, 0, 0.08),
+    0px 0px 1px 0px rgba(0, 0, 0, 0.08);
+
+  &:hover {
+    background-color: $gray200;
+    transition: 0.5s;
+  }
+
+  .color {
+    border-radius: 0.25rem;
+    width: 2.5rem;
+    height: 0.5rem;
+    background-color: $blue500;
+  }
+
+  .title {
+    width: 100%;
+    @include text-overflow-ellipsis(2);
+    font-weight: 700;
+    margin: 0.75rem 0 1rem;
+    line-height: 150%;
+    height: 3rem;
+  }
+
+  .box {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    .date {
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.25rem;
+      background-color: $gray100;
+      color: $gray800;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .date-d-day {
+      background-color: $red100;
+      color: $red600;
+    }
+
+    .day-day {
+      font-size: 1.0625rem;
+      font-weight: 700;
+      color: $gray800;
+    }
+
+    .d-day {
+      color: $red500;
+    }
+  }
+}

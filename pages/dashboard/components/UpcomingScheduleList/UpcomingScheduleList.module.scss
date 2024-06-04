@@ -1,0 +1,48 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 33rem;
+
+  .title {
+    background-color: $white;
+    border: 1px solid $gray300;
+    border-radius: 0.5rem;
+    box-shadow:
+      0px 1px 2px 0px rgba(0, 0, 0, 0.12),
+      0px 0px 1px 0px rgba(0, 0, 0, 0.08),
+      0px 0px 1px 0px rgba(0, 0, 0, 0.08);
+    padding: 0.5rem;
+    display: flex;
+    gap: 0.5rem;
+    font-size: 1.0625rem;
+    font-weight: 700;
+    align-items: center;
+  }
+
+  .box {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    height: 46.7rem;
+    height: calc(100vh - 11.5rem);
+    padding: 0;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 0.75rem;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $white;
+      border: 1px solid $gray400;
+      border-radius: 5px;
+      min-height: 3.75rem;
+    }
+
+    &::-webkit-scrollbar-track {
+      border-radius: 100px;
+      background: $gray300;
+    }
+  }
+}

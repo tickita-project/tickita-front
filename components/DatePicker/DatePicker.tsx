@@ -112,7 +112,7 @@ export default function DatePicker({
         )}
         <div className={cn("year-month")}>
           <span>{viewDate.year()}</span>
-          <Image src="/icons/vertical-divider-logo.svg" alt="" width={1} height={10} />
+          <Image src="/icons/vertical-divider-icon.svg" alt="" width={1} height={10} />
           <span>{viewDate.month() + 1}</span>
         </div>
         {hasNavigation && (

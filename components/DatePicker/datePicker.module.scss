@@ -1,8 +1,8 @@
 @mixin table-element {
   width: 1.75rem;
   height: 1.75rem;
-  padding: .5rem;
-  gap: .5rem;
+  padding: 0.5rem;
+  gap: 0.5rem;
   justify-content: center;
   align-items: center;
 
@@ -22,16 +22,22 @@
   padding: 1rem;
   flex-direction: column;
   align-items: flex-start;
-  border-radius: .5rem;
-  background: var(--neutral-white, #FFF);
+  border-radius: 0.5rem;
+  background: $white;
+  width: 100%;
+  height: 100%;
+  border: 1px solid $gray300;
 
   /* Elevation/Normal */
-  box-shadow: 0rem .0625rem .125rem 0rem rgba(0, 0, 0, 0.12), 0rem 0rem .0625rem 0rem rgba(0, 0, 0, 0.08), 0rem 0rem .0625rem 0rem rgba(0, 0, 0, 0.08);
+  box-shadow:
+    0rem 0.0625rem 0.125rem 0rem rgba(0, 0, 0, 0.12),
+    0rem 0rem 0.0625rem 0rem rgba(0, 0, 0, 0.08),
+    0rem 0rem 0.0625rem 0rem rgba(0, 0, 0, 0.08);
 
   .header {
     display: flex;
     width: 100%;
-    padding: 0rem .5rem .5rem .5rem;
+    padding: 0rem 0.5rem 0.5rem 0.5rem;
     justify-content: space-between;
     align-items: center;
 
@@ -41,11 +47,11 @@
 
     .today-button {
       display: inline-flex;
-      padding: .1875rem .5rem;
+      padding: 0.1875rem 0.5rem;
       justify-content: center;
       align-items: center;
-      gap: .5rem;
-      border-radius: .25rem;
+      gap: 0.5rem;
+      border-radius: 0.25rem;
       background: var(--blue-blue-900, #152868);
       @include caption2-medium(white);
     }
@@ -53,7 +59,7 @@
     .year-month {
       display: flex;
       align-items: center;
-      gap: .5rem;
+      gap: 0.5rem;
 
       span {
         @include body2-medium;
@@ -64,7 +70,7 @@
       display: flex;
       justify-content: flex-end;
       align-items: flex-start;
-      gap: .25rem;
+      gap: 0.25rem;
 
       .arrow-button {
         cursor: pointer;
@@ -101,7 +107,6 @@
         background-color: $blue500;
         @include body2-medium(white);
       }
-
     }
   }
 }
