@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import Image from "next/image";
 import Link from "next/link";
 
@@ -7,10 +9,19 @@ import styles from "./index.module.scss";
 
 const cn = classNames.bind(styles);
 
-const KAKAO_REDIRECT_URI = "http://localhost:3000/sign-in/kakao";
-const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_REST_API_KEY}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`;
-
 export default function SignIn() {
+  const [kakaoAuthUri, setKakaoAuthUri] = useState("");
+
+  useEffect(() => {
+    const getKakaoRediretUri = () => {
+      const { origin } = window.location;
+      return `${origin}/sign-in/kakao`;
+    };
+
+    const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_REST_API_KEY}&redirect_uri=${getKakaoRediretUri()}&response_type=code`;
+    setKakaoAuthUri(KAKAO_AUTH_URL);
+  }, []);
+
   return (
     <>
       <header className={cn("header")}>
@@ -30,7 +41,7 @@ export default function SignIn() {
           />
         </div>
         <div className={cn("login-button-container")}>
-          <Link href={KAKAO_AUTH_URL} className={cn("login-button", "kakao-login-button")}>
+          <Link href={kakaoAuthUri} className={cn("login-button", "kakao-login-button")}>
             <Image src="/icons/kakao-icon.svg" alt="카카오톡 아이콘" width={20} height={20} />
             카카오로 로그인
           </Link>
