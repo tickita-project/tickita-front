@@ -14,8 +14,8 @@ export default function SignIn() {
 
   useEffect(() => {
     const getKakaoRediretUri = () => {
-      const { protocol, host } = window.location;
-      return `${protocol}//${host}/sign-in/kakao`;
+      const { origin } = window.location;
+      return `${origin}/sign-in/kakao`;
     };
 
     const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_REST_API_KEY}&redirect_uri=${getKakaoRediretUri()}&response_type=code`;
