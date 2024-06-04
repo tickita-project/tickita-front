@@ -23,8 +23,8 @@ export default function CalendarPage() {
       <main>
         <CalendarTypeRadioButton setType={setCalendarType} />
         {calendarType === "월" && <MonthlyCalendar viewDate={focusDate} />}
-        {calendarType === "주" && <WeeklyCalendar />}
-        {calendarType === "일" && <DailyCalendar />}
+        {calendarType === "주" && <WeeklyCalendar viewDate={focusDate} />}
+        {calendarType === "일" && <DailyCalendar viewDate={focusDate} />}
       </main>
     </>
   );
