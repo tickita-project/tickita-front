@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 
 import { instance } from "@/apis/axios";
+import { PAGE_PATH } from "@/constants/pagePath";
 
 interface KakaoProps {
   isFirst: boolean;
@@ -27,12 +28,11 @@ export default function Kakao({ isFirst }: KakaoProps) {
 
   useEffect(() => {
     if (isFirst) {
-      router.push("/profile-setup"); // TODO: 우혁님 PR merge 된 후에, 상수로 수정 예정
+      router.push(PAGE_PATH.PROFILE_SETUP);
+      return; // TODO: 우혁님 PR merge 된 후에, 상수로 수정 예정
     }
 
-    if (!isFirst) {
-      router.push("/");
-    }
+    router.push(PAGE_PATH.MAIN);
   }, [isFirst]);
 
   return <div>로그인 요청중입니다.</div>;
