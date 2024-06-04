@@ -12,7 +12,7 @@ const cn = classNames.bind(styles);
 
 const isAnimation = {
   dashboard: false,
-  calender: false,
+  calendar: false,
 };
 
 // 로그인 정보에 따라 닉네임, 프로필 이미지 변경(유저 정보 전역 상태 관리?)
@@ -28,12 +28,12 @@ export default function Header() {
     }, 100);
   };
 
-  const handleCalenderTapClick = () => {
-    isAnimation.calender = true;
+  const handleCalendarTapClick = () => {
+    isAnimation.calendar = true;
 
     // 애니메이션 초기화
     setTimeout(() => {
-      isAnimation.calender = false;
+      isAnimation.calendar = false;
     }, 100);
   };
 
@@ -53,7 +53,7 @@ export default function Header() {
             대시보드
           </Link>
           <Link
-            onClick={handleCalenderTapClick}
+            onClick={handleCalendarTapClick}
             href={PAGE_PATH.CALENDAR}
             className={cn("nav-tap-item", { active: pathname === PAGE_PATH.CALENDAR })}
           >
@@ -62,7 +62,7 @@ export default function Header() {
           <div
             className={cn("active-effect", {
               "animation-effect-dashboard": isAnimation.dashboard,
-              "animation-effect-calender": isAnimation.calender,
+              "animation-effect-calendar": isAnimation.calendar,
               "effect-position-right": pathname === PAGE_PATH.CALENDAR,
             })}
           />

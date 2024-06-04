@@ -1,0 +1,12 @@
+.container {
+  width: 100%;
+  background-color: $gray50;
+  height: calc(100vh - 5rem - 1px);
+
+  .wrap {
+    width: 100vw;
+    max-width: 120rem;
+    margin: 0 auto;
+    display: flex;
+  }
+}
