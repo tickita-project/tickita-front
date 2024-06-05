@@ -1,8 +1,13 @@
+import { useRouter } from "next/router";
+
 import { zodResolver } from "@hookform/resolvers/zod";
+import { AxiosError } from "axios";
 import classNames from "classnames/bind";
 import { useForm } from "react-hook-form";
 
+import { postProfileSetup } from "@/apis/apis";
 import Input from "@/components/Input";
+import { PAGE_PATH } from "@/constants/pagePath";
 
 import FormSchema from "./FormSchema";
 import styles from "./ProfileSetupForm.module.scss";
@@ -20,6 +25,8 @@ export interface FieldValuesType {
 }
 
 export default function ProfileSetupForm({ accountId, email }: ProfileSetupFormProps) {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -32,7 +39,15 @@ export default function ProfileSetupForm({ accountId, email }: ProfileSetupFormP
 
   const onSubmit = async (data: Omit<FieldValuesType, "accountId">) => {
     const formData = { ...data, accountId: Number(accountId) };
-    console.log(formData); // TODO: 추후 삭제 예정 (데이터 확인용)
+
+    try {
+      await postProfileSetup(formData);
+      router.push(PAGE_PATH.MAIN);
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        alert("추가 정보 입력을 완료하지 못했습니다.");
+      }
+    }
   };
 
   return (
