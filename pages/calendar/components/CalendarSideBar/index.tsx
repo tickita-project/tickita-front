@@ -37,8 +37,8 @@ export default function CalendarSideBar({ selectedDay, setSelectedDay }: Calenda
         </div>
         {isCreateListVisible && (
           <ul className={cn("create-list-container")}>
-            <li>일정 생성</li>
-            <li>일정조율 생성</li>
+            <li>일정 만들기</li>
+            <li>일정 조율하기</li>
           </ul>
         )}
       </div>
