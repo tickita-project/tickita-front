@@ -1,5 +1,3 @@
-import { useRouter } from "next/router";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import classNames from "classnames/bind";
 import { useForm } from "react-hook-form";
@@ -22,8 +20,6 @@ export interface FieldValuesType {
 }
 
 export default function ProfileSetupForm({ accountId, email }: ProfileSetupFormProps) {
-  const router = useRouter();
-
   const {
     register,
     handleSubmit,
