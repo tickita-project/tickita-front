@@ -1,0 +1,46 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.container {
+  label {
+    display: flex;
+    gap: 0.125rem;
+    color: $black;
+    font-size: 1.0625rem;
+    font-weight: 700;
+    line-height: 1.5rem;
+    letter-spacing: -0.0266rem;
+
+    .required-field {
+      color: $red500;
+    }
+
+    .selective-field {
+      color: $black;
+      font-weight: 400;
+    }
+  }
+
+  input {
+    width: 22.875rem;
+    height: 4rem;
+    margin-bottom: 0.25rem;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    border: 1px solid $gray600;
+    font-size: 1.0625rem;
+    font-weight: 500;
+    line-height: 1.5rem;
+    letter-spacing: -0.0266rem;
+  }
+}
+
+.error-message {
+  color: $red500;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  letter-spacing: -0.0219rem;
+}
