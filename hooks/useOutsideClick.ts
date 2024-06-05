@@ -1,9 +1,9 @@
 import { RefObject, useEffect } from "react";
 
-type UseOutsideClickProps = {
+interface UseOutsideClickProps {
   ref: RefObject<HTMLElement>;
   handler: (event: MouseEvent) => void;
-};
+}
 
 /**
  * 전달 받은 요소 밖의 것을 클릭한 경우 인자의 handler 호출

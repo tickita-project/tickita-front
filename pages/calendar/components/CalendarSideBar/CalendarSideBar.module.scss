@@ -30,11 +30,11 @@
       list-style: none;
       padding: 0;
       margin: 0;
-      position: absolute; // 절대 위치로 설정하여 부모 요소 아래에 배치
-      top: 100%; // 부모 요소 바로 아래에 위치
+      position: absolute;
+      top: 100%;
       right: 0;
-      background: white; // 배경색 설정
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // 그림자 추가
+      background: $white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
       li {
         padding: 10px;

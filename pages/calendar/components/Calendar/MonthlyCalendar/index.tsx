@@ -16,7 +16,7 @@ interface MonthlyCalendarProps {
 
 export default function MonthlyCalendar({ viewDate }: MonthlyCalendarProps) {
   const buildCalendarTag = (calendarDays: Dayjs[]) => {
-    return calendarDays.map((day: Dayjs, i: number) => {
+    return calendarDays.map((day, i: number) => {
       return (
         <td key={i} className={cn()}>
           {day.date()}

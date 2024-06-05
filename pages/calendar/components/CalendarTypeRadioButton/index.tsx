@@ -4,12 +4,12 @@ import styles from "./CalendarTypeRadioButton.module.scss";
 import { CalendarType } from "../../index.page";
 
 interface CalendarTypeRadioButtonProps {
-  setType: (type: CalendarType) => void;
+  setCalendarType: (type: CalendarType) => void;
 }
 
 const cn = classNames.bind(styles);
 
-export default function CalendarTypeRadioButton({ setType }: CalendarTypeRadioButtonProps) {
+export default function CalendarTypeRadioButton({ setCalendarType }: CalendarTypeRadioButtonProps) {
   return (
     <>
       <div className={cn("container")}>
@@ -20,7 +20,7 @@ export default function CalendarTypeRadioButton({ setType }: CalendarTypeRadioBu
           value="월"
           defaultChecked
           onClick={() => {
-            setType("월");
+            setCalendarType("월");
           }}
         />
         <label htmlFor="monthly">월</label>
@@ -30,7 +30,7 @@ export default function CalendarTypeRadioButton({ setType }: CalendarTypeRadioBu
           name="calendar"
           value="주"
           onClick={() => {
-            setType("주");
+            setCalendarType("주");
           }}
         />
         <label htmlFor="weekly">주</label>
@@ -41,7 +41,7 @@ export default function CalendarTypeRadioButton({ setType }: CalendarTypeRadioBu
           name="calendar"
           value="일"
           onClick={() => {
-            setType("일");
+            setCalendarType("일");
           }}
         />
         <label htmlFor="monthly">일</label>

@@ -8,8 +8,8 @@ import MonthlyCalendar from "./components/Calendar/MonthlyCalendar";
 import WeeklyCalendar from "./components/Calendar/WeeklyCalendar";
 import CalendarSideBar from "./components/CalendarSideBar";
 import CalendarTypeRadioButton from "./components/CalendarTypeRadioButton";
-import { DatePickerProps } from "@/components/DatePicker/DatePicker";
 import Header from "@/components/Header";
+import MetaData from "@/components/MetaData";
 
 import styles from "./Calendar.module.scss";
 
@@ -22,16 +22,13 @@ export default function CalendarPage() {
 
   return (
     <>
+      <MetaData title="내 캘린더 | 티키타" />
       <Header />
       <div className={cn("container")}>
-        <CalendarSideBar
-          selectedDay={focusDate}
-          setSelectedDay={setFocusDate}
-          hasNavigation={true}
-        />
+        <CalendarSideBar selectedDay={focusDate} setSelectedDay={setFocusDate} />
 
         <main>
-          <CalendarTypeRadioButton setType={setCalendarType} />
+          <CalendarTypeRadioButton setCalendarType={setCalendarType} />
           {calendarType === "월" && <MonthlyCalendar viewDate={focusDate} />}
           {calendarType === "주" && <WeeklyCalendar viewDate={focusDate} />}
           {calendarType === "일" && <DailyCalendar viewDate={focusDate} />}

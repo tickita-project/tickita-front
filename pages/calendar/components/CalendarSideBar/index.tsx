@@ -43,7 +43,7 @@ export default function CalendarSideBar({ selectedDay, setSelectedDay }: Calenda
         )}
       </div>
 
-      <DatePicker selectedDay={selectedDay} setSelectedDay={setSelectedDay} hasNavigation={true} />
+      <DatePicker selectedDay={selectedDay} setSelectedDay={setSelectedDay} />
     </aside>
   );
 }

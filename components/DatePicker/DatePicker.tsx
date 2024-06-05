@@ -15,13 +15,13 @@ const cn = classNames.bind(styles);
 export interface DatePickerProps {
   selectedDay: Dayjs;
   setSelectedDay: (date: Dayjs) => void;
-  hasNavigation: boolean;
+  hasNavigation?: boolean;
 }
 
 export default function DatePicker({
   selectedDay,
   setSelectedDay,
-  hasNavigation,
+  hasNavigation = true,
 }: DatePickerProps) {
   const [viewDate, setViewDate] = useState(selectedDay);
 
