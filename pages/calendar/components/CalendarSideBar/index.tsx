@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 import classNames from "classnames/bind";
 import { Dayjs } from "dayjs";
 
@@ -12,7 +14,10 @@ interface CalendarSideBarProps extends DatePickerProps {}
 export default function CalendarSideBar({ selectedDay, setSelectedDay }: CalendarSideBarProps) {
   return (
     <aside className={cn("container")}>
-      <button type="button"></button>
+      <button className={cn("create-button")} type="button">
+        <Image src="/icons/schedule-icon.svg" alt="일정 생성" width={20} height={20} />
+        일정 생성
+      </button>
       <DatePicker selectedDay={selectedDay} setSelectedDay={setSelectedDay} hasNavigation={true} />
     </aside>
   );

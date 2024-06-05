@@ -1,8 +1,8 @@
 @mixin table-element {
-  width: 1.75rem;
-  height: 1.75rem;
-  padding: 0.5rem;
-  gap: 0.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: .375rem;
+  gap: .375rem;
   justify-content: center;
   align-items: center;
 
@@ -19,13 +19,13 @@
 
 .container {
   display: inline-flex;
-  padding: 1rem;
+  padding: .625rem;
   flex-direction: column;
   align-items: flex-start;
   border-radius: 0.5rem;
   background: $white;
   width: 100%;
-  height: 100%;
+  // height: 100%;
   border: 1px solid $gray300;
 
   /* Elevation/Normal */

@@ -2,9 +2,22 @@
   display: flex;
   width: 15rem;
   height: calc(100vh - 5rem - 1px);
-  padding: 5rem 0rem;
+  padding: 5rem 10px;
   flex-direction: column;
   align-items: center;
   gap: 2.5rem;
   align-self: stretch;
+
+  .create-button {
+    display: flex;
+    width: 12.5rem;
+    height: 3rem;
+    padding: .75rem 1.5rem;
+    justify-content: center;
+    align-items: center;
+    gap: .25rem;
+    border-radius: .5rem;
+    background: $blue500;
+    @include headline2-bold($white);
+  }
 }

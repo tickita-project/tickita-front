@@ -19,8 +19,7 @@
   font-weight: 500;
   font-style: normal;
   src:
-    url("https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Medium.woff2")
-      format("woff2"),
+    url("https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Medium.woff2") format("woff2"),
     url("https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Medium.woff") format("woff");
   font-display: swap;
 }
@@ -77,4 +76,16 @@
   line-height: 142.9%;
   /* 20.006px */
   letter-spacing: -0.35px;
+}
+
+@mixin headline2-bold($color: black) {
+  color: $color;
+  text-align: center;
+
+  /* Headline 2/Bold */
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 141.2%;
+  /* 24.004px */
+  letter-spacing: -0.425px;
 }
