@@ -86,7 +86,9 @@ export default function ProfileSetupForm({ accountId, email }: ProfileSetupFormP
           {...register("phoneNumber")}
         />
       </div>
-      <button className={cn("submit-button")}>프로필 저장하기</button>
+      <button type="submit" className={cn("submit-button")}>
+        프로필 저장하기
+      </button>
     </form>
   );
 }
