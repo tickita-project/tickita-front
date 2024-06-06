@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import Image from "next/image";
 
@@ -23,7 +23,7 @@ export default function DatePicker({ hasNavigation = true }: DatePickerProps) {
   useEffect(() => {
     setFocusDate(dayjs());
     setViewDate(dayjs());
-  });
+  }, []);
 
   const handleDateClick = (day: Dayjs) => {
     if (!hasNavigation) {
@@ -80,7 +80,7 @@ export default function DatePicker({ hasNavigation = true }: DatePickerProps) {
         )}
         <div className={cn("year-month")}>
           <span>{viewDate.year()}</span>
-          <Image src="/icons/vertical-divider-icon.svg" alt="" width={1} height={10} />
+          <Image src="/icons/vertical-divider-icon.svg" alt="" width={2} height={10} />
           <span>{viewDate.month() + 1}</span>
         </div>
         {hasNavigation && (
