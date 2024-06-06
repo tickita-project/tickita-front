@@ -4,12 +4,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { AxiosError } from "axios";
 import classNames from "classnames/bind";
 import { useForm } from "react-hook-form";
+import { ZodType, z } from "zod";
 
 import { postProfileSetup } from "@/apis/apis";
 import Input from "@/components/Input";
+import { NICKNAME_SCHEMA, PHONE_NUMBER_SCHEMA } from "@/constants/formSchema";
 import { PAGE_PATH } from "@/constants/pagePath";
 
-import FormSchema from "./FormSchema";
 import styles from "./ProfileSetupForm.module.scss";
 
 const cn = classNames.bind(styles);
@@ -19,10 +20,15 @@ interface ProfileSetupFormProps {
   email: string;
 }
 
-export interface FieldValuesType {
+interface FieldValuesType {
   nickname: string;
   phoneNumber: string | null;
 }
+
+const profileSetupFormSchema: ZodType<FieldValuesType> = z.object({
+  nickname: NICKNAME_SCHEMA,
+  phoneNumber: PHONE_NUMBER_SCHEMA,
+});
 
 export default function ProfileSetupForm({ accountId, email }: ProfileSetupFormProps) {
   const router = useRouter();
@@ -34,10 +40,10 @@ export default function ProfileSetupForm({ accountId, email }: ProfileSetupFormP
   } = useForm<FieldValuesType>({
     mode: "all",
     defaultValues: { nickname: "", phoneNumber: null },
-    resolver: zodResolver(FormSchema),
+    resolver: zodResolver(profileSetupFormSchema),
   });
 
-  const onSubmit = async (data: Omit<FieldValuesType, "accountId">) => {
+  const onSubmit = async (data: FieldValuesType) => {
     const formData = { ...data, accountId: Number(accountId) };
 
     try {
