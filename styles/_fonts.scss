@@ -90,6 +90,18 @@
   letter-spacing: -0.0266rem;
 }
 
+@mixin headline2-medium($color: black) {
+  color: $color;
+  text-align: center;
+
+  /* Headline 2/Medium */
+  font-size: 1.0625rem;
+  font-weight: 500;
+  line-height: 141.2%;
+  /* 24.004px */
+  letter-spacing: -0.0266rem;
+}
+
 @mixin body2-regular($color: black) {
   color: $color;
   text-align: center;

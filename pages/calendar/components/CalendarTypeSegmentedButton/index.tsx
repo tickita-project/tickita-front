@@ -46,7 +46,7 @@ export default function CalendarTypeSegmentedButton({
             setCalendarType("일");
           }}
         />
-        <label htmlFor="monthly">일</label>
+        <label htmlFor="daily">일</label>
       </div>
     </>
   );
