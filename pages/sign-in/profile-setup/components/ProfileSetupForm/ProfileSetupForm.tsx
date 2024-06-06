@@ -36,7 +36,7 @@ export default function ProfileSetupForm({ accountId, email }: ProfileSetupFormP
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<FieldValuesType>({
     mode: "all",
     defaultValues: { nickname: "", phoneNumber: null },
@@ -86,7 +86,10 @@ export default function ProfileSetupForm({ accountId, email }: ProfileSetupFormP
           {...register("phoneNumber")}
         />
       </div>
-      <button type="submit" className={cn("submit-button")}>
+      <button
+        type="submit"
+        className={cn("submit-button", { "submit-button--disabled": !isValid })}
+      >
         프로필 저장하기
       </button>
     </form>

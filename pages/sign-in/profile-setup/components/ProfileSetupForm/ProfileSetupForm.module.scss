@@ -27,4 +27,10 @@
   font-weight: 700;
   line-height: 1.875rem;
   letter-spacing: -0.0344rem;
+
+  &--disabled {
+    background-color: $gray300;
+    color: $gray600;
+    cursor: not-allowed;
+  }
 }
