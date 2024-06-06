@@ -31,7 +31,7 @@ export default function ProfileSetup({ accountId, email }: ProfileSetupProps) {
   return (
     <>
       <header className={cn("header")}>
-        <Image src="/icons/tickita-logo.svg" alt="logo" width={60} height={22} />
+        <Image src="/icons/tickita-logo.svg" alt="티키타 로고" width={60} height={22} />
       </header>
       <main>
         <div className={cn("container")}>
