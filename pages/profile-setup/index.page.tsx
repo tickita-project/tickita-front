@@ -6,6 +6,7 @@ import classNames from "classnames/bind";
 
 import ProfileSetupForm from "./components/ProfileSetupForm/ProfileSetupForm";
 import { instance } from "@/apis/axios";
+import MetaData from "@/components/MetaData";
 
 import styles from "./index.module.scss";
 
@@ -30,6 +31,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
 export default function ProfileSetup({ accountId, email }: ProfileSetupProps) {
   return (
     <>
+      <MetaData title="추가 정보 입력 | 티키타" />
       <header className={cn("header")}>
         <Image src="/icons/tickita-logo.svg" alt="티키타 로고" width={60} height={22} />
       </header>
