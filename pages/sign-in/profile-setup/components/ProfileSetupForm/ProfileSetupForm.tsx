@@ -73,7 +73,7 @@ export default function ProfileSetupForm({ accountId, email }: ProfileSetupFormP
           type="text"
           placeholder="닉네임을 입력해주세요"
           errorMessage={errors.nickname?.message}
-          required
+          isRequired
           {...register("nickname")}
         />
         <Input

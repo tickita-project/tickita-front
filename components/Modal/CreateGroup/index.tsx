@@ -54,7 +54,7 @@ export default function CreateGroupModal() {
           type="text"
           id="groupName"
           placeholder="그룹 이름을 입력해 주세요."
-          required
+          isRequired
           {...register("groupName")}
           errorMessage={errors.groupName?.message}
         />
