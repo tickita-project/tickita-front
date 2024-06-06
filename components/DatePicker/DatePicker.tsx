@@ -6,6 +6,7 @@ import classNames from "classnames/bind";
 import dayjs, { Dayjs } from "dayjs";
 
 import { DAYS } from "@/constants/calendarConstants";
+import useScroll from "@/hooks/useScroll";
 import { useDateStore } from "@/store/useDateStore";
 import { calculateMonthDates, divideWeek } from "@/utils/calculateCalendarDates";
 
@@ -64,6 +65,11 @@ export default function DatePicker({ hasNavigation = true }: DatePickerProps) {
     });
   };
 
+  const scrollRef = useScroll<HTMLTableElement>({
+    handleScrollUp: handlePrevButtonClick,
+    handleScrollDown: handleNextButtonClick,
+    isUsable: hasNavigation,
+  });
   const calendarRows = divideWeek(buildCalendarTag(calculateMonthDates(viewDate)));
 
   return (
@@ -94,7 +100,7 @@ export default function DatePicker({ hasNavigation = true }: DatePickerProps) {
           </div>
         )}
       </div>
-      <table className={cn("calendar-table")}>
+      <table className={cn("calendar-table")} ref={scrollRef}>
         <thead className={cn("table-header")}>
           <tr>
             {DAYS.map((day, i) => (
