@@ -1,8 +1,8 @@
 @mixin table-element {
-  width: 1.75rem;
-  height: 1.75rem;
-  padding: 0.5rem;
-  gap: 0.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: .375rem;
+  gap: .375rem;
   justify-content: center;
   align-items: center;
 
@@ -19,16 +19,13 @@
 
 .container {
   display: inline-flex;
-  padding: 1rem;
+  padding: .625rem;
   flex-direction: column;
   align-items: flex-start;
   border-radius: 0.5rem;
   background: $white;
   width: 100%;
-  height: 100%;
   border: 1px solid $gray300;
-
-  /* Elevation/Normal */
   box-shadow:
     0rem 0.0625rem 0.125rem 0rem rgba(0, 0, 0, 0.12),
     0rem 0rem 0.0625rem 0rem rgba(0, 0, 0, 0.08),
@@ -81,10 +78,8 @@
 
   .calendar-table {
     width: 100%;
-    /* 테이블이 컨테이너의 전체 너비를 차지하도록 설정 */
 
     .table-header {
-      /* display: flex; display 속성을 제거하여 기본 테이블 레이아웃 사용 */
       align-items: flex-start;
 
       .day {
@@ -96,11 +91,13 @@
     .date {
       @include table-element;
       @include body2-medium;
+
     }
 
     .date-hover {
       @include table-element;
       @include body2-medium;
+      cursor: pointer;
 
       &:hover {
         border-radius: 62.5rem;
