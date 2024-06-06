@@ -82,7 +82,7 @@ export default function ProfileSetupForm({ accountId, email }: ProfileSetupFormP
           type="tel"
           placeholder="전화번호를 입력해주세요"
           errorMessage={errors.phoneNumber?.message}
-          isOptional
+          isRequired={false}
           {...register("phoneNumber")}
         />
       </div>

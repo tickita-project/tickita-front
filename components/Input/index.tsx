@@ -10,11 +10,10 @@ interface InputProps extends ComponentPropsWithoutRef<"input"> {
   label: string;
   errorMessage?: string;
   isRequired?: boolean;
-  isOptional?: boolean;
 }
 
 export default forwardRef<HTMLInputElement, InputProps>(function Input(
-  { label, id, errorMessage, isRequired, isOptional, ...restProps }: InputProps,
+  { label, id, errorMessage, isRequired, ...restProps }: InputProps,
   ref,
 ) {
   return (
@@ -22,7 +21,7 @@ export default forwardRef<HTMLInputElement, InputProps>(function Input(
       <label htmlFor={id}>
         {label}
         {isRequired && <span className={cn("required-field")}>*</span>}
-        {isOptional && <span className={cn("selective-field")}>(선택)</span>}
+        {isRequired === false && <span className={cn("selective-field")}>(선택)</span>}
       </label>
       <input ref={ref} id={id} {...restProps} />
       {errorMessage && <span className={cn("error-message")}>{errorMessage}</span>}
