@@ -4,6 +4,34 @@
   display: flex;
   padding: 1rem 2rem;
   justify-content: space-between;
-  align-items: space-between;
+  align-items: center;
+
+  .year-month {
+    display: flex;
+    align-items: center;
+    gap: .625rem;
+
+    h2 {
+      @include headline2-bold;
+      font-size: 1.5rem;
+    }
+
+    img {
+      width: 2rem;
+      height: 2rem;
+    }
+
+    .today-button {
+      display: flex;
+      height: 2rem;
+      padding: .375rem 1rem;
+      justify-content: center;
+      align-items: center;
+      gap: .25rem;
+      border-radius: 6px;
+      border: 1px solid $blue500;
+      @include body2-bold($blue500);
+    }
+  }
 
 }
