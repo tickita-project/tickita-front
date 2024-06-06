@@ -5,6 +5,8 @@
 }
 
 .container {
+  position: relative;
+
   label {
     display: flex;
     gap: 0.125rem;
@@ -39,6 +41,8 @@
 }
 
 .error-message {
+  position: absolute;
+  bottom: -1.5rem;
   color: $red500;
   font-size: 0.875rem;
   line-height: 1.25rem;
