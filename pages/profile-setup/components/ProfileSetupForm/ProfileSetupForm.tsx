@@ -59,7 +59,14 @@ export default function ProfileSetupForm({ accountId, email }: ProfileSetupFormP
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={cn("container")}>
       <div className={cn("input-container")}>
-        <Input id="email" label="이메일" type="text" value={email} readOnly />
+        <Input
+          id="email"
+          label="이메일"
+          type="text"
+          value={email}
+          readOnly
+          className={cn("user-email-input")}
+        />
         <Input
           id="nickname"
           label="닉네임"

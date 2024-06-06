@@ -8,6 +8,12 @@
   display: flex;
   flex-direction: column;
   gap: 2.25rem;
+
+  .user-email-input {
+    border: none;
+    background-color: $gray300;
+    color: $gray600;
+  }
 }
 
 .submit-button {
