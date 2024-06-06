@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Image from "next/image";
 
@@ -18,9 +18,17 @@ export interface DatePickerProps {
 }
 
 export default function DatePicker({ hasNavigation = true }: DatePickerProps) {
-  const { focusDate, viewDate, setFocusDate, setViewDate } = useDateStore();
+  let { focusDate, viewDate, setFocusDate, setViewDate } = useDateStore();
+
+  useEffect(() => {
+    setFocusDate(dayjs());
+    setViewDate(dayjs());
+  });
 
   const handleDateClick = (day: Dayjs) => {
+    if (!hasNavigation) {
+      return;
+    }
     setFocusDate(day);
     setViewDate(day);
   };
