@@ -33,7 +33,7 @@ export default function Kakao({ id, isComplete }: KakaoProps) {
       return;
     }
 
-    router.push(PAGE_PATH.MAIN);
+    router.push(PAGE_PATH.DASHBOARD);
   }, [isComplete]);
 
   return <div>로그인 요청중입니다.</div>;
