@@ -37,7 +37,6 @@ export default function CreateGroupModal() {
 
   const onSubmit = (data: { groupName: string }) => {
     const formData = { ...data, groupColor: selectColor };
-
     // TODO: 그룹 생성 API 호출
   };
 
@@ -65,8 +64,8 @@ export default function CreateGroupModal() {
             그룹 색상 <span className={cn("asterisk")}>*</span>
           </h3>
           <div className={cn("color-box")}>
-            {GROUP_COLOR_LIST.map((color, index) => (
-              <div key={index} className={cn("color-item")} onClick={() => setSelectColor(color)}>
+            {GROUP_COLOR_LIST.map((color) => (
+              <div key={color} className={cn("color-item")} onClick={() => setSelectColor(color)}>
                 <input type="radio" id={color} name="groupColor" value={color} />
                 <label
                   htmlFor={color}
