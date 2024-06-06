@@ -4,15 +4,6 @@
   display: flex;
   gap: 0.5rem;
   align-items: center;
-  cursor: pointer;
-
-  .group-title {
-    color: $black;
-    font-weight: 500;
-    letter-spacing: -0.02188rem;
-    @include text-overflow-ellipsis(1);
-    flex-shrink: 1;
-  }
 
   .group-checkbox {
     width: 1.5rem;
@@ -20,5 +11,14 @@
     border-radius: 0.25rem;
     appearance: none;
     flex-shrink: 0;
+    cursor: pointer;
+  }
+
+  .group-title {
+    color: $black;
+    font-weight: 500;
+    letter-spacing: -0.02188rem;
+    @include text-overflow-ellipsis(1);
+    flex-shrink: 1;
   }
 }
