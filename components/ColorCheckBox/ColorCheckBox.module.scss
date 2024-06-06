@@ -1,6 +1,6 @@
 .box {
-  width: 208px;
-  height: 44px;
+  width: 13rem;
+  height: 2.75rem;
   display: flex;
   gap: 0.5rem;
   align-items: center;
@@ -17,7 +17,7 @@
   .group-checkbox {
     width: 1.5rem;
     height: 1.5rem;
-    border-radius: 4px;
+    border-radius: 0.25rem;
     appearance: none;
     flex-shrink: 0;
   }

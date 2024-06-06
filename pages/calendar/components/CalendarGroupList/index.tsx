@@ -26,9 +26,7 @@ export default function CalendarGroupList({ groupList }: CalendarGroupListProps)
       <p className={cn("enter-group")}>현재 가입된 그룹</p>
       <ul className={cn("group-container")}>
         {groupList.map((group) => (
-          <React.Fragment key={group.id}>
-            <ColorCheckBox color={group.groupColor} title={group.groupName} />
-          </React.Fragment>
+          <ColorCheckBox key={group.id} color={group.groupColor} title={group.groupName} />
         ))}
       </ul>
     </div>
