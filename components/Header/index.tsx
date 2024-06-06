@@ -7,13 +7,17 @@ import classNames from "classnames/bind";
 import { PAGE_PATH } from "@/constants/pagePath";
 
 import styles from "./Header.module.scss";
+import ProfileImage from "../ProfileImage";
 
 const cn = classNames.bind(styles);
 
 const isAnimation = {
   dashboard: false,
-  calender: false,
+  calendar: false,
 };
+
+// 임시 이미지 url 추후 삭제 예정
+const tempImageUrl = "https://i.pinimg.com/564x/c5/5c/76/c55c762ce418abefd071aa7e81c5a213.jpg";
 
 // 로그인 정보에 따라 닉네임, 프로필 이미지 변경(유저 정보 전역 상태 관리?)
 export default function Header() {
@@ -28,12 +32,12 @@ export default function Header() {
     }, 100);
   };
 
-  const handleCalenderTapClick = () => {
-    isAnimation.calender = true;
+  const handleCalendarTapClick = () => {
+    isAnimation.calendar = true;
 
     // 애니메이션 초기화
     setTimeout(() => {
-      isAnimation.calender = false;
+      isAnimation.calendar = false;
     }, 100);
   };
 
@@ -53,17 +57,17 @@ export default function Header() {
             대시보드
           </Link>
           <Link
-            onClick={handleCalenderTapClick}
-            href={PAGE_PATH.CALENDER}
-            className={cn("nav-tap-item", { active: pathname === PAGE_PATH.CALENDER })}
+            onClick={handleCalendarTapClick}
+            href={PAGE_PATH.CALENDAR}
+            className={cn("nav-tap-item", { active: pathname === PAGE_PATH.CALENDAR })}
           >
             캘린더
           </Link>
           <div
             className={cn("active-effect", {
               "animation-effect-dashboard": isAnimation.dashboard,
-              "animation-effect-calender": isAnimation.calender,
-              "effect-position-right": pathname === PAGE_PATH.CALENDER,
+              "animation-effect-calendar": isAnimation.calendar,
+              "effect-position-right": pathname === PAGE_PATH.CALENDAR,
             })}
           />
         </div>
@@ -73,16 +77,7 @@ export default function Header() {
             반가워요, <span className={cn("nickname")}>달맞이 토끼</span> 님
           </div>
 
-          <figure className={cn("profile-image-container")}>
-            <figcaption className={cn("profile-image-background")}>
-              <Image
-                src="/icons/default-profile.svg"
-                width={44}
-                height={44}
-                alt="유저 프로필 이미지"
-              />
-            </figcaption>
-          </figure>
+          <ProfileImage imageUrl={tempImageUrl} />
         </div>
       </nav>
     </header>

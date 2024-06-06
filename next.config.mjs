@@ -12,14 +12,14 @@ const nextConfig = {
     // 매번 가져올 파일 추가
     prependData: `@import "styles/globals.scss";`,
   },
-  // images: {
-  //   remotePatterns: [
-  //     {
-  //       protocol: "https",
-  //       hostname: "s3 도메인 추가 예정",
-  //     },
-  //   ],
-  // },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "*", //s3 도메인 추가 예정
+      },
+    ],
+  },
 };
 
 export default nextConfig;

@@ -22,13 +22,15 @@ export default function ColorCheckBox({ color, title }: ColorCheckBoxProps) {
   };
 
   return (
-    <div className={cn("box")}>
+    <li className={cn("box")}>
       <input
         id={`color-check-box-${unquieId}`}
-        className={cn("group-color")}
+        className={cn("group-checkbox")}
         style={{
           backgroundColor: isChecked ? color : "white",
-          border: isChecked ? "1.5px solid rgba(44, 44, 44, 0.28)" : "1px solid black",
+          border: isChecked ? "none" : "2px solid",
+          borderColor: isChecked ? "none" : color,
+          outline: "none",
         }}
         type="checkbox"
         checked={isChecked}
@@ -37,6 +39,6 @@ export default function ColorCheckBox({ color, title }: ColorCheckBoxProps) {
       <label htmlFor={`color-check-box-${unquieId}`} className={cn("group-title")}>
         {title}
       </label>
-    </div>
+    </li>
   );
 }

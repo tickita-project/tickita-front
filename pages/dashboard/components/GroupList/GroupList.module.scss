@@ -1,3 +1,12 @@
+@keyframes showArrow {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .container {
   width: 15rem;
   height: calc(100vh - 5rem - 1px);
@@ -12,7 +21,7 @@
       height: 3rem;
       display: flex;
       gap: 0.25rem;
-      margin: 3.5rem 0 4rem;
+      margin: 2rem 0;
       padding: 0.75rem 1.5rem;
       background-color: $blue500;
       border-radius: 8px;
@@ -31,12 +40,12 @@
     color: $gray700;
     font-size: 0.875rem;
     letter-spacing: -0.02188rem;
-    padding: 0 1rem 0 1.75rem;
+    padding: 0 1rem 0 1.25rem;
   }
 
   .group-box {
-    padding: 0 1rem 0 1.75rem;
-    height: 40rem;
+    padding: 0 1rem 0 1rem;
+    height: calc(100vh - 17.5rem);
     overflow-x: hidden;
     overflow-y: auto;
 
@@ -61,19 +70,41 @@
       font-weight: 500;
       letter-spacing: -0.02188rem;
       width: 13rem;
-      height: 2.5rem;
-      padding: 0.75rem 1.5rem 0.75rem 0;
+      height: 3rem;
+      padding: 0.75rem 1.5rem 0.75rem 0.5rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      border-radius: 0.5rem;
+      position: relative;
+
+      &:hover {
+        background-color: $blue200;
+        transition: 0.5s;
+
+        &::after {
+          content: "";
+          position: absolute;
+          right: 1rem;
+          top: 53%;
+          transform: translateY(-50%);
+          width: 1rem;
+          height: 1rem;
+          background-image: url("/icons/group-arrow-right.svg");
+          background-size: contain;
+          background-repeat: no-repeat;
+          animation: showArrow 0.5s forwards;
+        }
+      }
 
       .group-color {
-        width: 1.75rem;
+        width: 1.25rem;
         height: 1.25rem;
         border-radius: 4px;
       }
 
       .group-title {
+        width: 8.2rem;
         @include text-overflow-ellipsis(1);
       }
     }

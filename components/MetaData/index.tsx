@@ -22,7 +22,7 @@ export default function MetaData({ title = "간편한 일정 조율/관리 서�
       <meta property="og:description" content="간편한 일정 조율/관리 서비스 Tickita" />
       <meta property="og:type" content="website" />
       <meta property="og:url" content={currentUrl} />
-      <meta property="og:image" content="추후 OG 이미지 추가 예정" />
+      <meta property="og:image" content="/images/kakao-og.webp" />
       <meta property="og:image:alt" content="Tickita 로고 이미지" />
       <meta property="og:locale" content="ko_KR" />
 
@@ -31,7 +31,7 @@ export default function MetaData({ title = "간편한 일정 조율/관리 서�
       <meta name="twitter:description" content="간편한 일정 조율/관리 서비스 Tickita" />
       <meta name="twitter:card" content="website" />
       <meta property="twitter:site" content={currentUrl} />
-      <meta name="twitter:image" content="추후 OG 이미지 추가 예정" />
+      <meta name="twitter:image" content="/images/twitter-og.webp" />
       <meta property="twitter:image:alt" content="Tickita 로고 이미지" />
     </Head>
   );

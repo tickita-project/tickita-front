@@ -9,16 +9,35 @@ import styles from "./GroupList.module.scss";
 
 const cn = classNames.bind(styles);
 
-interface GroupListProps {
-  // props
-}
+const mockData = [
+  {
+    id: 1,
+    groupName: "그룹1",
+    groupColor: "#3360FF",
+  },
+  {
+    id: 2,
+    groupName: "그룹2",
+    groupColor: "#D688EA",
+  },
+  {
+    id: 3,
+    groupName: "그룹3",
+    groupColor: "#21D53E",
+  },
+  {
+    id: 4,
+    groupName:
+      "그룹 이름이 길어지는 경우 테스트그룹 이름이 길어지는 경우 테스트그룹 이름이 길어지는 경우 테스트그룹 이름이 길어지는 경우 테스트그룹 이름이 길어지는 경우 테스트그룹 이름이 길어지는 경우 테스트",
+    groupColor: "#F380B7",
+  },
+];
 
-// 추후 props 추가 예정
 export default function GroupList() {
   const { openModal } = useModalStore();
 
   return (
-    <div className={cn("container")}>
+    <section className={cn("container")}>
       <div className={cn("button-box")}>
         <button
           type="button"
@@ -31,11 +50,13 @@ export default function GroupList() {
       </div>
       <span className={cn("group-guide-text")}>현재 가입된 그룹</span>
       <ul className={cn("group-box")}>
-        <li className={cn("group-list")}>
-          <div className={cn("group-color")} style={{ backgroundColor: "#3360FF" }} />
-          <span className={cn("group-title")}>엄청 엄청 엄청 엄청 엄청 엄청 긴 이름</span>
-        </li>
+        {mockData.map((group) => (
+          <li key={group.id} className={cn("group-list")}>
+            <div className={cn("group-color")} style={{ backgroundColor: group.groupColor }} />
+            <span className={cn("group-title")}>{group.groupName}</span>
+          </li>
+        ))}
       </ul>
-    </div>
+    </section>
   );
 }

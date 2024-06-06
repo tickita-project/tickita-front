@@ -6,21 +6,22 @@ import classNames from "classnames/bind";
 import dayjs, { Dayjs } from "dayjs";
 
 import { DAYS } from "@/constants/calendarConstants";
+import { calculateMonthDates, divideWeek } from "@/utils/calculateCalendarDates";
 
 import styles from "./datePicker.module.scss";
 
 const cn = classNames.bind(styles);
 
-interface DatePickerProps {
+export interface DatePickerProps {
   selectedDay: Dayjs;
   setSelectedDay: (date: Dayjs) => void;
-  hasNavigation: boolean;
+  hasNavigation?: boolean;
 }
 
 export default function DatePicker({
   selectedDay,
   setSelectedDay,
-  hasNavigation,
+  hasNavigation = true,
 }: DatePickerProps) {
   const [viewDate, setViewDate] = useState(selectedDay);
 
@@ -35,31 +36,6 @@ export default function DatePicker({
 
   const handleNextButtonClick = () => {
     setViewDate(viewDate.add(1, "month"));
-  };
-
-  const buildCalendarDays = () => {
-    const startOfMonth = viewDate.startOf("month");
-    const endOfMonth = viewDate.endOf("month");
-
-    const startDay = startOfMonth.day();
-    const endDay = endOfMonth.date();
-
-    const days: Dayjs[] = [];
-
-    for (let i = startDay - 1; i >= 0; i--) {
-      days.push(startOfMonth.subtract(i + 1, "day"));
-    }
-
-    for (let i = 1; i <= endDay; i++) {
-      days.push(startOfMonth.date(i));
-    }
-
-    const nextMonthStartDate = endOfMonth.add(1, "day");
-    while (days.length < 42) {
-      days.push(nextMonthStartDate.add(days.length - endDay, "day"));
-    }
-
-    return days;
   };
 
   const buildCalendarTag = (calendarDays: Dayjs[]) => {
@@ -83,20 +59,7 @@ export default function DatePicker({
     });
   };
 
-  const divideWeek = (calendarTags: JSX.Element[]) => {
-    return calendarTags.reduce((acc: JSX.Element[][], day: JSX.Element, i: number) => {
-      if (i % 7 === 0) {
-        acc.push([day]);
-      } else {
-        acc[acc.length - 1].push(day);
-      }
-      return acc;
-    }, []);
-  };
-
-  const calendarDays = buildCalendarDays();
-  const calendarTags = buildCalendarTag(calendarDays);
-  const calendarRows = divideWeek(calendarTags);
+  const calendarRows = divideWeek(buildCalendarTag(calculateMonthDates(viewDate)));
 
   return (
     <div className={cn("container")}>
@@ -112,7 +75,7 @@ export default function DatePicker({
         )}
         <div className={cn("year-month")}>
           <span>{viewDate.year()}</span>
-          <Image src="/icons/vertical-divider-logo.svg" alt="" width={1} height={10} />
+          <Image src="/icons/vertical-divider-icon.svg" alt="" width={1} height={10} />
           <span>{viewDate.month() + 1}</span>
         </div>
         {hasNavigation && (
