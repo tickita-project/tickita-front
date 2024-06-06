@@ -11,6 +11,7 @@ import { useDateStore } from "@/store/useDateStore";
 import { calculateMonthDates, divideWeek } from "@/utils/calculateCalendarDates";
 
 import styles from "./datePicker.module.scss";
+import MonthNavButton from "./MonthNavButton";
 
 const cn = classNames.bind(styles);
 
@@ -19,7 +20,7 @@ export interface DatePickerProps {
 }
 
 export default function DatePicker({ hasNavigation = true }: DatePickerProps) {
-  let { focusDate, viewDate, setFocusDate, setViewDate } = useDateStore();
+  const { focusDate, viewDate, setFocusDate, setViewDate } = useDateStore();
 
   useEffect(() => {
     setFocusDate(dayjs());
@@ -89,16 +90,7 @@ export default function DatePicker({ hasNavigation = true }: DatePickerProps) {
           <Image src="/icons/vertical-divider-icon.svg" alt="" width={2} height={10} />
           <span>{viewDate.month() + 1}</span>
         </div>
-        {hasNavigation && (
-          <div className={cn("navigation-button")}>
-            <button onClick={handlePrevButtonClick} className={cn("arrow-button")} type="button">
-              <Image src="/icons/arrow-left-icon.svg" alt="이전달" width={20} height={20} />
-            </button>
-            <button onClick={handleNextButtonClick} className={cn("arrow-button")} type="button">
-              <Image src="/icons/arrow-right-icon.svg" alt="다음달" width={20} height={20} />
-            </button>
-          </div>
-        )}
+        {hasNavigation && <MonthNavButton />}
       </div>
       <table className={cn("calendar-table")} ref={scrollRef}>
         <thead className={cn("table-header")}>
