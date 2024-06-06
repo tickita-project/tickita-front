@@ -48,7 +48,7 @@ export default function ProfileSetupForm({ accountId, email }: ProfileSetupFormP
 
     try {
       await postProfileSetup(formData);
-      router.push(PAGE_PATH.MAIN);
+      router.push(PAGE_PATH.DASHBOARD);
     } catch (error) {
       if (error instanceof AxiosError) {
         alert("추가 정보 입력을 완료하지 못했습니다.");
