@@ -8,8 +8,8 @@ import { ZodType, z } from "zod";
 
 import { postProfileSetup } from "@/apis/apis";
 import Input from "@/components/Input";
-import { NICKNAME_SCHEMA, PHONE_NUMBER_SCHEMA } from "@/constants/formSchema";
 import { PAGE_PATH } from "@/constants/pagePath";
+import { NICKNAME_SCHEMA, PHONE_NUMBER_SCHEMA } from "@/constants/schema";
 
 import styles from "./ProfileSetupForm.module.scss";
 
@@ -73,7 +73,7 @@ export default function ProfileSetupForm({ accountId, email }: ProfileSetupFormP
           type="text"
           placeholder="닉네임을 입력해주세요"
           errorMessage={errors.nickname?.message}
-          isRequired
+          required
           {...register("nickname")}
         />
         <Input

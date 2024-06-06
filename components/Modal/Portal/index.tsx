@@ -13,21 +13,11 @@ const MODAL_TYPE: Record<string, JSX.Element> = {
 };
 
 export default function Portal() {
-  const { isOpen, type, closeModal } = useModalStore();
+  const { isOpen, type } = useModalStore();
 
   if (!isOpen) {
     return null;
   }
 
-  return createPortal(
-    <div className={cn("background")}>
-      <div className={cn("modal")}>
-        <div className={cn("button-box")}>
-          <button onClick={() => closeModal()}>임시 X 버튼</button>
-        </div>
-        {MODAL_TYPE[type]}
-      </div>
-    </div>,
-    document.body,
-  );
+  return createPortal(<div className={cn("background")}>{MODAL_TYPE[type]}</div>, document.body);
 }

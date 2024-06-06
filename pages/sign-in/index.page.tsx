@@ -18,7 +18,7 @@ export default function SignIn() {
       return `${origin}/sign-in/kakao`;
     };
 
-    const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_REST_API_KEY}&redirect_uri=${getKakaoRediretUri()}&response_type=code`;
+    const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_KAKAO_API_KEY}&redirect_uri=${getKakaoRediretUri()}&response_type=code`;
     setKakaoAuthUri(KAKAO_AUTH_URL);
   }, []);
 

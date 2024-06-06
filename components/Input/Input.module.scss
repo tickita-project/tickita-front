@@ -10,24 +10,20 @@
   label {
     display: flex;
     gap: 0.125rem;
-    color: $black;
-    font-size: 1.0625rem;
+    font-size: 1.125rem;
     font-weight: 700;
     line-height: 1.5rem;
     letter-spacing: -0.0266rem;
+    padding: 0 0.25rem;
+    margin-bottom: 0.25rem;
 
     .required-field {
       color: $red500;
     }
-
-    .selective-field {
-      color: $black;
-      font-weight: 400;
-    }
   }
 
   input {
-    width: 22.875rem;
+    width: 100%;
     height: 4rem;
     margin-bottom: 0.25rem;
     padding: 0.75rem 1rem;
@@ -38,6 +34,10 @@
     line-height: 1.5rem;
     letter-spacing: -0.0266rem;
   }
+
+  .error-style {
+    border: 1.5px solid $red500;
+  }
 }
 
 .error-message {
@@ -47,4 +47,5 @@
   font-size: 0.875rem;
   line-height: 1.25rem;
   letter-spacing: -0.0219rem;
+  padding: 0 0.25rem;
 }
