@@ -3,6 +3,7 @@ import { useState } from "react";
 import classNames from "classnames/bind";
 import dayjs, { Dayjs } from "dayjs";
 
+import CalendarHeader from "./components/Calendar/CalendarHeader";
 import DailyCalendar from "./components/Calendar/DailyCalendar";
 import MonthlyCalendar from "./components/Calendar/MonthlyCalendar";
 import WeeklyCalendar from "./components/Calendar/WeeklyCalendar";
@@ -28,7 +29,7 @@ export default function CalendarPage() {
         <CalendarSideBar selectedDay={focusDate} setSelectedDay={setFocusDate} />
 
         <main>
-          <CalendarTypeRadioButton setCalendarType={setCalendarType} />
+          <CalendarHeader viewDate={focusDate} setCalendarType={setCalendarType} />
           {calendarType === "월" && <MonthlyCalendar viewDate={focusDate} />}
           {calendarType === "주" && <WeeklyCalendar viewDate={focusDate} />}
           {calendarType === "일" && <DailyCalendar viewDate={focusDate} />}
