@@ -4,7 +4,7 @@ import { Dayjs } from "dayjs";
 import { CalendarType } from "@/pages/calendar/index.page";
 
 import styles from "./CalendarHeader.module.scss";
-import CalendarTypeRadioButton from "../../CalendarTypeRadioButton";
+import CalendarTypeSegmentedButton from "../../CalendarTypeSegmentedButton";
 
 const cn = classNames.bind(styles);
 
@@ -19,7 +19,7 @@ export default function CalendarHeader({ viewDate, setCalendarType }: CalendarHe
       <h2>
         {viewDate.get("year")} 년 {viewDate.get("M") + 1}월
       </h2>
-      <CalendarTypeRadioButton setCalendarType={setCalendarType} />
+      <CalendarTypeSegmentedButton setCalendarType={setCalendarType} />
     </header>
   );
 }
