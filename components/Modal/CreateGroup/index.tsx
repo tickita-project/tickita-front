@@ -67,9 +67,9 @@ export default function CreateGroupModal() {
           <h3 className={cn("label")}>
             그룹 색상 <span className={cn("asterisk")}>*</span>
           </h3>
-          <div className={cn("color-box")}>
+          <ul className={cn("color-box")}>
             {GROUP_COLOR_LIST.map((color) => (
-              <div key={color} className={cn("color-item")} onClick={() => setSelectColor(color)}>
+              <li key={color} className={cn("color-item")} onClick={() => setSelectColor(color)}>
                 <input type="radio" id={color} name="groupColor" value={color} />
                 <label
                   htmlFor={color}
@@ -85,9 +85,9 @@ export default function CreateGroupModal() {
                     height={40}
                   />
                 )}
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
         <div className={cn("button-box")}>
           <button type="submit" className={cn("create-button", { disabled: !isValid })}>
