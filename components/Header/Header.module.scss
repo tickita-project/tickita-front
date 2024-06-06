@@ -74,9 +74,45 @@
       display: flex;
       gap: 0.75rem;
       align-items: center;
+      width: 12.8rem;
+      justify-content: right;
 
-      .nickname {
-        color: $blue600;
+      .nickname-box {
+        display: flex;
+        align-items: center;
+
+        .guide-text {
+          padding-right: 0.25rem;
+        }
+
+        .notification-bell {
+          padding: 0rem 0.5rem 0 0;
+          display: flex;
+          gap: 0.25rem;
+          position: relative;
+
+          &:hover {
+            transform: scale(1.1);
+            transition: 0.75s;
+          }
+
+          .notification-count {
+            color: $white;
+            font-size: 0.75rem;
+            font-weight: 500;
+            background-color: $red500;
+            height: 1.5rem;
+            padding: 0.125rem 0.5rem;
+            border-radius: 999px;
+            display: flex;
+            align-items: center;
+            margin-top: 0.15rem;
+          }
+        }
+
+        .nickname {
+          color: $blue600;
+        }
       }
     }
   }

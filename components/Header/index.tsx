@@ -74,7 +74,15 @@ export default function Header() {
 
         <div className={cn("profile-box")}>
           <div className={cn("nickname-box")}>
-            반가워요, <span className={cn("nickname")}>달맞이 토끼</span> 님
+            {pathname === PAGE_PATH.DASHBOARD ? (
+              <span className={cn("guide-text")}>반가워요, </span>
+            ) : (
+              <figure className={cn("notification-bell")}>
+                <figcaption className={cn("notification-count")}>99+</figcaption>
+                <Image src="icons/notification-bell.svg" width={24} height={20} alt="알림 종" />
+              </figure>
+            )}
+            <span className={cn("nickname")}>달맞이 토끼</span> 님
           </div>
 
           <ProfileImage imageUrl={tempImageUrl} />

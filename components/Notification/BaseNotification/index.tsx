@@ -59,7 +59,7 @@ export default function BaseNotification({
         </div>
 
         <button ref={closeRef} type="button" className={cn("close-button")}>
-          <Image src="/icons/notification-close.svg" width={24} height={24} alt="알림 삭제" />
+          <Image src="/icons/close-icon.svg" width={24} height={24} alt="알림 삭제" />
         </button>
       </div>
 
