@@ -1,3 +1,4 @@
+import { group } from "console";
 import { useState } from "react";
 
 import Image from "next/image";
@@ -5,7 +6,7 @@ import Image from "next/image";
 import { zodResolver } from "@hookform/resolvers/zod";
 import classNames from "classnames/bind";
 import { useForm } from "react-hook-form";
-import { ZodType, z } from "zod";
+import { z } from "zod";
 
 import Input from "@/components/Input";
 import { GROUP_COLOR_LIST } from "@/constants/groupColorList";
@@ -18,29 +19,33 @@ import styles from "./CreateGroup.module.scss";
 
 const cn = classNames.bind(styles);
 
-interface CreateGroupSchemaType {
+interface GroupDataType {
   groupName: string;
+  groupColor: GroupColorType;
 }
 
-const createGroupSchema: ZodType<CreateGroupSchemaType> = z.object({
+const createGroupSchema = z.object({
   groupName: GROUP_NAME_SCHEMA,
+  groupColor: z.string(),
 });
 
 export default function CreateGroupModal() {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors, isValid },
   } = useForm({
     mode: "all",
-    defaultValues: { groupName: "" },
+    defaultValues: { groupName: "", groupColor: GROUP_COLOR_LIST[0] },
     resolver: zodResolver(createGroupSchema),
   });
-  const [selectColor, setSelectColor] = useState<GroupColorType>(GROUP_COLOR_LIST[0]);
   const { closeModal } = useModalStore();
+  const selectColor = watch("groupColor");
+  console.log(selectColor);
 
-  const onSubmit = (data: CreateGroupSchemaType) => {
-    const formData = { ...data, groupColor: selectColor };
+  const onSubmit = (data: GroupDataType) => {
+    console.log(data);
     // TODO: 그룹 생성 API 호출
   };
 
@@ -69,8 +74,8 @@ export default function CreateGroupModal() {
           </h3>
           <ul className={cn("color-box")}>
             {GROUP_COLOR_LIST.map((color) => (
-              <li key={color} className={cn("color-item")} onClick={() => setSelectColor(color)}>
-                <input type="radio" id={color} name="groupColor" value={color} />
+              <li key={color} className={cn("color-item")}>
+                <input type="radio" id={color} {...register("groupColor")} value={color} />
                 <label
                   htmlFor={color}
                   className={cn("group-color")}
