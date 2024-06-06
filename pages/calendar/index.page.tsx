@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 import classNames from "classnames/bind";
-import dayjs, { Dayjs } from "dayjs";
 
 import CalendarHeader from "./components/Calendar/CalendarHeader";
 import DailyCalendar from "./components/Calendar/DailyCalendar";
@@ -18,7 +17,6 @@ export type CalendarType = "월" | "주" | "일";
 const cn = classNames.bind(styles);
 
 export default function CalendarPage() {
-  const [focusDate, setFocusDate] = useState<Dayjs>(dayjs());
   const [calendarType, setCalendarType] = useState<CalendarType>("월");
 
   return (
@@ -26,13 +24,13 @@ export default function CalendarPage() {
       <MetaData title="내 캘린더 | 티키타" />
       <Header />
       <div className={cn("container")}>
-        <CalendarSideBar selectedDay={focusDate} setSelectedDay={setFocusDate} />
+        <CalendarSideBar />
 
         <main>
-          <CalendarHeader viewDate={focusDate} setCalendarType={setCalendarType} />
-          {calendarType === "월" && <MonthlyCalendar viewDate={focusDate} />}
-          {calendarType === "주" && <WeeklyCalendar viewDate={focusDate} />}
-          {calendarType === "일" && <DailyCalendar viewDate={focusDate} />}
+          <CalendarHeader setCalendarType={setCalendarType} />
+          {calendarType === "월" && <MonthlyCalendar />}
+          {calendarType === "주" && <WeeklyCalendar />}
+          {calendarType === "일" && <DailyCalendar />}
         </main>
       </div>
     </>

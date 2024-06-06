@@ -5,10 +5,6 @@ import styles from "./WeeklyCalendar.module.scss";
 
 const cn = classNames.bind(styles);
 
-interface WeeklyCalendarProps {
-  viewDate: Dayjs;
-}
-
-export default function WeeklyCalendar({ viewDate }: WeeklyCalendarProps) {
+export default function WeeklyCalendar() {
   return <div>주간 캘린더</div>;
 }

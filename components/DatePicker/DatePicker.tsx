@@ -6,6 +6,7 @@ import classNames from "classnames/bind";
 import dayjs, { Dayjs } from "dayjs";
 
 import { DAYS } from "@/constants/calendarConstants";
+import { useDateStore } from "@/store/useDateStore";
 import { calculateMonthDates, divideWeek } from "@/utils/calculateCalendarDates";
 
 import styles from "./datePicker.module.scss";
@@ -13,20 +14,14 @@ import styles from "./datePicker.module.scss";
 const cn = classNames.bind(styles);
 
 export interface DatePickerProps {
-  selectedDay: Dayjs;
-  setSelectedDay: (date: Dayjs) => void;
   hasNavigation?: boolean;
 }
 
-export default function DatePicker({
-  selectedDay,
-  setSelectedDay,
-  hasNavigation = true,
-}: DatePickerProps) {
-  const [viewDate, setViewDate] = useState(selectedDay);
+export default function DatePicker({ hasNavigation = true }: DatePickerProps) {
+  const { focusDate, viewDate, setFocusDate, setViewDate } = useDateStore();
 
   const handleDateClick = (day: Dayjs) => {
-    setSelectedDay(day);
+    setFocusDate(day);
     setViewDate(day);
   };
 
@@ -41,13 +36,15 @@ export default function DatePicker({
   const buildCalendarTag = (calendarDays: Dayjs[]) => {
     return calendarDays.map((day: Dayjs, i: number) => {
       const isThisMonthDay = !day.isSame(viewDate, "month");
-      const isToday = day.isSame(selectedDay, "date");
+      const isToday = day.isSame(dayjs(), "date");
+      const isFocusDay = day.isSame(focusDate, "date");
 
       return (
         <td
           key={i}
           className={cn(
             { date: !hasNavigation, "date-hover": hasNavigation },
+            { focus: isFocusDay && hasNavigation },
             { today: isToday },
             { "other-month": isThisMonthDay },
           )}

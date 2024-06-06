@@ -12,6 +12,11 @@
     @include body2-medium(white);
   }
 
+  &.focus {
+    border-radius: 62.5rem;
+    background-color: $blue300;
+  }
+
   &.other-month {
     @include body2-medium($gray600);
   }
@@ -101,8 +106,8 @@
 
       &:hover {
         border-radius: 62.5rem;
-        background-color: $blue500;
-        @include body2-medium(white);
+        background-color: $blue100;
+        @include body2-medium;
       }
     }
   }

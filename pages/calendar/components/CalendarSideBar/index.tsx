@@ -4,7 +4,7 @@ import Image from "next/image";
 
 import classNames from "classnames/bind";
 
-import DatePicker, { DatePickerProps } from "@/components/DatePicker/DatePicker";
+import DatePicker from "@/components/DatePicker/DatePicker";
 import { useOutsideClick } from "@/hooks/useOutsideClick";
 
 import { GroupColorType } from "@/types/type";
@@ -43,9 +43,9 @@ const mockData: mockType[] = [
   },
 ];
 
-interface CalendarSideBarProps extends DatePickerProps {}
+interface CalendarSideBarProps {}
 
-export default function CalendarSideBar({ selectedDay, setSelectedDay }: CalendarSideBarProps) {
+export default function CalendarSideBar() {
   const [isCreateListVisible, setIsCreateListVisible] = useState(false);
   const scheduleContainerRef = useRef(null);
 
@@ -74,7 +74,7 @@ export default function CalendarSideBar({ selectedDay, setSelectedDay }: Calenda
         )}
       </div>
 
-      <DatePicker selectedDay={selectedDay} setSelectedDay={setSelectedDay} />
+      <DatePicker />
       <CalendarGroupList groupList={mockData} />
     </aside>
   );
