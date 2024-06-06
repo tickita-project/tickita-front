@@ -1,3 +1,5 @@
+import React from "react";
+
 import classNames from "classnames/bind";
 
 import ColorCheckBox from "@/components/ColorCheckBox";
@@ -21,12 +23,12 @@ interface CalendarGroupListProps {
 export default function CalendarGroupList({ groupList }: CalendarGroupListProps) {
   return (
     <div className={cn("container")}>
-      <span>현재 가입된 그룹</span>
-      <ul className={cn("group-box")}>
+      <p className={cn("enter-group")}>현재 가입된 그룹</p>
+      <ul className={cn("group-container")}>
         {groupList.map((group) => (
-          <li key={group.id} className={cn("group-list")}>
+          <React.Fragment key={group.id}>
             <ColorCheckBox color={group.groupColor} title={group.groupName} />
-          </li>
+          </React.Fragment>
         ))}
       </ul>
     </div>

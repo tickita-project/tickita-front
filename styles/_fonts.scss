@@ -63,7 +63,7 @@
   font-weight: 500;
   line-height: 127.3%;
   /* 14.003px */
-  letter-spacing: -0.275px;
+  letter-spacing: -0.0172rem;
 }
 
 @mixin body2-medium($color: black) {
@@ -75,7 +75,7 @@
   font-weight: 500;
   line-height: 142.9%;
   /* 20.006px */
-  letter-spacing: -0.35px;
+  letter-spacing: -0.0219rem;
 }
 
 @mixin headline2-bold($color: black) {
@@ -87,5 +87,17 @@
   font-weight: 700;
   line-height: 141.2%;
   /* 24.004px */
-  letter-spacing: -0.425px;
+  letter-spacing: -0.0266rem;
+}
+
+@mixin body2-regular($color: black) {
+  color: $color;
+  text-align: center;
+
+  /* Body 2/Regular */
+  font-size: .875rem;
+  font-weight: 400;
+  line-height: 142.9%;
+  /* 20.006px */
+  letter-spacing: -0.0219rem;
 }

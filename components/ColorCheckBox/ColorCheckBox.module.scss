@@ -1,17 +1,24 @@
 .box {
+  width: 208px;
+  height: 44px;
   display: flex;
   gap: 0.5rem;
   align-items: center;
   cursor: pointer;
 
   .group-title {
+    color: $black;
+    font-weight: 500;
+    letter-spacing: -0.02188rem;
     @include text-overflow-ellipsis(1);
+    flex-shrink: 1;
   }
 
-  .group-color {
-    width: 1.75rem;
-    height: 1.25rem;
+  .group-checkbox {
+    width: 1.5rem;
+    height: 1.5rem;
     border-radius: 4px;
-    appearance: none; // 기본 스타일 제거
+    appearance: none;
+    flex-shrink: 0;
   }
 }
