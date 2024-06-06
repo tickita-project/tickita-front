@@ -17,3 +17,9 @@ export interface UserInfoType {
   profileImageUrl: string | null;
   phoneNumber: string | null;
 }
+
+export interface ProfileSetupType {
+  accountId: number;
+  nickname: string;
+  phoneNumber: string | null;
+}

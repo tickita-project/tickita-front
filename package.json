@@ -21,6 +21,7 @@
     "zustand": "^4.5.2"
   },
   "devDependencies": {
+    "@hookform/resolvers": "^3.5.0",
     "@tanstack/eslint-plugin-query": "^5.35.6",
     "@tanstack/react-query-devtools": "^5.40.0",
     "@types/node": "^20",

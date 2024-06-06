@@ -4,5 +4,5 @@ export const PAGE_PATH = {
   DASHBOARD: "/dashboard",
   CALENDAR: "/calendar",
   GROUP: "/group",
-  PROFILE_SETUP: "/profile-setup",
+  PROFILE_SETUP: "/sign-in/profile-setup",
 } as const;
