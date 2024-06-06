@@ -2,11 +2,11 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: start;
-  gap: .5rem;
+  align-items: flex-start;
+  gap: 0.5rem;
 
   .enter-group {
-    @include body2-regular($gray700)
+    @include body2-regular($gray700);
   }
 
   .group-container {
