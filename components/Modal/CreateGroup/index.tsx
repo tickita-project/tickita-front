@@ -5,7 +5,7 @@ import Image from "next/image";
 import { zodResolver } from "@hookform/resolvers/zod";
 import classNames from "classnames/bind";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { ZodType, z } from "zod";
 
 import Input from "@/components/Input";
 import { GROUP_COLOR_LIST } from "@/constants/groupColorList";
@@ -18,7 +18,11 @@ import styles from "./CreateGroup.module.scss";
 
 const cn = classNames.bind(styles);
 
-const createGroupSchema = z.object({
+interface CreateGroupSchemaType {
+  groupName: string;
+}
+
+const createGroupSchema: ZodType<CreateGroupSchemaType> = z.object({
   groupName: GROUP_NAME_SCHEMA,
 });
 
@@ -35,7 +39,7 @@ export default function CreateGroupModal() {
   const [selectColor, setSelectColor] = useState<GroupColorType>(GROUP_COLOR_LIST[0]);
   const { closeModal } = useModalStore();
 
-  const onSubmit = (data: { groupName: string }) => {
+  const onSubmit = (data: CreateGroupSchemaType) => {
     const formData = { ...data, groupColor: selectColor };
     // TODO: 그룹 생성 API 호출
   };
