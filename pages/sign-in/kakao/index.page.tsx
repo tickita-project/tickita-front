@@ -28,7 +28,7 @@ export default function Kakao({ id, isComplete }: KakaoProps) {
   const router = useRouter();
 
   useEffect(() => {
-    if (isComplete === false) {
+    if (!isComplete) {
       router.push({ pathname: PAGE_PATH.PROFILE_SETUP, query: { id } }, PAGE_PATH.PROFILE_SETUP);
       return;
     }
