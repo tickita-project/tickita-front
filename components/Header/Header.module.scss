@@ -90,11 +90,7 @@
           display: flex;
           gap: 0.25rem;
           position: relative;
-
-          &:hover {
-            transform: scale(1.1);
-            transition: 0.75s;
-          }
+          cursor: pointer;
 
           .notification-count {
             color: $white;

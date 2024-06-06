@@ -45,7 +45,13 @@ export default function Header() {
     <header className={cn("header")}>
       <nav className={cn("nav")}>
         <Link href={PAGE_PATH.DASHBOARD}>
-          <Image src="/icons/tickita-logo.svg" width={60} height={22} alt="티키타 로고" />
+          <Image
+            src="/icons/tickita-logo.svg"
+            width={60}
+            height={22}
+            alt="티키타 로고"
+            loading="eager"
+          />
         </Link>
 
         <div className={cn("nav-tap")}>
@@ -79,7 +85,13 @@ export default function Header() {
             ) : (
               <figure className={cn("notification-bell")}>
                 <figcaption className={cn("notification-count")}>99+</figcaption>
-                <Image src="icons/notification-bell.svg" width={24} height={20} alt="알림 종" />
+                <Image
+                  src="icons/notification-bell.svg"
+                  width={24}
+                  height={20}
+                  alt="알림 종"
+                  loading="eager"
+                />
               </figure>
             )}
             <span className={cn("nickname")}>달맞이 토끼</span> 님
