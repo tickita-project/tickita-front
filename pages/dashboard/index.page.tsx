@@ -3,7 +3,6 @@ import { useState, ReactElement } from "react";
 import Link from "next/link";
 
 import classNames from "classnames/bind";
-import dayjs, { Dayjs } from "dayjs";
 
 import NotificationCenter from "./components/NotificationCenter";
 import UpcomingScheduleList from "./components/UpcomingScheduleList";
@@ -17,14 +16,12 @@ import styles from "./Dashboard.module.scss";
 const cn = classNames.bind(styles);
 
 export default function Dashboard() {
-  const [focusDate, setFocusDate] = useState<Dayjs>(dayjs());
-
   return (
     <>
       <MetaData title="대시보드 | 티키타" />
       <section className={cn("content")}>
         <Link href={PAGE_PATH.CALENDAR} className={cn("calendar")}>
-          <DatePicker selectedDay={focusDate} setSelectedDay={setFocusDate} hasNavigation={false} />
+          <DatePicker hasNavigation={false} />
         </Link>
         <div className={cn("box")}>
           <UpcomingScheduleList />

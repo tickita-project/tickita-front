@@ -6,6 +6,12 @@
   justify-content: center;
   align-items: center;
 
+  &.focus {
+    border-radius: 62.5rem;
+    background-color: $blue300;
+    @include body2-medium;
+  }
+
   &.today {
     border-radius: 62.5rem;
     background-color: $blue500;
@@ -62,18 +68,6 @@
         @include body2-medium;
       }
     }
-
-    .navigation-button {
-      display: flex;
-      justify-content: flex-end;
-      align-items: flex-start;
-      gap: 0.25rem;
-
-      .arrow-button {
-        cursor: pointer;
-        padding: 0;
-      }
-    }
   }
 
   .calendar-table {
@@ -101,8 +95,8 @@
 
       &:hover {
         border-radius: 62.5rem;
-        background-color: $blue500;
-        @include body2-medium(white);
+        background-color: $blue100;
+        @include body2-medium;
       }
     }
   }

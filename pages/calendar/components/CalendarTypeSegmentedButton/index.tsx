@@ -1,6 +1,6 @@
 import classNames from "classnames/bind";
 
-import styles from "./CalendarTypeRadioButton.module.scss";
+import styles from "./CalendarTypeSegmentedButton.module.scss";
 import { CalendarType } from "../../index.page";
 
 interface CalendarTypeRadioButtonProps {
@@ -9,7 +9,9 @@ interface CalendarTypeRadioButtonProps {
 
 const cn = classNames.bind(styles);
 
-export default function CalendarTypeRadioButton({ setCalendarType }: CalendarTypeRadioButtonProps) {
+export default function CalendarTypeSegmentedButton({
+  setCalendarType,
+}: CalendarTypeRadioButtonProps) {
   return (
     <>
       <div className={cn("container")}>
@@ -44,7 +46,7 @@ export default function CalendarTypeRadioButton({ setCalendarType }: CalendarTyp
             setCalendarType("일");
           }}
         />
-        <label htmlFor="monthly">일</label>
+        <label htmlFor="daily">일</label>
       </div>
     </>
   );

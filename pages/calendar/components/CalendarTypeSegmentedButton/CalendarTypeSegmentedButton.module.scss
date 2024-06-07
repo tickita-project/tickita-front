@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: .5rem;
+
+  input {
+    display: none;
+
+    &:checked+label {
+      background-color: $blue500;
+      @include headline2-medium($white)
+    }
+  }
+
+  label {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 62.5rem;
+    @include headline2-medium($gray600);
+
+    //임시 hover
+    &:hover {
+      background-color: $gray300;
+
+    }
+  }
+}
