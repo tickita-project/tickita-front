@@ -1,5 +1,4 @@
 import classNames from "classnames/bind";
-import { Dayjs } from "dayjs";
 
 import styles from "./WeeklyCalendar.module.scss";
 

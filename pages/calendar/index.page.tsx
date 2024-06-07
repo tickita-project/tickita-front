@@ -7,7 +7,6 @@ import DailyCalendar from "./components/Calendar/DailyCalendar";
 import MonthlyCalendar from "./components/Calendar/MonthlyCalendar";
 import WeeklyCalendar from "./components/Calendar/WeeklyCalendar";
 import CalendarSideBar from "./components/CalendarSideBar";
-import CalendarTypeSegmentedButton from "./components/CalendarTypeSegmentedButton";
 import Header from "@/components/Header";
 import MetaData from "@/components/MetaData";
 

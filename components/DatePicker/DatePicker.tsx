@@ -25,14 +25,13 @@ export default function DatePicker({ hasNavigation = true }: DatePickerProps) {
   useEffect(() => {
     setFocusDate(dayjs());
     setViewDate(dayjs());
-  }, []);
+  }, [setFocusDate, setViewDate]);
 
   const handleDateClick = (day: Dayjs) => {
-    if (!hasNavigation) {
-      return;
+    if (hasNavigation) {
+      setFocusDate(day);
+      setViewDate(day);
     }
-    setFocusDate(day);
-    setViewDate(day);
   };
 
   const handlePrevButtonClick = () => {

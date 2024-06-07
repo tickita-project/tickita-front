@@ -37,7 +37,7 @@ export default function useScroll<T extends HTMLElement>({
     return () => {
       element.removeEventListener("wheel", handleWheel);
     };
-  }, [handleScrollDown, handleScrollUp]);
+  }, [handleScrollDown, handleScrollUp, isUsable]);
 
   return ref;
 }

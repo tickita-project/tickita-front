@@ -1,9 +1,6 @@
-import { useState } from "react";
-
 import classNames from "classnames/bind";
 import { Dayjs } from "dayjs";
 
-import { DAYS } from "@/constants/calendarConstants";
 import { useDateStore } from "@/store/useDateStore";
 import { calculateMonthDates, divideWeek } from "@/utils/calculateCalendarDates";
 
