@@ -31,6 +31,10 @@
       border-radius: 6px;
       border: 1px solid $blue500;
       @include body2-bold($blue500);
+
+      &:hover {
+        background: $blue50;
+      }
     }
   }
 
