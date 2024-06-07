@@ -1,6 +1,3 @@
-import { group } from "console";
-import { useState } from "react";
-
 import Image from "next/image";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -42,7 +39,6 @@ export default function CreateGroupModal() {
   });
   const { closeModal } = useModalStore();
   const selectColor = watch("groupColor");
-  console.log(selectColor);
 
   const onSubmit = (data: GroupDataType) => {
     console.log(data);
