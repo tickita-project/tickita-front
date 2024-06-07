@@ -60,14 +60,14 @@ export default function DatePicker({ hasNavigation = true }: DatePickerProps) {
   };
 
   //디바운싱 ( leading )  이 걸린 함수 생성
-  const debouncedScrollUp = useDebounce(
+  const handleScrollUpDebounced = useDebounce(
     () => {
       setViewDate(viewDate.subtract(1, "month"));
     },
     250,
     true,
   );
-  const debouncedScrollDown = useDebounce(
+  const handleScrollDownDebounced = useDebounce(
     () => {
       setViewDate(viewDate.add(1, "month"));
     },
@@ -76,8 +76,8 @@ export default function DatePicker({ hasNavigation = true }: DatePickerProps) {
   );
 
   const scrollRef = useScroll<HTMLTableElement>(
-    debouncedScrollUp,
-    debouncedScrollDown,
+    handleScrollUpDebounced,
+    handleScrollDownDebounced,
     hasNavigation,
   );
   const calendarRows = divideWeek(buildCalendarTag(calculateMonthDates(viewDate)));

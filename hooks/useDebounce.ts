@@ -11,21 +11,29 @@ export default function useDebounce(
   delay: number,
   isLeading: boolean = false,
 ) {
+  //setTimeout or null ref
   const timeoutId = useRef<NodeJS.Timeout | null>(null);
 
   const debouncedFunction = () => {
+    //setTimeout이 들어있는 상태이면 클리어하고 리셋
+    // 사용자가 딜레이중에 함수를 또 실행시켰다는걸 의미
     if (timeoutId.current) {
       clearTimeout(timeoutId.current);
     }
 
+    //isLeading 방식이면 여기서 함수실행시킴
     if (isLeading && !timeoutId.current) {
       func();
     }
 
+    //함수 실행시키고 나서 setTimeout 넣어줌
+    //딜레이 뒤에 아래함수 수행
     timeoutId.current = setTimeout(() => {
+      //trailing 방식이면 여기서 실행
       if (!isLeading) {
         func();
       }
+      //실행끝나면 null 넣어줌 (리셋)
       timeoutId.current = null;
     }, delay);
   };
