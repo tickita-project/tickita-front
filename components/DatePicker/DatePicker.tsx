@@ -6,6 +6,7 @@ import classNames from "classnames/bind";
 import dayjs, { Dayjs } from "dayjs";
 
 import { DAYS } from "@/constants/calendarConstants";
+import useDebounce from "@/hooks/useDebounce";
 import useScroll from "@/hooks/useScroll";
 import { useDateStore } from "@/store/useDateStore";
 import { calculateMonthDates, divideWeek } from "@/utils/calculateCalendarDates";
@@ -35,14 +36,6 @@ export default function DatePicker({ hasNavigation = true }: DatePickerProps) {
     setViewDate(day);
   };
 
-  const handlePrevButtonClick = () => {
-    setViewDate(viewDate.subtract(1, "month"));
-  };
-
-  const handleNextButtonClick = () => {
-    setViewDate(viewDate.add(1, "month"));
-  };
-
   const buildCalendarTag = (calendarDays: Dayjs[]) => {
     return calendarDays.map((day: Dayjs, i: number) => {
       const isThisMonthDay = !day.isSame(viewDate, "month");
@@ -66,9 +59,25 @@ export default function DatePicker({ hasNavigation = true }: DatePickerProps) {
     });
   };
 
+  //디바운싱 ( leading )  이 걸린 함수 생성
+  const debouncedScrollUp = useDebounce(
+    () => {
+      setViewDate(viewDate.subtract(1, "month"));
+    },
+    250,
+    true,
+  );
+  const debouncedScrollDown = useDebounce(
+    () => {
+      setViewDate(viewDate.add(1, "month"));
+    },
+    250,
+    true,
+  );
+
   const scrollRef = useScroll<HTMLTableElement>(
-    handlePrevButtonClick,
-    handleNextButtonClick,
+    debouncedScrollUp,
+    debouncedScrollDown,
     hasNavigation,
   );
   const calendarRows = divideWeek(buildCalendarTag(calculateMonthDates(viewDate)));
