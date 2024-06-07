@@ -28,10 +28,11 @@ export default function DatePicker({ hasNavigation = true }: DatePickerProps) {
   }, [setFocusDate, setViewDate]);
 
   const handleDateClick = (day: Dayjs) => {
-    if (hasNavigation) {
-      setFocusDate(day);
-      setViewDate(day);
+    if (!hasNavigation) {
+      return;
     }
+    setFocusDate(day);
+    setViewDate(day);
   };
 
   const handlePrevButtonClick = () => {
@@ -65,11 +66,11 @@ export default function DatePicker({ hasNavigation = true }: DatePickerProps) {
     });
   };
 
-  const scrollRef = useScroll<HTMLTableElement>({
-    handleScrollUp: handlePrevButtonClick,
-    handleScrollDown: handleNextButtonClick,
-    isUsable: hasNavigation,
-  });
+  const scrollRef = useScroll<HTMLTableElement>(
+    handlePrevButtonClick,
+    handleNextButtonClick,
+    hasNavigation,
+  );
   const calendarRows = divideWeek(buildCalendarTag(calculateMonthDates(viewDate)));
 
   return (

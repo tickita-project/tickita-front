@@ -53,7 +53,7 @@ export default function CalendarSideBar() {
     setIsCreateListVisible((prev) => !prev);
   };
 
-  useOutsideClick({ ref: scheduleContainerRef, handler: () => setIsCreateListVisible(false) });
+  useOutsideClick(scheduleContainerRef, () => setIsCreateListVisible(false));
 
   return (
     <aside className={cn("container")}>

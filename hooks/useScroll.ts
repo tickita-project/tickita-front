@@ -1,10 +1,5 @@
 import { useEffect, useRef, RefObject } from "react";
 
-interface UseScrollProps {
-  handleScrollDown: () => void;
-  handleScrollUp: () => void;
-  isUsable: boolean;
-}
 /**
  * 특정 요소에 ref를 걸고 그 요소위에서 스크롤을 위로 올리거나 내려서 이벤트를 발생시킵니다.
 
@@ -13,11 +8,11 @@ interface UseScrollProps {
  * @param isUsable 훅을 사용할지 안할지 결정 ( 기본 true 이므로 신경안써도 무방)
  * @returns HTML 요소에 걸 ref
  */
-export default function useScroll<T extends HTMLElement>({
-  handleScrollDown,
-  handleScrollUp,
+export default function useScroll<T extends HTMLElement>(
+  handleScrollDown: () => void,
+  handleScrollUp: () => void,
   isUsable = true,
-}: UseScrollProps): RefObject<T> {
+): RefObject<T> {
   const ref = useRef<T>(null);
 
   useEffect(() => {
