@@ -86,11 +86,20 @@
         }
 
         .notification-bell {
-          padding: 0 0.5rem 0 0;
+          margin-right: 0.8rem;
           display: flex;
           gap: 0.25rem;
           position: relative;
           cursor: pointer;
+          border-radius: 50%;
+          padding: 0.5rem 0.625rem;
+          transition:
+            transform 0.5s,
+            background-color 0.5s;
+
+          &:hover {
+            background-color: $gray300;
+          }
 
           .notification-count {
             color: $white;
@@ -98,11 +107,15 @@
             font-weight: 500;
             background-color: $red500;
             height: 1.5rem;
-            padding: 0.125rem 0.5rem;
-            border-radius: 999px;
+            width: 1.5rem;
+            border-radius: 50%;
             display: flex;
             align-items: center;
-            margin-top: 0.15rem;
+            justify-content: center;
+            position: absolute;
+            right: -0.1rem;
+            top: 0.15rem;
+            letter-spacing: -0.05rem;
           }
         }
 

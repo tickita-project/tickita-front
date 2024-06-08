@@ -78,10 +78,10 @@ export default function Header() {
               <span className={cn("guide-text")}>반가워요, </span>
             ) : (
               <figure className={cn("notification-bell")}>
-                <figcaption className={cn("notification-count")}>99+</figcaption>
+                <figcaption className={cn("notification-count")}>9+</figcaption>
                 <Image
                   src="icons/notification-bell.svg"
-                  width={24}
+                  width={32}
                   height={20}
                   alt="알림 종"
                   priority
