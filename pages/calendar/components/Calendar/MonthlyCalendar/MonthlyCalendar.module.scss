@@ -10,6 +10,7 @@ $border: 1px solid $gray400;
     justify-content: space-between;
     align-items: center;
     border-top: $border;
+    border-bottom: $border;
 
     .day {
       display: flex;
@@ -20,8 +21,6 @@ $border: 1px solid $gray400;
       align-items: center;
       flex: 1 0 0;
       @include body2-medium;
-      border-left: $border;
-      border-right: $border;
 
       &.sunday {
         color: $red500;
@@ -41,5 +40,38 @@ $border: 1px solid $gray400;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(6, 1fr);
+    background-color: $gray400;
+    grid-gap: 1px;
+
+    .date-container {
+      position: relative;
+      width: 100%;
+
+      .date {
+        position: absolute;
+        top: .25rem;
+        right: .25rem;
+        width: 1.5rem;
+        height: 1.5rem;
+        padding: .125rem;
+        gap: .5rem;
+        flex-shrink: 0;
+        @include body2-bold;
+
+        &.today {
+          background-color: $blue500;
+          border-radius: 4px;
+          color: $white;
+        }
+
+        &.other-month {
+          color: $gray500;
+        }
+      }
+    }
+  }
+
+  .month-content>* {
+    background-color: $white;
   }
 }

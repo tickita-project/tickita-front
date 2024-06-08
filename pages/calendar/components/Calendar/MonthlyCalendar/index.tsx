@@ -20,35 +20,35 @@ export default function MonthlyCalendar() {
     () => {
       setViewDate(viewDate.subtract(1, "month"));
     },
-    250,
+    300,
     true,
   );
   const handleScrollDownDebounced = useDebounce(
     () => {
       setViewDate(viewDate.add(1, "month"));
     },
-    250,
+    300,
     true,
   );
 
-  const scrollRef = useScroll<HTMLDivElement>(handleScrollUpDebounced, handleScrollDownDebounced);
+  const scrollRef = useScroll<HTMLDivElement>(handleScrollDownDebounced, handleScrollUpDebounced);
 
   return (
     <div className={cn("container")} ref={scrollRef}>
       <div className={cn("month-header")}>
         {DAYS.map((day, i) => (
-          <div key={i} className={cn("day", { sunday: day === "일" }, { saturday: day === "토" })}>
+          <div key={i} className={cn("day")}>
             {day}
           </div>
         ))}
       </div>
       <div className={cn("month-content")}>
         {dates.map((date, i) => {
-          const isNotThisMonthDay = !viewDate.isSame(dayjs(), "month");
-          const isToday = viewDate.isSame(dayjs(), "date");
+          const isThisMonthDay = date.isSame(dayjs(), "month");
+          const isToday = date.isSame(dayjs(), "date");
           return (
-            <div key={i} className={"date-container"}>
-              <p className={cn("date", { today: isToday }, { "other-month": isNotThisMonthDay })}>
+            <div key={i} className={cn("date-container")}>
+              <p className={cn("date", { today: isToday, "other-month": !isThisMonthDay })}>
                 {date.date()}
               </p>
             </div>
