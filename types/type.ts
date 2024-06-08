@@ -23,3 +23,8 @@ export interface ProfileSetupType {
   nickname: string;
   phoneNumber: string | null;
 }
+
+export interface GroupDataType {
+  groupName: string;
+  groupColor: GroupColorType;
+}
