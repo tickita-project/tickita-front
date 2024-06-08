@@ -1,25 +1,27 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import classNames from "classnames/bind";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
+import { createGroup } from "@/apis/apis";
 import GroupColorPicker from "@/components/GroupColorPicker";
 import Input from "@/components/Input";
 import { GROUP_COLOR_LIST } from "@/constants/groupColorList";
-import { GROUP_NAME_SCHEMA } from "@/constants/schema";
+import { CREW_NAME_SCHEMA } from "@/constants/schema";
 import { useModalStore } from "@/store/useModalStore";
 
-import { GroupDataType } from "@/types/type";
+import { CreateGroupDataType } from "@/types/type";
 
 import styles from "./CreateGroup.module.scss";
 
 const cn = classNames.bind(styles);
 
 const createGroupSchema = z.object({
-  groupName: GROUP_NAME_SCHEMA,
-  groupColor: z.string(),
+  crewName: CREW_NAME_SCHEMA,
+  labelColor: z.string(),
 });
 
 export default function CreateGroupModal() {
@@ -30,14 +32,16 @@ export default function CreateGroupModal() {
     formState: { errors, isValid },
   } = useForm({
     mode: "all",
-    defaultValues: { groupName: "", groupColor: GROUP_COLOR_LIST[0] },
+    defaultValues: { crewName: "", labelColor: GROUP_COLOR_LIST[0] },
     resolver: zodResolver(createGroupSchema),
   });
   const { closeModal } = useModalStore();
-  const selectColor = watch("groupColor");
+  const router = useRouter();
+  const selectColor = watch("labelColor");
 
-  const onSubmit = (data: GroupDataType) => {
-    console.log(data);
+  const onSubmit = async (data: CreateGroupDataType) => {
+    const response = createGroup(data);
+    // router.push(`/group/${response.crewId}`);
     // TODO: 그룹 생성 API 호출
   };
 
@@ -53,18 +57,18 @@ export default function CreateGroupModal() {
         <Input
           label="그룹 이름"
           type="text"
-          id="groupName"
+          id="crewName"
           placeholder="그룹 이름을 입력해 주세요."
           isRequired
-          {...register("groupName")}
-          errorMessage={errors.groupName?.message}
+          {...register("crewName")}
+          errorMessage={errors.crewName?.message}
         />
 
         <div className={cn("group-color")}>
           <h3 className={cn("label")}>
             그룹 색상 <span className={cn("asterisk")}>*</span>
           </h3>
-          <GroupColorPicker {...register("groupColor")} selectColor={selectColor} />
+          <GroupColorPicker {...register("labelColor")} selectColor={selectColor} />
         </div>
         <div className={cn("button-box")}>
           <button type="submit" className={cn("create-button", { disabled: !isValid })}>

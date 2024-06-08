@@ -24,7 +24,14 @@ export interface ProfileSetupType {
   phoneNumber: string | null;
 }
 
-export interface GroupDataType {
-  groupName: string;
-  groupColor: GroupColorType;
+export interface CreateGroupDataType {
+  crewName: string;
+  labelColor: GroupColorType;
+}
+
+export interface GroupType {
+  accountId: number;
+  crewName: string;
+  labelColor: GroupColorType;
+  crewId: number;
 }

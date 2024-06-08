@@ -15,7 +15,7 @@ export const PHONE_NUMBER_SCHEMA = z
     "010 포함 전화번호 11자리를 입력해주세요",
   );
 
-export const GROUP_NAME_SCHEMA = z
+export const CREW_NAME_SCHEMA = z
   .string()
   .min(2, "2자 이상으로 입력해주세요.")
   .max(30, "30자 이하로 입력해주세요.");
