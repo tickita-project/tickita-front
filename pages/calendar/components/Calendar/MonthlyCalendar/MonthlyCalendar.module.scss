@@ -1,4 +1,4 @@
-$border: 1px solid $gray400;
+$border: .0625rem solid $gray400;
 
 .container {
   width: 100%;
@@ -41,7 +41,7 @@ $border: 1px solid $gray400;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(6, 1fr);
     background-color: $gray400;
-    grid-gap: 1px;
+    grid-gap: .0625rem;
 
     .date-container {
       position: relative;
@@ -60,7 +60,7 @@ $border: 1px solid $gray400;
 
         &.today {
           background-color: $blue500;
-          border-radius: 4px;
+          border-radius: .25rem;
           color: $white;
         }
 
