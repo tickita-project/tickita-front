@@ -81,7 +81,7 @@ export default function Header() {
                 <figcaption className={cn("notification-count")}>9+</figcaption>
                 <Image
                   src="icons/notification-bell.svg"
-                  width={28}
+                  width={26}
                   height={20}
                   alt="알림 종"
                   priority
