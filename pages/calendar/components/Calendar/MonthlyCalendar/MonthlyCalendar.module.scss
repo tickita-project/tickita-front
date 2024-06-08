@@ -22,14 +22,12 @@ $border: .0625rem solid $gray400;
       flex: 1 0 0;
       @include body2-medium;
 
-      &.sunday {
+      &:first-child {
         color: $red500;
-        border-left: none;
       }
 
-      &.saturday {
+      &:last-child {
         color: $blue500;
-        border-right: none;
       }
     }
   }
