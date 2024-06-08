@@ -1,1 +1,30 @@
-.container {}
+.container {
+  width: 100%;
+  height: calc(100% - 4rem);
+
+  .month-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .day {
+      display: flex;
+      height: 2.25rem;
+      padding: .5rem 0;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      flex: 1 0 0;
+      @include body2-medium;
+
+      &.sunday {
+        color: $red500;
+      }
+
+      &.saturday {
+        color: $blue500;
+      }
+    }
+  }
+}

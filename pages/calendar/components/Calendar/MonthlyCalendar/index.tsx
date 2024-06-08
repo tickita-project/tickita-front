@@ -1,6 +1,7 @@
 import classNames from "classnames/bind";
 import { Dayjs } from "dayjs";
 
+import { DAYS } from "@/constants/calendarConstants";
 import { useDateStore } from "@/store/useDateStore";
 import { calculateMonthDates, divideWeek } from "@/utils/calculateCalendarDates";
 
@@ -22,5 +23,15 @@ export default function MonthlyCalendar() {
 
   const calendarRows = divideWeek(buildCalendarTag(calculateMonthDates(viewDate)));
 
-  return <div className={cn("container")}>월간캘린더</div>;
+  return (
+    <div className={cn("container")}>
+      <div className={cn("month-header")}>
+        {DAYS.map((day, i) => (
+          <div key={i} className={cn("day", { sunday: day === "일" }, { saturday: day === "토" })}>
+            {day}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
