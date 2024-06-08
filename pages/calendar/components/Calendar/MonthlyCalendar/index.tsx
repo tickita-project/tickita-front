@@ -2,6 +2,8 @@ import classNames from "classnames/bind";
 import dayjs from "dayjs";
 
 import { DAYS } from "@/constants/calendarConstants";
+import useDebounce from "@/hooks/useDebounce";
+import useScroll from "@/hooks/useScroll";
 import { useDateStore } from "@/store/useDateStore";
 import { calculateMonthDates } from "@/utils/calculateCalendarDates";
 
@@ -10,12 +12,29 @@ import styles from "./MonthlyCalendar.module.scss";
 const cn = classNames.bind(styles);
 
 export default function MonthlyCalendar() {
-  const { viewDate } = useDateStore();
+  const { viewDate, setViewDate } = useDateStore();
 
   const dates = calculateMonthDates(viewDate);
 
+  const handleScrollUpDebounced = useDebounce(
+    () => {
+      setViewDate(viewDate.subtract(1, "month"));
+    },
+    250,
+    true,
+  );
+  const handleScrollDownDebounced = useDebounce(
+    () => {
+      setViewDate(viewDate.add(1, "month"));
+    },
+    250,
+    true,
+  );
+
+  const scrollRef = useScroll<HTMLDivElement>(handleScrollUpDebounced, handleScrollDownDebounced);
+
   return (
-    <div className={cn("container")}>
+    <div className={cn("container")} ref={scrollRef}>
       <div className={cn("month-header")}>
         {DAYS.map((day, i) => (
           <div key={i} className={cn("day", { sunday: day === "일" }, { saturday: day === "토" })}>
