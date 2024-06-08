@@ -11,4 +11,4 @@ export const GROUP_COLOR_LIST: GroupColorType[] = [
   "#F380B7",
   "#D688EA",
   "#4F4F4F",
-];
+] as const;

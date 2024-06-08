@@ -34,10 +34,10 @@
       border-radius: 6px;
       width: 100%;
       height: 100%;
-      transition: transform 0.75s;
 
       &:hover {
         transform: scale(1.1);
+        transition: 0.75s;
       }
     }
 
