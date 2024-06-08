@@ -41,7 +41,6 @@ export default function CreateGroupModal() {
   const selectColor = watch("groupColor");
 
   const onSubmit = (data: GroupDataType) => {
-    console.log(data);
     // TODO: 그룹 생성 API 호출
   };
 
