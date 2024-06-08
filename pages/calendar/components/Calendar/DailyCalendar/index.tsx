@@ -5,10 +5,6 @@ import styles from "./DailyCalendar.module.scss";
 
 const cn = classNames.bind(styles);
 
-interface DailyCalendarProps {
-  viewDate: Dayjs;
-}
-
-export default function DailyCalendar({ viewDate }: DailyCalendarProps) {
+export default function DailyCalendar() {
   return <div>일간 캘린더</div>;
 }

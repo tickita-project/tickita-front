@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect } from "react";
 
 import Image from "next/image";
 
@@ -6,27 +6,32 @@ import classNames from "classnames/bind";
 import dayjs, { Dayjs } from "dayjs";
 
 import { DAYS } from "@/constants/calendarConstants";
+import useScroll from "@/hooks/useScroll";
+import { useDateStore } from "@/store/useDateStore";
 import { calculateMonthDates, divideWeek } from "@/utils/calculateCalendarDates";
 
 import styles from "./datePicker.module.scss";
+import MonthNavButton from "./MonthNavButton";
 
 const cn = classNames.bind(styles);
 
 export interface DatePickerProps {
-  selectedDay: Dayjs;
-  setSelectedDay: (date: Dayjs) => void;
   hasNavigation?: boolean;
 }
 
-export default function DatePicker({
-  selectedDay,
-  setSelectedDay,
-  hasNavigation = true,
-}: DatePickerProps) {
-  const [viewDate, setViewDate] = useState(selectedDay);
+export default function DatePicker({ hasNavigation = true }: DatePickerProps) {
+  const { focusDate, viewDate, setFocusDate, setViewDate } = useDateStore();
+
+  useEffect(() => {
+    setFocusDate(dayjs());
+    setViewDate(dayjs());
+  }, [setFocusDate, setViewDate]);
 
   const handleDateClick = (day: Dayjs) => {
-    setSelectedDay(day);
+    if (!hasNavigation) {
+      return;
+    }
+    setFocusDate(day);
     setViewDate(day);
   };
 
@@ -41,13 +46,15 @@ export default function DatePicker({
   const buildCalendarTag = (calendarDays: Dayjs[]) => {
     return calendarDays.map((day: Dayjs, i: number) => {
       const isThisMonthDay = !day.isSame(viewDate, "month");
-      const isToday = day.isSame(selectedDay, "date");
+      const isToday = day.isSame(dayjs(), "date");
+      const isFocusDay = day.isSame(focusDate, "date");
 
       return (
         <td
           key={i}
           className={cn(
             { date: !hasNavigation, "date-hover": hasNavigation },
+            { focus: isFocusDay && hasNavigation },
             { today: isToday },
             { "other-month": isThisMonthDay },
           )}
@@ -59,6 +66,11 @@ export default function DatePicker({
     });
   };
 
+  const scrollRef = useScroll<HTMLTableElement>(
+    handlePrevButtonClick,
+    handleNextButtonClick,
+    hasNavigation,
+  );
   const calendarRows = divideWeek(buildCalendarTag(calculateMonthDates(viewDate)));
 
   return (
@@ -75,21 +87,12 @@ export default function DatePicker({
         )}
         <div className={cn("year-month")}>
           <span>{viewDate.year()}</span>
-          <Image src="/icons/vertical-divider-icon.svg" alt="" width={1} height={10} />
+          <Image src="/icons/vertical-divider-icon.svg" alt="" width={2} height={10} />
           <span>{viewDate.month() + 1}</span>
         </div>
-        {hasNavigation && (
-          <div className={cn("navigation-button")}>
-            <button onClick={handlePrevButtonClick} className={cn("arrow-button")} type="button">
-              <Image src="/icons/arrow-left-icon.svg" alt="이전달" width={20} height={20} />
-            </button>
-            <button onClick={handleNextButtonClick} className={cn("arrow-button")} type="button">
-              <Image src="/icons/arrow-right-icon.svg" alt="다음달" width={20} height={20} />
-            </button>
-          </div>
-        )}
+        {hasNavigation && <MonthNavButton />}
       </div>
-      <table className={cn("calendar-table")}>
+      <table className={cn("calendar-table")} ref={scrollRef}>
         <thead className={cn("table-header")}>
           <tr>
             {DAYS.map((day, i) => (

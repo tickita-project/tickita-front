@@ -96,6 +96,18 @@
   letter-spacing: -0.0266rem;
 }
 
+@mixin headline2-medium($color: black) {
+  color: $color;
+  text-align: center;
+
+  /* Headline 2/Medium */
+  font-size: 1.0625rem;
+  font-weight: 500;
+  line-height: 141.2%;
+  /* 24.004px */
+  letter-spacing: -0.0266rem;
+}
+
 @mixin body2-regular($color: black) {
   color: $color;
   text-align: center;
@@ -107,3 +119,17 @@
   /* 20.006px */
   letter-spacing: -0.0219rem;
 }
+
+
+@mixin body2-bold($color: black) {
+  color: $color;
+  text-align: center;
+
+  /* Body 2/Bold */
+  font-size: .875rem;
+  font-weight: 700;
+  line-height: 142.9%;
+  /* 20.006px */
+  letter-spacing: -0.0219rem;
+}
+
