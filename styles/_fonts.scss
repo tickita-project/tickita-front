@@ -9,8 +9,10 @@
   font-weight: 400;
   font-style: normal;
   src:
-    url("https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Regular.woff2") format("woff2"),
-    url("https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Regular.woff") format("woff");
+    url("https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Regular.woff2")
+      format("woff2"),
+    url("https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Regular.woff")
+      format("woff");
   font-display: swap;
 }
 
@@ -19,7 +21,8 @@
   font-weight: 500;
   font-style: normal;
   src:
-    url("https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Medium.woff2") format("woff2"),
+    url("https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Medium.woff2")
+      format("woff2"),
     url("https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Medium.woff") format("woff");
   font-display: swap;
 }
@@ -29,8 +32,10 @@
   font-weight: 600;
   font-style: normal;
   src:
-    url("https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-SemiBold.woff2") format("woff2"),
-    url("https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-SemiBold.woff") format("woff");
+    url("https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-SemiBold.woff2")
+      format("woff2"),
+    url("https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-SemiBold.woff")
+      format("woff");
   font-display: swap;
 }
 
@@ -49,17 +54,18 @@
   font-weight: 800;
   font-style: normal;
   src:
-    url("https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-ExtraBold.woff2") format("woff2"),
-    url("https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-ExtraBold.woff") format("woff");
+    url("https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-ExtraBold.woff2")
+      format("woff2"),
+    url("https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-ExtraBold.woff")
+      format("woff");
   font-display: swap;
 }
-
 
 @mixin caption2-medium($color: black) {
   color: $color;
   text-align: center;
   /* Caption 2/Medium */
-  font-size: .6875rem;
+  font-size: 0.6875rem;
   font-weight: 500;
   line-height: 127.3%;
   /* 14.003px */
@@ -71,7 +77,7 @@
   text-align: center;
 
   /* Body 2/Medium */
-  font-size: .875rem;
+  font-size: 0.875rem;
   font-weight: 500;
   line-height: 142.9%;
   /* 20.006px */
@@ -95,7 +101,7 @@
   text-align: center;
 
   /* Body 2/Regular */
-  font-size: .875rem;
+  font-size: 0.875rem;
   font-weight: 400;
   line-height: 142.9%;
   /* 20.006px */

@@ -7,6 +7,18 @@
   }
 }
 
+@keyframes hoverScale {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 .container {
   width: 32rem;
   padding: 1.5rem;
@@ -87,10 +99,10 @@
           border-radius: 6px;
           width: 100%;
           height: 100%;
+          transition: transform 0.75s;
 
           &:hover {
             transform: scale(1.1);
-            transition: 0.75s;
           }
         }
 
