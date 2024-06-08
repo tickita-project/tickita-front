@@ -1,3 +1,5 @@
+$border: 1px solid $gray400;
+
 .container {
   width: 100%;
   height: calc(100% - 4rem);
@@ -7,6 +9,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-top: $border;
 
     .day {
       display: flex;
@@ -17,14 +20,26 @@
       align-items: center;
       flex: 1 0 0;
       @include body2-medium;
+      border-left: $border;
+      border-right: $border;
 
       &.sunday {
         color: $red500;
+        border-left: none;
       }
 
       &.saturday {
         color: $blue500;
+        border-right: none;
       }
     }
+  }
+
+  .month-content {
+    width: 100%;
+    height: calc(100% - 2.25rem);
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(6, 1fr);
   }
 }
