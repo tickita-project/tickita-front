@@ -12,7 +12,7 @@ export default function useDebounce(
   isLeading: boolean = false,
 ) {
   //setTimeout or null ref
-  const timeoutId = useRef<NodeJS.Timeout | null>(null);
+  const timeoutId = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const debouncedFunction = () => {
     //setTimeout이 들어있는 상태이면 클리어하고 리셋
@@ -44,7 +44,6 @@ export default function useDebounce(
         clearTimeout(timeoutId.current);
       }
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return debouncedFunction;
