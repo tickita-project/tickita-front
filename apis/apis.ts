@@ -1,5 +1,3 @@
-import { useRouter } from "next/router";
-
 import { ProfileSetupType, CreateGroupDataType, GroupType } from "@/types/type";
 
 import { instance } from "./axios";
