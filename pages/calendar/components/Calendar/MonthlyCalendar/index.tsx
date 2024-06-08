@@ -44,7 +44,7 @@ export default function MonthlyCalendar() {
       </div>
       <div className={cn("month-content")}>
         {dates.map((date, i) => {
-          const isThisMonthDay = date.isSame(dayjs(), "month");
+          const isThisMonthDay = date.isSame(viewDate, "month");
           const isToday = date.isSame(dayjs(), "date");
           return (
             <div key={i} className={cn("date-container")}>
