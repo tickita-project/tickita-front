@@ -45,13 +45,7 @@ export default function Header() {
     <header className={cn("header")}>
       <nav className={cn("nav")}>
         <Link href={PAGE_PATH.DASHBOARD}>
-          <Image
-            src="/icons/tickita-logo.svg"
-            width={60}
-            height={22}
-            alt="티키타 로고"
-            loading="eager"
-          />
+          <Image src="/icons/tickita-logo.svg" width={60} height={22} alt="티키타 로고" priority />
         </Link>
 
         <div className={cn("nav-tap")}>
@@ -90,7 +84,7 @@ export default function Header() {
                   width={24}
                   height={20}
                   alt="알림 종"
-                  loading="eager"
+                  priority
                 />
               </figure>
             )}
