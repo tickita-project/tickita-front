@@ -32,7 +32,11 @@
       @include body2-bold($blue500);
 
       &:hover {
-        background: $blue50;
+        background-color: $blue50;
+      }
+
+      &:active {
+        background-color: $blue200;
       }
     }
   }
