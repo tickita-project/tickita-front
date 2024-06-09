@@ -17,7 +17,19 @@ export async function getServerSideProps(
   const { code } = context.query;
 
   const res = await instance.get(`/login/oauth/kakao?code=${code}`);
-  const { id, isComplete } = res.data;
+  const { id, isComplete, accessToken, refreshToken } = res.data;
+
+  if (accessToken && refreshToken) {
+    context.res.setHeader(
+      "Set-Cookie",
+      `accessToken=${accessToken}; Path=/; HttpOnly; Secure; SameSite=Strict`,
+    );
+
+    context.res.setHeader(
+      "Set-Cookie",
+      `refreshToken=${refreshToken}; Path=/; HttpOnly; Secure; SameSite=Strict`,
+    );
+  }
 
   return {
     props: { id, isComplete },
