@@ -64,22 +64,18 @@ export default function DatePicker({ hasNavigation = true }: DatePickerProps) {
     () => {
       setViewDate(viewDate.subtract(1, "month"));
     },
-    250,
+    300,
     true,
   );
   const handleScrollDownDebounced = useDebounce(
     () => {
       setViewDate(viewDate.add(1, "month"));
     },
-    250,
+    300,
     true,
   );
 
-  const scrollRef = useScroll<HTMLTableElement>(
-    handleScrollUpDebounced,
-    handleScrollDownDebounced,
-    hasNavigation,
-  );
+  const scrollRef = useScroll<HTMLTableElement>(handleScrollDownDebounced, handleScrollUpDebounced);
   const calendarRows = divideWeek(buildCalendarTag(calculateMonthDates(viewDate)));
 
   return (
