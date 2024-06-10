@@ -56,7 +56,6 @@ export default function MonthlyCalendar() {
               ref={(el) => {
                 dateRefs.current[i] = el;
               }}
-              onClick={() => console.log(dateRefs.current[i])}
             >
               <p className={cn("date", { today: isToday, "other-month": !isThisMonthDay })}>
                 {date.date()}

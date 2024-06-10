@@ -1,4 +1,4 @@
-import { Dayjs } from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 
 /**
  * 월간 캘린더에 들어갈 날짜를 42일 기준으로 계산
@@ -28,6 +28,17 @@ export const calculateMonthDates = (date: Dayjs) => {
   return days;
 };
 
+export const getCalendarMatrix = (date: Dayjs) => {
+  const days = calculateMonthDates(date);
+  const weeks: Dayjs[][] = [];
+
+  for (let i = 0; i < days.length; i += 7) {
+    weeks.push(days.slice(i, i + 7));
+  }
+
+  return weeks;
+};
+
 export const divideWeek = (calendarTags: JSX.Element[]) => {
   return calendarTags.reduce((acc: JSX.Element[][], day: JSX.Element, i: number) => {
     if (i % 7 === 0) {
@@ -37,4 +48,14 @@ export const divideWeek = (calendarTags: JSX.Element[]) => {
     }
     return acc;
   }, []);
+};
+
+type DateTimeType = string | Dayjs;
+
+export const convertDayjsIso = (DateTime: DateTimeType): DateTimeType => {
+  if (typeof DateTime === "string") {
+    return dayjs(DateTime);
+  } else {
+    return DateTime.toISOString();
+  }
 };
