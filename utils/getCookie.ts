@@ -1,4 +1,6 @@
-const getCookie = (name: string) => {
+import { CookieNameType } from "@/types/type";
+
+const getCookie = (name: CookieNameType) => {
   if (typeof document === "undefined") {
     return null;
   }
