@@ -1,3 +1,5 @@
+import { useRef } from "react";
+
 import classNames from "classnames/bind";
 import dayjs from "dayjs";
 
@@ -13,6 +15,7 @@ const cn = classNames.bind(styles);
 
 export default function MonthlyCalendar() {
   const { viewDate, setViewDate } = useDateStore();
+  const dateRefs = useRef<(HTMLDivElement | null)[]>([]); // 타입 지정
 
   const dates = calculateMonthDates(viewDate);
 
@@ -47,7 +50,14 @@ export default function MonthlyCalendar() {
           const isThisMonthDay = date.isSame(viewDate, "month");
           const isToday = date.isSame(dayjs(), "date");
           return (
-            <div key={i} className={cn("date-container")}>
+            <div
+              key={i}
+              className={cn("date-container")}
+              ref={(el) => {
+                dateRefs.current[i] = el;
+              }}
+              onClick={() => console.log(dateRefs.current[i])}
+            >
               <p className={cn("date", { today: isToday, "other-month": !isThisMonthDay })}>
                 {date.date()}
               </p>
