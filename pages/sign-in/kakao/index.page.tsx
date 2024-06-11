@@ -20,15 +20,10 @@ export async function getServerSideProps(
   const { id, isComplete, accessToken, refreshToken } = res.data;
 
   if (accessToken && refreshToken) {
-    context.res.setHeader(
-      "Set-Cookie",
-      `accessToken=${accessToken}; Path=/; HttpOnly; Secure; SameSite=Strict`,
-    );
+    const ACCESS_TOKEN = `ACCESS_TOKEN=${accessToken}; Path=/; HttpOnly; Secure; SameSite=Strict`;
+    const REFRESH_TOKEN = `REFRESH_TOKEN=${refreshToken}; Path=/; HttpOnly; Secure; SameSite=Strict`;
 
-    context.res.setHeader(
-      "Set-Cookie",
-      `refreshToken=${refreshToken}; Path=/; HttpOnly; Secure; SameSite=Strict`,
-    );
+    context.res.setHeader("Set-Cookie", [ACCESS_TOKEN, REFRESH_TOKEN]);
   }
 
   return {

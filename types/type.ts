@@ -10,7 +10,7 @@ export type GroupColorType =
   | "#FFB723" // yellow500
   | "#32ECB4"; // emelard500
 
-export type CookieNameType = "accessToken" | "refreshToken";
+export type CookieNameType = "ACCESS_TOKEN" | "REFRESH_TOKEN";
 
 export interface UserInfoType {
   id: number;
