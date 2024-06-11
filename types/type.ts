@@ -22,6 +22,6 @@ export interface UserInfoType {
 
 export interface ProfileSetupType {
   accountId: number;
-  nickname: string;
+  nickName: string;
   phoneNumber: string | null;
 }
