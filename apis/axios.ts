@@ -5,12 +5,19 @@ export const instance = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
+});
+
+export const authorizationInstance = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_BASE_API_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
   withCredentials: true,
 });
 
-instance.interceptors.request.use(async (config) => {
+authorizationInstance.interceptors.request.use(async (config) => {
   try {
-    const res = await axios.get("http://localhost:3000/api/cookies");
+    const res = await axios.get("http://localhost:3000/api/cookies", { withCredentials: true });
     const { ACCESS_TOKEN } = res.data;
 
     if (ACCESS_TOKEN) {
