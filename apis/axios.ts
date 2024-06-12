@@ -22,10 +22,17 @@ export const instance = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
+});
+
+export const AuthorizationInstance = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_BASE_API_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
   withCredentials: true,
 });
 
-instance.interceptors.request.use(async (config) => {
+AuthorizationInstance.interceptors.request.use(async (config) => {
   try {
     if (getIsServer()) {
       nextInstance.defaults.headers.cookie = context?.req.headers.cookie!;
@@ -46,4 +53,4 @@ instance.interceptors.request.use(async (config) => {
   return config;
 });
 
-instance.interceptors.response.use();
+AuthorizationInstance.interceptors.response.use();
