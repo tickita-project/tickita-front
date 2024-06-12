@@ -40,9 +40,8 @@ export default function CreateGroupModal() {
   const selectColor = watch("labelColor");
 
   const onSubmit = async (data: CreateGroupDataType) => {
-    const response = createGroup(data);
-    // router.push(`/group/${response.crewId}`);
-    // TODO: 그룹 생성 API 호출
+    const response = await createGroup(data);
+    router.push(`/group/${response.crewId}`);
   };
 
   return (
