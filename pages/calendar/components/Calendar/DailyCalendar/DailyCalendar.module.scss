@@ -1,1 +1,18 @@
-.container {}
+.container {
+  display: flex;
+  flex-direction: column;
+
+  .events {
+    flex: 1;
+    border-left: 1px solid #ddd;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .event-slot {
+    border-bottom: 1px solid #ddd;
+    height: 60px;
+    box-sizing: border-box;
+  }
+}
