@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 
 import { getIsBrowser } from "@/utils/getIsEnvironment";
 
@@ -23,7 +23,7 @@ instance.interceptors.request.use(async (config) => {
       }
     } catch (error) {
       if (error instanceof AxiosError) {
-        console.error("cookies API 가져오는 데 실패함", error);
+        return Promise.reject(error);
       }
     }
   }
@@ -31,5 +31,4 @@ instance.interceptors.request.use(async (config) => {
   return config;
 });
 
-// 인터셉터 res 설정(에러 처리 등)
 instance.interceptors.response.use();
