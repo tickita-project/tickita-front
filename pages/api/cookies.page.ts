@@ -1,7 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
 const handler = (req: NextApiRequest, res: NextApiResponse) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  const origin = req.headers.origin;
+  res.setHeader("Access-Control-Allow-Origin", origin!);
+  res.setHeader("Access-Control-Allow-Credentials", "true");
 
   const ACCESS_TOKEN = req.cookies.ACCESS_TOKEN || null;
   const REFRESH_TOKEN = req.cookies.REFRESH_TOKEN || null;
