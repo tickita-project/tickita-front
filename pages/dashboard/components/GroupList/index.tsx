@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import { useQuery } from "@tanstack/react-query";
 import classNames from "classnames/bind";
@@ -31,9 +32,11 @@ export default function GroupList() {
       <span className={cn("group-guide-text")}>현재 가입된 그룹</span>
       <ul className={cn("group-box")}>
         {data?.map((crew) => (
-          <li key={crew.crewId} className={cn("group-list")}>
-            <div className={cn("group-color")} style={{ backgroundColor: crew.labelColor }} />
-            <span className={cn("group-title")}>{crew.crewName}</span>
+          <li key={crew.crewId}>
+            <Link href={`/group/${crew.crewId}`} className={cn("group-list")}>
+              <div className={cn("group-color")} style={{ backgroundColor: crew.labelColor }} />
+              <span className={cn("group-title")}>{crew.crewName}</span>
+            </Link>
           </li>
         ))}
       </ul>
