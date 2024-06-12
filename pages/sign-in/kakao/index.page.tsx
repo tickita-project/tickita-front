@@ -16,12 +16,16 @@ export async function getServerSideProps(
 ): Promise<GetServerSidePropsResult<KakaoProps>> {
   const { code } = context.query;
 
-  const res = await instance.get(`/login/oauth/kakao?code=${code}`);
+  const res = await instance.get("/login/oauth/kakao", {
+    params: {
+      code,
+    },
+  });
   const { id, isComplete, accessToken, refreshToken } = res.data;
 
   if (accessToken && refreshToken) {
-    const ACCESS_TOKEN = `ACCESS_TOKEN=${accessToken}; Path=/`;
-    const REFRESH_TOKEN = `REFRESH_TOKEN=${refreshToken}; Path=/`;
+    const ACCESS_TOKEN = `ACCESS_TOKEN=${accessToken}; Path=/; HttpOnly; Secure; SameSite=Strict`;
+    const REFRESH_TOKEN = `REFRESH_TOKEN=${refreshToken}; Path=/; HttpOnly; Secure; SameSite=Strict`;
 
     context.res.setHeader("Set-Cookie", [ACCESS_TOKEN, REFRESH_TOKEN]);
   }
