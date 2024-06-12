@@ -5,38 +5,15 @@ import classNames from "classnames/bind";
 
 import { getGroupList } from "@/apis/apis";
 import { MODAL_TYPE } from "@/constants/modalType";
+import { groupKey } from "@/constants/queryKey";
 import { useModalStore } from "@/store/useModalStore";
 
 import styles from "./GroupList.module.scss";
 
 const cn = classNames.bind(styles);
 
-const mockData = [
-  {
-    id: 1,
-    groupName: "그룹1",
-    groupColor: "#3360FF",
-  },
-  {
-    id: 2,
-    groupName: "그룹2",
-    groupColor: "#D688EA",
-  },
-  {
-    id: 3,
-    groupName: "그룹3",
-    groupColor: "#21D53E",
-  },
-  {
-    id: 4,
-    groupName:
-      "그룹 이름이 길어지는 경우 테스트그룹 이름이 길어지는 경우 테스트그룹 이름이 길어지는 경우 테스트그룹 이름이 길어지는 경우 테스트그룹 이름이 길어지는 경우 테스트그룹 이름이 길어지는 경우 테스트",
-    groupColor: "#F380B7",
-  },
-];
-
 export default function GroupList() {
-  const { data } = useQuery({ queryKey: ["groupList"], queryFn: getGroupList });
+  const { data } = useQuery({ queryKey: groupKey.all, queryFn: getGroupList });
   const { openModal } = useModalStore();
 
   return (

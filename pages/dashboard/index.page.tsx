@@ -3,7 +3,7 @@ import { ReactElement } from "react";
 import Link from "next/link";
 import { GetServerSidePropsContext } from "next/types";
 
-import { QueryClient, dehydrate, useQuery } from "@tanstack/react-query";
+import { QueryClient, dehydrate } from "@tanstack/react-query";
 import classNames from "classnames/bind";
 
 import NotificationCenter from "./components/NotificationCenter";
@@ -14,6 +14,7 @@ import DatePicker from "@/components/DatePicker/DatePicker";
 import Layout from "@/components/Layout";
 import MetaData from "@/components/MetaData";
 import { PAGE_PATH } from "@/constants/pagePath";
+import { groupKey } from "@/constants/queryKey";
 
 import styles from "./Dashboard.module.scss";
 
@@ -25,7 +26,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
   try {
     const queryClient = new QueryClient();
 
-    await queryClient.prefetchQuery({ queryKey: ["groupList"], queryFn: getGroupList });
+    await queryClient.prefetchQuery({ queryKey: groupKey.all, queryFn: getGroupList });
 
     return {
       props: { dehydrateState: dehydrate(queryClient) },
