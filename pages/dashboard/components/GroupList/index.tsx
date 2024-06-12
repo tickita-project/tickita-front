@@ -1,12 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { useQuery } from "@tanstack/react-query";
 import classNames from "classnames/bind";
 
-import { getGroupList } from "@/apis/apis";
 import { MODAL_TYPE } from "@/constants/modalType";
-import { groupKey } from "@/constants/queryKey";
+import { useGetGroupList } from "@/hooks/useGetGroupList";
 import { useModalStore } from "@/store/useModalStore";
 
 import styles from "./GroupList.module.scss";
@@ -14,8 +12,12 @@ import styles from "./GroupList.module.scss";
 const cn = classNames.bind(styles);
 
 export default function GroupList() {
-  const { data } = useQuery({ queryKey: groupKey.all, queryFn: getGroupList });
+  const { data, isError } = useGetGroupList();
   const { openModal } = useModalStore();
+
+  if (isError) {
+    return <div>에러 컴포넌트 추가 예정?!</div>;
+  }
 
   return (
     <section className={cn("container")}>

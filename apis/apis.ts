@@ -21,7 +21,6 @@ export const getGroupList = async (): Promise<Omit<GroupType[], "accountId">> =>
     const res = await instance.get("/crew/all-info");
     return res.data.crewAllInfos;
   } catch (error: any) {
-    alert(error.response.data.message);
-    return error;
+    throw new Error(error.response.data.message);
   }
 };
