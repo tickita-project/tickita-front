@@ -1,6 +1,21 @@
-import axios, { AxiosError, AxiosResponse } from "axios";
+import { GetServerSidePropsContext } from "next/types";
 
-import { getIsBrowser } from "@/utils/getIsEnvironment";
+import axios, { AxiosError } from "axios";
+
+import { getIsServer } from "@/utils/getIsEnvironment";
+
+let context: GetServerSidePropsContext | null = null;
+export const setContext = (_context: GetServerSidePropsContext) => {
+  context = _context;
+};
+
+export const nextInstance = axios.create({
+  baseURL: "http://localhost:3000",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  withCredentials: true,
+});
 
 export const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_API_URL,
@@ -11,20 +26,20 @@ export const instance = axios.create({
 });
 
 instance.interceptors.request.use(async (config) => {
-  const isBrowser = getIsBrowser();
+  try {
+    if (getIsServer()) {
+      nextInstance.defaults.headers.cookie = context?.req.headers.cookie!;
+    }
 
-  if (isBrowser) {
-    try {
-      const res = await axios.get("http://localhost:3000/api/cookies", { withCredentials: true });
-      const { ACCESS_TOKEN } = res.data;
+    const res = await nextInstance.get("/api/cookies");
+    const { ACCESS_TOKEN } = res.data;
 
-      if (ACCESS_TOKEN) {
-        config.headers.Authorization = `Bearer ${ACCESS_TOKEN}`;
-      }
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        return Promise.reject(error);
-      }
+    if (ACCESS_TOKEN) {
+      config.headers.Authorization = `Bearer ${ACCESS_TOKEN}`;
+    }
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      return Promise.reject(error);
     }
   }
 
