@@ -10,6 +10,8 @@ export type GroupColorType =
   | "#32ECB4" // emelard500
   | "#4F4F4F"; // gray800
 
+export type CookieNameType = "ACCESS_TOKEN" | "REFRESH_TOKEN";
+
 export interface UserInfoType {
   id: number;
   nickname: string;
@@ -20,7 +22,7 @@ export interface UserInfoType {
 
 export interface ProfileSetupType {
   accountId: number;
-  nickname: string;
+  nickName: string;
   phoneNumber: string | null;
 }
 

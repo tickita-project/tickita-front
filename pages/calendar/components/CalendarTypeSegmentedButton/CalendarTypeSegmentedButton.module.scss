@@ -25,8 +25,11 @@
 
     //임시 hover
     &:hover {
-      background-color: $gray300;
+      background-color: $gray100;
+    }
 
+    &:active {
+      background-color: $gray300;
     }
   }
 }
