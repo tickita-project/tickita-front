@@ -43,7 +43,10 @@ export async function getServerSideProps(
     };
   } catch (error) {
     return {
-      notFound: true, // 404 페이지로 이동
+      redirect: {
+        destination: PAGE_PATH.SIGN_IN,
+        permanent: false,
+      },
     };
   }
 }
