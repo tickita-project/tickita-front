@@ -6,6 +6,13 @@ import { useRouter } from "next/router";
 import { instance } from "@/apis/axios";
 import { PAGE_PATH } from "@/constants/pagePath";
 
+interface ResponseType {
+  id: number;
+  isComplete: boolean;
+  accessToken: string;
+  refreshToken: string;
+}
+
 interface KakaoProps {
   id: number;
   isComplete: boolean;
@@ -22,7 +29,7 @@ export async function getServerSideProps(
         code,
       },
     });
-    const { id, isComplete, accessToken, refreshToken } = res.data;
+    const { id, isComplete, accessToken, refreshToken }: ResponseType = res.data;
 
     if (accessToken && refreshToken) {
       const ACCESS_TOKEN = `ACCESS_TOKEN=${accessToken}; Path=/; HttpOnly; Secure; SameSite=Strict`;
