@@ -18,7 +18,7 @@ export const nextInstance = axios.create({
 });
 
 export const instance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_BASE_API_URL,
+  baseURL: process.env.NODE_ENV === "production" ? "/server" : process.env.NEXT_PUBLIC_BASE_API_URL,
   headers: {
     "Content-Type": "application/json",
   },
