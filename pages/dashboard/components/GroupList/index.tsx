@@ -1,7 +1,9 @@
 import Image from "next/image";
 
+import { useQuery } from "@tanstack/react-query";
 import classNames from "classnames/bind";
 
+import { getGroupList } from "@/apis/apis";
 import { MODAL_TYPE } from "@/constants/modalType";
 import { useModalStore } from "@/store/useModalStore";
 
@@ -34,6 +36,7 @@ const mockData = [
 ];
 
 export default function GroupList() {
+  const { data } = useQuery({ queryKey: ["groupList"], queryFn: getGroupList });
   const { openModal } = useModalStore();
 
   return (
@@ -50,10 +53,10 @@ export default function GroupList() {
       </div>
       <span className={cn("group-guide-text")}>현재 가입된 그룹</span>
       <ul className={cn("group-box")}>
-        {mockData.map((group) => (
-          <li key={group.id} className={cn("group-list")}>
-            <div className={cn("group-color")} style={{ backgroundColor: group.groupColor }} />
-            <span className={cn("group-title")}>{group.groupName}</span>
+        {data?.map((crew) => (
+          <li key={crew.crewId} className={cn("group-list")}>
+            <div className={cn("group-color")} style={{ backgroundColor: crew.labelColor }} />
+            <span className={cn("group-title")}>{crew.crewName}</span>
           </li>
         ))}
       </ul>

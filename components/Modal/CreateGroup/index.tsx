@@ -6,11 +6,11 @@ import classNames from "classnames/bind";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { createGroup } from "@/apis/apis";
 import GroupColorPicker from "@/components/GroupColorPicker";
 import Input from "@/components/Input";
 import { GROUP_COLOR_LIST } from "@/constants/groupColorList";
 import { CREW_NAME_SCHEMA } from "@/constants/schema";
+import { useCreateGroup } from "@/hooks/useCreateGroup";
 import { useModalStore } from "@/store/useModalStore";
 
 import { CreateGroupDataType } from "@/types/type";
@@ -36,12 +36,19 @@ export default function CreateGroupModal() {
     resolver: zodResolver(createGroupSchema),
   });
   const { closeModal } = useModalStore();
+  const { mutate, isPending } = useCreateGroup();
   const router = useRouter();
   const selectColor = watch("labelColor");
 
-  const onSubmit = async (data: CreateGroupDataType) => {
-    const response = await createGroup(data);
-    router.push(`/group/${response.crewId}`);
+  const onSubmit = async (formData: CreateGroupDataType) => {
+    mutate(formData, {
+      onSuccess: (response) => {
+        router.push(`/group/${response.crewId}`); // 만든 그룹 상세 페이지로 이동
+      },
+      onError: (error) => {
+        alert(error);
+      },
+    });
   };
 
   return (
@@ -70,7 +77,10 @@ export default function CreateGroupModal() {
           <GroupColorPicker {...register("labelColor")} selectColor={selectColor} />
         </div>
         <div className={cn("button-box")}>
-          <button type="submit" className={cn("create-button", { disabled: !isValid })}>
+          <button
+            type="submit"
+            className={cn("create-button", { disabled: !isValid || isPending })}
+          >
             그룹 생성하기
           </button>
         </div>
