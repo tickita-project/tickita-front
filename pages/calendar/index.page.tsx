@@ -1,6 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+import { useRouter } from "next/router";
 
 import classNames from "classnames/bind";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
 
 import CalendarHeader from "./components/Calendar/CalendarHeader";
 import DailyCalendar from "./components/Calendar/DailyCalendar";
@@ -9,14 +13,34 @@ import WeeklyCalendar from "./components/Calendar/WeeklyCalendar";
 import CalendarSideBar from "./components/CalendarSideBar";
 import Header from "@/components/Header";
 import MetaData from "@/components/MetaData";
+import { useDateStore } from "@/store/useDateStore";
+import { calculateMonthDates } from "@/utils/calculateCalendarDates";
 
 import styles from "./Calendar.module.scss";
 
 export type CalendarType = "월" | "주" | "일";
 const cn = classNames.bind(styles);
+dayjs.extend(utc);
 
 export default function CalendarPage() {
   const [calendarType, setCalendarType] = useState<CalendarType>("월");
+  const router = useRouter();
+  const { focusDate } = useDateStore();
+
+  useEffect(() => {
+    if (calendarType === "월") {
+      const days = calculateMonthDates(focusDate);
+      const startDate = days[0].startOf("day").utc().add(9, "hour");
+      const endDate = days[41].endOf("day").utc().add(9, "hour");
+
+      const query = {
+        startDate: startDate.toISOString(),
+        endDate: endDate.toISOString(),
+      };
+
+      router.replace({ query });
+    }
+  }, [calendarType, focusDate]);
 
   return (
     <>
