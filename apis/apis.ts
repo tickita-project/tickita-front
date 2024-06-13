@@ -1,4 +1,4 @@
-import { ProfileSetupType, CreateGroupDataType, GroupType } from "@/types/type";
+import { ProfileSetupType, CreateGroupDataType, GroupType, UserInfoType } from "@/types/type";
 
 import { instance } from "./axios";
 
@@ -18,8 +18,17 @@ export const createGroup = async (data: CreateGroupDataType): Promise<GroupType>
 
 export const getGroupList = async (): Promise<Omit<GroupType[], "accountId">> => {
   try {
-    const res = await instance.get("/crew/all-info");
-    return res.data.crewAllInfos;
+    const response = await instance.get("/crew/all-info");
+    return response.data.crewAllInfos;
+  } catch (error: any) {
+    throw new Error(error.response.data.message);
+  }
+};
+
+export const getUserInfo = async (): Promise<UserInfoType> => {
+  try {
+    const response = await instance.get("/account-info/all");
+    return response.data;
   } catch (error: any) {
     throw new Error(error.response.data.message);
   }
