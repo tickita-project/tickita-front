@@ -40,6 +40,7 @@ instance.interceptors.request.use(async (config) => {
     }
 
     const res = await nextInstance.get("/api/cookies");
+
     const { ACCESS_TOKEN } = res.data;
 
     if (ACCESS_TOKEN) {

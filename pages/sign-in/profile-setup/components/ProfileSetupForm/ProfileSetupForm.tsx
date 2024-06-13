@@ -12,8 +12,8 @@ import { ZodType, z } from "zod";
 import { postProfileImageUrl, postProfileSetup } from "@/apis/apis";
 import { nextInstance } from "@/apis/axios";
 import Input from "@/components/Input";
-import { NICKNAME_SCHEMA, PHONE_NUMBER_SCHEMA } from "@/constants/formSchema";
 import { PAGE_PATH } from "@/constants/pagePath";
+import { NICKNAME_SCHEMA, PHONE_NUMBER_SCHEMA } from "@/constants/schema";
 
 import styles from "./ProfileSetupForm.module.scss";
 

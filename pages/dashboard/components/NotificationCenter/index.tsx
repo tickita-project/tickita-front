@@ -5,30 +5,30 @@ import classNames from "classnames/bind";
 import BaseNotification from "@/components/Notification/BaseNotification";
 import CoordinationNotification from "@/components/Notification/CoordinationNotification";
 import EmptyNotification from "@/components/Notification/EmptyNotification";
-import SchduleInfoNotification from "@/components/Notification/SchduleInfoNotification";
+import ScheduleInfoNotification from "@/components/Notification/ScheduleInfoNotification";
 
 import styles from "./NotificationCenter.module.scss";
 
 const cn = classNames.bind(styles);
 
-interface SchduleInfoType {
+interface ScheduleInfoType {
   id: number;
   type: string;
   groupName: string;
   text: string;
-  schduleInfo?: string;
+  scheduleInfo?: string;
   notificationDate: string;
   isChecked: boolean;
   link?: string;
 }
 
-const mockData: SchduleInfoType[] = [
+const mockData: ScheduleInfoType[] = [
   {
     id: 1,
     type: "default",
     groupName: "코드잇 4기 11팀",
     text: "기본 알림 클릭 이벤트 X, 알림 삭제만 가능",
-    schduleInfo: "24.05.23 (금) 14:00, 하남돼지집",
+    scheduleInfo: "24.05.23 (금) 14:00, 하남돼지집",
     notificationDate: "24.05.23 (금)",
     isChecked: true,
   },
@@ -43,10 +43,10 @@ const mockData: SchduleInfoType[] = [
   },
   {
     id: 3,
-    type: "schduleInfo",
+    type: "scheduleInfo",
     groupName: "코드잇 4기 11팀",
     text: "클릭 시 일정 상세 모달 열기, 알림 삭제 가능",
-    schduleInfo: "24.05.23 (금) 14:00, 하남돼지집",
+    scheduleInfo: "24.05.23 (금) 14:00, 하남돼지집",
     notificationDate: "24.05.23 (금)",
     isChecked: false,
   },
@@ -69,13 +69,13 @@ export default function NotificationCenter() {
       </h2>
       <div className={cn("box")}>
         {mockData.length > 0 ? (
-          mockData.map((item, idx) => {
-            if (item.type === "schduleInfo") {
-              return <SchduleInfoNotification key={item.id} schduleDetail={item} />;
+          mockData.map((item) => {
+            if (item.type === "scheduleInfo") {
+              return <ScheduleInfoNotification key={item.id} scheduleDetail={item} />;
             }
 
             if (item.type === "coordination") {
-              return <CoordinationNotification key={item.id} schduleDetail={item} />;
+              return <CoordinationNotification key={item.id} scheduleDetail={item} />;
             }
 
             return (
@@ -84,7 +84,7 @@ export default function NotificationCenter() {
                 key={item.id}
                 groupName={item.groupName}
                 text={item.text}
-                schduleInfo={item.schduleInfo}
+                scheduleInfo={item.scheduleInfo}
                 notificationDate={item.notificationDate}
                 isChecked={item.isChecked}
               />
