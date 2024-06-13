@@ -19,7 +19,6 @@ export const nextInstance = axios.create({
 
 export const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_API_URL,
-  // baseURL: "/server",
   headers: {
     "Content-Type": "application/json",
   },
@@ -27,6 +26,7 @@ export const instance = axios.create({
 
 instance.interceptors.request.use(async (config) => {
   try {
+    console.log(config);
     if (getIsServer()) {
       nextInstance.defaults.headers.cookie = context?.req.headers.cookie!;
     }
