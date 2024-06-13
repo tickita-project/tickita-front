@@ -42,6 +42,16 @@ export default function CalendarPage() {
       };
 
       router.replace({ query });
+    } else if (calendarType === "주") {
+      startDate = focusDate.startOf("week").utc().add(9, "hour");
+      endDate = focusDate.endOf("week").utc().add(9, "hour");
+
+      query = {
+        startDate: startDate.toISOString(),
+        endDate: endDate.toISOString(),
+      };
+
+      router.replace({ query });
     } else if (calendarType === "일") {
       startDate = focusDate.startOf("day").utc().add(9, "hour");
       endDate = focusDate.endOf("day").utc().add(9, "hour");
@@ -52,7 +62,6 @@ export default function CalendarPage() {
 
       router.replace({ query });
     }
-    console.log(query);
   }, [calendarType, focusDate]);
 
   return (
