@@ -26,7 +26,6 @@ export const instance = axios.create({
 
 instance.interceptors.request.use(async (config) => {
   try {
-    console.log(config);
     if (getIsServer()) {
       nextInstance.defaults.headers.cookie = context?.req.headers.cookie!;
     }
