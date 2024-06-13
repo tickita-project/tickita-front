@@ -5,10 +5,10 @@ export type GroupColorType =
   | "#3360FF" // blue500
   | "#21D53E" // green500
   | "#33DAFF" // sky500
-  | "#4F4F4F" // gray800
   | "#F380B7" // pink400
   | "#FFB723" // yellow500
-  | "#32ECB4"; // emelard500
+  | "#32ECB4" // emelard500
+  | "#4F4F4F"; // gray800
 
 export type CookieNameType = "ACCESS_TOKEN" | "REFRESH_TOKEN";
 
@@ -24,4 +24,16 @@ export interface ProfileSetupType {
   accountId: number;
   nickName: string;
   phoneNumber: string | null;
+}
+
+export interface CreateGroupDataType {
+  crewName: string;
+  labelColor: GroupColorType;
+}
+
+export interface GroupType {
+  accountId: number;
+  crewName: string;
+  labelColor: GroupColorType;
+  crewId: number;
 }

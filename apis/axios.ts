@@ -24,21 +24,14 @@ export const instance = axios.create({
   },
 });
 
-export const AuthorizationInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_BASE_API_URL,
-  headers: {
-    "Content-Type": "application/json",
-  },
-  withCredentials: true,
-});
-
-AuthorizationInstance.interceptors.request.use(async (config) => {
+instance.interceptors.request.use(async (config) => {
   try {
     if (getIsServer()) {
       nextInstance.defaults.headers.cookie = context?.req.headers.cookie!;
     }
 
     const res = await nextInstance.get("/api/cookies");
+
     const { ACCESS_TOKEN } = res.data;
 
     if (ACCESS_TOKEN) {
@@ -53,4 +46,4 @@ AuthorizationInstance.interceptors.request.use(async (config) => {
   return config;
 });
 
-AuthorizationInstance.interceptors.response.use();
+instance.interceptors.response.use();

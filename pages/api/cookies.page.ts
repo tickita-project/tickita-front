@@ -1,9 +1,11 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
 const handler = (req: NextApiRequest, res: NextApiResponse) => {
-  if (req.method === "OPTIONS") {
-    res.status(200).end();
-    return;
+  const origin = req.headers.origin;
+
+  if (origin) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+    res.setHeader("Access-Control-Allow-Credentials", "true");
   }
 
   const ACCESS_TOKEN = req.cookies.ACCESS_TOKEN || null;
