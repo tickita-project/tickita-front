@@ -1,3 +1,3 @@
 export const groupKey = {
-  all: ["group", "all"],
+  all: ["group", "all"] as const,
 };
