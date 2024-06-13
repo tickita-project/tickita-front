@@ -3,7 +3,7 @@ import { useEffect } from "react";
 
 import { useRouter } from "next/router";
 
-import { instance } from "@/apis/axios";
+import { instance, setContext } from "@/apis/axios";
 import { PAGE_PATH } from "@/constants/pagePath";
 
 interface ResponseType {
@@ -24,6 +24,8 @@ export async function getServerSideProps(
   context: GetServerSidePropsContext,
 ): Promise<GetServerSidePropsResult<KakaoProps>> {
   const { code } = context.query;
+
+  setContext(context); // 삭제
 
   try {
     const res = await instance.get("/login/oauth/kakao", {

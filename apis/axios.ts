@@ -1,8 +1,11 @@
+import Router from "next/router";
 import { GetServerSidePropsContext } from "next/types";
 
-import axios, { AxiosError } from "axios";
+import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
-import { getIsServer } from "@/utils/getIsEnvironment";
+import { PAGE_PATH } from "@/constants/pagePath";
+import getCookieValue from "@/utils/getCookieValue";
+import { getIsBrowser, getIsServer } from "@/utils/getIsEnvironment";
 
 let context: GetServerSidePropsContext | null = null;
 export const setContext = (_context: GetServerSidePropsContext) => {
@@ -51,4 +54,62 @@ instance.interceptors.request.use(async (config) => {
   return config;
 });
 
-instance.interceptors.response.use();
+instance.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+
+  async (error: AxiosError) => {
+    const originalRequest = error.config as AxiosRequestConfig & { _retry?: boolean };
+
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+      try {
+        // refresh token 가져오기
+        let REFRESH_TOKEN = "";
+
+        if (getIsServer()) {
+          const refreshTokenString = context?.req.headers.cookie;
+
+          if (!refreshTokenString) {
+            throw new Error("refresh token이 존재하지 않습니다"); // refresh token 없으면 로그인 페이지로 이동
+          }
+
+          REFRESH_TOKEN = getCookieValue(refreshTokenString, "REFRESH_TOKEN");
+        }
+
+        if (getIsBrowser()) {
+          const tokens = await nextInstance.get("/api/cookies");
+          REFRESH_TOKEN = tokens.data.REFRESH_TOKEN;
+        }
+
+        // access token 재발급
+        const refreshResponse = await instance.post("/token/refresh", REFRESH_TOKEN);
+        const { accessToken, accessTokenExpireAt, refreshToken, refreshTokenExpireAt } =
+          refreshResponse.data;
+
+        // cookie에 새로 발급받은 token 저장
+        await nextInstance.post("/apis/setCookies", {
+          accessToken,
+          accessTokenExpireAt,
+          refreshToken,
+          refreshTokenExpireAt,
+        });
+
+        // Authorization header에 새로 발급받은 access token 설정
+        originalRequest.headers = {
+          ...originalRequest.headers,
+          Authorization: `Bearer ${accessToken}`,
+        };
+
+        // 기존 요청 재시도
+        return axios(originalRequest);
+      } catch (refreshError) {
+        Router.push(PAGE_PATH.SIGN_IN);
+
+        return Promise.reject(refreshError);
+      }
+    }
+    return Promise.reject(error);
+  },
+);
