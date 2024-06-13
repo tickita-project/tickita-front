@@ -25,8 +25,6 @@ export async function getServerSideProps(
 ): Promise<GetServerSidePropsResult<KakaoProps>> {
   const { code } = context.query;
 
-  setContext(context); // 삭제
-
   try {
     const res = await instance.get("/login/oauth/kakao", {
       params: {
