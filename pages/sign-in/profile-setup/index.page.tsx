@@ -37,19 +37,11 @@ export default function ProfileSetup({ accountId, email }: ProfileSetupProps) {
       </header>
       <main className={cn("main")}>
         <div className={cn("container")}>
-          <div className={cn("profile-container")}>
-            <p className={cn("description")}>
-              티키타에 합류하신 걸 환영해요
-              <br />
-              원활한 사용을 위해 추가 정보를 입력해주세요
-            </p>
-            <Image
-              src="/icons/profile-add-icon.svg"
-              alt="default profile image"
-              width={120}
-              height={120}
-            />
-          </div>
+          <p className={cn("description")}>
+            티키타에 합류하신 걸 환영해요
+            <br />
+            원활한 사용을 위해 추가 정보를 입력해주세요
+          </p>
           <ProfileSetupForm accountId={accountId} email={email} />
         </div>
       </main>

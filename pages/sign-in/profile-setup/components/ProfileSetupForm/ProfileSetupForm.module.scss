@@ -34,3 +34,26 @@
     cursor: not-allowed;
   }
 }
+
+.profile-image-button {
+  position: relative;
+  width: 7.5rem;
+  height: 7.5rem;
+
+  .profile-image {
+    border-radius: 9999px;
+    overflow: hidden;
+    object-fit: cover;
+  }
+
+  .camera-icon {
+    z-index: 5;
+    position: absolute;
+    bottom: 0rem;
+    right: -0.5rem;
+  }
+}
+
+.hidden-image-input {
+  display: none;
+}

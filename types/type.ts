@@ -14,7 +14,7 @@ export type CookieNameType = "ACCESS_TOKEN" | "REFRESH_TOKEN";
 
 export interface UserInfoType {
   id: number;
-  nickname: string;
+  nickName: string;
   email: string;
   profileImageUrl: string | null;
   phoneNumber: string | null;
