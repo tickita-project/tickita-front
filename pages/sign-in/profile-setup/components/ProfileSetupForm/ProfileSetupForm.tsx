@@ -61,7 +61,7 @@ export default function ProfileSetupForm({ accountId, email }: ProfileSetupFormP
 
     const imageFile = e.target.files[0];
 
-    const maxSize = 1 * 1024 - 1024;
+    const maxSize = 1 * 1024 * 1024;
     if (imageFile.size > maxSize) {
       alert("파일 크기는 1MB를 초과할 수 없습니다");
       return;
