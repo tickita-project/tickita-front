@@ -95,7 +95,7 @@ export default function DatePicker({ hasNavigation = true }: DatePickerProps) {
           <Image src="/icons/vertical-divider-icon.svg" alt="" width={2} height={10} />
           <span>{viewDate.month() + 1}</span>
         </div>
-        {hasNavigation && <MonthNavButton />}
+        {hasNavigation && <MonthNavButton calendarType={null} />}
       </div>
       <table className={cn("calendar-table")} ref={scrollRef}>
         <thead className={cn("table-header")}>

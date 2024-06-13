@@ -26,7 +26,7 @@ export default function CalendarPage() {
         <CalendarSideBar />
 
         <main>
-          <CalendarHeader setCalendarType={setCalendarType} />
+          <CalendarHeader calendarType={calendarType} setCalendarType={setCalendarType} />
           {calendarType === "월" && <MonthlyCalendar />}
           {calendarType === "주" && <WeeklyCalendar />}
           {calendarType === "일" && <DailyCalendar />}

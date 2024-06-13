@@ -11,10 +11,11 @@ import CalendarTypeSegmentedButton from "../../CalendarTypeSegmentedButton";
 const cn = classNames.bind(styles);
 
 interface CalendarHeader {
+  calendarType: CalendarType;
   setCalendarType: (type: CalendarType) => void;
 }
 
-export default function CalendarHeader({ setCalendarType }: CalendarHeader) {
+export default function CalendarHeader({ calendarType, setCalendarType }: CalendarHeader) {
   const { focusDate, setViewDate, setFocusDate } = useDateStore();
 
   const handleTodayClick = () => {
@@ -28,7 +29,7 @@ export default function CalendarHeader({ setCalendarType }: CalendarHeader) {
         <h2>
           {focusDate.get("year")} 년 {focusDate.get("M") + 1}월
         </h2>
-        <MonthNavButton />
+        <MonthNavButton calendarType={calendarType} />
         <button className={cn("today-button")} type="button" onClick={handleTodayClick}>
           오늘로
         </button>

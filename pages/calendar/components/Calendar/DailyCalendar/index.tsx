@@ -10,12 +10,12 @@ const cn = classNames.bind(styles);
 const hoursArray = Array.from({ length: 24 }, (_, index) => index + 1);
 
 export default function DailyCalendar() {
-  const { viewDate } = useDateStore();
+  const { focusDate } = useDateStore();
 
   return (
     <div className={cn("container")}>
       <p className={cn("date")}>
-        {viewDate.date()} <span>{DAYS[viewDate.day()]}</span>
+        {focusDate.date()} <span>{DAYS[focusDate.day()]}</span>
       </p>
       <div className={cn("all-day-schedules")}></div>
       <div className={cn("time-scroll-container")}>
