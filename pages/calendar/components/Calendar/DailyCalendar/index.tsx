@@ -7,19 +7,22 @@ import styles from "./DailyCalendar.module.scss";
 
 const cn = classNames.bind(styles);
 
-const hours = Array.from({ length: 24 }, (_, i) => i);
+const hoursArray = Array.from({ length: 25 }, (_, index) => index); // 0부터 24까지의 숫자 배열 생성
 
 export default function DailyCalendar() {
   const { viewDate } = useDateStore();
+
   return (
     <div className={cn("container")}>
       <p className={cn("date")}>
-        {viewDate.date()}일 {DAYS[viewDate.day()]}요일
+        {viewDate.date()} <span>{DAYS[viewDate.day()]}</span>
       </p>
-      <div className={cn("events")}>
-        {Array.from({ length: 24 }, (_, i) => (
-          <div key={i} className={cn("event-slot")}>
-            {/* 이벤트를 여기에 추가합니다 */}
+      <div className={cn("all-day-schedules")}></div>
+      <div className={cn("time-scroll-container")}>
+        {hoursArray.map((hour) => (
+          <div className={cn("time-block")} key={hour}>
+            <p className={cn("label")}>{hour.toString().padStart(2, "0")}</p>
+            <div key={hour} className={cn("schedule-block")}></div>
           </div>
         ))}
       </div>
