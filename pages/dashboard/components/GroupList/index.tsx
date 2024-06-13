@@ -12,7 +12,7 @@ import styles from "./GroupList.module.scss";
 const cn = classNames.bind(styles);
 
 export default function GroupList() {
-  const { data, isError } = useGetGroupList();
+  const { data: groupList, isError } = useGetGroupList();
   const { openModal } = useModalStore();
 
   if (isError) {
@@ -33,11 +33,11 @@ export default function GroupList() {
       </div>
       <span className={cn("group-guide-text")}>현재 가입된 그룹</span>
       <ul className={cn("group-box")}>
-        {data?.map((crew) => (
-          <li key={crew.crewId}>
-            <Link href={`/group/${crew.crewId}`} className={cn("group-list")}>
-              <div className={cn("group-color")} style={{ backgroundColor: crew.labelColor }} />
-              <span className={cn("group-title")}>{crew.crewName}</span>
+        {groupList?.map((data) => (
+          <li key={data.crewId}>
+            <Link href={`/group/${data.crewId}`} className={cn("group-list")}>
+              <div className={cn("group-color")} style={{ backgroundColor: data.labelColor }} />
+              <span className={cn("group-title")}>{data.crewName}</span>
             </Link>
           </li>
         ))}

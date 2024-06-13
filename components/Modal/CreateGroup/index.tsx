@@ -37,8 +37,7 @@ export default function CreateGroupModal() {
     resolver: zodResolver(createGroupSchema),
   });
   const { closeModal } = useModalStore();
-  const queryClient = useQueryClient();
-  const { mutate, isPending } = useCreateGroup(queryClient);
+  const { mutate, isPending } = useCreateGroup();
   const router = useRouter();
   const selectColor = watch("labelColor");
 
