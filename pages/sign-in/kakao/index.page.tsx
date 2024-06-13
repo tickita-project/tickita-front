@@ -10,7 +10,9 @@ interface ResponseType {
   id: number;
   isComplete: boolean;
   accessToken: string;
+  accessTokenExpireAt: string;
   refreshToken: string;
+  refreshTokenExpireAt: string;
 }
 
 interface KakaoProps {
@@ -29,11 +31,21 @@ export async function getServerSideProps(
         code,
       },
     });
-    const { id, isComplete, accessToken, refreshToken }: ResponseType = res.data;
+    const {
+      id,
+      isComplete,
+      accessToken,
+      accessTokenExpireAt,
+      refreshToken,
+      refreshTokenExpireAt,
+    }: ResponseType = res.data;
 
     if (accessToken && refreshToken) {
-      const ACCESS_TOKEN = `ACCESS_TOKEN=${accessToken}; Path=/; HttpOnly; Secure; SameSite=Strict`;
-      const REFRESH_TOKEN = `REFRESH_TOKEN=${refreshToken}; Path=/; HttpOnly; Secure; SameSite=Strict`;
+      const ACCESS_TOKEN_EXPIRE_AT = new Date(accessTokenExpireAt).toUTCString();
+      const REFRESH_TOKEN_EXPIRE_AT = new Date(refreshTokenExpireAt).toUTCString();
+
+      const ACCESS_TOKEN = `ACCESS_TOKEN=${accessToken}; Path=/; HttpOnly; Secure; SameSite=Strict; Expires=${ACCESS_TOKEN_EXPIRE_AT}`;
+      const REFRESH_TOKEN = `REFRESH_TOKEN=${refreshToken}; Path=/; HttpOnly; Secure; SameSite=Strict; Expires=${REFRESH_TOKEN_EXPIRE_AT}`;
 
       context.res.setHeader("Set-Cookie", [ACCESS_TOKEN, REFRESH_TOKEN]);
     }
