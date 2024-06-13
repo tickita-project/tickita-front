@@ -26,7 +26,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
   try {
     const queryClient = new QueryClient();
 
-    await queryClient.prefetchQuery({ queryKey: groupKey.all, queryFn: getGroupList });
+    await queryClient.prefetchQuery({ queryKey: groupKey.lists(), queryFn: getGroupList });
 
     return {
       props: { dehydrateState: dehydrate(queryClient) },

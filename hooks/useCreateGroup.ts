@@ -7,7 +7,7 @@ export const useCreateGroup = (queryClient: QueryClient) => {
   const { mutate, isPending } = useMutation({
     mutationFn: createGroup,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: groupKey.all });
+      queryClient.invalidateQueries({ queryKey: groupKey.lists() });
     },
   });
 
