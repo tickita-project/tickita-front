@@ -87,9 +87,14 @@ export default function ProfileSetupForm({ accountId, email }: ProfileSetupFormP
 
     try {
       const res = await postProfileSetup(formData);
-      const { accessToken, refreshToken } = res;
+      const { accessToken, accessTokenExpireAt, refreshToken, refreshTokenExpireAt } = res;
 
-      await nextInstance.post("/api/setCookies", { accessToken, refreshToken });
+      await nextInstance.post("/api/setCookies", {
+        accessToken,
+        accessTokenExpireAt,
+        refreshToken,
+        refreshTokenExpireAt,
+      });
 
       router.push(PAGE_PATH.DASHBOARD);
     } catch (error) {
