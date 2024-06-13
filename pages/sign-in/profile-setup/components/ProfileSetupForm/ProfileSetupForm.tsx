@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import { ZodType, z } from "zod";
 
 import { postProfileImageUrl, postProfileSetup } from "@/apis/apis";
+import { nextInstance } from "@/apis/axios";
 import Input from "@/components/Input";
 import { NICKNAME_SCHEMA, PHONE_NUMBER_SCHEMA } from "@/constants/formSchema";
 import { PAGE_PATH } from "@/constants/pagePath";
@@ -78,10 +79,12 @@ export default function ProfileSetupForm({ accountId, email }: ProfileSetupFormP
   const onSubmit = async (data: FieldValuesType) => {
     const formData = { ...data, accountId: Number(accountId), imgUrl };
 
-    console.log(formData);
-
     try {
-      await postProfileSetup(formData);
+      const res = await postProfileSetup(formData);
+      const { accessToken, refreshToken } = res;
+
+      await nextInstance.post("/api/setCookies", { accessToken, refreshToken });
+
       router.push(PAGE_PATH.DASHBOARD);
     } catch (error) {
       if (error instanceof AxiosError) {
