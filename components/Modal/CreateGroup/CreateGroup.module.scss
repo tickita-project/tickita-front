@@ -63,11 +63,11 @@
         color: $white;
         font-weight: 700;
         font-size: 1.25rem;
-      }
 
-      .disabled {
-        color: $gray600;
-        background-color: $gray300;
+        &:disabled {
+          color: $gray600;
+          background-color: $gray300;
+        }
       }
     }
   }

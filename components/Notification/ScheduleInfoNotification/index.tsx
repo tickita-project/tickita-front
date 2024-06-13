@@ -1,4 +1,4 @@
-import { useRouter } from "next/router";
+import { useModalStore } from "@/store/useModalStore";
 
 import BaseNotification from "../BaseNotification";
 
@@ -17,13 +17,13 @@ interface ScheduleInfoNotificationProps {
   scheduleDetail: ScheduleInfoType;
 }
 
-export default function CoordinationNotification({
+export default function ScheduleInfoNotification({
   scheduleDetail,
 }: ScheduleInfoNotificationProps) {
-  const router = useRouter();
+  const { openModal } = useModalStore();
 
   const handleNotificationClick = () => {
-    scheduleDetail.link && router.push(scheduleDetail.link); // TODO: 일정 상세 모달 열기, 일정 데이터 전달
+    openModal("일정 상세 모달", scheduleDetail); // TODO: 일정 상세 모달 열기, 일정 데이터 전달
   };
 
   return (

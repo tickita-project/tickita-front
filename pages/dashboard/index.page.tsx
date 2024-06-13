@@ -22,10 +22,9 @@ const cn = classNames.bind(styles);
 
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
   setContext(context);
+  const queryClient = new QueryClient();
 
   try {
-    const queryClient = new QueryClient();
-
     await queryClient.prefetchQuery({ queryKey: groupKey.lists(), queryFn: getGroupList });
 
     return {

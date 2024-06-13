@@ -2,7 +2,6 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useQueryClient } from "@tanstack/react-query";
 import classNames from "classnames/bind";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -79,10 +78,7 @@ export default function CreateGroupModal() {
           <GroupColorPicker {...register("labelColor")} selectColor={selectColor} />
         </div>
         <div className={cn("button-box")}>
-          <button
-            type="submit"
-            className={cn("create-button", { disabled: !isValid || isPending })}
-          >
+          <button type="submit" disabled={!isValid || isPending} className={cn("create-button")}>
             그룹 생성하기
           </button>
         </div>

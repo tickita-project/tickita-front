@@ -12,7 +12,7 @@ interface BaseNotificationProps {
   type: string;
   groupName: string;
   text: string;
-  schduleInfo?: string;
+  scheduleInfo?: string;
   notificationDate: string;
   isChecked: boolean;
   onClick?: () => void;
@@ -22,7 +22,7 @@ export default function BaseNotification({
   type,
   groupName,
   text,
-  schduleInfo,
+  scheduleInfo,
   notificationDate,
   isChecked,
   onClick,
@@ -64,7 +64,7 @@ export default function BaseNotification({
       </div>
 
       <p className={cn("text")}>{text}</p>
-      <p className={cn("schdule-info")}>{schduleInfo}</p>
+      <p className={cn("schedule-info")}>{scheduleInfo}</p>
       <div className={cn("button-box")}>
         {type === "invite" && (
           <button className={cn("accept-button")} type="button" onClick={handleInviteAcceptClick}>

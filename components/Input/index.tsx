@@ -21,7 +21,7 @@ export default forwardRef<HTMLInputElement, InputProps>(function Input(
       <label htmlFor={id}>
         {label}
         {isRequired && <span className={cn("required-field")}>*</span>}
-        {isRequired == false && <span className={cn("selective-field")}>(선택)</span>}
+        {isRequired === false && <span className={cn("selective-field")}>(선택)</span>}
       </label>
       <input ref={ref} id={id} {...restProps} className={cn({ "error-style": errorMessage })} />
       {errorMessage && <span className={cn("error-message")}>{errorMessage}</span>}
