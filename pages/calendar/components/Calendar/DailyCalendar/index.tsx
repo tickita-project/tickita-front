@@ -7,7 +7,7 @@ import styles from "./DailyCalendar.module.scss";
 
 const cn = classNames.bind(styles);
 
-const hoursArray = Array.from({ length: 25 }, (_, index) => index); // 0부터 24까지의 숫자 배열 생성
+const hoursArray = Array.from({ length: 24 }, (_, index) => index + 1);
 
 export default function DailyCalendar() {
   const { viewDate } = useDateStore();

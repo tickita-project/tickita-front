@@ -14,7 +14,8 @@
     line-height: 135.8%;
     /* 38.024px */
     letter-spacing: -0.0437rem;
-    padding-left: 6.25rem;
+    padding-top: .625rem;
+    padding-left: 3.75rem;
 
     span {
       @include headline2-bold($gray700)
@@ -62,8 +63,8 @@
 
       .label {
         position: absolute;
-        top: 0;
-        left: 0;
+        bottom: -0.625rem;
+
         width: 3.125rem;
         text-align: center;
         @include caption2-medium($gray700);
