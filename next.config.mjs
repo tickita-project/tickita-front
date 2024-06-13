@@ -20,14 +20,6 @@ const nextConfig = {
       },
     ],
   },
-  async rewrites() {
-    return [
-      {
-        source: "/server/:path*",
-        destination: "http://15.165.82.167:8080/:path*", // 프록시할 HTTP 서버의 주소
-      },
-    ];
-  },
 };
 
 export default nextConfig;

@@ -18,7 +18,7 @@ export const nextInstance = axios.create({
 });
 
 export const instance = axios.create({
-  baseURL: process.env.NODE_ENV === "production" ? "/server" : process.env.NEXT_PUBLIC_BASE_API_URL,
+  baseURL: process.env.NEXT_PUBLIC_BASE_API_URL,
   headers: {
     "Content-Type": "application/json",
   },
@@ -33,6 +33,7 @@ instance.interceptors.request.use(async (config) => {
     const res = await nextInstance.get("/api/cookies");
 
     const { ACCESS_TOKEN } = res.data;
+
     if (ACCESS_TOKEN) {
       config.headers.Authorization = `Bearer ${ACCESS_TOKEN}`;
     }
