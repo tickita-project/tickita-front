@@ -28,18 +28,31 @@ export default function CalendarPage() {
   const { focusDate } = useDateStore();
 
   useEffect(() => {
+    let startDate = null;
+    let endDate = null;
+    let query = null;
     if (calendarType === "월") {
       const days = calculateMonthDates(focusDate);
-      const startDate = days[0].startOf("day").utc().add(9, "hour");
-      const endDate = days[41].endOf("day").utc().add(9, "hour");
+      startDate = days[0].startOf("day").utc().add(9, "hour");
+      endDate = days[41].endOf("day").utc().add(9, "hour");
 
-      const query = {
+      query = {
+        startDate: startDate.toISOString(),
+        endDate: endDate.toISOString(),
+      };
+
+      router.replace({ query });
+    } else if (calendarType === "일") {
+      startDate = focusDate.startOf("day").utc().add(9, "hour");
+      endDate = focusDate.endOf("day").utc().add(9, "hour");
+      query = {
         startDate: startDate.toISOString(),
         endDate: endDate.toISOString(),
       };
 
       router.replace({ query });
     }
+    console.log(query);
   }, [calendarType, focusDate]);
 
   return (
