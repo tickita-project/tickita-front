@@ -12,20 +12,22 @@ import styles from "./MonthlyCalendar.module.scss";
 const cn = classNames.bind(styles);
 
 export default function MonthlyCalendar() {
-  const { viewDate, setViewDate } = useDateStore();
+  const { focusDate, setFocusDate, setViewDate } = useDateStore();
 
-  const dates = calculateMonthDates(viewDate);
+  const dates = calculateMonthDates(focusDate);
 
   const handleScrollUpDebounced = useDebounce(
     () => {
-      setViewDate(viewDate.subtract(1, "month"));
+      setFocusDate(focusDate.subtract(1, "month").date(1));
+      setViewDate(focusDate.subtract(1, "month"));
     },
     300,
     true,
   );
   const handleScrollDownDebounced = useDebounce(
     () => {
-      setViewDate(viewDate.add(1, "month"));
+      setFocusDate(focusDate.add(1, "month").date(1));
+      setViewDate(focusDate.add(1, "month"));
     },
     300,
     true,
@@ -44,7 +46,7 @@ export default function MonthlyCalendar() {
       </div>
       <div className={cn("month-content")}>
         {dates.map((date, i) => {
-          const isThisMonthDay = date.isSame(viewDate, "month");
+          const isThisMonthDay = date.isSame(focusDate, "month");
           const isToday = date.isSame(dayjs(), "date");
           return (
             <div key={i} className={cn("date-container")}>

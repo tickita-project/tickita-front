@@ -15,7 +15,7 @@ interface CalendarHeader {
 }
 
 export default function CalendarHeader({ setCalendarType }: CalendarHeader) {
-  const { viewDate, setViewDate, setFocusDate } = useDateStore();
+  const { focusDate, setViewDate, setFocusDate } = useDateStore();
 
   const handleTodayClick = () => {
     const today = dayjs();
@@ -26,7 +26,7 @@ export default function CalendarHeader({ setCalendarType }: CalendarHeader) {
     <header className={cn("container")}>
       <div className={cn("year-month")}>
         <h2>
-          {viewDate.get("year")} 년 {viewDate.get("M") + 1}월
+          {focusDate.get("year")} 년 {focusDate.get("M") + 1}월
         </h2>
         <MonthNavButton />
         <button className={cn("today-button")} type="button" onClick={handleTodayClick}>
