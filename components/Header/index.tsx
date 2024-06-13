@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import classNames from "classnames/bind";
 
 import { PAGE_PATH } from "@/constants/pagePath";
+import { useGetUserInfo } from "@/hooks/useGetUserInfo";
 
 import styles from "./Header.module.scss";
 import ProfileImage from "../ProfileImage";
@@ -16,13 +17,14 @@ const isAnimation = {
   calendar: false,
 };
 
-// 임시 이미지 url 추후 삭제 예정
-const tempImageUrl =
-  "https://tickita-bucket.s3.ap-northeast-2.amazonaws.com/92c6f2fd-9a48-4252-af2d-ddfb0d82e3d3";
-
 // 로그인 정보에 따라 닉네임, 프로필 이미지 변경(유저 정보 전역 상태 관리?)
 export default function Header() {
   const { pathname } = useRouter();
+  const { data: userInfo, isError } = useGetUserInfo();
+
+  if (!userInfo || isError) {
+    return <div>에러 컴포넌트 추가 예정</div>;
+  }
 
   const handleDashboardTapClick = () => {
     isAnimation.dashboard = true;
@@ -89,10 +91,10 @@ export default function Header() {
                 />
               </figure>
             )}
-            <span className={cn("nickname")}>달맞이 토끼</span> 님
+            <span className={cn("nickname")}>{userInfo.nickName}</span> 님
           </div>
 
-          <ProfileImage imageUrl={tempImageUrl} />
+          <ProfileImage imageUrl={userInfo.image} />
         </div>
       </nav>
     </header>

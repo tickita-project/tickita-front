@@ -5,7 +5,7 @@ import classNames from "classnames/bind";
 import styles from "./ProfileImage.module.scss";
 
 interface ProfileImageProps {
-  imageUrl: string;
+  imageUrl: string | null;
 }
 
 const cn = classNames.bind(styles);
