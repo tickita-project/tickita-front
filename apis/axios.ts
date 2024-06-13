@@ -24,15 +24,14 @@ export const instance = axios.create({
   },
 });
 
-export const AuthorizationInstance = axios.create({
+export const imageRequestInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_API_URL,
   headers: {
-    "Content-Type": "application/json",
+    "Content-Type": "multipart/form-data",
   },
-  withCredentials: true,
 });
 
-AuthorizationInstance.interceptors.request.use(async (config) => {
+instance.interceptors.request.use(async (config) => {
   try {
     if (getIsServer()) {
       nextInstance.defaults.headers.cookie = context?.req.headers.cookie!;
@@ -53,4 +52,4 @@ AuthorizationInstance.interceptors.request.use(async (config) => {
   return config;
 });
 
-AuthorizationInstance.interceptors.response.use();
+instance.interceptors.response.use();
