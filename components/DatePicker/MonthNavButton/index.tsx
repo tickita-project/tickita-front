@@ -26,7 +26,8 @@ export default function MonthNavButton({ calendarType }: MonthNavButtonProps) {
         // '주' 일때 동작
         break;
       case "일":
-        // '일' 일때 동작
+        setFocusDate(focusDate.subtract(1, "d"));
+        setViewDate(viewDate.subtract(1, "d"));
         break;
       default:
         setViewDate(viewDate.subtract(1, "month"));
@@ -44,7 +45,6 @@ export default function MonthNavButton({ calendarType }: MonthNavButtonProps) {
         // '주' 일때 동작
         break;
       case "일":
-        // '일' 일때 동작
         setFocusDate(focusDate.add(1, "d"));
         setViewDate(viewDate.add(1, "d"));
         break;
