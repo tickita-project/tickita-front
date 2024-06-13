@@ -2,6 +2,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useQueryClient } from "@tanstack/react-query";
 import classNames from "classnames/bind";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -36,13 +37,15 @@ export default function CreateGroupModal() {
     resolver: zodResolver(createGroupSchema),
   });
   const { closeModal } = useModalStore();
-  const { mutate, isPending } = useCreateGroup();
+  const queryClient = useQueryClient();
+  const { mutate, isPending } = useCreateGroup(queryClient);
   const router = useRouter();
   const selectColor = watch("labelColor");
 
   const onSubmit = async (formData: CreateGroupDataType) => {
     mutate(formData, {
       onSuccess: (response) => {
+        closeModal();
         router.push(`/group/${response.crewId}`); // 만든 그룹 상세 페이지로 이동
       },
       onError: (error) => {
