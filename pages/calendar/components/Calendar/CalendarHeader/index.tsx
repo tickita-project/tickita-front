@@ -2,20 +2,21 @@ import classNames from "classnames/bind";
 import dayjs from "dayjs";
 
 import MonthNavButton from "@/components/DatePicker/MonthNavButton";
-import { CalendarType } from "@/pages/calendar/index.page";
 import { useDateStore } from "@/store/useDateStore";
+
+import { CalendarType } from "@/types/type";
 
 import styles from "./CalendarHeader.module.scss";
 import CalendarTypeSegmentedButton from "../../CalendarTypeSegmentedButton";
 
 const cn = classNames.bind(styles);
 
-interface CalendarHeader {
+interface CalendarHeaderProps {
   calendarType: CalendarType;
   setCalendarType: (type: CalendarType) => void;
 }
 
-export default function CalendarHeader({ calendarType, setCalendarType }: CalendarHeader) {
+export default function CalendarHeader({ calendarType, setCalendarType }: CalendarHeaderProps) {
   const { focusDate, setViewDate, setFocusDate } = useDateStore();
 
   const handleTodayClick = () => {
@@ -23,6 +24,7 @@ export default function CalendarHeader({ calendarType, setCalendarType }: Calend
     setViewDate(today);
     setFocusDate(today);
   };
+
   return (
     <header className={cn("container")}>
       <div className={cn("year-month")}>

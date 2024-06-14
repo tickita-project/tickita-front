@@ -2,10 +2,10 @@ import Image from "next/image";
 
 import classNames from "classnames/bind";
 
-import { CalendarType } from "@/pages/calendar/index.page";
 import { useDateStore } from "@/store/useDateStore";
 
 import styles from "./MonthNavButton.module.scss";
+import { CalendarType } from "@/types/type";
 
 const cn = classNames.bind(styles);
 
@@ -32,7 +32,6 @@ export default function MonthNavButton({ calendarType }: MonthNavButtonProps) {
         break;
       default:
         setViewDate(viewDate.subtract(1, "month"));
-        break;
     }
   };
 
@@ -52,7 +51,6 @@ export default function MonthNavButton({ calendarType }: MonthNavButtonProps) {
         break;
       default:
         setViewDate(viewDate.add(1, "month"));
-        break;
     }
   };
 

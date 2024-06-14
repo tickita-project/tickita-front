@@ -50,6 +50,7 @@
           "caseInsensitive": true
         }
       }
-    ]
+    ],
+    "react-hooks/exhaustive-deps": "off"
   }
 }

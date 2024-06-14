@@ -22,9 +22,10 @@ import { useDateStore } from "@/store/useDateStore";
 import { calculateMonthDates } from "@/utils/calculateCalendarDates";
 
 import styles from "./Calendar.module.scss";
+import { CalendarType } from "@/types/type";
 
-export type CalendarType = "월" | "주" | "일";
 const cn = classNames.bind(styles);
+
 dayjs.extend(utc);
 
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
@@ -53,25 +54,28 @@ export default function CalendarPage() {
     let startDate = null;
     let endDate = null;
     let query = null;
-    if (calendarType === "월") {
-      const days = calculateMonthDates(focusDate);
-      startDate = days[0].startOf("day").utc().add(9, "hour");
-      endDate = days[41].endOf("day").utc().add(9, "hour");
-    } else if (calendarType === "주") {
-      startDate = focusDate.startOf("week").utc().add(9, "hour");
-      endDate = focusDate.endOf("week").utc().add(9, "hour");
-    } else if (calendarType === "일") {
-      startDate = focusDate.startOf("day").utc().add(9, "hour");
-      endDate = focusDate.endOf("day").utc().add(9, "hour");
+    switch (calendarType) {
+      case "월":
+        const days = calculateMonthDates(focusDate);
+        startDate = days[0].startOf("day").utc().add(9, "hour");
+        endDate = days[41].endOf("day").utc().add(9, "hour");
+        break;
+      case "주":
+        startDate = focusDate.startOf("week").utc().add(9, "hour");
+        endDate = focusDate.endOf("week").utc().add(9, "hour");
+        break;
+      case "일":
+        startDate = focusDate.startOf("day").utc().add(9, "hour");
+        endDate = focusDate.endOf("day").utc().add(9, "hour");
+        break;
     }
+
     query = {
       startDate: startDate?.format("YYYY-MM-DDTHH:mm:ss.SSS"),
       endDate: endDate?.format("YYYY-MM-DDTHH:mm:ss.SSS"),
     };
 
     router.replace({ query });
-    console.log(`startDate 쿼리값: ${query?.startDate}`);
-    console.log(`endDate 쿼리값: ${query?.endDate}`);
   }, [calendarType, focusDate]);
 
   return (
