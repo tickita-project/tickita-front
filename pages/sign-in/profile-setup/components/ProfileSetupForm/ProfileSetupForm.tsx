@@ -37,7 +37,7 @@ const profileSetupFormSchema: ZodType<FieldValuesType> = z.object({
 export default function ProfileSetupForm({ accountId, email }: ProfileSetupFormProps) {
   const [uploadedImgUrl, setUploadedImgUrl] = useState("");
   const [imgUrl, setImgUrl] = useState("");
-  const profileImageInput = useRef<HTMLInputElement>(null);
+  const profileImageInputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
 
   const {
@@ -50,7 +50,7 @@ export default function ProfileSetupForm({ accountId, email }: ProfileSetupFormP
     resolver: zodResolver(profileSetupFormSchema),
   });
 
-  const handleProfileImageButtonClick = () => profileImageInput.current?.click();
+  const handleProfileImageButtonClick = () => profileImageInputRef.current?.click();
 
   const handleProfileImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) {
@@ -164,7 +164,7 @@ export default function ProfileSetupForm({ accountId, email }: ProfileSetupFormP
       <input
         type="file"
         accept="image/*"
-        ref={profileImageInput}
+        ref={profileImageInputRef}
         onChange={handleProfileImageChange}
         className={cn("hidden-image-input")}
       />
