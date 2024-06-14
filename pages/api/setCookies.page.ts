@@ -18,7 +18,11 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
     ]);
 
     res.status(200).json({ message: "쿠키가 성공적으로 저장되었습니다" });
-  } else {
+
+    return;
+  }
+
+  if (req.method !== "POST") {
     res.setHeader("Allow", ["POST"]);
     res.status(405).end(`${req.method} 메소드는 허용되지 않습니다`);
   }
