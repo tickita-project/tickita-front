@@ -18,7 +18,7 @@ export const getErrorMessage = (status: number) => {
     case 404:
       return {
         title: "요청하신 API 엔드포인트를 찾을 수 없습니다.",
-        content: "입력하신 주소가 정확한지 확인해 주세요.",
+        content: "요청한 API 엔드포인트를 확인해 주세요.",
       };
     case 408:
       return {
