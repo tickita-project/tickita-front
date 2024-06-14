@@ -9,3 +9,8 @@ export const groupKey = {
   details: () => [...groupKey.all, "detail"] as const,
   detail: (id: number) => [...groupKey.details(), id] as const,
 };
+
+export const userInfoKey = {
+  all: ["user"] as const,
+  info: () => [...userInfoKey.all, "info"] as const,
+};
