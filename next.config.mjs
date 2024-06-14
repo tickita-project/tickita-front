@@ -16,7 +16,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "*", //s3 도메인 추가 예정
+        hostname: "tickita-bucket.s3.ap-northeast-2.amazonaws.com",
       },
     ],
   },

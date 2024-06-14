@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 
 import { useRouter } from "next/router";
+import { GetServerSidePropsContext } from "next/types";
 
+import { QueryClient, dehydrate } from "@tanstack/react-query";
 import classNames from "classnames/bind";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
@@ -11,8 +13,11 @@ import DailyCalendar from "./components/Calendar/DailyCalendar";
 import MonthlyCalendar from "./components/Calendar/MonthlyCalendar";
 import WeeklyCalendar from "./components/Calendar/WeeklyCalendar";
 import CalendarSideBar from "./components/CalendarSideBar";
+import { getUserInfo } from "@/apis/apis";
+import { setContext } from "@/apis/axios";
 import Header from "@/components/Header";
 import MetaData from "@/components/MetaData";
+import { userInfoKey } from "@/constants/queryKey";
 import { useDateStore } from "@/store/useDateStore";
 import { calculateMonthDates } from "@/utils/calculateCalendarDates";
 
@@ -21,6 +26,23 @@ import styles from "./Calendar.module.scss";
 export type CalendarType = "월" | "주" | "일";
 const cn = classNames.bind(styles);
 dayjs.extend(utc);
+
+export const getServerSideProps = async (context: GetServerSidePropsContext) => {
+  setContext(context);
+  const queryClient = new QueryClient();
+
+  try {
+    await queryClient.prefetchQuery({ queryKey: userInfoKey.info(), queryFn: getUserInfo });
+
+    return {
+      props: { dehydrateState: dehydrate(queryClient) },
+    };
+  } catch (error) {
+    return {
+      props: { dehydrateState: null },
+    };
+  }
+};
 
 export default function CalendarPage() {
   const [calendarType, setCalendarType] = useState<CalendarType>("월");

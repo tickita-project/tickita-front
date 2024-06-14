@@ -1,39 +1,18 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import classNames from "classnames/bind";
 
 import { MODAL_TYPE } from "@/constants/modalType";
+import { useGetGroupList } from "@/hooks/useGetGroupList";
 import { useModalStore } from "@/store/useModalStore";
 
 import styles from "./GroupList.module.scss";
 
 const cn = classNames.bind(styles);
 
-const mockData = [
-  {
-    id: 1,
-    groupName: "그룹1",
-    groupColor: "#3360FF",
-  },
-  {
-    id: 2,
-    groupName: "그룹2",
-    groupColor: "#D688EA",
-  },
-  {
-    id: 3,
-    groupName: "그룹3",
-    groupColor: "#21D53E",
-  },
-  {
-    id: 4,
-    groupName:
-      "그룹 이름이 길어지는 경우 테스트그룹 이름이 길어지는 경우 테스트그룹 이름이 길어지는 경우 테스트그룹 이름이 길어지는 경우 테스트그룹 이름이 길어지는 경우 테스트그룹 이름이 길어지는 경우 테스트",
-    groupColor: "#F380B7",
-  },
-];
-
 export default function GroupList() {
+  const { data: groupList } = useGetGroupList();
   const { openModal } = useModalStore();
 
   return (
@@ -50,10 +29,12 @@ export default function GroupList() {
       </div>
       <span className={cn("group-guide-text")}>현재 가입된 그룹</span>
       <ul className={cn("group-box")}>
-        {mockData.map((group) => (
-          <li key={group.id} className={cn("group-list")}>
-            <div className={cn("group-color")} style={{ backgroundColor: group.groupColor }} />
-            <span className={cn("group-title")}>{group.groupName}</span>
+        {groupList?.map((data) => (
+          <li key={data.crewId}>
+            <Link href={`/group/${data.crewId}`} className={cn("group-list")}>
+              <div className={cn("group-color")} style={{ backgroundColor: data.labelColor }} />
+              <span className={cn("group-title")}>{data.crewName}</span>
+            </Link>
           </li>
         ))}
       </ul>

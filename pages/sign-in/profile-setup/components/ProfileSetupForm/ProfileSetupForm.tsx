@@ -8,8 +8,8 @@ import { ZodType, z } from "zod";
 
 import { postProfileSetup } from "@/apis/apis";
 import Input from "@/components/Input";
-import { NICKNAME_SCHEMA, PHONE_NUMBER_SCHEMA } from "@/constants/formSchema";
 import { PAGE_PATH } from "@/constants/pagePath";
+import { NICKNAME_SCHEMA, PHONE_NUMBER_SCHEMA } from "@/constants/schema";
 
 import styles from "./ProfileSetupForm.module.scss";
 
@@ -21,12 +21,12 @@ interface ProfileSetupFormProps {
 }
 
 interface FieldValuesType {
-  nickname: string;
+  nickName: string;
   phoneNumber: string | null;
 }
 
 const profileSetupFormSchema: ZodType<FieldValuesType> = z.object({
-  nickname: NICKNAME_SCHEMA,
+  nickName: NICKNAME_SCHEMA,
   phoneNumber: PHONE_NUMBER_SCHEMA,
 });
 
@@ -39,7 +39,7 @@ export default function ProfileSetupForm({ accountId, email }: ProfileSetupFormP
     formState: { errors, isValid },
   } = useForm<FieldValuesType>({
     mode: "all",
-    defaultValues: { nickname: "", phoneNumber: null },
+    defaultValues: { nickName: "", phoneNumber: null },
     resolver: zodResolver(profileSetupFormSchema),
   });
 
@@ -68,13 +68,13 @@ export default function ProfileSetupForm({ accountId, email }: ProfileSetupFormP
           className={cn("user-email-input")}
         />
         <Input
-          id="nickname"
+          id="nickName"
           label="닉네임"
           type="text"
           placeholder="닉네임을 입력해주세요"
-          errorMessage={errors.nickname?.message}
+          errorMessage={errors.nickName?.message}
           isRequired
-          {...register("nickname")}
+          {...register("nickName")}
         />
         <Input
           id="phoneNumber"
