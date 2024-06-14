@@ -63,7 +63,7 @@ instance.interceptors.response.use(
   async (error: AxiosError) => {
     const originalRequest = error.config as AxiosRequestConfig & { _retry?: boolean };
 
-    if (error.response?.status === 401 && !originalRequest._retry) {
+    if (error.response?.status === 403 && !originalRequest._retry) {
       originalRequest._retry = true;
       try {
         // refresh token 가져오기
@@ -90,7 +90,7 @@ instance.interceptors.response.use(
           refreshResponse.data;
 
         // cookie에 새로 발급받은 token 저장
-        await nextInstance.post("/apis/setCookies", {
+        await nextInstance.post("/api/setCookies", {
           accessToken,
           accessTokenExpireAt,
           refreshToken,
