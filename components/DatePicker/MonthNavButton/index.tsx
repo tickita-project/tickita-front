@@ -23,7 +23,8 @@ export default function MonthNavButton({ calendarType }: MonthNavButtonProps) {
         setViewDate(viewDate.subtract(1, "month"));
         break;
       case "주":
-        // '주' 일때 동작
+        setFocusDate(focusDate.subtract(1, "week"));
+        setViewDate(viewDate.subtract(1, "week"));
         break;
       case "일":
         setFocusDate(focusDate.subtract(1, "d"));
@@ -42,7 +43,8 @@ export default function MonthNavButton({ calendarType }: MonthNavButtonProps) {
         setViewDate(viewDate.add(1, "month"));
         break;
       case "주":
-        // '주' 일때 동작
+        setFocusDate(focusDate.add(1, "week"));
+        setViewDate(viewDate.add(1, "week"));
         break;
       case "일":
         setFocusDate(focusDate.add(1, "d"));
