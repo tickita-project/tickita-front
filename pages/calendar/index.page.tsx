@@ -35,33 +35,21 @@ export default function CalendarPage() {
       const days = calculateMonthDates(focusDate);
       startDate = days[0].startOf("day").utc().add(9, "hour");
       endDate = days[41].endOf("day").utc().add(9, "hour");
-
-      query = {
-        startDate: startDate.toISOString(),
-        endDate: endDate.toISOString(),
-      };
-
-      router.replace({ query });
     } else if (calendarType === "주") {
       startDate = focusDate.startOf("week").utc().add(9, "hour");
       endDate = focusDate.endOf("week").utc().add(9, "hour");
-
-      query = {
-        startDate: startDate.toISOString(),
-        endDate: endDate.toISOString(),
-      };
-
-      router.replace({ query });
     } else if (calendarType === "일") {
       startDate = focusDate.startOf("day").utc().add(9, "hour");
       endDate = focusDate.endOf("day").utc().add(9, "hour");
-      query = {
-        startDate: startDate.toISOString(),
-        endDate: endDate.toISOString(),
-      };
-
-      router.replace({ query });
     }
+    query = {
+      startDate: startDate?.format("YYYY-MM-DDTHH:mm:ss.SSS"),
+      endDate: endDate?.format("YYYY-MM-DDTHH:mm:ss.SSS"),
+    };
+
+    router.replace({ query });
+    console.log(`startDate 쿼리값: ${query?.startDate}`);
+    console.log(`endDate 쿼리값: ${query?.endDate}`);
   }, [calendarType, focusDate]);
 
   return (
