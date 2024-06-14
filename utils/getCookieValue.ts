@@ -1,4 +1,6 @@
-const getCookieValue = (cookieString: string, cookieName: string): string => {
+import { CookieNameType } from "@/types/type";
+
+const getCookieValue = (cookieString: string, cookieName: CookieNameType): string => {
   const name = cookieName + "=";
   const decodedCookie = decodeURIComponent(cookieString);
   const cookieParts = decodedCookie.split(";");
