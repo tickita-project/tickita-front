@@ -16,6 +16,15 @@
   }
 }
 
+@keyframes opacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .header {
   border-bottom: 1px solid $gray200;
 
@@ -119,6 +128,52 @@
 
         .nickname {
           color: $blue600;
+        }
+      }
+
+      .profileBox {
+        padding: 1rem 0;
+
+        .dropdown {
+          position: absolute;
+          background-color: $white;
+          top: 4.5rem;
+          right: 1rem;
+          border-radius: 0.5rem;
+          animation: opacity 0.3s ease forwards;
+
+          li {
+            width: 7.5rem;
+            height: 2.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            border: 1px solid $gray300;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            &:hover {
+              background-color: $blue200;
+              transition: 0.75s;
+            }
+
+            &:first-child {
+              border-radius: 0.5rem 0.5rem 0 0;
+            }
+
+            &:last-child {
+              border-top: none;
+              border-radius: 0 0 0.5rem 0.5rem;
+            }
+
+            .logout {
+              color: $red500;
+              font-size: 0.875rem;
+              font-weight: 500;
+              width: 100%;
+              height: 100%;
+            }
+          }
         }
       }
     }

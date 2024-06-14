@@ -8,13 +8,13 @@ import classNames from "classnames/bind";
 
 import NotificationCenter from "./components/NotificationCenter";
 import UpcomingScheduleList from "./components/UpcomingScheduleList";
-import { getGroupList } from "@/apis/apis";
+import { getGroupList, getUserInfo } from "@/apis/apis";
 import { setContext } from "@/apis/axios";
 import DatePicker from "@/components/DatePicker/DatePicker";
 import Layout from "@/components/Layout";
 import MetaData from "@/components/MetaData";
 import { PAGE_PATH } from "@/constants/pagePath";
-import { groupKey } from "@/constants/queryKey";
+import { groupKey, userInfoKey } from "@/constants/queryKey";
 
 import styles from "./Dashboard.module.scss";
 
@@ -26,6 +26,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
 
   try {
     await queryClient.prefetchQuery({ queryKey: groupKey.lists(), queryFn: getGroupList });
+    await queryClient.prefetchQuery({ queryKey: userInfoKey.info(), queryFn: getUserInfo });
 
     return {
       props: { dehydrateState: dehydrate(queryClient) },
