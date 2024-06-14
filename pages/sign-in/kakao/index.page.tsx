@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 
 import { instance, setContext } from "@/apis/axios";
 import { PAGE_PATH } from "@/constants/pagePath";
+import changeLocalToUTCTime from "@/utils/changeLocalToUTCTime";
 
 interface ResponseType {
   id: number;
@@ -41,15 +42,8 @@ export async function getServerSideProps(
     }: ResponseType = res.data;
 
     if (accessToken && refreshToken) {
-      const changeUTCTime = (tokenExpireAt: string) => {
-        const localData = new Date(tokenExpireAt);
-        const UTCDate = new Date(localData.getTime() - localData.getTimezoneOffset() * 60000);
-
-        return UTCDate.toUTCString();
-      };
-
-      const ACCESS_TOKEN_EXPIRE_AT = changeUTCTime(accessTokenExpireAt);
-      const REFRESH_TOKEN_EXPIRE_AT = changeUTCTime(refreshTokenExpireAt);
+      const ACCESS_TOKEN_EXPIRE_AT = changeLocalToUTCTime(accessTokenExpireAt);
+      const REFRESH_TOKEN_EXPIRE_AT = changeLocalToUTCTime(refreshTokenExpireAt);
 
       const ACCESS_TOKEN = `ACCESS_TOKEN=${accessToken}; Path=/; HttpOnly; Secure; SameSite=Strict; Expires=${ACCESS_TOKEN_EXPIRE_AT}`;
       const REFRESH_TOKEN = `REFRESH_TOKEN=${refreshToken}; Path=/; HttpOnly; Secure; SameSite=Strict; Expires=${REFRESH_TOKEN_EXPIRE_AT}`;
