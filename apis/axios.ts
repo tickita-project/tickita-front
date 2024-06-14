@@ -35,8 +35,8 @@ export const imageRequestInstance = axios.create({
 
 instance.interceptors.request.use(async (config) => {
   try {
-    if (getIsServer()) {
-      nextInstance.defaults.headers.cookie = context?.req.headers.cookie!;
+    if (getIsServer() && context) {
+      nextInstance.defaults.headers.cookie = context.req.headers.cookie!;
     }
 
     const res = await nextInstance.get("/api/cookies");
@@ -69,8 +69,8 @@ instance.interceptors.response.use(
         // refresh token 가져오기
         let REFRESH_TOKEN = "";
 
-        if (getIsServer()) {
-          const refreshTokenString = context?.req.headers.cookie;
+        if (getIsServer() && context) {
+          const refreshTokenString = context.req.headers.cookie;
 
           if (!refreshTokenString) {
             throw new Error("refresh token이 존재하지 않습니다"); // refresh token 없으면 로그인 페이지로 이동
