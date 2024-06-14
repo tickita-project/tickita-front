@@ -35,8 +35,8 @@ const profileSetupFormSchema: ZodType<FieldValuesType> = z.object({
 });
 
 export default function ProfileSetupForm({ accountId, email }: ProfileSetupFormProps) {
-  const [uploadedImgUrl, setUploadedImgUrl] = useState("");
-  const [imgUrl, setImgUrl] = useState("");
+  const [uploadedImgUrl, setUploadedImgUrl] = useState<string | null>(null);
+  const [imgUrl, setImgUrl] = useState<string | null>(null);
   const profileImageInputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
 
@@ -104,7 +104,7 @@ export default function ProfileSetupForm({ accountId, email }: ProfileSetupFormP
     <>
       <label htmlFor="file" className={cn("profile-image-button")}>
         <Image
-          src={uploadedImgUrl || "/icons/default-profile-image.svg"}
+          src={uploadedImgUrl ?? "/icons/default-profile-image.svg"}
           alt="프로필 이미지"
           fill
           className={cn("profile-image")}
