@@ -24,8 +24,10 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       new QueryClient({
         defaultOptions: {
           queries: {
+            retry: 0, // 재시도 횟수
             staleTime: 1 * 60 * 1000, // 1분
             gcTime: 5 * 60 * 1000, // 5분
+            throwOnError: true, // 에러 발생 시 컴포넌트에 에러를 전파
           },
         },
       }),

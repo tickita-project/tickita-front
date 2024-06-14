@@ -10,37 +10,16 @@ export const postProfileSetup = async (data: ProfileSetupType) => {
 };
 
 export const createGroup = async (data: CreateGroupDataType): Promise<GroupType> => {
-  try {
-    const response = await instance.post("/crew", data);
-    return response.data;
-  } catch (error) {
-    if (error instanceof AxiosError) {
-      throw new Error(error?.response?.data.message);
-    }
-    throw error;
-  }
+  const response = await instance.post("/crew", data);
+  return response.data;
 };
 
 export const getGroupList = async (): Promise<Omit<GroupType[], "accountId">> => {
-  try {
-    const response = await instance.get("/crew/all-info");
-    return response.data.crewAllInfos;
-  } catch (error) {
-    if (error instanceof AxiosError) {
-      throw new Error(error?.response?.data.message);
-    }
-    throw error;
-  }
+  const response = await instance.get("/crew/all-info");
+  return response.data.crewAllInfos;
 };
 
 export const getUserInfo = async (): Promise<UserInfoType> => {
-  try {
-    const response = await instance.get("/account-info/all");
-    return response.data;
-  } catch (error: any) {
-    if (error instanceof AxiosError) {
-      throw new Error(error?.response?.data.message);
-    }
-    throw error;
-  }
+  const response = await instance.get("/account-info/all");
+  return response.data;
 };
