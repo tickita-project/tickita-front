@@ -35,6 +35,21 @@ export const calculateMonthDates = (date: Dayjs) => {
   return days;
 };
 
+export const calculateWeekDates = (date: Dayjs): Dayjs[] => {
+  const startOfWeek = date.startOf("week");
+  const endOfWeek = date.endOf("week");
+  const days: Dayjs[] = [];
+
+  let currentDate = startOfWeek;
+
+  while (currentDate <= endOfWeek) {
+    days.push(currentDate);
+    currentDate = currentDate.add(1, "day");
+  }
+
+  return days;
+};
+
 export const divideWeek = (calendarTags: JSX.Element[]) => {
   return calendarTags.reduce((acc: JSX.Element[][], day: JSX.Element, i: number) => {
     if (i % 7 === 0) {

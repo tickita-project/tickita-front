@@ -7,18 +7,12 @@
 
   .date {
     width: 100%;
-    color: $black;
-    /* Heading 2/Medium */
-    font-size: 1.75rem;
-    font-weight: 500;
-    line-height: 135.8%;
-    /* 38.024px */
-    letter-spacing: -0.0437rem;
+    @include heading2-medium;
     padding-top: .625rem;
     padding-left: 3.75rem;
 
     span {
-      @include headline2-bold($gray700)
+      @include caption1-medium($gray700)
     }
   }
 

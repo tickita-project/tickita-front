@@ -1,1 +1,48 @@
-.container {}
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  .week-dates {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: .625rem;
+    padding-left: 3.75rem;
+
+    .date-container {
+      height: 5rem;
+      display: flex;
+      padding: .5rem 1rem;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: .125rem;
+      flex: 1 0 0;
+      align-self: stretch;
+
+      .day {
+        @include caption1-medium($gray700)
+      }
+
+      .date {
+        @include heading2-medium;
+
+        &.today {
+          display: flex;
+          width: 2.5rem;
+          height: 2.5rem;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          border-radius: 62.5rem;
+          background: $blue500;
+          color: white;
+        }
+      }
+    }
+  }
+}
