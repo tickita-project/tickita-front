@@ -1,7 +1,7 @@
-export const getIsBrowser = () => {
+export const getIsBrowser = (): boolean => {
   return typeof window !== "undefined" && typeof document !== "undefined";
 };
 
-export const getIsServer = () => {
+export const getIsServer = (): boolean => {
   return !getIsBrowser();
 };
