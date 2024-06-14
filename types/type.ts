@@ -13,7 +13,7 @@ export type GroupColorType =
 export type CookieNameType = "ACCESS_TOKEN" | "REFRESH_TOKEN";
 
 export interface UserInfoType {
-  accointId: number;
+  accountId: number;
   nickName: string;
   email: string;
   image: string | null;
