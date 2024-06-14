@@ -35,7 +35,7 @@ const profileSetupFormSchema: ZodType<FieldValuesType> = z.object({
 });
 
 export default function ProfileSetupForm({ accountId, email }: ProfileSetupFormProps) {
-  const [uploadedImage, setUploadedImage] = useState("");
+  const [uploadedImgUrl, setUploadedImgUrl] = useState("");
   const [imgUrl, setImgUrl] = useState("");
   const profileImageInput = useRef<HTMLInputElement>(null);
   const router = useRouter();
@@ -50,9 +50,7 @@ export default function ProfileSetupForm({ accountId, email }: ProfileSetupFormP
     resolver: zodResolver(profileSetupFormSchema),
   });
 
-  const handleProfileImageButtonClick = () => {
-    profileImageInput.current?.click();
-  };
+  const handleProfileImageButtonClick = () => profileImageInput.current?.click();
 
   const handleProfileImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) {
@@ -69,7 +67,7 @@ export default function ProfileSetupForm({ accountId, email }: ProfileSetupFormP
 
     const fileReader = new FileReader();
     fileReader.onload = () => {
-      setUploadedImage(fileReader.result as string);
+      setUploadedImgUrl(fileReader.result as string);
     };
     fileReader.readAsDataURL(imageFile);
 
@@ -112,7 +110,7 @@ export default function ProfileSetupForm({ accountId, email }: ProfileSetupFormP
         className={cn("profile-image-button")}
       >
         <Image
-          src={uploadedImage || "/icons/default-profile-image.svg"}
+          src={uploadedImgUrl || "/icons/default-profile-image.svg"}
           alt="프로필 이미지"
           fill
           className={cn("profile-image")}
