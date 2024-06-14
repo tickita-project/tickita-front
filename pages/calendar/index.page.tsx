@@ -21,8 +21,9 @@ import { userInfoKey } from "@/constants/queryKey";
 import { useDateStore } from "@/store/useDateStore";
 import { calculateMonthDates } from "@/utils/calculateCalendarDates";
 
-import styles from "./Calendar.module.scss";
 import { CalendarType } from "@/types/type";
+
+import styles from "./Calendar.module.scss";
 
 const cn = classNames.bind(styles);
 

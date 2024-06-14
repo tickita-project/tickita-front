@@ -4,8 +4,9 @@ import classNames from "classnames/bind";
 
 import { useDateStore } from "@/store/useDateStore";
 
-import styles from "./MonthNavButton.module.scss";
 import { CalendarType } from "@/types/type";
+
+import styles from "./MonthNavButton.module.scss";
 
 const cn = classNames.bind(styles);
 
