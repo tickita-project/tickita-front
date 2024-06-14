@@ -72,6 +72,17 @@
   letter-spacing: -0.0172rem;
 }
 
+@mixin caption1-medium($color: black) {
+  color: $color;
+  text-align: center;
+  /* Caption 1/Medium */
+  font-size: .75rem;
+  font-weight: 500;
+  line-height: 133.4%;
+  /* 16.008px */
+  letter-spacing: -0.3px;
+}
+
 @mixin body2-medium($color: black) {
   color: $color;
   text-align: center;
@@ -82,6 +93,17 @@
   line-height: 142.9%;
   /* 20.006px */
   letter-spacing: -0.0219rem;
+}
+
+@mixin heading2-medium($color: black) {
+  color: $color;
+
+  /* Heading 2/Medium */
+  font-size: 1.75rem;
+  font-weight: 500;
+  line-height: 135.8%;
+  /* 38.024px */
+  letter-spacing: -0.0437rem;
 }
 
 @mixin headline2-bold($color: black) {

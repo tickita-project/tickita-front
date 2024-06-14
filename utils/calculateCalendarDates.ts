@@ -12,17 +12,39 @@ export const calculateMonthDates = (date: Dayjs) => {
 
   const days: Dayjs[] = [];
 
+  // 지난달 날짜 추가
   for (let i = startDay - 1; i >= 0; i--) {
     days.push(startOfMonth.subtract(i + 1, "day"));
   }
 
+  // 이번 달 날짜 추가
   for (let i = 1; i <= endDay; i++) {
     days.push(startOfMonth.date(i));
   }
 
-  const nextMonthStartDate = endOfMonth.add(1, "day");
+  // 다음달 시작 날짜 설정 (다음달의 1일)
+  const nextMonthStartDate = endOfMonth.add(1, "day").startOf("month");
+
+  // 다음달 날짜 추가
+  let currentDay = nextMonthStartDate;
   while (days.length < 42) {
-    days.push(nextMonthStartDate.add(days.length - endDay, "day"));
+    days.push(currentDay);
+    currentDay = currentDay.add(1, "day");
+  }
+
+  return days;
+};
+
+export const calculateWeekDates = (date: Dayjs): Dayjs[] => {
+  const startOfWeek = date.startOf("week");
+  const endOfWeek = date.endOf("week");
+  const days: Dayjs[] = [];
+
+  let currentDate = startOfWeek;
+
+  while (currentDate <= endOfWeek) {
+    days.push(currentDate);
+    currentDate = currentDate.add(1, "day");
   }
 
   return days;

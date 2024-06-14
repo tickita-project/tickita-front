@@ -37,3 +37,5 @@ export interface GroupType {
   labelColor: GroupColorType;
   crewId: number;
 }
+
+export type CalendarType = "월" | "주" | "일";
