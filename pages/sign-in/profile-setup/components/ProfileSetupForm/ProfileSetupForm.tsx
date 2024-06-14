@@ -50,8 +50,6 @@ export default function ProfileSetupForm({ accountId, email }: ProfileSetupFormP
     resolver: zodResolver(profileSetupFormSchema),
   });
 
-  const handleProfileImageButtonClick = () => profileImageInputRef.current?.click();
-
   const handleProfileImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) {
       return;
@@ -104,13 +102,9 @@ export default function ProfileSetupForm({ accountId, email }: ProfileSetupFormP
 
   return (
     <>
-      <button
-        type="button"
-        onClick={handleProfileImageButtonClick}
-        className={cn("profile-image-button")}
-      >
+      <label htmlFor="file" className={cn("profile-image-button")}>
         <Image
-          src={uploadedImgUrl ?? "/icons/default-profile-image.svg"}
+          src={uploadedImgUrl || "/icons/default-profile-image.svg"}
           alt="프로필 이미지"
           fill
           className={cn("profile-image")}
@@ -122,7 +116,15 @@ export default function ProfileSetupForm({ accountId, email }: ProfileSetupFormP
           height={44}
           className={cn("camera-icon")}
         />
-      </button>
+      </label>
+      <input
+        id="file"
+        type="file"
+        accept="image/*"
+        ref={profileImageInputRef}
+        onChange={handleProfileImageChange}
+        className={cn("hidden-image-input")}
+      />
 
       <form onSubmit={handleSubmit(onSubmit)} className={cn("container")}>
         <div className={cn("input-container")}>
@@ -153,21 +155,10 @@ export default function ProfileSetupForm({ accountId, email }: ProfileSetupFormP
             {...register("phoneNumber")}
           />
         </div>
-        <button
-          type="submit"
-          className={cn("submit-button", { "submit-button--disabled": !isValid })}
-        >
+        <button type="submit" disabled={!isValid} className={cn("submit-button")}>
           프로필 저장하기
         </button>
       </form>
-
-      <input
-        type="file"
-        accept="image/*"
-        ref={profileImageInputRef}
-        onChange={handleProfileImageChange}
-        className={cn("hidden-image-input")}
-      />
     </>
   );
 }

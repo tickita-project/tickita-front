@@ -28,7 +28,7 @@
   line-height: 1.875rem;
   letter-spacing: -0.0344rem;
 
-  &--disabled {
+  &:disabled {
     background-color: $gray300;
     color: $gray600;
     cursor: not-allowed;
@@ -39,6 +39,10 @@
   position: relative;
   width: 7.5rem;
   height: 7.5rem;
+
+  :hover {
+    cursor: pointer;
+  }
 
   .profile-image {
     border-radius: 9999px;
