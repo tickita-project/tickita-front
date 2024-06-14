@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -19,11 +21,12 @@ const isAnimation = {
 
 // 로그인 정보에 따라 닉네임, 프로필 이미지 변경(유저 정보 전역 상태 관리?)
 export default function Header() {
+  const [isDropDownView, setIsDropDownView] = useState(false);
   const { pathname } = useRouter();
-  const { data: userInfo, isError } = useGetUserInfo();
+  const { data: userInfo } = useGetUserInfo();
 
-  if (!userInfo || isError) {
-    return <div>에러 컴포넌트 추가 예정</div>;
+  if (!userInfo) {
+    return null;
   }
 
   const handleDashboardTapClick = () => {
@@ -42,6 +45,18 @@ export default function Header() {
     setTimeout(() => {
       isAnimation.calendar = false;
     }, 100);
+  };
+
+  const handleMouseOver = () => {
+    setIsDropDownView(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsDropDownView(false);
+  };
+
+  const handleLogoutButtonClick = () => {
+    // 로그아웃 처리
   };
 
   return (
@@ -93,8 +108,25 @@ export default function Header() {
             )}
             <span className={cn("nickname")}>{userInfo.nickName}</span> 님
           </div>
-
-          <ProfileImage imageUrl={userInfo.image} />
+          <div
+            className={cn("profileBox")}
+            onMouseOver={handleMouseOver}
+            onMouseLeave={handleMouseLeave}
+          >
+            <ProfileImage imageUrl={userInfo.image} />
+            {isDropDownView && (
+              <ul className={cn("dropdown")}>
+                <li>
+                  <Link href={PAGE_PATH.MY_PAGE}>마이페이지</Link>
+                </li>
+                <li>
+                  <button onClick={handleLogoutButtonClick} className={cn("logout")} type="button">
+                    로그아웃
+                  </button>
+                </li>
+              </ul>
+            )}
+          </div>
         </div>
       </nav>
     </header>

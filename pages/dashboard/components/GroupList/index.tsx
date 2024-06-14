@@ -12,12 +12,8 @@ import styles from "./GroupList.module.scss";
 const cn = classNames.bind(styles);
 
 export default function GroupList() {
-  const { data: groupList, isError } = useGetGroupList();
+  const { data: groupList } = useGetGroupList();
   const { openModal } = useModalStore();
-
-  if (isError) {
-    return <div>에러 컴포넌트 추가 예정?!</div>;
-  }
 
   return (
     <section className={cn("container")}>

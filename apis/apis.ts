@@ -1,5 +1,3 @@
-import { AxiosError } from "axios";
-
 import { ProfileSetupType, CreateGroupDataType, GroupType, UserInfoType } from "@/types/type";
 
 import { instance } from "./axios";

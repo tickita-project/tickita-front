@@ -3,10 +3,18 @@ import { ReactElement, ReactNode, useState } from "react";
 
 import type { AppProps } from "next/app";
 
-import { HydrationBoundary, QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {
+  HydrationBoundary,
+  QueryClient,
+  QueryClientProvider,
+  useQueryErrorResetBoundary,
+} from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { ErrorBoundary } from "react-error-boundary";
 
 import "@/styles/reset.scss";
+
+import ErrorFallback from "@/components/ErrorFallBack";
 import Portal from "@/components/Modal/Portal";
 
 // 페이지 컴포넌트에 레이아웃을 추가할 수 있도록 확장한 타입
@@ -36,12 +44,16 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   // 컴포넌트에 getLayout 함수가 정의되어 있으면 해당 함수를 호출하고, 그렇지 않으면 페이지 컴포넌트를 그대로 반환
   const getLayout = Component.getLayout ?? ((page) => page);
 
+  const { reset } = useQueryErrorResetBoundary();
+
   return (
     <QueryClientProvider client={queryClient}>
       <HydrationBoundary state={pageProps.dehydratedState}>
         <ReactQueryDevtools initialIsOpen={false} />
-        {getLayout(<Component {...pageProps} />)}
-        <Portal />
+        <ErrorBoundary FallbackComponent={ErrorFallback} onReset={reset}>
+          {getLayout(<Component {...pageProps} />)}
+          <Portal />
+        </ErrorBoundary>
       </HydrationBoundary>
     </QueryClientProvider>
   );
