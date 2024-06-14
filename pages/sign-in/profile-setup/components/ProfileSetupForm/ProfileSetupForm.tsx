@@ -58,10 +58,10 @@ export default function ProfileSetupForm({ accountId, email }: ProfileSetupFormP
     }
 
     const imageFile = e.target.files[0];
-
     const maxSize = 1 * 1024 * 1024;
+
     if (imageFile.size > maxSize) {
-      alert("파일 크기는 1MB를 초과할 수 없습니다");
+      alert("파일 크기는 1MB를 초과할 수 없습니다"); // TODO: 추후 toast로 변경 예정
       return;
     }
 
@@ -97,7 +97,7 @@ export default function ProfileSetupForm({ accountId, email }: ProfileSetupFormP
       router.push(PAGE_PATH.DASHBOARD);
     } catch (error) {
       if (error instanceof AxiosError) {
-        alert("추가 정보 입력을 완료하지 못했습니다.");
+        alert("추가 정보 입력을 완료하지 못했습니다."); // TODO: 추후 toast로 변경 예정
       }
     }
   };
@@ -110,7 +110,7 @@ export default function ProfileSetupForm({ accountId, email }: ProfileSetupFormP
         className={cn("profile-image-button")}
       >
         <Image
-          src={uploadedImgUrl || "/icons/default-profile-image.svg"}
+          src={uploadedImgUrl ?? "/icons/default-profile-image.svg"}
           alt="프로필 이미지"
           fill
           className={cn("profile-image")}
