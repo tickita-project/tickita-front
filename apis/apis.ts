@@ -1,6 +1,6 @@
 import { ProfileSetupType, CreateGroupDataType, GroupType, UserInfoType } from "@/types/type";
 
-import { instance } from "./axios";
+import { imageRequestInstance, instance } from "./axios";
 
 export const postProfileSetup = async (data: ProfileSetupType) => {
   const res = await instance.post("/account-info", data);
@@ -20,4 +20,9 @@ export const getGroupList = async (): Promise<Omit<GroupType[], "accountId">> =>
 export const getUserInfo = async (): Promise<UserInfoType> => {
   const response = await instance.get("/account-info/all");
   return response.data;
+};
+
+export const postProfileImageUrl = async (data: FormData) => {
+  const res = await imageRequestInstance.post("/account-info/img", data);
+  return res.data;
 };

@@ -28,9 +28,36 @@
   line-height: 1.875rem;
   letter-spacing: -0.0344rem;
 
-  &--disabled {
+  &:disabled {
     background-color: $gray300;
     color: $gray600;
     cursor: not-allowed;
   }
+}
+
+.profile-image-button {
+  position: relative;
+  width: 7.5rem;
+  height: 7.5rem;
+
+  :hover {
+    cursor: pointer;
+  }
+
+  .profile-image {
+    border-radius: 9999px;
+    overflow: hidden;
+    object-fit: cover;
+  }
+
+  .camera-icon {
+    z-index: 5;
+    position: absolute;
+    bottom: 0rem;
+    right: -0.5rem;
+  }
+}
+
+.hidden-image-input {
+  display: none;
 }
