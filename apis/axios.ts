@@ -85,7 +85,7 @@ instance.interceptors.response.use(
         }
 
         // access token 재발급
-        const refreshResponse = await instance.post("/token/refresh", REFRESH_TOKEN);
+        const refreshResponse = await instance.post("/token/refresh", { refresh: REFRESH_TOKEN });
         const { accessToken, accessTokenExpireAt, refreshToken, refreshTokenExpireAt } =
           refreshResponse.data;
 
