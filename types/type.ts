@@ -47,3 +47,10 @@ export interface GroupMemberInfoType {
   email: string;
   imageUrl: string | null;
 }
+
+export interface GroupInfoType {
+  crewId: number;
+  crewName: string;
+  labelColor: GroupColorType;
+  crewMemberInfoResponses: GroupMemberInfoType[];
+}

@@ -1,5 +1,5 @@
 .invite-box {
-  width: 30rem;
+  width: 27.5rem;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
@@ -33,7 +33,7 @@
   }
 
   .invite-list-box {
-    width: 30rem;
+    width: 27.5rem;
     height: 31.5rem;
     padding: 1.25rem;
     border-radius: 1rem;
@@ -82,7 +82,7 @@
         justify-content: space-between;
 
         .email {
-          width: 21rem;
+          width: 17rem;
           @include text-overflow-ellipsis(1);
         }
 

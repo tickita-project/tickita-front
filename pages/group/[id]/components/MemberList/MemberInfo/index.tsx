@@ -30,8 +30,6 @@ export default function MemberInfo({
   const isLeader = role === "OWNER"; // 리더인지 확인
   const isMe = userId === accountId; // 나인지 확인
 
-  console.log(userId);
-
   const handleMenuButtonClick = () => {
     setIsMenuOpen((prev) => !prev);
   };
