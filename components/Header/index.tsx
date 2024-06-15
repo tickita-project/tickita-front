@@ -24,6 +24,9 @@ export default function Header() {
   const [isDropDownView, setIsDropDownView] = useState(false);
   const { pathname } = useRouter();
   const { data: userInfo } = useGetUserInfo();
+  const isDashboardPage = pathname === PAGE_PATH.DASHBOARD;
+  const isCalendardPage = pathname === PAGE_PATH.CALENDAR;
+  console.log(isAnimation);
 
   const handleDashboardTapClick = () => {
     isAnimation.dashboard = true;
@@ -31,7 +34,7 @@ export default function Header() {
     // 애니메이션 초기화
     setTimeout(() => {
       isAnimation.dashboard = false;
-    }, 100);
+    }, 500);
   };
 
   const handleCalendarTapClick = () => {
@@ -40,7 +43,7 @@ export default function Header() {
     // 애니메이션 초기화
     setTimeout(() => {
       isAnimation.calendar = false;
-    }, 100);
+    }, 500);
   };
 
   const handleMouseOver = () => {
@@ -66,14 +69,14 @@ export default function Header() {
           <Link
             onClick={handleDashboardTapClick}
             href={PAGE_PATH.DASHBOARD}
-            className={cn("nav-tap-item", { active: pathname === PAGE_PATH.DASHBOARD })}
+            className={cn("nav-tap-item", { active: isDashboardPage })}
           >
             대시보드
           </Link>
           <Link
             onClick={handleCalendarTapClick}
             href={PAGE_PATH.CALENDAR}
-            className={cn("nav-tap-item", { active: pathname === PAGE_PATH.CALENDAR })}
+            className={cn("nav-tap-item", { active: isCalendardPage })}
           >
             캘린더
           </Link>
@@ -81,14 +84,23 @@ export default function Header() {
             className={cn("active-effect", {
               "animation-effect-dashboard": isAnimation.dashboard,
               "animation-effect-calendar": isAnimation.calendar,
-              "effect-position-right": pathname === PAGE_PATH.CALENDAR,
+              "effect-position-right": isCalendardPage,
             })}
           />
+          {/* {(isDashboardPage || isCalendardPage) && (
+            <div
+              className={cn("active-effect", {
+                "animation-effect-dashboard": isAnimation.dashboard,
+                "animation-effect-calendar": isAnimation.calendar,
+                "effect-position-right": isCalendardPage,
+              })}
+            />
+          )} */}
         </div>
 
         <div className={cn("profile-box")}>
           <div className={cn("nickname-box")}>
-            {pathname === PAGE_PATH.DASHBOARD ? (
+            {isDashboardPage ? (
               <span className={cn("guide-text")}>반가워요, </span>
             ) : (
               <figure className={cn("notification-bell")}>
