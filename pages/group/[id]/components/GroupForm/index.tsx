@@ -26,7 +26,6 @@ interface GroupFormProps {
 }
 
 export default function GroupForm({ groupInfo }: GroupFormProps) {
-  console.log(groupInfo);
   const {
     register,
     handleSubmit,
