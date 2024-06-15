@@ -16,8 +16,8 @@ interface ResponseType {
 }
 
 interface KakaoProps {
-  id: number;
-  isComplete: boolean;
+  // id: number;
+  // isComplete: boolean;
 }
 
 export async function getServerSideProps(
@@ -55,25 +55,33 @@ export async function getServerSideProps(
     };
   } catch (error) {
     return {
-      redirect: {
-        destination: PAGE_PATH.SIGN_IN,
-        permanent: false,
-      },
+      // redirect: {
+      //   destination: PAGE_PATH.SIGN_IN,
+      //   permanent: false,
+      // },
+
+      props: { error },
     };
   }
 }
 
-export default function Kakao({ id, isComplete }: KakaoProps) {
-  const router = useRouter();
+// export default function Kakao({ id, isComplete }: KakaoProps) {
+//   const router = useRouter();
 
-  useEffect(() => {
-    if (!isComplete) {
-      router.push({ pathname: PAGE_PATH.PROFILE_SETUP, query: { id } }, PAGE_PATH.PROFILE_SETUP);
-      return;
-    }
+//   useEffect(() => {
+//     if (!isComplete) {
+//       router.push({ pathname: PAGE_PATH.PROFILE_SETUP, query: { id } }, PAGE_PATH.PROFILE_SETUP);
+//       return;
+//     }
 
-    router.push(PAGE_PATH.DASHBOARD);
-  }, [isComplete]);
+//     router.push(PAGE_PATH.DASHBOARD);
+//   }, [isComplete]);
+
+//   return <div>로그인 요청중입니다.</div>;
+// }
+
+export default function Kakao({ error }) {
+  console.error("에러지롱", error);
 
   return <div>로그인 요청중입니다.</div>;
 }
