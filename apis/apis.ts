@@ -1,3 +1,5 @@
+import { InviteDataType } from "@/pages/group/[id]/components/InviteForm";
+
 import { ProfileSetupType, CreateGroupDataType, GroupType, UserInfoType } from "@/types/type";
 
 import { imageRequestInstance, instance } from "./axios";
@@ -24,5 +26,10 @@ export const getUserInfo = async (): Promise<UserInfoType> => {
 
 export const postProfileImageUrl = async (data: FormData) => {
   const res = await imageRequestInstance.post("/account-info/img", data);
+  return res.data;
+};
+
+export const inviteGroupMember = async (data: InviteDataType) => {
+  const res = await instance.post(`/mail/send/${data.crewId}`, { email: data.email });
   return res.data;
 };

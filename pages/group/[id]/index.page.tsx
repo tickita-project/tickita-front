@@ -6,6 +6,7 @@ import { GetServerSidePropsContext } from "next/types";
 import { QueryClient, dehydrate } from "@tanstack/react-query";
 import classNames from "classnames/bind";
 
+import InviteForm from "./components/InviteForm";
 import MemberList from "./components/MemberList";
 import { setContext } from "@/apis/axios";
 import Input from "@/components/Input";
@@ -43,22 +44,7 @@ export default function Group() {
       <MetaData title="대시보드 | 티키타" />
       <section className={cn("content")}>
         <MemberList />
-        <div className={cn("invite-box")}>
-          <div className={cn("invite")}>
-            <div className={cn("title-box")}>
-              <TitleBox title="그룹 초대" />
-            </div>
-            <Input
-              label="멤버 초대"
-              type="text"
-              id="inviteMember"
-              placeholder="이메일을 입력해 주세요."
-              // {...register("crewName")}
-              // errorMessage={errors.crewName?.message}
-            />
-          </div>
-          <div className={cn("invite-list")}></div>
-        </div>
+        <InviteForm />
       </section>
     </>
   );
