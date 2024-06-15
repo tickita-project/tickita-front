@@ -1,7 +1,7 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 
 import { instance } from "@/apis/axios";
 import { PAGE_PATH } from "@/constants/pagePath";
@@ -18,6 +18,7 @@ interface ResponseType {
 interface KakaoProps {
   // id: number;
   // isComplete: boolean;
+  error?: any;
 }
 
 export async function getServerSideProps(
@@ -51,7 +52,8 @@ export async function getServerSideProps(
     }
 
     return {
-      props: { id, isComplete },
+      // props: { id, isComplete },
+      props: {},
     };
   } catch (error) {
     return {
@@ -80,7 +82,7 @@ export async function getServerSideProps(
 //   return <div>로그인 요청중입니다.</div>;
 // }
 
-export default function Kakao({ error }) {
+export default function Kakao({ error }: KakaoProps) {
   console.error("에러지롱", error);
 
   return <div>로그인 요청중입니다.</div>;
