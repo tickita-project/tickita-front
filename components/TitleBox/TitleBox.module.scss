@@ -1,0 +1,15 @@
+.container {
+  position: relative;
+
+  .title {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: $blue500;
+    font-size: 0.875rem;
+    font-weight: 500;
+    width: 100%;
+    text-align: center;
+  }
+}

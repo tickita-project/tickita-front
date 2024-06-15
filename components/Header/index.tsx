@@ -98,7 +98,7 @@ export default function Header() {
               <figure className={cn("notification-bell")}>
                 <figcaption className={cn("notification-count")}>9+</figcaption>
                 <Image
-                  src="icons/notification-bell.svg"
+                  src="/icons/notification-bell.svg"
                   width={26}
                   height={20}
                   alt="알림 종"
