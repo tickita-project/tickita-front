@@ -25,10 +25,6 @@ export default function Header() {
   const { pathname } = useRouter();
   const { data: userInfo } = useGetUserInfo();
 
-  if (!userInfo) {
-    return null;
-  }
-
   const handleDashboardTapClick = () => {
     isAnimation.dashboard = true;
 
@@ -106,14 +102,14 @@ export default function Header() {
                 />
               </figure>
             )}
-            <span className={cn("nickname")}>{userInfo.nickName}</span> 님
+            <span className={cn("nickname")}>{userInfo!.nickName}</span> 님
           </div>
           <div
             className={cn("profileBox")}
             onMouseOver={handleMouseOver}
             onMouseLeave={handleMouseLeave}
           >
-            <ProfileImage imageUrl={userInfo.image} />
+            <ProfileImage imageUrl={userInfo!.image} />
             {isDropDownView && (
               <ul className={cn("dropdown")}>
                 <li>
