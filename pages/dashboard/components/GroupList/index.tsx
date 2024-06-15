@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 import classNames from "classnames/bind";
 
@@ -12,8 +13,10 @@ import styles from "./GroupList.module.scss";
 const cn = classNames.bind(styles);
 
 export default function GroupList() {
+  const { query } = useRouter();
   const { data: groupList } = useGetGroupList();
   const { openModal } = useModalStore();
+  const selectId = Number(query.id);
 
   return (
     <section className={cn("container")}>
@@ -31,7 +34,10 @@ export default function GroupList() {
       <ul className={cn("group-box")}>
         {groupList?.map((data) => (
           <li key={data.crewId}>
-            <Link href={`/group/${data.crewId}`} className={cn("group-list")}>
+            <Link
+              href={`/group/${data.crewId}`}
+              className={cn("group-list", { selected: selectId === data.crewId })}
+            >
               <div className={cn("group-color")} style={{ backgroundColor: data.labelColor }} />
               <span className={cn("group-title")}>{data.crewName}</span>
             </Link>
