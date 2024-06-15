@@ -1,7 +1,7 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
-// import { useEffect } from "react";
+import { useEffect } from "react";
 
-// import { useRouter } from "next/router";
+import { useRouter } from "next/router";
 
 import { instance } from "@/apis/axios";
 import { PAGE_PATH } from "@/constants/pagePath";
@@ -16,9 +16,8 @@ interface ResponseType {
 }
 
 interface KakaoProps {
-  // id: number;
-  // isComplete: boolean;
-  error?: any;
+  id: number;
+  isComplete: boolean;
 }
 
 export async function getServerSideProps(
@@ -52,38 +51,29 @@ export async function getServerSideProps(
     }
 
     return {
-      // props: { id, isComplete },
-      props: {},
+      props: { id, isComplete },
     };
   } catch (error) {
     return {
-      // redirect: {
-      //   destination: PAGE_PATH.SIGN_IN,
-      //   permanent: false,
-      // },
-
-      props: { error },
+      redirect: {
+        destination: PAGE_PATH.SIGN_IN,
+        permanent: false,
+      },
     };
   }
 }
 
-// export default function Kakao({ id, isComplete }: KakaoProps) {
-//   const router = useRouter();
+export default function Kakao({ id, isComplete }: KakaoProps) {
+  const router = useRouter();
 
-//   useEffect(() => {
-//     if (!isComplete) {
-//       router.push({ pathname: PAGE_PATH.PROFILE_SETUP, query: { id } }, PAGE_PATH.PROFILE_SETUP);
-//       return;
-//     }
+  useEffect(() => {
+    if (!isComplete) {
+      router.push({ pathname: PAGE_PATH.PROFILE_SETUP, query: { id } }, PAGE_PATH.PROFILE_SETUP);
+      return;
+    }
 
-//     router.push(PAGE_PATH.DASHBOARD);
-//   }, [isComplete]);
-
-//   return <div>로그인 요청중입니다.</div>;
-// }
-
-export default function Kakao({ error }: KakaoProps) {
-  console.error("에러지롱", error);
+    router.push(PAGE_PATH.DASHBOARD);
+  }, [isComplete]);
 
   return <div>로그인 요청중입니다.</div>;
 }
