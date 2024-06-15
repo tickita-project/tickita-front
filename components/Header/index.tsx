@@ -80,14 +80,7 @@ export default function Header() {
           >
             캘린더
           </Link>
-          <div
-            className={cn("active-effect", {
-              "animation-effect-dashboard": isAnimation.dashboard,
-              "animation-effect-calendar": isAnimation.calendar,
-              "effect-position-right": isCalendardPage,
-            })}
-          />
-          {/* {(isDashboardPage || isCalendardPage) && (
+          {(isDashboardPage || isCalendardPage) && (
             <div
               className={cn("active-effect", {
                 "animation-effect-dashboard": isAnimation.dashboard,
@@ -95,7 +88,7 @@ export default function Header() {
                 "effect-position-right": isCalendardPage,
               })}
             />
-          )} */}
+          )}
         </div>
 
         <div className={cn("profile-box")}>
