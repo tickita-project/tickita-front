@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 import Image from "next/image";
 
@@ -14,13 +14,11 @@ const cn = classNames.bind(styles);
 
 export default function CalendarSideBar() {
   const [isCreateListVisible, setIsCreateListVisible] = useState(false);
-  const scheduleContainerRef = useRef(null);
+  const scheduleContainerRef = useOutsideClick<HTMLDivElement>(() => setIsCreateListVisible(false));
 
   const handleListVisibleToggle = () => {
     setIsCreateListVisible((prev) => !prev);
   };
-
-  useOutsideClick(scheduleContainerRef, () => setIsCreateListVisible(false));
 
   return (
     <aside className={cn("container")}>
