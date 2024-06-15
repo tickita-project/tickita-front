@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import classNames from "classnames/bind";
 import Lottie from "react-lottie-player";
 
-import { instance } from "@/apis/axios";
+import { basicInstance, instance, setContext } from "@/apis/axios";
 import { PAGE_PATH } from "@/constants/pagePath";
 import loadingLottie from "@/public/images/login-loading.json";
 
@@ -31,10 +31,12 @@ interface KakaoProps {
 export async function getServerSideProps(
   context: GetServerSidePropsContext,
 ): Promise<GetServerSidePropsResult<KakaoProps>> {
+  setContext(context);
+
   const { code } = context.query;
 
   try {
-    const res = await instance.get("/login/oauth/kakao", {
+    const res = await basicInstance.get("/login/oauth/kakao", {
       params: {
         code,
       },
