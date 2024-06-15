@@ -3,8 +3,16 @@ import { useEffect } from "react";
 
 import { useRouter } from "next/router";
 
+import classNames from "classnames/bind";
+import Lottie from "react-lottie-player";
+
 import { instance } from "@/apis/axios";
 import { PAGE_PATH } from "@/constants/pagePath";
+import loadingLottie from "@/public/images/login-loading.json";
+
+import styles from "./index.module.scss";
+
+const cn = classNames.bind(styles);
 
 interface ResponseType {
   id: number;
@@ -75,5 +83,9 @@ export default function Kakao({ id, isComplete }: KakaoProps) {
     router.push(PAGE_PATH.DASHBOARD);
   }, [isComplete]);
 
-  return <div>로그인 요청중입니다.</div>;
+  return (
+    <div className={cn("container")}>
+      <Lottie animationData={loadingLottie} loop play className={cn("loading-lottie")} />
+    </div>
+  );
 }
