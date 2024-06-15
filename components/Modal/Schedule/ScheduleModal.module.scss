@@ -1,0 +1,10 @@
+.container {
+  width: 32rem;
+  padding: 1.5rem;
+  background-color: $white;
+  transform: translate(-50%, -50%);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  border-radius: 16px;
+}

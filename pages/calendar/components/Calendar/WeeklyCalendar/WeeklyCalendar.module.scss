@@ -23,6 +23,7 @@
       gap: .125rem;
       flex: 1 0 0;
       align-self: stretch;
+      @include text-drag-disable;
 
       .day {
         @include caption1-medium($gray700);
@@ -76,6 +77,7 @@
 
       .label {
         @include caption2-medium($gray700);
+        @include text-drag-disable;
       }
     }
 

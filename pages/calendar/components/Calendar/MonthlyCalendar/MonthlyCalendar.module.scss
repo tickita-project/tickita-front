@@ -65,6 +65,8 @@ $border: .0625rem solid $gray400;
         &.other-month {
           color: $gray500;
         }
+
+        @include text-drag-disable;
       }
     }
   }
