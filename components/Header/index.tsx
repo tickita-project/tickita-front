@@ -26,7 +26,6 @@ export default function Header() {
   const { data: userInfo } = useGetUserInfo();
   const isDashboardPage = pathname === PAGE_PATH.DASHBOARD;
   const isCalendardPage = pathname === PAGE_PATH.CALENDAR;
-  console.log(isAnimation);
 
   const handleDashboardTapClick = () => {
     isAnimation.dashboard = true;
