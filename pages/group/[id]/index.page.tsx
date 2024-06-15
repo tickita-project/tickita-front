@@ -61,6 +61,7 @@ export default function Group() {
   };
 
   if (!groupInfo || !userInfo) {
+    // 추후 로딩 처리로 변경
     return null;
   }
 

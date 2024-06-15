@@ -73,7 +73,7 @@ export default function GroupForm({ groupInfo }: GroupFormProps) {
           <h3>캘린더에 등록 시 오른쪽 화면처럼 색상이 등록돼요</h3>
         </div>
         <div className={cn("preview-image")}>
-          <p className={cn("preview-color")} />
+          <p className={cn("preview-color")} style={{ backgroundColor: selectColor }} />
           <Image src="/images/preview.webp" width={170} height={170} alt="그룹 색상 미리보기" />
         </div>
       </div>
