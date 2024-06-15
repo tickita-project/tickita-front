@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import classNames from "classnames/bind";
+import { useShallow } from "zustand/react/shallow";
 
 import { DAYS, HOURS } from "@/constants/calendarConstants";
 import { useDrag } from "@/hooks/useDarg";
@@ -11,7 +12,7 @@ import styles from "./DailyCalendar.module.scss";
 const cn = classNames.bind(styles);
 
 export default function DailyCalendar() {
-  const { focusDate } = useDateStore();
+  const { focusDate } = useDateStore(useShallow((state) => ({ focusDate: state.focusDate })));
   const { isDragging, startPos, endPos, handlePointerDown } = useDrag();
   const [draggedBlocks, setDraggedBlocks] = useState<Set<number>>(new Set());
 

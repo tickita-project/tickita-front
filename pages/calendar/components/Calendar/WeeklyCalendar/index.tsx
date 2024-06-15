@@ -2,6 +2,7 @@ import React from "react";
 
 import classNames from "classnames/bind";
 import dayjs from "dayjs";
+import { useShallow } from "zustand/react/shallow";
 
 import { DAYS, HOURS } from "@/constants/calendarConstants";
 import { useDateStore } from "@/store/useDateStore";
@@ -12,7 +13,7 @@ import styles from "./WeeklyCalendar.module.scss";
 const cn = classNames.bind(styles);
 
 export default function WeeklyCalendar() {
-  const { focusDate } = useDateStore();
+  const { focusDate } = useDateStore(useShallow((state) => ({ focusDate: state.focusDate })));
 
   const dates = calculateWeekDates(focusDate);
 

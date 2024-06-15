@@ -7,6 +7,7 @@ import { QueryClient, dehydrate } from "@tanstack/react-query";
 import classNames from "classnames/bind";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
+import { useShallow } from "zustand/react/shallow";
 
 import CalendarHeader from "./components/Calendar/CalendarHeader";
 import DailyCalendar from "./components/Calendar/DailyCalendar";
@@ -50,7 +51,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
 export default function CalendarPage() {
   const [calendarType, setCalendarType] = useState<CalendarType>("월");
   const router = useRouter();
-  const { focusDate } = useDateStore();
+  const { focusDate } = useDateStore(useShallow((state) => ({ focusDate: state.focusDate })));
 
   useEffect(() => {
     let startDate = null;
