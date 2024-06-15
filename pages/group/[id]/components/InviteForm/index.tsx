@@ -28,6 +28,7 @@ const mockData = Array.from({ length: 20 }, (_, index) => ({
   email: `test${index}@naver.com`,
 }));
 
+// TODO: 초대한 계정 리스트 가져오기 API 연결
 export default function InviteForm() {
   const { query } = useRouter();
   const { mutate } = useInviteGroupMember(Number(query.id));
@@ -77,16 +78,28 @@ export default function InviteForm() {
         </form>
       </div>
       <div className={cn("invite-list-box")}>
-        <ul className={cn("invite-list")}>
-          {mockData.map((data) => (
-            <li key={data.id} className={cn("list")}>
-              <span className={cn("email")}>{data.email}</span>
-              <button type="button">
-                <Image src="/icons/close-icon.svg" width={22} height={22} alt="초대 삭제" />
-              </button>
-            </li>
-          ))}
-        </ul>
+        {mockData.length > 0 ? (
+          <ul className={cn("invite-list")}>
+            {mockData?.map((data) => (
+              <li key={data.id} className={cn("list")}>
+                <span className={cn("email")}>{data.email}</span>
+                <button type="button">
+                  <Image src="/icons/close-icon.svg" width={22} height={22} alt="초대 삭제" />
+                </button>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className={cn("empty-box")}>
+            <Image
+              src="/icons/invite-empty.svg"
+              width={125}
+              height={125}
+              alt="초대한 계정이 없음"
+            />
+            <span>아직 초대된 계정이 없습니다</span>
+          </p>
+        )}
       </div>
     </div>
   );
