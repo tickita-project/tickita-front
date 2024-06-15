@@ -1,9 +1,24 @@
 .container {
   position: relative;
+  width: 103px; /* 내부 사다리꼴 width + border-left + border-right */
+  height: 0;
+  border-bottom: 38px solid $gray200; /* 테두리 색상 */
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+
+  .box {
+    position: absolute;
+    top: 0.15rem;
+    right: -9%;
+    width: 98px;
+    border-bottom: 35px solid $white;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+  }
 
   .title {
     position: absolute;
-    top: 45%;
+    top: 1rem;
     left: 50%;
     transform: translate(-50%, -50%);
     color: $blue500;

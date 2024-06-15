@@ -75,7 +75,7 @@ export default function GroupForm({ groupInfo }: GroupFormProps) {
         </div>
         <div className={cn("preview-image")}>
           <p className={cn("preview-color")} />
-          <Image src="/images/preview.webp" width={160} height={160} alt="그룹 색상 미리보기" />
+          <Image src="/images/preview.webp" width={170} height={170} alt="그룹 색상 미리보기" />
         </div>
       </div>
     </div>

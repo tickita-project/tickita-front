@@ -1,7 +1,6 @@
 import classNames from "classnames/bind";
 
 import TitleBox from "@/components/TitleBox";
-import { useGetUserInfo } from "@/hooks/useGetUserInfo";
 
 import { GroupMemberInfoType } from "@/types/type";
 
@@ -11,13 +10,12 @@ import styles from "./MemberList.module.scss";
 const cn = classNames.bind(styles);
 
 interface MemberListProps {
+  isCurrentUserLeader: boolean;
+  currentUserId: number;
   memberList: GroupMemberInfoType[];
 }
 
-function MemberList({ memberList }: MemberListProps) {
-  const { data: userInfo } = useGetUserInfo();
-  const isCurrentUserLeader = userInfo?.accountId === memberList[0].accountId; // 로그인한 유저가 이 그룹의 리더인지 확인
-
+function MemberList({ currentUserId, isCurrentUserLeader, memberList }: MemberListProps) {
   return (
     <div className={cn("user-list-box")}>
       <div className={cn("title-box")}>
@@ -28,7 +26,7 @@ function MemberList({ memberList }: MemberListProps) {
           <MemberInfo
             key={member.accountId}
             isCurrentUserLeader={isCurrentUserLeader}
-            userId={userInfo?.accountId}
+            currentUserId={currentUserId}
             MemberInfoData={member}
           />
         ))}

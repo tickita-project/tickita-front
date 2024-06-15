@@ -15,20 +15,20 @@ const cn = classNames.bind(styles);
 
 interface MemberInfoProps {
   isCurrentUserLeader: boolean;
-  userId: number | undefined;
+  currentUserId: number;
   MemberInfoData: GroupMemberInfoType;
 }
 
 export default function MemberInfo({
   isCurrentUserLeader,
-  userId,
+  currentUserId,
   MemberInfoData,
 }: MemberInfoProps) {
   const { role, accountId, nickName, email, imageUrl } = MemberInfoData;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const isLeader = role === "OWNER"; // 리더인지 확인
-  const isMe = userId === accountId; // 나인지 확인
+  const isMe = currentUserId === accountId; // 나인지 확인
 
   const handleMenuButtonClick = () => {
     setIsMenuOpen((prev) => !prev);
