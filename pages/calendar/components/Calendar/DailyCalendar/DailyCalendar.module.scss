@@ -60,6 +60,7 @@
         width: 3.125rem;
         text-align: center;
         @include caption2-medium($gray700);
+        @include text-drag-disable;
       }
 
       .schedule-block {
@@ -67,6 +68,10 @@
         height: 3.5rem;
         border-top: 1px solid $gray400;
         margin-left: 3.125rem;
+
+        &.dragged {
+          background-color: $blue300;
+        }
       }
     }
   }
