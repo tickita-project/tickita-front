@@ -67,7 +67,7 @@ export default function Group() {
 
   return (
     <>
-      <MetaData title="그룹 상세 페이지 | 티키타" />
+      <MetaData title={`${groupInfo.crewName} | 티키타`} />
       <section className={cn("content")}>
         <MemberList
           isCurrentUserLeader={isCurrentUserLeader}
