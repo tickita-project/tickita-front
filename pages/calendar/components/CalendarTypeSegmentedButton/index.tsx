@@ -1,7 +1,8 @@
 import classNames from "classnames/bind";
 
+import { CalendarType } from "@/types/type";
+
 import styles from "./CalendarTypeSegmentedButton.module.scss";
-import { CalendarType } from "../../index.page";
 
 interface CalendarTypeRadioButtonProps {
   setCalendarType: (type: CalendarType) => void;

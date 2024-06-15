@@ -1,10 +1,29 @@
 import classNames from "classnames/bind";
-import { Dayjs } from "dayjs";
+
+import { DAYS, HOURS } from "@/constants/calendarConstants";
+import { useDateStore } from "@/store/useDateStore";
 
 import styles from "./DailyCalendar.module.scss";
 
 const cn = classNames.bind(styles);
 
 export default function DailyCalendar() {
-  return <div>일간 캘린더</div>;
+  const { focusDate } = useDateStore();
+
+  return (
+    <div className={cn("container")}>
+      <p className={cn("date")}>
+        {focusDate.date()} <span>{DAYS[focusDate.day()]}</span>
+      </p>
+      <div className={cn("all-day-schedules")}></div>
+      <div className={cn("time-scroll-container")}>
+        {HOURS.map((hour) => (
+          <div className={cn("time-block")} key={hour}>
+            <p className={cn("label")}>{hour.toString().padStart(2, "0")}</p>
+            <div key={hour} className={cn("schedule-block")}></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
