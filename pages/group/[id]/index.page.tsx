@@ -53,7 +53,7 @@ export default function Group() {
     <>
       <MetaData title="그룹 상세 페이지 | 티키타" />
       <section className={cn("content")}>
-        <MemberList />
+        <MemberList memberList={groupInfo.crewMemberInfoResponses} />
         <InviteForm />
         <GroupForm groupInfo={groupInfo} />
       </section>

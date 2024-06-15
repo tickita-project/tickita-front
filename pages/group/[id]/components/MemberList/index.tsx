@@ -10,25 +10,13 @@ import styles from "./MemberList.module.scss";
 
 const cn = classNames.bind(styles);
 
-const mockData: GroupMemberInfoType[] = Array.from({ length: 20 }, (_, index) => ({
-  role: "MEMBER",
-  accountId: index,
-  nickName: `테스트 닉네임 ${index}`,
-  email: `test${index}@naver.com`,
-  imageUrl: null,
-}));
+interface MemberListProps {
+  memberList: GroupMemberInfoType[];
+}
 
-mockData.unshift({
-  role: "OWNER",
-  accountId: 23,
-  nickName: `테스트 닉네임 리더`,
-  email: `leader@naver.com`,
-  imageUrl: null,
-});
-
-function MemberList() {
+function MemberList({ memberList }: MemberListProps) {
   const { data: userInfo } = useGetUserInfo();
-  const isCurrentUserLeader = userInfo?.accountId === mockData[0].accountId; // 로그인한 유저가 이 그룹의 리더인지 확인
+  const isCurrentUserLeader = userInfo?.accountId === memberList[0].accountId; // 로그인한 유저가 이 그룹의 리더인지 확인
 
   return (
     <div className={cn("user-list-box")}>
@@ -36,7 +24,7 @@ function MemberList() {
         <TitleBox title="그룹 멤버" />
       </div>
       <ul className={cn("user-list")}>
-        {mockData.map((member) => (
+        {memberList?.map((member) => (
           <MemberInfo
             key={member.accountId}
             isCurrentUserLeader={isCurrentUserLeader}
