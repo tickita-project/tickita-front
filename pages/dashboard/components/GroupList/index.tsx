@@ -16,6 +16,7 @@ export default function GroupList() {
   const { query } = useRouter();
   const { data: groupList } = useGetGroupList();
   const { openModal } = useModalStore();
+
   const selectId = Number(query.id);
 
   return (

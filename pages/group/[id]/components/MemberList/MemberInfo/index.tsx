@@ -25,8 +25,10 @@ export default function MemberInfo({
   MemberInfoData,
 }: MemberInfoProps) {
   const { role, accountId, nickName, email, imageUrl } = MemberInfoData;
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
+
   const isLeader = role === "OWNER"; // 리더인지 확인
   const isMe = currentUserId === accountId; // 나인지 확인
 

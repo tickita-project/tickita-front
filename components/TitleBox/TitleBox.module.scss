@@ -1,8 +1,8 @@
 .container {
   position: relative;
-  width: 103px; /* 내부 사다리꼴 width + border-left + border-right */
+  width: 6.4375rem;
   height: 0;
-  border-bottom: 38px solid $gray200; /* 테두리 색상 */
+  border-bottom: 38px solid $gray200;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
 
@@ -10,7 +10,7 @@
     position: absolute;
     top: 0.15rem;
     right: -9%;
-    width: 98px;
+    width: 6.125rem;
     border-bottom: 35px solid $white;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;

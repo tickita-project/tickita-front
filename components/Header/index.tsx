@@ -25,7 +25,7 @@ export default function Header() {
   const { pathname } = useRouter();
   const { data: userInfo } = useGetUserInfo();
   const isDashboardPage = pathname === PAGE_PATH.DASHBOARD;
-  const isCalendardPage = pathname === PAGE_PATH.CALENDAR;
+  const isCalendarPage = pathname === PAGE_PATH.CALENDAR;
 
   const handleDashboardTapClick = () => {
     isAnimation.dashboard = true;
@@ -75,16 +75,16 @@ export default function Header() {
           <Link
             onClick={handleCalendarTapClick}
             href={PAGE_PATH.CALENDAR}
-            className={cn("nav-tap-item", { active: isCalendardPage })}
+            className={cn("nav-tap-item", { active: isCalendarPage })}
           >
             캘린더
           </Link>
-          {(isDashboardPage || isCalendardPage) && (
+          {(isDashboardPage || isCalendarPage) && (
             <div
               className={cn("active-effect", {
                 "animation-effect-dashboard": isAnimation.dashboard,
                 "animation-effect-calendar": isAnimation.calendar,
-                "effect-position-right": isCalendardPage,
+                "effect-position-right": isCalendarPage,
               })}
             />
           )}
