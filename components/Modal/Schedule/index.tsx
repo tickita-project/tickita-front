@@ -15,13 +15,22 @@ interface ScheduleModalProps {
 
 export default function ScheduleModal({ mode }: ScheduleModalProps) {
   const { closeModal } = useModalStore();
-  const modalContainerRef = useOutsideClick<HTMLDivElement>(closeModal);
-  const { scheduleStart, scheduleEnd } = useDateStore(
+  const { scheduleStart, scheduleEnd, setScheduleStart, setScheduleEnd } = useDateStore(
     useShallow((state) => ({
       scheduleStart: state.scheduleStart,
       scheduleEnd: state.scheduleEnd,
+      setScheduleStart: state.setScheduleStart,
+      setScheduleEnd: state.setScheduleEnd,
     })),
   );
+
+  const handleCloseModal = () => {
+    closeModal();
+    setScheduleStart(null);
+    setScheduleEnd(null);
+  };
+
+  const modalContainerRef = useOutsideClick<HTMLDivElement>(handleCloseModal);
 
   return (
     <div className={cn("container")} ref={modalContainerRef}>
