@@ -27,7 +27,6 @@ export default function MemberInfo({
   const { role, accountId, nickName, email, imageUrl } = MemberInfoData;
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   const isLeader = role === "OWNER"; // 리더인지 확인
   const isMe = currentUserId === accountId; // 나인지 확인
@@ -36,7 +35,7 @@ export default function MemberInfo({
     setIsMenuOpen((prev) => !prev);
   };
 
-  useOutsideClick(menuButtonRef, () => setIsMenuOpen(false));
+  const menuButtonRef = useOutsideClick<HTMLButtonElement>(() => setIsMenuOpen(false));
 
   return (
     <li className={cn("info-box")}>
