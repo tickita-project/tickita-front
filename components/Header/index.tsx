@@ -8,6 +8,7 @@ import classNames from "classnames/bind";
 
 import { PAGE_PATH } from "@/constants/pagePath";
 import { useGetUserInfo } from "@/hooks/useGetUserInfo";
+import { useOutsideClick } from "@/hooks/useOutsideClick";
 
 import styles from "./Header.module.scss";
 import ProfileImage from "../ProfileImage";
@@ -24,6 +25,8 @@ export default function Header() {
   const [isDropDownView, setIsDropDownView] = useState(false);
   const { pathname } = useRouter();
   const { data: userInfo } = useGetUserInfo();
+  const profileButtonRef = useOutsideClick<HTMLButtonElement>(() => setIsDropDownView(false));
+
   const isDashboardPage = pathname === PAGE_PATH.DASHBOARD;
   const isCalendarPage = pathname === PAGE_PATH.CALENDAR;
 
@@ -45,12 +48,8 @@ export default function Header() {
     }, 500);
   };
 
-  const handleMouseOver = () => {
-    setIsDropDownView(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsDropDownView(false);
+  const handleMenuButtonClick = () => {
+    setIsDropDownView((prev) => !prev);
   };
 
   const handleLogoutButtonClick = () => {
@@ -108,12 +107,10 @@ export default function Header() {
             )}
             <span className={cn("nickname")}>{userInfo?.nickName}</span> 님
           </div>
-          <div
-            className={cn("profileBox")}
-            onMouseOver={handleMouseOver}
-            onMouseLeave={handleMouseLeave}
-          >
-            <ProfileImage imageUrl={userInfo?.image} />
+          <div className={cn("profileBox")}>
+            <button ref={profileButtonRef} onClick={handleMenuButtonClick}>
+              <ProfileImage imageUrl={userInfo?.image} />
+            </button>
             {isDropDownView && (
               <ul className={cn("dropdown")}>
                 <li>
