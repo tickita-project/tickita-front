@@ -1,3 +1,5 @@
+import { useRef, useState } from "react";
+
 import classNames from "classnames/bind";
 import dayjs, { Dayjs } from "dayjs";
 import { useShallow } from "zustand/react/shallow";
@@ -5,6 +7,7 @@ import { useShallow } from "zustand/react/shallow";
 import { DAYS } from "@/constants/calendarConstants";
 import { MODAL_TYPE } from "@/constants/modalType";
 import useDebounce from "@/hooks/useDebounce";
+import useDragSelect from "@/hooks/useDragSelect";
 import useScroll from "@/hooks/useScroll";
 import { useDateStore } from "@/store/useDateStore";
 import { useModalStore } from "@/store/useModalStore";
@@ -15,6 +18,8 @@ import styles from "./MonthlyCalendar.module.scss";
 const cn = classNames.bind(styles);
 
 export default function MonthlyCalendar() {
+  const [selectedDates, setSelectedDates] = useState<number[]>([]);
+  const dragContainerRef = useRef<HTMLDivElement>(null);
   const { focusDate, setFocusDate, setViewDate } = useDateStore();
   const { openModal } = useModalStore();
   const { setScheduleStart, setScheduleEnd } = useDateStore(
@@ -44,6 +49,7 @@ export default function MonthlyCalendar() {
   );
 
   const scrollRef = useScroll<HTMLDivElement>(handleScrollDownDebounced, handleScrollUpDebounced);
+  const { draggedIndex } = useDragSelect(dragContainerRef, setSelectedDates);
 
   const handleOpenModalClick = (date: Dayjs) => {
     setScheduleStart(date.add(0, "hour"));
@@ -60,15 +66,17 @@ export default function MonthlyCalendar() {
           </div>
         ))}
       </div>
-      <div className={cn("month-content")}>
+      <div className={cn("month-content")} ref={dragContainerRef}>
         {dates.map((date, i) => {
           const isThisMonthDay = date.isSame(focusDate, "month");
           const isToday = date.isSame(dayjs(), "date");
+          const isSelected = draggedIndex.includes(i);
           return (
             <div
               key={i}
-              className={cn("date-container")}
+              className={cn("date-container", { selected: isSelected })}
               onClick={() => handleOpenModalClick(date)}
+              data-index={i}
             >
               <p className={cn("date", { today: isToday, "other-month": !isThisMonthDay })}>
                 {date.date()}
