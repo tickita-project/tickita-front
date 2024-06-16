@@ -31,6 +31,8 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
     await queryClient.prefetchQuery({
       queryKey: groupKey.detail(Number(context.query.id)),
       queryFn: () => getGroupInfo(Number(context.query.id)),
+      staleTime: 0,
+      gcTime: 0,
     });
 
     return {

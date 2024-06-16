@@ -2,7 +2,7 @@ import Image from "next/image";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import classNames from "classnames/bind";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { z } from "zod";
 
 import GroupColorPicker from "@/components/GroupColorPicker";
@@ -29,14 +29,14 @@ export default function GroupForm({ groupInfo }: GroupFormProps) {
   const {
     register,
     handleSubmit,
-    watch,
+    control,
     formState: { errors, isValid, isDirty },
   } = useForm({
     mode: "all",
     defaultValues: { crewName: groupInfo.crewName, labelColor: groupInfo.labelColor },
     resolver: zodResolver(createGroupSchema),
   });
-  const selectColor = watch("labelColor");
+  const selectColor = useWatch({ name: "labelColor", control });
 
   const onSubmit = async (formData: any) => {
     // 그룹 정보 변경 로직 추가 예정

@@ -7,6 +7,8 @@ export const useGetGroupInfo = (id: number) => {
   const { data } = useQuery({
     queryKey: groupKey.detail(id),
     queryFn: () => getGroupInfo(id),
+    staleTime: 0,
+    gcTime: 0,
   });
 
   return { data };
