@@ -1,6 +1,7 @@
 import classNames from "classnames/bind";
 import { useShallow } from "zustand/react/shallow";
 
+import Input from "@/components/Input";
 import { useOutsideClick } from "@/hooks/useOutsideClick";
 import { useDateStore } from "@/store/useDateStore";
 import { useModalStore } from "@/store/useModalStore";
@@ -30,10 +31,18 @@ export default function ScheduleModal({ mode }: ScheduleModalProps) {
     setScheduleEnd(null);
   };
 
+  const handleSubmit = () => {
+    //post 요청 추가
+    handleCloseModal();
+  };
+
   return (
     <div className={cn("container")}>
-      <button type="button" onClick={handleCloseModal}>
-        X
+      <form className={cn("create-schedule-form")}>
+        <input type="text" className={cn("schedule-name")} placeholder="무슨 일정인가요?" />
+      </form>
+      <button className={cn("close-modal")} type="button" onClick={handleCloseModal}>
+        취소
       </button>
     </div>
   );

@@ -7,4 +7,23 @@
   top: 50%;
   left: 50%;
   border-radius: 16px;
+
+  .create-schedule-form {
+    width: 100%;
+
+    .schedule-name {
+      width: 100%;
+      display: flex;
+      padding: .5rem 0rem;
+      align-items: center;
+      gap: .25rem;
+      align-self: stretch;
+      outline: none;
+      @include heading4-medium;
+
+      &::placeholder {
+        color: $gray600;
+      }
+    }
+  }
 }

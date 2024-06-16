@@ -39,3 +39,18 @@ export interface GroupType {
 }
 
 export type CalendarType = "월" | "주" | "일";
+
+export interface ParticipantType {
+  accountId: number;
+  nickName: string;
+}
+
+export interface SchedulePostDataType {
+  title: string;
+  startDateTime: string;
+  endDateTime: string;
+  location: string;
+  description: string;
+  crewId: number;
+  participants: ParticipantType[];
+}
