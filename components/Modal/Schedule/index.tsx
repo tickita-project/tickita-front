@@ -30,11 +30,11 @@ export default function ScheduleModal({ mode }: ScheduleModalProps) {
     setScheduleEnd(null);
   };
 
-  const modalContainerRef = useOutsideClick<HTMLDivElement>(handleCloseModal);
-
   return (
-    <div className={cn("container")} ref={modalContainerRef}>
-      스케줄 모달
+    <div className={cn("container")}>
+      <button type="button" onClick={handleCloseModal}>
+        X
+      </button>
     </div>
   );
 }

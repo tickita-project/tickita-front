@@ -25,8 +25,8 @@ export default function DailyCalendar() {
 
   const handleOpenModalClick = (hour: number) => {
     const today = dayjs().startOf("day");
-    setScheduleStart(today.add(hour, "hour"));
-    setScheduleEnd(today.add(hour + 1, "hour"));
+    setScheduleStart(today.add(hour - 1, "hour"));
+    setScheduleEnd(today.add(hour, "hour"));
     openModal(MODAL_TYPE.SCHEDULE_CREATE);
   };
 

@@ -1,7 +1,9 @@
 import classNames from "classnames/bind";
-import dayjs from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
+import { useShallow } from "zustand/react/shallow";
 
 import { DAYS } from "@/constants/calendarConstants";
+import { MODAL_TYPE } from "@/constants/modalType";
 import useDebounce from "@/hooks/useDebounce";
 import useScroll from "@/hooks/useScroll";
 import { useDateStore } from "@/store/useDateStore";
@@ -15,6 +17,12 @@ const cn = classNames.bind(styles);
 export default function MonthlyCalendar() {
   const { focusDate, setFocusDate, setViewDate } = useDateStore();
   const { openModal } = useModalStore();
+  const { setScheduleStart, setScheduleEnd } = useDateStore(
+    useShallow((state) => ({
+      setScheduleStart: state.setScheduleStart,
+      setScheduleEnd: state.setScheduleEnd,
+    })),
+  );
 
   const dates = calculateMonthDates(focusDate);
 
@@ -37,6 +45,12 @@ export default function MonthlyCalendar() {
 
   const scrollRef = useScroll<HTMLDivElement>(handleScrollDownDebounced, handleScrollUpDebounced);
 
+  const handleOpenModalClick = (date: Dayjs) => {
+    setScheduleStart(date.add(0, "hour"));
+    setScheduleEnd(date.add(24, "hour"));
+    openModal(MODAL_TYPE.SCHEDULE_CREATE);
+  };
+
   return (
     <div className={cn("container")} ref={scrollRef}>
       <div className={cn("month-header")}>
@@ -51,7 +65,11 @@ export default function MonthlyCalendar() {
           const isThisMonthDay = date.isSame(focusDate, "month");
           const isToday = date.isSame(dayjs(), "date");
           return (
-            <div key={i} className={cn("date-container")}>
+            <div
+              key={i}
+              className={cn("date-container")}
+              onClick={() => handleOpenModalClick(date)}
+            >
               <p className={cn("date", { today: isToday, "other-month": !isThisMonthDay })}>
                 {date.date()}
               </p>
