@@ -5,6 +5,7 @@ import { DAYS } from "@/constants/calendarConstants";
 import useDebounce from "@/hooks/useDebounce";
 import useScroll from "@/hooks/useScroll";
 import { useDateStore } from "@/store/useDateStore";
+import { useModalStore } from "@/store/useModalStore";
 import { calculateMonthDates } from "@/utils/calculateCalendarDates";
 
 import styles from "./MonthlyCalendar.module.scss";
@@ -13,6 +14,7 @@ const cn = classNames.bind(styles);
 
 export default function MonthlyCalendar() {
   const { focusDate, setFocusDate, setViewDate } = useDateStore();
+  const { openModal } = useModalStore();
 
   const dates = calculateMonthDates(focusDate);
 

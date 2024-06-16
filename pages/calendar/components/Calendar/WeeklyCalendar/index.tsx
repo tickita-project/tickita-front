@@ -6,6 +6,7 @@ import { useShallow } from "zustand/react/shallow";
 
 import { DAYS, HOURS } from "@/constants/calendarConstants";
 import { useDateStore } from "@/store/useDateStore";
+import { useModalStore } from "@/store/useModalStore";
 import { calculateWeekDates } from "@/utils/calculateCalendarDates";
 
 import styles from "./WeeklyCalendar.module.scss";
@@ -14,6 +15,7 @@ const cn = classNames.bind(styles);
 
 export default function WeeklyCalendar() {
   const { focusDate } = useDateStore(useShallow((state) => ({ focusDate: state.focusDate })));
+  const { openModal } = useModalStore();
 
   const dates = calculateWeekDates(focusDate);
 

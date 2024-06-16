@@ -5,6 +5,7 @@ import { useShallow } from "zustand/react/shallow";
 
 import { DAYS, HOURS } from "@/constants/calendarConstants";
 import { useDateStore } from "@/store/useDateStore";
+import { useModalStore } from "@/store/useModalStore";
 
 import styles from "./DailyCalendar.module.scss";
 
@@ -12,6 +13,7 @@ const cn = classNames.bind(styles);
 
 export default function DailyCalendar() {
   const { focusDate } = useDateStore(useShallow((state) => ({ focusDate: state.focusDate })));
+  const { openModal } = useModalStore();
 
   return (
     <div className={cn("container")}>
