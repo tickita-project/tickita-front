@@ -4,10 +4,9 @@ interface UseDragSelectReturn {
   draggedIndex: number[];
 }
 
-function useDragSelect(
-  containerRef: RefObject<HTMLDivElement>,
-  onSelect: (selectedDates: number[]) => void,
-  onDragEnd?: () => void,
+function useDragSelect<T extends HTMLElement>(
+  containerRef: RefObject<T>,
+  handleDragEnd: (draggedIndex: number[]) => void,
 ): UseDragSelectReturn {
   const [isDragging, setIsDragging] = useState(false);
   const [startIndex, setStartIndex] = useState<number | null>(null);
@@ -53,10 +52,7 @@ function useDragSelect(
           for (let i = min; i <= max; i++) {
             newSelectedDates.push(i);
           }
-          onSelect(newSelectedDates);
-          if (onDragEnd) {
-            onDragEnd();
-          }
+          handleDragEnd(newSelectedDates);
         }
         setStartIndex(null);
         setEndIndex(null);
@@ -72,7 +68,7 @@ function useDragSelect(
       document.removeEventListener("pointermove", handlePointerMove);
       document.removeEventListener("pointerup", handlePointerUp);
     };
-  }, [isDragging, startIndex, endIndex, containerRef, onSelect, onDragEnd]);
+  }, [isDragging, startIndex, endIndex, containerRef, handleDragEnd]);
 
   return { draggedIndex };
 }

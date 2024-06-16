@@ -1,7 +1,7 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 
 import classNames from "classnames/bind";
-import dayjs, { Dayjs } from "dayjs";
+import dayjs from "dayjs";
 import { useShallow } from "zustand/react/shallow";
 
 import { DAYS } from "@/constants/calendarConstants";
@@ -18,16 +18,17 @@ import styles from "./MonthlyCalendar.module.scss";
 const cn = classNames.bind(styles);
 
 export default function MonthlyCalendar() {
-  const [selectedDates, setSelectedDates] = useState<number[]>([]);
   const dragContainerRef = useRef<HTMLDivElement>(null);
-  const { focusDate, setFocusDate, setViewDate } = useDateStore();
-  const { openModal } = useModalStore();
-  const { setScheduleStart, setScheduleEnd } = useDateStore(
+  const { focusDate, setFocusDate, setViewDate, setScheduleStart, setScheduleEnd } = useDateStore(
     useShallow((state) => ({
+      focusDate: state.focusDate,
+      setFocusDate: state.setFocusDate,
+      setViewDate: state.setViewDate,
       setScheduleStart: state.setScheduleStart,
       setScheduleEnd: state.setScheduleEnd,
     })),
   );
+  const { openModal } = useModalStore();
 
   const dates = calculateMonthDates(focusDate);
 
@@ -39,6 +40,7 @@ export default function MonthlyCalendar() {
     300,
     true,
   );
+
   const handleScrollDownDebounced = useDebounce(
     () => {
       setFocusDate(focusDate.add(1, "month").date(1));
@@ -48,14 +50,16 @@ export default function MonthlyCalendar() {
     true,
   );
 
-  const scrollRef = useScroll<HTMLDivElement>(handleScrollDownDebounced, handleScrollUpDebounced);
-  const { draggedIndex } = useDragSelect(dragContainerRef, setSelectedDates);
-
-  const handleOpenModalClick = (date: Dayjs) => {
-    setScheduleStart(date.add(0, "hour"));
-    setScheduleEnd(date.add(24, "hour"));
+  const handleDragEnd = (draggedIndex: number[]) => {
+    const startDate = dates[draggedIndex[0]].add(0, "hour");
+    const endDate = dates[draggedIndex[draggedIndex.length - 1]].add(24, "hour");
+    setScheduleStart(startDate);
+    setScheduleEnd(endDate);
     openModal(MODAL_TYPE.SCHEDULE_CREATE);
   };
+
+  const { draggedIndex } = useDragSelect(dragContainerRef, handleDragEnd);
+  const scrollRef = useScroll<HTMLDivElement>(handleScrollDownDebounced, handleScrollUpDebounced);
 
   return (
     <div className={cn("container")} ref={scrollRef}>
@@ -72,12 +76,7 @@ export default function MonthlyCalendar() {
           const isToday = date.isSame(dayjs(), "date");
           const isSelected = draggedIndex.includes(i);
           return (
-            <div
-              key={i}
-              className={cn("date-container", { selected: isSelected })}
-              onClick={() => handleOpenModalClick(date)}
-              data-index={i}
-            >
+            <div key={i} className={cn("date-container", { selected: isSelected })} data-index={i}>
               <p className={cn("date", { today: isToday, "other-month": !isThisMonthDay })}>
                 {date.date()}
               </p>
