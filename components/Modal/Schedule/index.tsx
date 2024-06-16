@@ -1,9 +1,7 @@
-import { useRef } from "react";
-
 import classNames from "classnames/bind";
-import { Dayjs } from "dayjs";
 import { useShallow } from "zustand/react/shallow";
 
+import { useOutsideClick } from "@/hooks/useOutsideClick";
 import { useDateStore } from "@/store/useDateStore";
 import { useModalStore } from "@/store/useModalStore";
 
@@ -16,14 +14,14 @@ interface ScheduleModalProps {
 }
 
 export default function ScheduleModal({ mode }: ScheduleModalProps) {
-  const modalContainerRef = useRef(null);
+  const { closeModal } = useModalStore();
+  const modalContainerRef = useOutsideClick<HTMLDivElement>(closeModal);
   const { scheduleStart, scheduleEnd } = useDateStore(
     useShallow((state) => ({
       scheduleStart: state.scheduleStart,
       scheduleEnd: state.scheduleEnd,
     })),
   );
-  const { closeModal } = useModalStore();
 
   return (
     <div className={cn("container")} ref={modalContainerRef}>
