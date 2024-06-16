@@ -9,10 +9,13 @@
   border-radius: 16px;
 
   .create-schedule-form {
-    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    align-self: stretch;
 
     .schedule-name {
-      width: 100%;
       display: flex;
       padding: .5rem 0rem;
       align-items: center;
@@ -25,5 +28,63 @@
         color: $gray600;
       }
     }
+  }
+
+  .time-location-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    .time-container,
+    .location-container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      align-self: stretch;
+
+      p {
+        width: 2.5rem;
+        @include headline2-bold;
+
+      }
+
+      .time {
+        display: flex;
+        align-items: center;
+        gap: .125rem;
+
+
+        .start,
+        .end {
+          display: flex;
+          align-items: center;
+          gap: .3125rem;
+
+          .date {
+            @include headline2-bold;
+          }
+
+          .time {
+            @include headline2-bold;
+          }
+        }
+      }
+
+      .location {
+        width: 100%;
+        display: flex;
+        padding: 8px 4px;
+        align-items: center;
+        gap: 4px;
+
+        .location-input {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .close-modal {
+    /* close-modal 버튼 스타일 추가 */
   }
 }

@@ -19,6 +19,12 @@ export const useDateStore = create<DateStoreType>((set) => ({
   scheduleEnd: null,
   setFocusDate: (day) => set(() => ({ focusDate: day })),
   setViewDate: (day) => set(() => ({ viewDate: day })),
-  setScheduleStart: (day) => set(() => ({ scheduleStart: day })),
-  setScheduleEnd: (day) => set(() => ({ scheduleEnd: day })),
+  setScheduleStart: (day) =>
+    set(() => ({
+      scheduleStart: day ? day.month(day.month() + 1) : null,
+    })),
+  setScheduleEnd: (day) =>
+    set(() => ({
+      scheduleEnd: day ? day.month(day.month() + 1) : null,
+    })),
 }));
