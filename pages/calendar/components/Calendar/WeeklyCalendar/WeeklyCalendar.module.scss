@@ -99,6 +99,10 @@
         .time-block {
           height: 5rem; // 각 시간 칸의 높이
           border-bottom: 1px solid $gray300;
+
+          &.dragged {
+            background-color: $blue300;
+          }
         }
       }
     }

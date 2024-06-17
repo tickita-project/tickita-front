@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import classNames from "classnames/bind";
-import dayjs, { Dayjs } from "dayjs";
+import dayjs from "dayjs";
 import { useShallow } from "zustand/react/shallow";
 
 import { DAYS, HOURS } from "@/constants/calendarConstants";
@@ -15,21 +15,41 @@ import styles from "./WeeklyCalendar.module.scss";
 const cn = classNames.bind(styles);
 
 export default function WeeklyCalendar() {
-  const { focusDate } = useDateStore(useShallow((state) => ({ focusDate: state.focusDate })));
-  const { openModal } = useModalStore();
-  const { setScheduleStart, setScheduleEnd } = useDateStore(
+  const [dragStartDayIndex, setDragStartDayIndex] = useState<number | null>(null);
+  const [draggedHoursIndex, setDraggedHoursIndex] = useState<number[]>([]);
+  const { focusDate, setScheduleStart, setScheduleEnd } = useDateStore(
     useShallow((state) => ({
+      focusDate: state.focusDate,
       setScheduleStart: state.setScheduleStart,
       setScheduleEnd: state.setScheduleEnd,
     })),
   );
+  const { openModal } = useModalStore();
 
   const dates = calculateWeekDates(focusDate);
 
-  const handleOpenModalClick = (date: Dayjs, hour: number) => {
-    setScheduleStart(date.add(hour - 1, "hour"));
-    setScheduleEnd(date.add(hour, "hour"));
-    openModal(MODAL_TYPE.SCHEDULE_CREATE);
+  const handleDragStart = (dayIndex: number, hourIndex: number) => {
+    setDragStartDayIndex(dayIndex);
+    setDraggedHoursIndex([hourIndex]);
+  };
+
+  const handleDragMove = (hourIndex: number) => {
+    setDraggedHoursIndex((prev) => {
+      const newDraggedIndex = [...prev, hourIndex];
+      return Array.from(new Set(newDraggedIndex)).sort((a, b) => a - b);
+    });
+  };
+
+  const handleDragEnd = () => {
+    if (dragStartDayIndex) {
+      setScheduleStart(dates[dragStartDayIndex].add(draggedHoursIndex[0], "hour"));
+      setScheduleEnd(
+        dates[dragStartDayIndex].add(draggedHoursIndex[draggedHoursIndex.length - 1], "hour"),
+      );
+      openModal(MODAL_TYPE.SCHEDULE_CREATE);
+    }
+    setDraggedHoursIndex([]);
+    setDragStartDayIndex(null);
   };
 
   return (
@@ -51,13 +71,19 @@ export default function WeeklyCalendar() {
           ))}
         </div>
         <div className={cn("time-container")}>
-          {dates.map((date, idx) => (
-            <div key={idx} className={cn("time-column")}>
-              {HOURS.map((hour) => (
+          {dates.map((date, dayIndex) => (
+            <div key={dayIndex} className={cn("time-column")}>
+              {HOURS.map((hour, hourIndex) => (
                 <div
                   key={hour}
-                  className={cn("time-block")}
-                  onClick={() => handleOpenModalClick(date, hour)}
+                  className={cn("time-block", {
+                    dragged:
+                      draggedHoursIndex.includes(hourIndex) && dragStartDayIndex === dayIndex,
+                  })}
+                  data-index={hourIndex}
+                  onPointerDown={() => handleDragStart(dayIndex, hourIndex)}
+                  onPointerMove={() => handleDragMove(hourIndex)}
+                  onPointerUp={handleDragEnd}
                 ></div>
               ))}
             </div>
