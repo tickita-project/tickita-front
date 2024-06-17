@@ -23,6 +23,7 @@
       gap: .125rem;
       flex: 1 0 0;
       align-self: stretch;
+      @include text-drag-disable;
 
       .day {
         @include caption1-medium($gray700);
@@ -76,6 +77,7 @@
 
       .label {
         @include caption2-medium($gray700);
+        @include text-drag-disable;
       }
     }
 
@@ -97,6 +99,10 @@
         .time-block {
           height: 5rem; // 각 시간 칸의 높이
           border-bottom: 1px solid $gray300;
+
+          &.dragged {
+            background-color: $blue300;
+          }
         }
       }
     }

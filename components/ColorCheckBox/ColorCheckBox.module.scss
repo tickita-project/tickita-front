@@ -20,5 +20,6 @@
     letter-spacing: -0.02188rem;
     @include text-overflow-ellipsis(1);
     flex-shrink: 1;
+    cursor: pointer;
   }
 }
