@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, RefObject } from "react";
+import { useState, useEffect, RefObject } from "react";
 
 interface UseDragSelectReturn {
   draggedIndex: number[];
@@ -13,10 +13,14 @@ function useDragSelect<T extends HTMLElement>(
   const [endIndex, setEndIndex] = useState<number | null>(null);
   const [draggedIndex, setDraggedIndex] = useState<number[]>([]);
 
+  const getTargetIndex = (e: PointerEvent): number => {
+    return parseInt((e.target as HTMLElement).dataset.index ?? "-1", 10);
+  };
+
   useEffect(() => {
     const handlePointerDown = (e: PointerEvent) => {
       if (containerRef.current && containerRef.current.contains(e.target as Node)) {
-        const targetIndex = parseInt((e.target as HTMLElement).dataset.index || "-1", 10);
+        const targetIndex = getTargetIndex(e);
         if (targetIndex !== -1) {
           setIsDragging(true);
           setStartIndex(targetIndex);
@@ -28,7 +32,7 @@ function useDragSelect<T extends HTMLElement>(
 
     const handlePointerMove = (e: PointerEvent) => {
       if (isDragging && containerRef.current && containerRef.current.contains(e.target as Node)) {
-        const targetIndex = parseInt((e.target as HTMLElement).dataset.index || "-1", 10);
+        const targetIndex = getTargetIndex(e);
         if (targetIndex !== -1) {
           setEndIndex(targetIndex);
           const min = Math.min(startIndex!, targetIndex);

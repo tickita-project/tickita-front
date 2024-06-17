@@ -1,7 +1,6 @@
 import { useRef } from "react";
 
 import classNames from "classnames/bind";
-import dayjs, { Dayjs } from "dayjs";
 import { useShallow } from "zustand/react/shallow";
 
 import { DAYS, HOURS } from "@/constants/calendarConstants";
@@ -49,7 +48,7 @@ export default function DailyCalendar() {
               key={hour}
               className={cn("schedule-block", { dragged: draggedIndex.includes(i) })}
               data-index={i}
-            ></div>
+            />
           </div>
         ))}
       </div>

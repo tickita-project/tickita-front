@@ -84,7 +84,7 @@ export default function WeeklyCalendar() {
                   onPointerDown={() => handleDragStart(dayIndex, hourIndex)}
                   onPointerMove={() => handleDragMove(hourIndex)}
                   onPointerUp={handleDragEnd}
-                ></div>
+                />
               ))}
             </div>
           ))}

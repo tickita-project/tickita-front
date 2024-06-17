@@ -3,10 +3,8 @@ import { useState } from "react";
 import Image from "next/image";
 
 import classNames from "classnames/bind";
-import dayjs from "dayjs";
 import { useShallow } from "zustand/react/shallow";
 
-import Input from "@/components/Input";
 import { useDateStore } from "@/store/useDateStore";
 import { useModalStore } from "@/store/useModalStore";
 
@@ -68,7 +66,7 @@ export default function ScheduleModal({ mode }: ScheduleModalProps) {
         <div className={cn("location-container")}>
           <p>장소</p>
           <div className={cn("location")}>
-            <Image src={"/icons/location-icon.svg"} width={20} height={20} alt="장소" />
+            <Image src="/icons/location-icon.svg" width={20} height={20} alt="장소" />
             <input
               className={cn("location-input")}
               type="text"
@@ -83,4 +81,3 @@ export default function ScheduleModal({ mode }: ScheduleModalProps) {
     </div>
   );
 }
-// className={cn("")}
