@@ -1,0 +1,42 @@
+.user-list-box {
+  position: relative;
+  padding: 1.25rem 1.5rem;
+  width: 28rem;
+  height: 43rem;
+  border-radius: 1rem;
+  background-color: $white;
+  border: 1px solid $gray200;
+  box-shadow:
+    0px 1px 2px 0px rgba(0, 0, 0, 0.12),
+    0px 0px 1px 0px rgba(0, 0, 0, 0.08),
+    0px 0px 1px 0px rgba(0, 0, 0, 0.08);
+
+  .title-box {
+    position: absolute;
+    top: -2.4rem;
+    left: 1rem;
+  }
+
+  .user-list {
+    height: 40rem;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+      width: 0.7rem;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $gray300;
+      border: 1px solid $gray400;
+      border-radius: 5px;
+      min-height: 3.75rem;
+    }
+
+    &::-webkit-scrollbar-track {
+      border-radius: 100px;
+      background: $gray100;
+    }
+  }
+}

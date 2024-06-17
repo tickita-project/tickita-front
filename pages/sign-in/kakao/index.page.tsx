@@ -41,6 +41,7 @@ export async function getServerSideProps(
         code,
       },
     });
+
     const {
       id,
       isComplete,
