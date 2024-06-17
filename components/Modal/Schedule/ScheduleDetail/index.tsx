@@ -12,12 +12,7 @@ import styles from "./ScheduleModal.module.scss";
 
 const cn = classNames.bind(styles);
 
-interface ScheduleModalProps {
-  mode: "create" | "edit" | "detail";
-}
-
-export default function ScheduleModal({ mode }: ScheduleModalProps) {
-  const [isReadOnly, setIsReadOnly] = useState<boolean>(mode === "detail");
+export default function ScheduleDetailModal() {
   const { closeModal } = useModalStore();
   const { scheduleStart, scheduleEnd, setScheduleStart, setScheduleEnd } = useDateStore(
     useShallow((state) => ({
@@ -42,12 +37,7 @@ export default function ScheduleModal({ mode }: ScheduleModalProps) {
   return (
     <div className={cn("container")}>
       <form className={cn("create-schedule-form")}>
-        <input
-          type="text"
-          className={cn("schedule-name")}
-          readOnly={isReadOnly}
-          placeholder="무슨 일정인가요?"
-        />
+        <input type="text" className={cn("schedule-name")} placeholder="무슨 일정인가요?" />
       </form>
       <div className={cn("time-location-container")}>
         <div className={cn("time-container")}>

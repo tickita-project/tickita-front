@@ -5,13 +5,13 @@ import { useModalStore } from "@/store/useModalStore";
 
 import styles from "./Portal.module.scss";
 import CreateGroupModal from "../CreateGroup";
-import ScheduleModal from "../Schedule";
+import ScheduleDetailModal from "../Schedule/ScheduleDetail";
 
 const cn = classNames.bind(styles);
 
 const MODAL_TYPE: Record<string, JSX.Element> = {
   CREATE_GROUP: <CreateGroupModal />,
-  SCHEDULE_CREATE: <ScheduleModal mode="create" />,
+  SCHEDULE_CREATE: <ScheduleDetailModal />,
 };
 
 export default function Portal() {
