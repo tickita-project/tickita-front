@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import classNames from "classnames/bind";
 import Lottie from "react-lottie-player";
 
-import { basicInstance, instance, setContext } from "@/apis/axios";
+import { basicInstance, setContext } from "@/apis/axios";
 import { PAGE_PATH } from "@/constants/pagePath";
 import loadingLottie from "@/public/images/login-loading.json";
 
