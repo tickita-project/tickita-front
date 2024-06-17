@@ -8,7 +8,7 @@ import ProfileSetupForm from "./components/ProfileSetupForm/ProfileSetupForm";
 import { instance } from "@/apis/axios";
 import MetaData from "@/components/MetaData";
 
-import styles from "./index.module.scss";
+import styles from "./ProfileSetup.module.scss";
 
 const cn = classNames.bind(styles);
 

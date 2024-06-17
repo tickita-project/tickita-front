@@ -10,7 +10,7 @@ import { basicInstance, setContext } from "@/apis/axios";
 import { PAGE_PATH } from "@/constants/pagePath";
 import loadingLottie from "@/public/images/login-loading.json";
 
-import styles from "./index.module.scss";
+import styles from "./Kakao.module.scss";
 
 const cn = classNames.bind(styles);
 

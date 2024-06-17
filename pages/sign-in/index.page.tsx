@@ -5,7 +5,7 @@ import Link from "next/link";
 
 import classNames from "classnames/bind";
 
-import styles from "./index.module.scss";
+import styles from "./SignIn.module.scss";
 
 const cn = classNames.bind(styles);
 
