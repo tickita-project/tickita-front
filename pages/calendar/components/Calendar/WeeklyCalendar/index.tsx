@@ -44,7 +44,7 @@ export default function WeeklyCalendar() {
     if (dragStartDayIndex) {
       setScheduleStart(dates[dragStartDayIndex].add(draggedHoursIndex[0], "hour"));
       setScheduleEnd(
-        dates[dragStartDayIndex].add(draggedHoursIndex[draggedHoursIndex.length - 1], "hour"),
+        dates[dragStartDayIndex].add(draggedHoursIndex[draggedHoursIndex.length - 1] + 1, "hour"),
       );
       openModal(MODAL_TYPE.SCHEDULE_CREATE);
     }

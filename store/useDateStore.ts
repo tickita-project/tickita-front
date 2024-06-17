@@ -21,10 +21,10 @@ export const useDateStore = create<DateStoreType>((set) => ({
   setViewDate: (day) => set(() => ({ viewDate: day })),
   setScheduleStart: (day) =>
     set(() => ({
-      scheduleStart: day ? day.month(day.month() + 1) : null,
+      scheduleStart: day,
     })),
   setScheduleEnd: (day) =>
     set(() => ({
-      scheduleEnd: day ? day.month(day.month() + 1) : null,
+      scheduleEnd: day,
     })),
 }));

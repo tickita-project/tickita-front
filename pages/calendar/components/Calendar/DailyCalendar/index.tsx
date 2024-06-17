@@ -26,8 +26,10 @@ export default function DailyCalendar() {
   const { openModal } = useModalStore();
 
   const handleDragEnd = (draggedIndex: number[]) => {
-    setScheduleStart(focusDate.add(draggedIndex[0], "hour"));
-    setScheduleEnd(focusDate.add(draggedIndex[draggedIndex.length - 1], "hour"));
+    const startHour = draggedIndex[0];
+    const endHour = draggedIndex[draggedIndex.length - 1] + 1;
+    setScheduleStart(focusDate.hour(startHour).minute(0).second(0));
+    setScheduleEnd(focusDate.hour(endHour).minute(0).second(0));
     openModal(MODAL_TYPE.SCHEDULE_CREATE);
   };
 

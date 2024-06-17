@@ -56,15 +56,12 @@ export default function ScheduleModal({ mode }: ScheduleModalProps) {
           <p>시간</p>
           <div className={cn("time")}>
             <div className={cn("start")}>
-              <p className={cn("date")}>
-                {scheduleStart?.year()}.{scheduleStart?.month()}.{scheduleStart?.date()}
-              </p>
+              <p className={cn("date")}>{scheduleStart?.format("YYYY-MM-DDTHH:mm:ss")}</p>
+              <p className={cn("time")}></p>
             </div>
-            <p>&nbsp;-&nbsp;</p>
+
             <div className={cn("end")}>
-              <p className={cn("date")}>
-                {scheduleEnd?.year()}.{scheduleEnd?.month()}.{scheduleEnd?.date()}
-              </p>
+              <p className={cn("date")}>{scheduleEnd?.format("YYYY-MM-DDTHH:mm:ss")}</p>
             </div>
           </div>
         </div>
