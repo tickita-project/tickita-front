@@ -1,0 +1,120 @@
+.invite-box {
+  width: 27.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  .invite {
+    width: 100%;
+    position: relative;
+    padding: 1.25rem 1.5rem;
+    border-radius: 1rem;
+    background-color: $white;
+    border: 1px solid $gray200;
+    box-shadow:
+      0px 1px 2px 0px rgba(0, 0, 0, 0.12),
+      0px 0px 1px 0px rgba(0, 0, 0, 0.08),
+      0px 0px 1px 0px rgba(0, 0, 0, 0.08);
+
+    .title-box {
+      position: absolute;
+      top: -2.4rem;
+      left: 1rem;
+    }
+
+    .text {
+      display: flex;
+      justify-content: right;
+      color: $gray600;
+      font-size: 0.75rem;
+      margin-top: 1rem;
+      font-weight: 600;
+    }
+  }
+
+  .invite-list-box {
+    width: 27.5rem;
+    height: 31.5rem;
+    padding: 1.25rem;
+    border-radius: 1rem;
+    background-color: $white;
+    border: 1px solid $gray200;
+    box-shadow:
+      0px 1px 2px 0px rgba(0, 0, 0, 0.12),
+      0px 0px 1px 0px rgba(0, 0, 0, 0.08),
+      0px 0px 1px 0px rgba(0, 0, 0, 0.08);
+
+    .empty-box {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+      padding: 5rem 1rem 0;
+      background-color: $gray50;
+      border-radius: 0.5rem;
+      border: 1px solid $gray200;
+      height: 100%;
+
+      span {
+        font-size: 1.25rem;
+        font-weight: 500;
+        color: $gray600;
+      }
+    }
+
+    .invite-list {
+      padding: 1rem;
+      background-color: $blue50;
+      border-radius: 0.5rem;
+      border: 1px solid $gray200;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      overflow-y: auto;
+
+      &::-webkit-scrollbar {
+        width: 0.75rem;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: $blue100;
+        border: 1.5px solid $blue300;
+        border-radius: 5px;
+        min-height: 3.75rem;
+      }
+
+      &::-webkit-scrollbar-track {
+        border-radius: 100px;
+        background: $blue200;
+      }
+
+      .list {
+        width: 100%;
+        padding: 1rem;
+        background-color: $white;
+        border: 1px solid $gray400;
+        display: flex;
+        align-items: center;
+        border-radius: 0.5rem;
+        justify-content: space-between;
+
+        .email {
+          width: 17rem;
+          @include text-overflow-ellipsis(1);
+        }
+
+        button {
+          padding: 0;
+          width: 1.375rem;
+          height: 1.375rem;
+          transition: transform 0.5s ease;
+
+          &:hover {
+            transform: rotate(180deg);
+          }
+        }
+      }
+    }
+  }
+}

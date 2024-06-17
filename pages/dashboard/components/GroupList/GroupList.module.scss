@@ -69,7 +69,7 @@
       color: $black;
       font-weight: 500;
       letter-spacing: -0.02188rem;
-      width: 13rem;
+      width: 12.5rem;
       height: 3rem;
       padding: 0.75rem 1.5rem 0.75rem 0.5rem;
       display: flex;
@@ -94,6 +94,23 @@
           background-size: contain;
           background-repeat: no-repeat;
           animation: showArrow 0.5s forwards;
+        }
+      }
+
+      &.selected {
+        background-color: $blue200;
+
+        &::after {
+          content: "";
+          position: absolute;
+          right: 1rem;
+          top: 53%;
+          transform: translateY(-50%);
+          width: 1rem;
+          height: 1rem;
+          background-image: url("/icons/group-arrow-right.svg");
+          background-size: contain;
+          background-repeat: no-repeat;
         }
       }
 

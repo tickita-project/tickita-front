@@ -1,4 +1,4 @@
-import { useRef, useEffect, RefObject } from "react";
+import { RefObject, useEffect, useRef } from "react";
 
 /**
  * 전달 받은 요소 밖의 것을 클릭한 경우 인자의 handler 호출
@@ -15,6 +15,7 @@ export function useOutsideClick<T extends HTMLElement>(
       if (!ref.current || ref.current.contains(event.target as Node)) {
         return;
       }
+
       handler(event);
     };
 

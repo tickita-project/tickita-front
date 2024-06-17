@@ -8,6 +8,7 @@ import classNames from "classnames/bind";
 
 import { PAGE_PATH } from "@/constants/pagePath";
 import { useGetUserInfo } from "@/hooks/useGetUserInfo";
+import { useOutsideClick } from "@/hooks/useOutsideClick";
 
 import styles from "./Header.module.scss";
 import ProfileImage from "../ProfileImage";
@@ -24,10 +25,10 @@ export default function Header() {
   const [isDropDownView, setIsDropDownView] = useState(false);
   const { pathname } = useRouter();
   const { data: userInfo } = useGetUserInfo();
+  const profileButtonRef = useOutsideClick<HTMLButtonElement>(() => setIsDropDownView(false));
 
-  if (!userInfo) {
-    return null;
-  }
+  const isDashboardPage = pathname === PAGE_PATH.DASHBOARD;
+  const isCalendarPage = pathname === PAGE_PATH.CALENDAR;
 
   const handleDashboardTapClick = () => {
     isAnimation.dashboard = true;
@@ -35,7 +36,7 @@ export default function Header() {
     // 애니메이션 초기화
     setTimeout(() => {
       isAnimation.dashboard = false;
-    }, 100);
+    }, 500);
   };
 
   const handleCalendarTapClick = () => {
@@ -44,15 +45,11 @@ export default function Header() {
     // 애니메이션 초기화
     setTimeout(() => {
       isAnimation.calendar = false;
-    }, 100);
+    }, 500);
   };
 
-  const handleMouseOver = () => {
-    setIsDropDownView(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsDropDownView(false);
+  const handleMenuButtonClick = () => {
+    setIsDropDownView((prev) => !prev);
   };
 
   const handleLogoutButtonClick = () => {
@@ -70,35 +67,37 @@ export default function Header() {
           <Link
             onClick={handleDashboardTapClick}
             href={PAGE_PATH.DASHBOARD}
-            className={cn("nav-tap-item", { active: pathname === PAGE_PATH.DASHBOARD })}
+            className={cn("nav-tap-item", { active: isDashboardPage })}
           >
             대시보드
           </Link>
           <Link
             onClick={handleCalendarTapClick}
             href={PAGE_PATH.CALENDAR}
-            className={cn("nav-tap-item", { active: pathname === PAGE_PATH.CALENDAR })}
+            className={cn("nav-tap-item", { active: isCalendarPage })}
           >
             캘린더
           </Link>
-          <div
-            className={cn("active-effect", {
-              "animation-effect-dashboard": isAnimation.dashboard,
-              "animation-effect-calendar": isAnimation.calendar,
-              "effect-position-right": pathname === PAGE_PATH.CALENDAR,
-            })}
-          />
+          {(isDashboardPage || isCalendarPage) && (
+            <div
+              className={cn("active-effect", {
+                "animation-effect-dashboard": isAnimation.dashboard,
+                "animation-effect-calendar": isAnimation.calendar,
+                "effect-position-right": isCalendarPage,
+              })}
+            />
+          )}
         </div>
 
         <div className={cn("profile-box")}>
           <div className={cn("nickname-box")}>
-            {pathname === PAGE_PATH.DASHBOARD ? (
+            {isDashboardPage ? (
               <span className={cn("guide-text")}>반가워요, </span>
             ) : (
               <figure className={cn("notification-bell")}>
                 <figcaption className={cn("notification-count")}>9+</figcaption>
                 <Image
-                  src="icons/notification-bell.svg"
+                  src="/icons/notification-bell.svg"
                   width={26}
                   height={20}
                   alt="알림 종"
@@ -106,14 +105,12 @@ export default function Header() {
                 />
               </figure>
             )}
-            <span className={cn("nickname")}>{userInfo.nickName}</span> 님
+            <span className={cn("nickname")}>{userInfo?.nickName}</span> 님
           </div>
-          <div
-            className={cn("profileBox")}
-            onMouseOver={handleMouseOver}
-            onMouseLeave={handleMouseLeave}
-          >
-            <ProfileImage imageUrl={userInfo.image} />
+          <div className={cn("profileBox")}>
+            <button ref={profileButtonRef} onClick={handleMenuButtonClick}>
+              <ProfileImage imageUrl={userInfo?.image} />
+            </button>
             {isDropDownView && (
               <ul className={cn("dropdown")}>
                 <li>
