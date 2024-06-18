@@ -1,0 +1,30 @@
+.container {
+  position: relative;
+  width: 6.4375rem;
+  height: 0;
+  border-bottom: 38px solid $gray200;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+
+  .box {
+    position: absolute;
+    top: 0.15rem;
+    right: -9%;
+    width: 6.125rem;
+    border-bottom: 35px solid $white;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+  }
+
+  .title {
+    position: absolute;
+    top: 1rem;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: $blue500;
+    font-size: 0.875rem;
+    font-weight: 500;
+    width: 100%;
+    text-align: center;
+  }
+}

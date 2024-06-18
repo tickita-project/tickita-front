@@ -12,8 +12,32 @@ export const setContext = (_context: GetServerSidePropsContext) => {
   context = _context;
 };
 
+const getBaseURL = () => {
+  if (getIsBrowser()) {
+    return window.location.origin;
+  }
+
+  if (getIsServer() && context) {
+    const { req } = context;
+
+    const protocol = req.headers["x-forwarded-proto"];
+    const host = req.headers.host;
+
+    if (protocol && host) {
+      return `${protocol}://${host}`;
+    }
+  }
+};
+
 export const nextInstance = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: getBaseURL(),
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+export const basicInstance = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_BASE_API_URL,
   headers: {
     "Content-Type": "application/json",
   },

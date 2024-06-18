@@ -1,0 +1,109 @@
+.info-box {
+  display: flex;
+  align-items: center;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid $gray300;
+
+  &:first-child {
+    padding: 0 0 0.9rem;
+  }
+
+  &:last-child {
+    padding: 0.9rem 0 0;
+    border-bottom: none;
+  }
+
+  .image-box {
+    position: relative;
+
+    .my-badge {
+      position: absolute;
+      right: -0.4rem;
+      bottom: -0.4rem;
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 50%;
+      background-color: $gray900;
+      color: $white;
+      opacity: 0.75;
+      font-size: 0.65rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .text-box {
+    padding: 0.2rem 0.9rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 75%;
+
+    .nickname {
+      font-size: 0.875rem;
+      font-weight: 600;
+      @include text-overflow-ellipsis(1);
+    }
+
+    .email {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: $gray700;
+      @include text-overflow-ellipsis(1);
+    }
+  }
+
+  .leader-badge {
+    background-color: $blue500;
+    color: $white;
+    padding: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 0.25rem;
+  }
+
+  .menu-box {
+    margin-left: 1.25rem;
+    position: relative;
+
+    .menu-list {
+      position: absolute;
+      z-index: 999;
+      top: 1rem;
+      left: -5rem;
+      background-color: $white;
+      width: 6rem;
+      height: 4.5rem;
+      border: 1px solid $gray300;
+      border-radius: 0.5rem;
+
+      .menu-button {
+        width: 100%;
+        padding: 0.6rem 1rem;
+        font-size: 0.8rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 600;
+        cursor: pointer;
+
+        &.mandate-button {
+          border-bottom: 1px solid $gray300;
+          border-radius: 0.5rem 0.5rem 0 0;
+        }
+
+        &.exile-button {
+          border-radius: 0 0 0.5rem 0.5rem;
+          color: $red500;
+        }
+
+        &:hover {
+          background-color: $gray200;
+          transition: 0.75s;
+        }
+      }
+    }
+  }
+}

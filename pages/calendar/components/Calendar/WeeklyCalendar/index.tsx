@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import classNames from "classnames/bind";
 import dayjs from "dayjs";
+import { useShallow } from "zustand/react/shallow";
 
 import { DAYS, HOURS } from "@/constants/calendarConstants";
+import { MODAL_TYPE } from "@/constants/modalType";
 import { useDateStore } from "@/store/useDateStore";
+import { useModalStore } from "@/store/useModalStore";
 import { calculateWeekDates } from "@/utils/calculateCalendarDates";
 
 import styles from "./WeeklyCalendar.module.scss";
@@ -12,9 +15,42 @@ import styles from "./WeeklyCalendar.module.scss";
 const cn = classNames.bind(styles);
 
 export default function WeeklyCalendar() {
-  const { focusDate } = useDateStore();
+  const [dragStartDayIndex, setDragStartDayIndex] = useState<number | null>(null);
+  const [draggedHoursIndex, setDraggedHoursIndex] = useState<number[]>([]);
+  const { focusDate, setScheduleStart, setScheduleEnd } = useDateStore(
+    useShallow((state) => ({
+      focusDate: state.focusDate,
+      setScheduleStart: state.setScheduleStart,
+      setScheduleEnd: state.setScheduleEnd,
+    })),
+  );
+  const { openModal } = useModalStore();
 
   const dates = calculateWeekDates(focusDate);
+
+  const handleDragStart = (dayIndex: number, hourIndex: number) => {
+    setDragStartDayIndex(dayIndex);
+    setDraggedHoursIndex([hourIndex]);
+  };
+
+  const handleDragMove = (hourIndex: number) => {
+    setDraggedHoursIndex((prev) => {
+      const newDraggedIndex = [...prev, hourIndex];
+      return Array.from(new Set(newDraggedIndex)).sort((a, b) => a - b);
+    });
+  };
+
+  const handleDragEnd = () => {
+    if (dragStartDayIndex) {
+      setScheduleStart(dates[dragStartDayIndex].add(draggedHoursIndex[0], "hour"));
+      setScheduleEnd(
+        dates[dragStartDayIndex].add(draggedHoursIndex[draggedHoursIndex.length - 1] + 1, "hour"),
+      );
+      openModal(MODAL_TYPE.SCHEDULE_CREATE);
+    }
+    setDraggedHoursIndex([]);
+    setDragStartDayIndex(null);
+  };
 
   return (
     <div className={cn("container")}>
@@ -35,10 +71,20 @@ export default function WeeklyCalendar() {
           ))}
         </div>
         <div className={cn("time-container")}>
-          {dates.map((date, idx) => (
-            <div key={idx} className={cn("time-column")}>
-              {HOURS.map((hour) => (
-                <div key={hour} className={cn("time-block")}></div>
+          {dates.map((date, dayIndex) => (
+            <div key={dayIndex} className={cn("time-column")}>
+              {HOURS.map((hour, hourIndex) => (
+                <div
+                  key={hour}
+                  className={cn("time-block", {
+                    dragged:
+                      draggedHoursIndex.includes(hourIndex) && dragStartDayIndex === dayIndex,
+                  })}
+                  data-index={hourIndex}
+                  onPointerDown={() => handleDragStart(dayIndex, hourIndex)}
+                  onPointerMove={() => handleDragMove(hourIndex)}
+                  onPointerUp={handleDragEnd}
+                />
               ))}
             </div>
           ))}

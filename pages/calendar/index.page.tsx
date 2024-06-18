@@ -7,17 +7,18 @@ import { QueryClient, dehydrate } from "@tanstack/react-query";
 import classNames from "classnames/bind";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
+import { useShallow } from "zustand/react/shallow";
 
 import CalendarHeader from "./components/Calendar/CalendarHeader";
 import DailyCalendar from "./components/Calendar/DailyCalendar";
 import MonthlyCalendar from "./components/Calendar/MonthlyCalendar";
 import WeeklyCalendar from "./components/Calendar/WeeklyCalendar";
 import CalendarSideBar from "./components/CalendarSideBar";
-import { getUserInfo } from "@/apis/apis";
+import { getGroupList, getUserInfo } from "@/apis/apis";
 import { setContext } from "@/apis/axios";
 import Header from "@/components/Header";
 import MetaData from "@/components/MetaData";
-import { userInfoKey } from "@/constants/queryKey";
+import { groupKey, userInfoKey } from "@/constants/queryKey";
 import { useDateStore } from "@/store/useDateStore";
 import { calculateMonthDates } from "@/utils/calculateCalendarDates";
 
@@ -34,6 +35,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
   const queryClient = new QueryClient();
 
   try {
+    await queryClient.prefetchQuery({ queryKey: groupKey.lists(), queryFn: getGroupList });
     await queryClient.prefetchQuery({ queryKey: userInfoKey.info(), queryFn: getUserInfo });
 
     return {
@@ -49,7 +51,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
 export default function CalendarPage() {
   const [calendarType, setCalendarType] = useState<CalendarType>("월");
   const router = useRouter();
-  const { focusDate } = useDateStore();
+  const { focusDate } = useDateStore(useShallow((state) => ({ focusDate: state.focusDate })));
 
   useEffect(() => {
     let startDate = null;

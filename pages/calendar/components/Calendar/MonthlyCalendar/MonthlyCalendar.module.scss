@@ -45,6 +45,10 @@ $border: .0625rem solid $gray400;
       position: relative;
       width: 100%;
 
+      &.selected {
+        background-color: $blue300;
+      }
+
       .date {
         position: absolute;
         top: .25rem;
@@ -65,6 +69,8 @@ $border: .0625rem solid $gray400;
         &.other-month {
           color: $gray500;
         }
+
+        @include text-drag-disable;
       }
     }
   }

@@ -1,13 +1,14 @@
 import Image from "next/image";
 
 import classNames from "classnames/bind";
+import { FallbackProps } from "react-error-boundary";
 
 import { getErrorMessage } from "@/utils/getErrorMessage";
 
 import styles from "./ErrorFallBack.module.scss";
 const cn = classNames.bind(styles);
 
-function ErrorFallback({ error, resetErrorBoundary }: any) {
+function ErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
   const errorStatus = error.toString().split("code")[1];
   const { title, content } = getErrorMessage(Number(errorStatus));
 

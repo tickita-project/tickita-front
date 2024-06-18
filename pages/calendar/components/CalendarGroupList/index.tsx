@@ -3,30 +3,21 @@ import React from "react";
 import classNames from "classnames/bind";
 
 import ColorCheckBox from "@/components/ColorCheckBox";
-
-import { GroupColorType } from "@/types/type";
+import { useGetGroupList } from "@/hooks/useGetGroupList";
 
 import styles from "./CalendarGroupList.module.scss";
 
 const cn = classNames.bind(styles);
 
-interface GroupType {
-  id: number;
-  groupName: string;
-  groupColor: GroupColorType;
-}
+export default function CalendarGroupList() {
+  const { data: groupList } = useGetGroupList();
 
-interface CalendarGroupListProps {
-  groupList: GroupType[];
-}
-
-export default function CalendarGroupList({ groupList }: CalendarGroupListProps) {
   return (
     <div className={cn("container")}>
       <p className={cn("enter-group")}>현재 가입된 그룹</p>
       <ul className={cn("group-container")}>
-        {groupList.map((group) => (
-          <ColorCheckBox key={group.id} color={group.groupColor} title={group.groupName} />
+        {groupList?.map((group) => (
+          <ColorCheckBox key={group.crewId} color={group.labelColor} title={group.crewName} />
         ))}
       </ul>
     </div>
