@@ -1,0 +1,119 @@
+.container {
+  width: 62.5rem;
+  padding: 2.5rem 15rem;
+  background-color: $white;
+  transform: translate(-50%, -50%);
+  gap: 2.5rem;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  border-radius: 16px;
+
+  .modal-header {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+
+    .modal-title {
+      gap: 0.125rem;
+
+      .modal-title-main {
+        font-size: 1.75rem;
+        font-weight: 700;
+        text-align: center;
+        line-height: 135.8%;
+        letter-spacing: -0.044rem;
+      }
+      .modal-title-sub {
+        font-size: 1rem;
+        font-weight: 400;
+        text-align: center;
+        line-height: 150%;
+        letter-spacing: -0.025rem;
+        .sub-span {
+          color: blue;
+        }
+      }
+    }
+  }
+  .modal-body {
+    display: flex;
+    padding: 1.5rem 1.25rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+    align-self: stretch;
+
+    .modal-body-title {
+      padding: 0 0.5rem;
+      align-self: flex-start;
+      gap: 0.5rem;
+      font-size: 1.25rem;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 140%;
+      letter-spacing: -0.031rem;
+    }
+
+    .modal-body-main {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .modal-body-content {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 2rem;
+
+      .modal-body-content-text {
+        font-size: 1.063rem;
+        font-weight: 500;
+        text-align: left;
+        line-height: 141.2%;
+        letter-spacing: -0.044rem;
+      }
+
+      .modal-body-content-text-sub {
+        font-size: 0.875rem;
+        font-weight: 500;
+        text-align: left;
+        line-height: 142.9%;
+        letter-spacing: -0.044rem;
+        color: gray;
+      }
+    }
+    .modal-body-sub {
+      padding: 0 0.75rem;
+      gap: 0.125rem;
+      .modal-body-sub-text {
+        font-size: 0.75rem;
+        font-weight: 500;
+        text-align: left;
+        line-height: 133.4%;
+        letter-spacing: -0.044rem;
+        color: red;
+      }
+    }
+  }
+  .modal-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: stretch;
+    .modal-button {
+      display: flex;
+      height: 3rem;
+      padding: 0.75rem 1.5rem;
+      justify-content: center;
+      align-items: center;
+      border-radius: 8px;
+      background: #3360ff;
+
+      color: white;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+  }
+}
