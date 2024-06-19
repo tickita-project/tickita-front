@@ -5,6 +5,7 @@ import { useModalStore } from "@/store/useModalStore";
 
 import styles from "./Portal.module.scss";
 import CreateGroupModal from "../CreateGroup";
+import DeleteGroupModal from "../DeleteGroup";
 import ScheduleDetailModal from "../Schedule/ScheduleDetail";
 
 const cn = classNames.bind(styles);
@@ -12,7 +13,8 @@ const cn = classNames.bind(styles);
 const MODAL_TYPE: Record<string, JSX.Element> = {
   CREATE_GROUP: <CreateGroupModal />,
   SCHEDULE_CREATE: <ScheduleDetailModal />,
-};
+  DELETE_GROUP: <DeleteGroupModal />,
+} as const;
 
 export default function Portal() {
   const { isOpen, type } = useModalStore();

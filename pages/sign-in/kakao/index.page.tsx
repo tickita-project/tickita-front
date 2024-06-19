@@ -1,10 +1,10 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import { useEffect } from "react";
 
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 
 import classNames from "classnames/bind";
-import Lottie from "react-lottie-player";
 
 import { basicInstance, setContext } from "@/apis/axios";
 import { PAGE_PATH } from "@/constants/pagePath";
@@ -27,6 +27,8 @@ interface KakaoProps {
   id: number;
   isComplete: boolean;
 }
+
+const LottiePlayer = dynamic(() => import("react-lottie-player"), { ssr: false });
 
 export async function getServerSideProps(
   context: GetServerSidePropsContext,
@@ -82,13 +84,12 @@ export default function Kakao({ id, isComplete }: KakaoProps) {
       router.push({ pathname: PAGE_PATH.PROFILE_SETUP, query: { id } }, PAGE_PATH.PROFILE_SETUP);
       return;
     }
-
     router.push(PAGE_PATH.DASHBOARD);
   }, [isComplete]);
 
   return (
     <div className={cn("container")}>
-      <Lottie animationData={loadingLottie} loop play className={cn("loading-lottie")} />
+      <LottiePlayer animationData={loadingLottie} loop play className={cn("loading-lottie")} />
     </div>
   );
 }

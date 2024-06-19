@@ -1,7 +1,7 @@
 import { ReactElement, useState } from "react";
 
 import Image from "next/image";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 import { GetServerSidePropsContext } from "next/types";
 
 import { QueryClient, dehydrate } from "@tanstack/react-query";
@@ -14,9 +14,14 @@ import { getGroupInfo, getUserInfo } from "@/apis/apis";
 import { setContext } from "@/apis/axios";
 import Layout from "@/components/Layout";
 import MetaData from "@/components/MetaData";
+import { MODAL_TYPE } from "@/constants/modalType";
+import { PAGE_PATH } from "@/constants/pagePath";
 import { groupKey, userInfoKey } from "@/constants/queryKey";
+import { useDeleteGroup } from "@/hooks/useDeleteGroup";
+import { useExitGroup } from "@/hooks/useExitGroup";
 import { useGetGroupInfo } from "@/hooks/useGetGroupInfo";
 import { useGetUserInfo } from "@/hooks/useGetUserInfo";
+import { useModalStore } from "@/store/useModalStore";
 
 import styles from "./Group.module.scss";
 
@@ -51,8 +56,9 @@ export default function Group() {
   const { data: groupInfo } = useGetGroupInfo(Number(query.id));
   const { data: userInfo } = useGetUserInfo();
 
-  const isCurrentUserLeader =
-    userInfo?.accountId === groupInfo?.crewMemberInfoResponses[0].accountId;
+  const { openModal } = useModalStore();
+
+  const isCurrentUserLeader = userInfo?.accountId === groupInfo?.crewMembers[0].accountId;
 
   const handleInfoTextMouseOver = () => {
     setIsInfoTextView(true);
@@ -60,6 +66,14 @@ export default function Group() {
 
   const handleInfoTextMouseLeave = () => {
     setIsInfoTextView(false);
+  };
+
+  const handleGroupDeleteButtonClick = () => {
+    openModal(MODAL_TYPE.DELETE_GROUP);
+  };
+
+  const handleGroupExitButtonClick = () => {
+    openModal(MODAL_TYPE.EXIT_GROUP);
   };
 
   if (!groupInfo || !userInfo) {
@@ -74,9 +88,9 @@ export default function Group() {
         <MemberList
           isCurrentUserLeader={isCurrentUserLeader}
           currentUserId={userInfo.accountId}
-          memberList={groupInfo.crewMemberInfoResponses}
+          memberList={groupInfo.crewMembers}
         />
-        <InviteForm />
+        <InviteForm inviteeList={groupInfo.waitingMembers} />
         <div className={cn("box")}>
           <GroupForm groupInfo={groupInfo} />
           <div className={cn("button-box")}>
@@ -100,9 +114,23 @@ export default function Group() {
                 </div>
               )}
             </div>
-            <button className={cn("group-button")}>
-              {isCurrentUserLeader ? "그룹 삭제" : "그룹 나가기"}
-            </button>
+            {isCurrentUserLeader ? (
+              <button
+                type="button"
+                className={cn("group-button")}
+                onClick={handleGroupDeleteButtonClick}
+              >
+                그룹 삭제
+              </button>
+            ) : (
+              <button
+                type="button"
+                className={cn("group-button")}
+                onClick={handleGroupExitButtonClick}
+              >
+                그룹 나가기
+              </button>
+            )}
           </div>
         </div>
       </section>
