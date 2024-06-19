@@ -11,12 +11,14 @@
 
 .profile-image {
   border-radius: 50%;
+  width: 2.75rem;
+  height: 2.75rem;
 }
 
 .profile-image-container::before {
   content: "";
   position: absolute;
-  height: 2.875rem;
+  height: 3rem;
   inset: -2px;
   border-radius: 50%;
   background: linear-gradient(
