@@ -52,34 +52,27 @@ export default function ScheduleCreateModal() {
       <form className={cn("create-schedule-form")} onSubmit={handleSubmit(handleCreateSchedule)}>
         <input
           type="text"
-          className={cn("schedule-name")}
+          className={cn("title")}
           placeholder="무슨 일정인가요?"
           autoFocus
           {...register("title")}
         />
-        <div className={cn("time-location-container")}>
+        <div className={cn("time-place")}>
           <div className={cn("time-container")}>
-            <p>시간</p>
+            <p className={cn("label")}>시간</p>
             <div className={cn("time")}>
               <div className={cn("start")}>
-                <p className={cn("time")}></p>
+                <p className={cn("date")}>{scheduleStart?.format("YYYY.MM.DD")}</p>
               </div>
-
+              <p> - </p>
               <div className={cn("end")}>
-                <p className={cn("date")}>{scheduleEnd?.format("YYYY-MM-DDTHH:mm:00.000Z")}</p>
+                <p className={cn("date")}>{scheduleEnd?.format("YYYY.MM.DD")}</p>
               </div>
             </div>
           </div>
-          <div className={cn("location-container")}>
-            <p>장소</p>
-            <div className={cn("location")}>
-              <Image src="/icons/location-icon.svg" width={20} height={20} alt="장소" />
-              <input
-                className={cn("location-input")}
-                type="text"
-                placeholder="(예시) 위워크 을지로점 10층 C미팅룸"
-              />
-            </div>
+          <div className={cn("place")}>
+            <p className={cn("label")}>장소</p>
+            <input type="text" />
           </div>
         </div>
       </form>
