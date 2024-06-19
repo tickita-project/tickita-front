@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 
 import Image from "next/image";
-import Router from "next/router";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import classNames from "classnames/bind";
@@ -35,7 +34,7 @@ export default function GroupForm({ groupInfo }: GroupFormProps) {
     handleSubmit,
     reset,
     control,
-    formState: { errors, isValid, isDirty, dirtyFields, defaultValues },
+    formState: { errors, isValid, isDirty },
   } = useForm({
     mode: "all",
     defaultValues: { crewName: groupInfo.crewName, labelColor: groupInfo.labelColor },
@@ -55,7 +54,6 @@ export default function GroupForm({ groupInfo }: GroupFormProps) {
     mutate(formData, {
       onSuccess: () => {
         alert("그룹 정보가 변경되었습니다.");
-        // Router.reload(); // 추후 변경 예정
       },
       onError: (error) => {
         alert(error);
