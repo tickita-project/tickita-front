@@ -1,5 +1,6 @@
 import classNames from "classnames/bind";
 
+import { MODAL_TYPE } from "@/constants/modalType";
 import { useModalStore } from "@/store/useModalStore";
 
 import styles from "./UpcomingSchedule.module.scss";
@@ -23,7 +24,7 @@ export default function UpcomingSchedule({
   const isToday = daysRemaining === "D-DAY";
 
   const handleUpcomingScheduleClick = () => {
-    openModal("일정 상세 모달", "일정 데이터");
+    openModal(MODAL_TYPE.SCHEDULE_DETAILS, "일정 데이터");
   };
 
   return (
