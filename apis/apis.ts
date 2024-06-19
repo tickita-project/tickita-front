@@ -6,6 +6,7 @@ import {
   GroupType,
   UserInfoType,
   GroupInfoType,
+  SchedulePostDataType,
 } from "@/types/type";
 
 import { imageRequestInstance, instance } from "./axios";
@@ -42,5 +43,10 @@ export const inviteGroupMember = async (data: InviteDataType) => {
 
 export const getGroupInfo = async (id: number): Promise<GroupInfoType> => {
   const res = await instance.get(`/crew/${id}`);
+  return res.data;
+};
+
+export const postSchedule = async (data: SchedulePostDataType) => {
+  const res = await instance.post(`/schedule`, data);
   return res.data;
 };

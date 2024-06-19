@@ -14,3 +14,10 @@ export const userInfoKey = {
   all: ["user"] as const,
   info: () => [...userInfoKey.all, "info"] as const,
 };
+
+export const scheduleKey = {
+  all: ["schedule"] as const,
+  lists: () => [...scheduleKey.all, "list"] as const,
+  details: () => [...scheduleKey.all, "detail"] as const,
+  detail: (id: number) => [...scheduleKey.details(), id] as const,
+};
