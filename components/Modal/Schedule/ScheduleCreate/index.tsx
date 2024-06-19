@@ -7,16 +7,13 @@ import { useShallow } from "zustand/react/shallow";
 import { useDateStore } from "@/store/useDateStore";
 import { useModalStore } from "@/store/useModalStore";
 
+import { SchedulePostDataType } from "@/types/type";
+
 import styles from "./ScheduleCreateModal.module.scss";
 
 const cn = classNames.bind(styles);
 
 export default function ScheduleCreateModal() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isValid },
-  } = useForm();
   const { closeModal } = useModalStore();
   const { scheduleStart, scheduleEnd, setScheduleStart, setScheduleEnd } = useDateStore(
     useShallow((state) => ({
@@ -26,6 +23,16 @@ export default function ScheduleCreateModal() {
       setScheduleEnd: state.setScheduleEnd,
     })),
   );
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm<SchedulePostDataType>({
+    defaultValues: {
+      startDateTime: scheduleStart?.format("YYYY-MM-DDTHH:mm"),
+      endDateTime: scheduleEnd?.format("YYYY-MM-DDTHH:mm"),
+    },
+  });
 
   const handleCloseModal = () => {
     closeModal();
@@ -39,25 +46,27 @@ export default function ScheduleCreateModal() {
 
   return (
     <div className={cn("container")}>
+      <button className={cn("close-button")} type="button" onClick={handleCloseModal}>
+        <Image src="/icons/close-icon.svg" alt="모달 닫기" width={30} height={30} />
+      </button>
       <form className={cn("create-schedule-form")} onSubmit={handleSubmit(handleCreateSchedule)}>
         <input
           type="text"
           className={cn("schedule-name")}
           placeholder="무슨 일정인가요?"
           autoFocus
-          {...register("scheduleTitle")}
+          {...register("title")}
         />
         <div className={cn("time-location-container")}>
           <div className={cn("time-container")}>
             <p>시간</p>
             <div className={cn("time")}>
               <div className={cn("start")}>
-                <p className={cn("date")}>{scheduleStart?.format("YYYY-MM-DDTHH:mm:ss")}</p>
                 <p className={cn("time")}></p>
               </div>
 
               <div className={cn("end")}>
-                <p className={cn("date")}>{scheduleEnd?.format("YYYY-MM-DDTHH:mm:ss")}</p>
+                <p className={cn("date")}>{scheduleEnd?.format("YYYY-MM-DDTHH:mm:00.000Z")}</p>
               </div>
             </div>
           </div>
@@ -74,10 +83,6 @@ export default function ScheduleCreateModal() {
           </div>
         </div>
       </form>
-
-      <button className={cn("close-modal")} type="button" onClick={handleCloseModal}>
-        취소
-      </button>
     </div>
   );
 }
