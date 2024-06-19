@@ -5,7 +5,7 @@ import { useModalStore } from "@/store/useModalStore";
 
 import ConfirmModal from "../Confirm";
 
-export default function ChangeLeaderModal() {
+export default function ExportMemberModal() {
   const { closeModal, data } = useModalStore();
   const { query } = useRouter();
   const { mutate } = useExportMember(Number(query.id));

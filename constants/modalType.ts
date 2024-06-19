@@ -9,3 +9,5 @@ export const MODAL_TYPE = {
   CHANGE_LEADER: "CHANGE_LEADER", // 리더 변경
   EXIT_GROUP: "EXIT_GROUP", // 그룹 탈퇴
 } as const;
+
+export type ModalType = (typeof MODAL_TYPE)[keyof typeof MODAL_TYPE];

@@ -1,27 +1,41 @@
 import classNames from "classnames/bind";
 import { createPortal } from "react-dom";
 
+import { ModalType } from "@/constants/modalType";
+import { MODAL_TYPE } from "@/constants/modalType";
 import { useModalStore } from "@/store/useModalStore";
 
 import styles from "./Portal.module.scss";
+import ChangeLeaderModal from "../ChangeLeader";
 import CreateGroupModal from "../CreateGroup";
 import DeleteGroupModal from "../DeleteGroup";
+import ExitGroupModal from "../ExitGroup";
+import ExportMemberModal from "../ExportMember";
 import ScheduleDetailModal from "../Schedule/ScheduleDetail";
 
 const cn = classNames.bind(styles);
 
-const MODAL_TYPE: Record<string, JSX.Element> = {
-  CREATE_GROUP: <CreateGroupModal />,
-  SCHEDULE_CREATE: <ScheduleDetailModal />,
-  DELETE_GROUP: <DeleteGroupModal />,
+const MODAL_COMPONENTS: Record<ModalType, JSX.Element> = {
+  [MODAL_TYPE.CREATE_GROUP]: <CreateGroupModal />,
+  [MODAL_TYPE.SCHEDULE_COORDINATION]: <ScheduleDetailModal />, // 재영님 일정쪽 모달 타입때문에 일단 넣어뒀어요
+  [MODAL_TYPE.SCHEDULE_DETAILS]: <ScheduleDetailModal />,
+  [MODAL_TYPE.SCHEDULE_CREATE]: <ScheduleDetailModal />,
+  [MODAL_TYPE.SCHEDULE_EDIT]: <ScheduleDetailModal />,
+  [MODAL_TYPE.DELETE_GROUP]: <DeleteGroupModal />,
+  [MODAL_TYPE.EXPORT_MEMBER]: <ExportMemberModal />,
+  [MODAL_TYPE.CHANGE_LEADER]: <ChangeLeaderModal />,
+  [MODAL_TYPE.EXIT_GROUP]: <ExitGroupModal />,
 } as const;
 
 export default function Portal() {
   const { isOpen, type } = useModalStore();
 
-  if (!isOpen) {
+  if (!isOpen || !type) {
     return null;
   }
 
-  return createPortal(<div className={cn("background")}>{MODAL_TYPE[type]}</div>, document.body);
+  return createPortal(
+    <div className={cn("background")}>{MODAL_COMPONENTS[type]}</div>,
+    document.body,
+  );
 }
