@@ -25,13 +25,11 @@
         letter-spacing: -0.044rem;
       }
       .modal-title-sub {
-        font-size: 1rem;
-        font-weight: 400;
         text-align: center;
         line-height: 150%;
         letter-spacing: -0.025rem;
         .sub-span {
-          color: blue;
+          color: $blue500;
         }
       }
     }
@@ -49,7 +47,6 @@
       align-self: flex-start;
       gap: 0.5rem;
       font-size: 1.25rem;
-      font-style: normal;
       font-weight: 500;
       line-height: 140%;
       letter-spacing: -0.031rem;
@@ -63,7 +60,6 @@
 
     .modal-body-content {
       display: flex;
-      flex-direction: row;
       align-items: center;
       gap: 2rem;
 
@@ -81,7 +77,7 @@
         text-align: left;
         line-height: 142.9%;
         letter-spacing: -0.044rem;
-        color: gray;
+        color: $gray700;
       }
     }
     .modal-body-sub {
@@ -90,10 +86,9 @@
       .modal-body-sub-text {
         font-size: 0.75rem;
         font-weight: 500;
-        text-align: left;
         line-height: 133.4%;
         letter-spacing: -0.044rem;
-        color: red;
+        color: $red500;
       }
     }
   }
@@ -109,11 +104,10 @@
       justify-content: center;
       align-items: center;
       border-radius: 8px;
-      background: #3360ff;
+      background: $blue500;
 
-      color: white;
+      color: $white;
       font-weight: 700;
-      font-size: 1rem;
     }
   }
 }
