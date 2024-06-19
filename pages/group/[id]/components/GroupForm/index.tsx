@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import Image from "next/image";
 import Router from "next/router";
 
@@ -31,24 +33,29 @@ export default function GroupForm({ groupInfo }: GroupFormProps) {
   const {
     register,
     handleSubmit,
+    reset,
     control,
-    formState: { errors, isValid, isDirty },
+    formState: { errors, isValid, isDirty, dirtyFields, defaultValues },
   } = useForm({
     mode: "all",
     defaultValues: { crewName: groupInfo.crewName, labelColor: groupInfo.labelColor },
     resolver: zodResolver(createGroupSchema),
   });
   const selectColor = useWatch({ name: "labelColor", control });
-  console.log(isDirty);
 
   const { mutate } = useEditGroupInfo(groupInfo.crewId);
+
+  useEffect(() => {
+    // groupInfo가 변경될 때 폼을 재설정
+    reset({ crewName: groupInfo.crewName, labelColor: groupInfo.labelColor });
+  }, [groupInfo]);
 
   const onSubmit = async (formData: any) => {
     // 그룹 정보 변경 로직 추가 예정
     mutate(formData, {
       onSuccess: () => {
         alert("그룹 정보가 변경되었습니다.");
-        Router.reload(); // 추후 변경 예정
+        // Router.reload(); // 추후 변경 예정
       },
       onError: (error) => {
         alert(error);

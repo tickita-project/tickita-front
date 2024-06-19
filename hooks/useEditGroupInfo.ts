@@ -11,6 +11,7 @@ export const useEditGroupInfo = (crewId: number) => {
     mutationFn: (data: CreateGroupDataType) => editGroupInfo(crewId, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: groupKey.detail(crewId) });
+      queryClient.invalidateQueries({ queryKey: groupKey.lists() });
     },
   });
 
