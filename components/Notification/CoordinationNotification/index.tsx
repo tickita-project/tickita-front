@@ -19,13 +19,13 @@ export default function CoordinationNotification({
 
   return (
     <BaseNotification
-      id={scheduleDetail.notificationId}
+      notificationId={scheduleDetail.notificationId}
       crewId={scheduleDetail.crewId}
-      type={scheduleDetail.notificationType}
-      groupName={scheduleDetail.crewName}
-      text={scheduleDetail.content}
+      notificationType={scheduleDetail.notificationType}
+      crewName={scheduleDetail.crewName}
+      content={scheduleDetail.content}
       scheduleInfo={scheduleDetail.scheduleInfo}
-      notificationDate={scheduleDetail.localDateTime}
+      localDateTime={scheduleDetail.localDateTime}
       isChecked={scheduleDetail.isChecked}
       onClick={handleNotificationClick}
     />

@@ -39,14 +39,14 @@ export default function NotificationCenter() {
 
             return (
               <BaseNotification
-                id={value.notificationId}
+                notificationId={value.notificationId}
                 crewId={value.crewId}
-                type={value.notificationType}
+                notificationType={value.notificationType}
                 key={value.notificationId}
-                groupName={value.crewName}
-                text={value.content}
+                crewName={value.crewName}
+                content={value.content}
                 scheduleInfo={value.scheduleInfo}
-                notificationDate={value.localDateTime}
+                localDateTime={value.localDateTime}
                 isChecked={value.isChecked}
               />
             );

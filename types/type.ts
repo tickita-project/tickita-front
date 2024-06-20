@@ -111,7 +111,7 @@ export interface CrewNotificationResponseType {
   notificationId: number;
   notificationType: NotificationType;
   crewId: number;
-  accountId: number;
+  accountId?: number;
   crewName: string;
   scheduleInfo?: {
     scheduleId: number;
@@ -121,7 +121,6 @@ export interface CrewNotificationResponseType {
   localDateTime: string;
   isChecked: boolean;
   content: string;
-  link?: string;
 }
 
 export interface NotifactionType {
