@@ -69,3 +69,8 @@ export const exportMember = async (crewId: number, memberId: number) => {
   const res = await instance.put(`/crew/remove-member/${crewId}/${memberId}`);
   return res.data;
 };
+
+export const putUserInfo = async (data: ProfileSetupType): Promise<UserInfoType> => {
+  const res = await instance.put(`/account-info/${data.accountId}`, data);
+  return res.data;
+};
