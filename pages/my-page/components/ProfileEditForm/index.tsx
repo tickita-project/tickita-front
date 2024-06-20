@@ -37,7 +37,7 @@ export default function ProfileEditForm({ userInfo }: ProfileEditFormProps) {
   const [isUnchanged, setIsUnchanged] = useState(true);
   const profileImageInputRef = useRef<HTMLInputElement>(null);
 
-  const { uploadedImgUrl, imgUrl, handleProfileImageChange } = useGetProfileImage();
+  const { uploadedImgUrl, imgUrl, handleProfileImageChange } = useGetProfileImage(userInfo.image);
 
   const {
     register,

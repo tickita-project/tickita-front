@@ -6,9 +6,9 @@ import { postProfileImageUrl } from "@/apis/apis";
  * 이미지 파일을 업로드하면, S3 이미지 링크를 반환합니다.
  * @returns S3 이미지 url, 프로필 이미지 변경 함수
  */
-const useGetProfileImage = () => {
+const useGetProfileImage = (initialImgUrl: string | null) => {
   const [uploadedImgUrl, setUploadedImgUrl] = useState<string | null>(null);
-  const [imgUrl, setImgUrl] = useState<string | null>(null);
+  const [imgUrl, setImgUrl] = useState<string | null>(initialImgUrl);
 
   const handleProfileImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) {
