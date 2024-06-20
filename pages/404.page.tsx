@@ -12,7 +12,7 @@ export default function NotFound() {
   return (
     <div className={cn("container")}>
       <p className={cn("title")}>
-        404{" "}
+        404
         <Image
           className={cn("image")}
           src="/images/error.webp"
