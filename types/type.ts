@@ -89,7 +89,7 @@ export interface CancelInviteType {
 export interface AcceptInviteType {
   crewId: number;
   notificationId: number;
-  crewAccept: "ACCEPPT";
+  crewAccept: "ACCEPT";
 }
 
 export interface VoteNotificationType {

@@ -44,7 +44,7 @@ export default function BaseNotification({
 }: BaseNotificationProps) {
   const closeRef = useRef<HTMLButtonElement>(null);
   const { mutate: inviteMutate } = useAcceptInvite();
-
+  console.log(id);
   const handleNotificationClick = () => {
     if (!onClick) {
       return;
@@ -56,7 +56,7 @@ export default function BaseNotification({
     const payload = {
       crewId,
       notificationId: id,
-      crewAccept: "ACCEPPT",
+      crewAccept: "ACCEPT",
     } as AcceptInviteType;
 
     inviteMutate(payload, {
