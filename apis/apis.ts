@@ -6,6 +6,7 @@ import {
   GroupType,
   UserInfoType,
   GroupInfoType,
+  AllNotificationType,
   CancelInviteType,
 } from "@/types/type";
 
@@ -28,6 +29,11 @@ export const getGroupList = async (): Promise<Omit<GroupType[], "accountId">> =>
 
 export const getUserInfo = async (): Promise<UserInfoType> => {
   const response = await instance.get("/account-info/all");
+  return response.data;
+};
+
+export const getAllNotifications = async (): Promise<AllNotificationType> => {
+  const response = await instance.get("/notification");
   return response.data;
 };
 
