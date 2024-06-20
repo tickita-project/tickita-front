@@ -20,7 +20,7 @@ export default forwardRef<HTMLInputElement, GroupColorPickerProps>(function Grou
   ref,
 ) {
   return (
-    <ul className={cn("color-box", { test: readOnly })}>
+    <ul className={cn("color-box", { "read-only": readOnly })}>
       {GROUP_COLOR_LIST.map((color) => (
         <li key={color} className={cn("color-item")}>
           <input disabled={readOnly} ref={ref} type="radio" id={color} value={color} {...rest} />

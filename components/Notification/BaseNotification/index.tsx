@@ -3,18 +3,15 @@ import { MouseEvent, useRef } from "react";
 import Image from "next/image";
 
 import classNames from "classnames/bind";
-import dayjs from "dayjs";
-import "dayjs/locale/ko";
 
 import { useAcceptInvite } from "@/hooks/useAcceptInvite";
+import formatKoreanDateTime from "@/utils/formatKoreanDateTime";
 
 import { AcceptInviteType, CrewNotificationResponseType } from "@/types/type";
 
 import styles from "./BaseNotification.module.scss";
 
 const cn = classNames.bind(styles);
-
-dayjs.locale("ko");
 
 interface BaseNotificationProps {
   notificationData: CrewNotificationResponseType;
@@ -87,7 +84,7 @@ export default function BaseNotification({ notificationData, onClick }: BaseNoti
       {scheduleInfo && (
         <>
           <span className={cn("schedule-info")}>
-            {dayjs(scheduleInfo.scheduleTime).format("YY.MM.DD (ddd) HH:mm")},
+            {formatKoreanDateTime(scheduleInfo.scheduleTime)},
           </span>
           <span className={cn("schedule-info")}>{scheduleInfo.place}</span>
         </>
@@ -98,9 +95,7 @@ export default function BaseNotification({ notificationData, onClick }: BaseNoti
             초대 수락
           </button>
         )}
-        <p className={cn("notification-date")}>
-          {dayjs(localDateTime).format("YY.MM.DD (ddd) HH:mm")}
-        </p>
+        <p className={cn("notification-date")}>{formatKoreanDateTime(localDateTime)}</p>
       </div>
     </div>
   );

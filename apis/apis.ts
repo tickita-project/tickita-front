@@ -8,7 +8,7 @@ import {
   GroupInfoType,
   CancelInviteType,
   AcceptInviteType,
-  NotifactionType,
+  NotificationDataType,
 } from "@/types/type";
 
 import { imageRequestInstance, instance } from "./axios";
@@ -78,7 +78,7 @@ export const putUserInfo = async (data: ProfileSetupType): Promise<UserInfoType>
   return res.data;
 };
 
-export const getAllNotification = async (): Promise<NotifactionType> => {
+export const getAllNotification = async (): Promise<NotificationDataType> => {
   const res = await instance.get("/notification");
   return res.data;
 };

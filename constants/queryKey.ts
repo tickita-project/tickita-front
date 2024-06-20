@@ -16,6 +16,6 @@ export const userInfoKey = {
 };
 
 export const notificationKey = {
-  all: ["notifaction"] as const,
+  all: ["notification"] as const,
   lists: () => [...notificationKey.all, "list"] as const,
 } as const;

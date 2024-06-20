@@ -123,7 +123,7 @@ export interface CrewNotificationResponseType {
   content: string;
 }
 
-export interface NotifactionType {
+export interface NotificationDataType {
   count: number;
   crewNotificationResponse: CrewNotificationResponseType[];
 }
