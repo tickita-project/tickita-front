@@ -109,7 +109,7 @@ export default function ScheduleCreateModal() {
             <option value="" disabled>
               그룹을 선택하세요
             </option>
-            {groupList?.map((group) => (
+            {groupList?.slice(7).map((group) => (
               <option key={group.crewId} value={group.crewId}>
                 {group.crewName}
               </option>
