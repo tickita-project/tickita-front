@@ -44,3 +44,8 @@ export const getGroupInfo = async (id: number): Promise<GroupInfoType> => {
   const res = await instance.get(`/crew/${id}`);
   return res.data;
 };
+
+export const putUserInfo = async (data: ProfileSetupType): Promise<UserInfoType> => {
+  const res = await instance.put(`/account-info/${data.accountId}`, data);
+  return res.data;
+};
