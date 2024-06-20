@@ -134,7 +134,7 @@ export default function ProfileSetupForm({ accountId, email }: ProfileSetupFormP
             type="text"
             value={email}
             readOnly
-            className={cn("user-email-input")}
+            className={cn("email-input")}
           />
           <Input
             id="nickName"
