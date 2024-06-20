@@ -4,7 +4,7 @@ import Image from "next/image";
 
 import classNames from "classnames/bind";
 
-import { useGetNotifications } from "@/hooks/useGetNotifications";
+import { useGetAllNotification } from "@/hooks/useGetAllNotification";
 
 import styles from "./NotificationPopup.module.scss";
 import BaseNotification from "../Notification/BaseNotification";
@@ -15,7 +15,13 @@ const cn = classNames.bind(styles);
 export default function NotificationPopup() {
   const [isClicked, setIsClicked] = useState(false);
 
-  const { data: allNotifications } = useGetNotifications();
+  const { data: notificationInfo } = useGetAllNotification();
+
+  const getNotificationCount = () => {
+    if (!notificationInfo) return;
+
+    return notificationInfo.count < 10 ? notificationInfo.count : "+";
+  };
 
   const handleBellClick = () => {
     setIsClicked(!isClicked);
@@ -24,14 +30,16 @@ export default function NotificationPopup() {
   return (
     <div className={cn("container")}>
       <figure onClick={handleBellClick} className={cn("notification-bell")}>
-        <figcaption className={cn("notification-count")}>{allNotifications?.count}</figcaption>
+        {notificationInfo?.count && (
+          <figcaption className={cn("notification-count")}>{getNotificationCount()}</figcaption>
+        )}
         <Image src="/icons/notification-bell.svg" width={26} height={20} alt="알림 종" priority />
       </figure>
       {isClicked && (
         <div className={cn("notification-popup")}>
-          {allNotifications?.count ? (
-            allNotifications.crewNotificationResponse?.map((notification) => (
-              <BaseNotification key={notification.notificationId} notification={notification} />
+          {notificationInfo?.crewNotificationResponse.length ? (
+            notificationInfo.crewNotificationResponse?.map((notification) => (
+              <BaseNotification key={notification.notificationId} notificationData={notification} />
             ))
           ) : (
             <EmptyNotification title="알림이 없어요" />
