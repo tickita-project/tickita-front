@@ -3,22 +3,37 @@ import { MouseEvent, useRef } from "react";
 import Image from "next/image";
 
 import classNames from "classnames/bind";
+import dayjs from "dayjs";
+import "dayjs/locale/ko";
+
+import { useAcceptInvite } from "@/hooks/useAcceptInvite";
+
+import { AcceptInviteType } from "@/types/type";
 
 import styles from "./BaseNotification.module.scss";
 
 const cn = classNames.bind(styles);
 
+dayjs.locale("ko");
+
 interface BaseNotificationProps {
+  id: number;
   type: string;
+  crewId: number;
   groupName: string;
   text: string;
-  scheduleInfo?: string;
+  scheduleInfo?: {
+    scheduleTime: string;
+    place: string;
+  };
   notificationDate: string;
   isChecked: boolean;
   onClick?: () => void;
 }
 
 export default function BaseNotification({
+  id,
+  crewId,
   type,
   groupName,
   text,
@@ -28,6 +43,7 @@ export default function BaseNotification({
   onClick,
 }: BaseNotificationProps) {
   const closeRef = useRef<HTMLButtonElement>(null);
+  const { mutate: inviteMutate } = useAcceptInvite();
 
   const handleNotificationClick = () => {
     if (!onClick) {
@@ -37,7 +53,20 @@ export default function BaseNotification({
   };
 
   const handleInviteAcceptClick = () => {
-    alert("TODO: 그룹 초대 수락 로직 추가 예정");
+    const payload = {
+      crewId,
+      notificationId: id,
+      crewAccept: "ACCEPPT",
+    } as AcceptInviteType;
+
+    inviteMutate(payload, {
+      onSuccess: () => {
+        alert("그룹 초대 수락 성공");
+      },
+      onError: (error) => {
+        alert(error);
+      },
+    });
   };
 
   const handleDeleteButtonClick = (e: MouseEvent<HTMLElement>) => {
@@ -64,14 +93,21 @@ export default function BaseNotification({
       </div>
 
       <p className={cn("text")}>{text}</p>
-      <p className={cn("schedule-info")}>{scheduleInfo}</p>
+      {scheduleInfo && (
+        <>
+          <span className={cn("schedule-info")}>{scheduleInfo.scheduleTime}</span>
+          <span className={cn("schedule-info")}>{scheduleInfo.place}</span>
+        </>
+      )}
       <div className={cn("button-box")}>
-        {type === "invite" && (
+        {type === "INVITE" && (
           <button className={cn("accept-button")} type="button" onClick={handleInviteAcceptClick}>
             초대 수락
           </button>
         )}
-        <p className={cn("notification-date")}>{notificationDate}</p>
+        <p className={cn("notification-date")}>
+          {dayjs(notificationDate).format("YY.MM.DD (ddd)")}
+        </p>
       </div>
     </div>
   );

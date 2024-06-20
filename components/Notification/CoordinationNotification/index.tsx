@@ -1,20 +1,11 @@
 import { useRouter } from "next/router";
 
+import { CrewNotificationResponseType } from "@/types/type";
+
 import BaseNotification from "../BaseNotification";
 
-interface ScheduleInfoType {
-  id: number;
-  type: string;
-  groupName: string;
-  text: string;
-  scheduleInfo?: string;
-  notificationDate: string;
-  isChecked: boolean;
-  link?: string;
-}
-
 interface ScheduleInfoNotificationProps {
-  scheduleDetail: ScheduleInfoType;
+  scheduleDetail: CrewNotificationResponseType;
 }
 
 export default function CoordinationNotification({
@@ -28,11 +19,13 @@ export default function CoordinationNotification({
 
   return (
     <BaseNotification
-      type={scheduleDetail.type}
-      groupName={scheduleDetail.groupName}
-      text={scheduleDetail.text}
-      scheduleInfo={scheduleDetail.scheduleInfo}
-      notificationDate={scheduleDetail.notificationDate}
+      id={scheduleDetail.notificationId}
+      crewId={scheduleDetail.crewId}
+      type={scheduleDetail.notificationType}
+      groupName={scheduleDetail.crewName}
+      text={scheduleDetail.content}
+      scheduleInfo={scheduleDetail.content}
+      notificationDate={scheduleDetail.localDateTime}
       isChecked={scheduleDetail.isChecked}
       onClick={handleNotificationClick}
     />

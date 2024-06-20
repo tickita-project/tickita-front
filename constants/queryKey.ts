@@ -14,3 +14,8 @@ export const userInfoKey = {
   all: ["user"] as const,
   info: () => [...userInfoKey.all, "info"] as const,
 };
+
+export const notificationKey = {
+  all: ["notifaction"] as const,
+  lists: () => [...notificationKey.all, "list"] as const,
+} as const;

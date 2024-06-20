@@ -85,6 +85,13 @@ export interface CancelInviteType {
   notificationId: number;
   crewAccept: "DECLINE";
 }
+
+export interface AcceptInviteType {
+  crewId: number;
+  notificationId: number;
+  crewAccept: "ACCEPPT";
+}
+
 export interface VoteNotificationType {
   notificationId: number;
   notificationType: string;
@@ -96,4 +103,27 @@ export interface VoteNotificationType {
   voteId: number;
   voteTitle: string;
   voteParticipateType: boolean;
+}
+
+type NotificationType = "INVITE" | "SCHEDULE_INFO" | "UPDATE" | "EXCLUDE" | "REQUEST";
+
+export interface CrewNotificationResponseType {
+  notificationId: number;
+  notificationType: NotificationType;
+  crewId: number;
+  accountId: number;
+  crewName: string;
+  scheduleInfo?: {
+    scheduleTime: string;
+    place: string;
+  };
+  localDateTime: string;
+  isChecked: boolean;
+  content: string;
+  link?: string;
+}
+
+export interface NotifactionType {
+  count: number;
+  crewNotificationResponse: CrewNotificationResponseType[];
 }
