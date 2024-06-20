@@ -97,3 +97,26 @@ export interface VoteNotificationType {
   voteTitle: string;
   voteParticipateType: boolean;
 }
+
+export interface NotificationListType {
+  notificationId: number;
+  notificationType: string;
+  crewId: number;
+  accountId: number;
+  crewName: string;
+  scheduleInfo: [
+    {
+      scheduleTime: string;
+      place: string;
+    },
+  ];
+  localDateTime: string;
+  isChecked: boolean;
+  link: string;
+  content: string;
+}
+
+export interface AllNotificationType {
+  count: number;
+  crewNotificationResponse: NotificationListType[];
+}
