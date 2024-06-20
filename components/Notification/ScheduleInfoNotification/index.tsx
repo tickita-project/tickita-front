@@ -15,7 +15,7 @@ export default function ScheduleInfoNotification({
   const { openModal } = useModalStore();
 
   const handleNotificationClick = () => {
-    openModal(MODAL_TYPE.SCHEDULE_DETAILS, scheduleDetail); // TODO: 일정 상세 모달 열기, 일정 데이터 전달
+    openModal(MODAL_TYPE.SCHEDULE_DETAILS, scheduleDetail?.scheduleInfo?.scheduleId); // TODO: 일정 상세 모달 열기, 일정 데이터 전달
   };
 
   return (
