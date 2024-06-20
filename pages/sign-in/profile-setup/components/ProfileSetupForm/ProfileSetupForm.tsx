@@ -1,4 +1,4 @@
-import { ChangeEvent, useRef, useState } from "react";
+import { useRef } from "react";
 
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -9,11 +9,12 @@ import classNames from "classnames/bind";
 import { useForm } from "react-hook-form";
 import { ZodType, z } from "zod";
 
-import { postProfileImageUrl, postProfileSetup } from "@/apis/apis";
+import { postProfileSetup } from "@/apis/apis";
 import { nextInstance } from "@/apis/axios";
 import Input from "@/components/Input";
 import { PAGE_PATH } from "@/constants/pagePath";
 import { NICKNAME_SCHEMA, PHONE_NUMBER_SCHEMA } from "@/constants/schema";
+import useGetProfileImage from "@/hooks/useGetProfileImage";
 
 import styles from "./ProfileSetupForm.module.scss";
 
@@ -35,10 +36,10 @@ const profileSetupFormSchema: ZodType<FieldValuesType> = z.object({
 });
 
 export default function ProfileSetupForm({ accountId, email }: ProfileSetupFormProps) {
-  const [uploadedImgUrl, setUploadedImgUrl] = useState<string | null>(null);
-  const [imgUrl, setImgUrl] = useState<string | null>(null);
   const profileImageInputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
+
+  const { uploadedImgUrl, imgUrl, handleProfileImageChange } = useGetProfileImage();
 
   const {
     register,
@@ -49,34 +50,6 @@ export default function ProfileSetupForm({ accountId, email }: ProfileSetupFormP
     defaultValues: { nickName: "", phoneNumber: null },
     resolver: zodResolver(profileSetupFormSchema),
   });
-
-  const handleProfileImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files) {
-      return;
-    }
-
-    const imageFile = e.target.files[0];
-    const maxSize = 1 * 1024 * 1024;
-
-    if (imageFile.size > maxSize) {
-      alert("파일 크기는 1MB를 초과할 수 없습니다"); // TODO: 추후 toast로 변경 예정
-      return;
-    }
-
-    const fileReader = new FileReader();
-    fileReader.onload = () => {
-      setUploadedImgUrl(fileReader.result as string);
-    };
-    fileReader.readAsDataURL(imageFile);
-
-    const formData = new FormData();
-    formData.append("multipartFile", imageFile);
-
-    const res = await postProfileImageUrl(formData);
-    const { imgUrl } = res;
-
-    setImgUrl(imgUrl);
-  };
 
   const onSubmit = async (data: FieldValuesType) => {
     const formData = { ...data, accountId: Number(accountId), imgUrl };
