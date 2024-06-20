@@ -25,7 +25,7 @@ export default function ScheduleInfoNotification({
       type={scheduleDetail.notificationType}
       groupName={scheduleDetail.crewName}
       text={scheduleDetail.content}
-      scheduleInfo={scheduleDetail.content}
+      scheduleInfo={scheduleDetail.scheduleInfo}
       notificationDate={scheduleDetail.localDateTime}
       isChecked={scheduleDetail.isChecked}
       onClick={handleNotificationClick}
