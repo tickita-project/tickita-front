@@ -73,5 +73,9 @@ export const exportMember = async (crewId: number, memberId: number) => {
 
 export const cancelInvite = async (data: CancelInviteType) => {
   const res = await instance.delete("/notification");
+};
+
+export const putUserInfo = async (data: ProfileSetupType): Promise<UserInfoType> => {
+  const res = await instance.put(`/account-info/${data.accountId}`, data);
   return res.data;
 };

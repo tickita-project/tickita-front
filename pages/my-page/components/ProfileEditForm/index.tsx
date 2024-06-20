@@ -1,7 +1,6 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import Image from "next/image";
-import { useRouter } from "next/router";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AxiosError } from "axios";
@@ -9,20 +8,19 @@ import classNames from "classnames/bind";
 import { useForm } from "react-hook-form";
 import { ZodType, z } from "zod";
 
-import { postProfileSetup } from "@/apis/apis";
-import { nextInstance } from "@/apis/axios";
+import { putUserInfo } from "@/apis/apis";
 import Input from "@/components/Input";
-import { PAGE_PATH } from "@/constants/pagePath";
 import { NICKNAME_SCHEMA, PHONE_NUMBER_SCHEMA } from "@/constants/schema";
 import useGetProfileImage from "@/hooks/useGetProfileImage";
 
-import styles from "./ProfileSetupForm.module.scss";
+import { UserInfoType } from "@/types/type";
+
+import styles from "./ProfileEditForm.module.scss";
 
 const cn = classNames.bind(styles);
 
-interface ProfileSetupFormProps {
-  accountId: number;
-  email: string;
+interface ProfileEditFormProps {
+  userInfo: UserInfoType;
 }
 
 interface FieldValuesType {
@@ -35,49 +33,51 @@ const profileSetupFormSchema: ZodType<FieldValuesType> = z.object({
   phoneNumber: PHONE_NUMBER_SCHEMA,
 });
 
-export default function ProfileSetupForm({ accountId, email }: ProfileSetupFormProps) {
+export default function ProfileEditForm({ userInfo }: ProfileEditFormProps) {
+  const [isUnchanged, setIsUnchanged] = useState(true);
   const profileImageInputRef = useRef<HTMLInputElement>(null);
-  const router = useRouter();
 
   const { uploadedImgUrl, imgUrl, handleProfileImageChange } = useGetProfileImage();
 
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors, isValid },
   } = useForm<FieldValuesType>({
     mode: "all",
-    defaultValues: { nickName: "", phoneNumber: null },
+    defaultValues: { nickName: userInfo.nickName, phoneNumber: userInfo.phoneNumber },
     resolver: zodResolver(profileSetupFormSchema),
   });
 
   const onSubmit = async (data: FieldValuesType) => {
-    const formData = { ...data, accountId: Number(accountId), imgUrl };
+    const formData = { ...data, accountId: Number(userInfo.accountId), imgUrl };
 
     try {
-      const res = await postProfileSetup(formData);
-      const { accessToken, accessTokenExpireAt, refreshToken, refreshTokenExpireAt } = res;
+      await putUserInfo(formData);
 
-      await nextInstance.post("/api/setCookies", {
-        accessToken,
-        accessTokenExpireAt,
-        refreshToken,
-        refreshTokenExpireAt,
-      });
-
-      router.push(PAGE_PATH.DASHBOARD);
+      window.location.reload();
     } catch (error) {
       if (error instanceof AxiosError) {
-        alert("추가 정보 입력을 완료하지 못했습니다."); // TODO: 추후 toast로 변경 예정
+        console.error(error);
+        alert("프로필 수정을 완료하지 못했습니다."); // TODO: 추후 toast로 변경 예정
       }
     }
   };
 
+  useEffect(() => {
+    const isSame =
+      watch("nickName") === userInfo.nickName &&
+      watch("phoneNumber") === userInfo.phoneNumber &&
+      imgUrl === userInfo.image;
+    setIsUnchanged(isSame);
+  }, [watch("nickName"), watch("phoneNumber"), userInfo, imgUrl]);
+
   return (
-    <>
+    <div className={cn("container")}>
       <label htmlFor="file" className={cn("profile-image-button")}>
         <Image
-          src={uploadedImgUrl ?? "/icons/default-profile-image.svg"}
+          src={uploadedImgUrl ?? userInfo.image ?? "/icons/default-profile-image.svg"}
           alt="프로필 이미지"
           fill
           className={cn("profile-image")}
@@ -99,13 +99,13 @@ export default function ProfileSetupForm({ accountId, email }: ProfileSetupFormP
         className={cn("hidden-image-input")}
       />
 
-      <form onSubmit={handleSubmit(onSubmit)} className={cn("container")}>
+      <form onSubmit={handleSubmit(onSubmit)} className={cn("form-container")}>
         <div className={cn("input-container")}>
           <Input
             id="email"
             label="이메일"
             type="text"
-            value={email}
+            value={userInfo.email}
             readOnly
             className={cn("email-input")}
           />
@@ -128,10 +128,10 @@ export default function ProfileSetupForm({ accountId, email }: ProfileSetupFormP
             {...register("phoneNumber")}
           />
         </div>
-        <button type="submit" disabled={!isValid} className={cn("submit-button")}>
+        <button type="submit" disabled={!isValid || isUnchanged} className={cn("submit-button")}>
           프로필 저장하기
         </button>
       </form>
-    </>
+    </div>
   );
 }
