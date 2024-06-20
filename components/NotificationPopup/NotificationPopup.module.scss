@@ -36,11 +36,30 @@
 
 .notification-popup {
   z-index: 99;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
   position: absolute;
   right: 15%;
   width: 18.75rem;
   max-height: 31.25rem;
-  background-color: $white;
-  display: flex;
-  flex-direction: column;
+  padding: 0.5rem;
+  border-radius: 8px;
+  background-color: $blue50;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 0.75rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $gray200;
+    border: 1px solid $gray400;
+    border-radius: 5px;
+    min-height: 3.75rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 100px;
+  }
 }
