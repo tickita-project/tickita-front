@@ -53,5 +53,10 @@
     font-size: 1.25rem;
     font-weight: 500;
     cursor: pointer;
+
+    &:hover {
+      transform: scale(1.05);
+      transition: 0.75s;
+    }
   }
 }

@@ -47,4 +47,20 @@
       animation: opacity 0.5s forwards;
     }
   }
+
+  &.test {
+    background-color: $gray300;
+
+    .color-item {
+      cursor: not-allowed;
+    }
+
+    .group-color {
+      opacity: 0.4;
+
+      &:hover {
+        transform: scale(1);
+      }
+    }
+  }
 }
