@@ -27,6 +27,8 @@ const getBaseURL = () => {
       return `${protocol}://${host}`;
     }
   }
+
+  return "http://localhost:3000";
 };
 
 export const nextInstance = axios.create({

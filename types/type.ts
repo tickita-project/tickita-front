@@ -24,6 +24,7 @@ export interface ProfileSetupType {
   accountId: number;
   nickName: string;
   phoneNumber: string | null;
+  imgUrl: string | null;
 }
 
 export interface CreateGroupDataType {
@@ -68,4 +69,17 @@ export interface SchedulePostDataType {
   description: string;
   crewId: number;
   participants: ParticipantType[];
+}
+
+export interface VoteNotificationType {
+  notificationId: number;
+  notificationType: string;
+  crewId: number;
+  accountId: number;
+  crewName: string;
+  localDateTime: string;
+  isChecked: boolean;
+  voteId: number;
+  voteTitle: string;
+  voteParticipateType: boolean;
 }
