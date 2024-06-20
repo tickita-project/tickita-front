@@ -14,7 +14,7 @@ export default function ExitGroupModal() {
   const handleGroupExitButtonClick = () => {
     groupExitMutate(undefined, {
       onSuccess: () => {
-        alert("그룹이 삭제되었습니다.");
+        alert("그룹 탈출 성공 ㅇ_ㅇ!");
         Router.push(PAGE_PATH.DASHBOARD);
         closeModal();
       },

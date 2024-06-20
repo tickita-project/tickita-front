@@ -6,14 +6,19 @@ import BaseNotification from "@/components/Notification/BaseNotification";
 import CoordinationNotification from "@/components/Notification/CoordinationNotification";
 import EmptyNotification from "@/components/Notification/EmptyNotification";
 import ScheduleInfoNotification from "@/components/Notification/ScheduleInfoNotification";
-import { useGetNotifications } from "@/hooks/useGetNotifications";
+import { useGetAllNotification } from "@/hooks/useGetAllNotification";
 
 import styles from "./NotificationCenter.module.scss";
 
 const cn = classNames.bind(styles);
 
 export default function NotificationCenter() {
-  const { data: allNotifications } = useGetNotifications();
+  const { data: notificationInfo } = useGetAllNotification();
+  const notificationList = notificationInfo?.crewNotificationResponse;
+
+  if (!notificationList) {
+    return null;
+  }
 
   return (
     <div className={cn("container")}>
@@ -22,29 +27,17 @@ export default function NotificationCenter() {
         알림
       </h2>
       <div className={cn("box")}>
-        {allNotifications?.count ? (
-          allNotifications?.crewNotificationResponse.map((notification) => {
-            if (notification.notificationType === "SCHEDULE_INFO") {
-              return (
-                <ScheduleInfoNotification
-                  key={notification.notificationId}
-                  notification={notification}
-                />
-              );
+        {notificationList.length > 0 ? (
+          notificationList.map((data) => {
+            if (data.notificationType === "SCHEDULE_INFO" || data.notificationType === "UPDATE") {
+              return <ScheduleInfoNotification key={data.notificationId} notificationData={data} />;
             }
 
-            if (notification.notificationType === "REQUEST") {
-              return (
-                <CoordinationNotification
-                  key={notification.notificationId}
-                  notification={notification}
-                />
-              );
+            if (data.notificationType === "REQUEST") {
+              return <CoordinationNotification key={data.notificationId} notificationData={data} />;
             }
 
-            return (
-              <BaseNotification key={notification.notificationId} notification={notification} />
-            );
+            return <BaseNotification key={data.notificationId} notificationData={data} />;
           })
         ) : (
           <EmptyNotification title="아직 수신된 알람이 없어요." />

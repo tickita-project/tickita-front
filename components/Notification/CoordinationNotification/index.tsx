@@ -1,19 +1,21 @@
-import { useRouter } from "next/router";
+import Router from "next/router";
 
-import { NotificationListType } from "@/types/type";
+import { PAGE_PATH } from "@/constants/pagePath";
+
+import { CrewNotificationResponseType } from "@/types/type";
 
 import BaseNotification from "../BaseNotification";
 
 interface ScheduleInfoNotificationProps {
-  notification: NotificationListType;
+  notificationData: CrewNotificationResponseType;
 }
 
-export default function CoordinationNotification({ notification }: ScheduleInfoNotificationProps) {
-  const router = useRouter();
-
+export default function CoordinationNotification({
+  notificationData,
+}: ScheduleInfoNotificationProps) {
   const handleNotificationClick = () => {
-    notification.link && router.push(notification.link); // TODO: 일정 상세 모달 열기, 일정 데이터 전달
+    Router.push(PAGE_PATH.MY_PAGE);
   };
 
-  return <BaseNotification notification={notification} onClick={handleNotificationClick} />;
+  return <BaseNotification notificationData={notificationData} onClick={handleNotificationClick} />;
 }

@@ -26,7 +26,7 @@ export default function MemberInfo({
   currentUserId,
   MemberInfoData,
 }: MemberInfoProps) {
-  const { role, accountId, nickName, email, imageUrl } = MemberInfoData;
+  const { role, accountId, nickName, email, image } = MemberInfoData;
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { openModal } = useModalStore();
@@ -51,7 +51,7 @@ export default function MemberInfo({
   return (
     <li className={cn("info-box")}>
       <div className={cn("image-box")}>
-        <ProfileImage imageUrl={imageUrl} />
+        <ProfileImage imageUrl={image} />
         {isMe && <p className={cn("my-badge")}>나</p>}
       </div>
       <div className={cn("text-box")}>

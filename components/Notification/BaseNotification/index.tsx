@@ -4,21 +4,34 @@ import Image from "next/image";
 
 import classNames from "classnames/bind";
 
-import { changeLocalFullTime, changeLocalTime } from "@/utils/changeLocalTime";
+import { useAcceptInvite } from "@/hooks/useAcceptInvite";
+import formatKoreanDateTime from "@/utils/formatKoreanDateTime";
 
-import { NotificationListType } from "@/types/type";
+import { AcceptInviteType, CrewNotificationResponseType } from "@/types/type";
 
 import styles from "./BaseNotification.module.scss";
 
 const cn = classNames.bind(styles);
 
 interface BaseNotificationProps {
-  notification: NotificationListType;
+  notificationData: CrewNotificationResponseType;
   onClick?: () => void;
 }
 
-export default function BaseNotification({ notification, onClick }: BaseNotificationProps) {
+export default function BaseNotification({ notificationData, onClick }: BaseNotificationProps) {
+  const {
+    notificationId,
+    crewId,
+    notificationType,
+    crewName,
+    content,
+    scheduleInfo,
+    localDateTime,
+    isChecked,
+  } = notificationData;
+
   const closeRef = useRef<HTMLButtonElement>(null);
+  const { mutate: inviteMutate } = useAcceptInvite();
 
   const handleNotificationClick = () => {
     if (!onClick) {
@@ -28,7 +41,20 @@ export default function BaseNotification({ notification, onClick }: BaseNotifica
   };
 
   const handleInviteAcceptClick = () => {
-    alert("TODO: 그룹 초대 수락 로직 추가 예정");
+    const payload = {
+      crewId,
+      notificationId,
+      crewAccept: "ACCEPT",
+    } as AcceptInviteType;
+
+    inviteMutate(payload, {
+      onSuccess: () => {
+        alert("그룹 초대 수락 성공");
+      },
+      onError: (error) => {
+        alert(error);
+      },
+    });
   };
 
   const handleDeleteButtonClick = (e: MouseEvent<HTMLElement>) => {
@@ -37,14 +63,11 @@ export default function BaseNotification({ notification, onClick }: BaseNotifica
   };
 
   return (
-    <div
-      className={cn("container", { checked: notification.isChecked })}
-      onClick={handleNotificationClick}
-    >
+    <div className={cn("container", { checked: isChecked })} onClick={handleNotificationClick}>
       <div className={cn("header")}>
         <div className={cn("label-box")}>
-          <p className={cn("group-name")}>{notification.crewName}</p>
-          {!notification.isChecked && <p className={cn("new-label")}>NEW</p>}
+          <p className={cn("group-name")}>{crewName}</p>
+          {!isChecked && <p className={cn("new-label")}>NEW</p>}
         </div>
 
         <button
@@ -57,23 +80,22 @@ export default function BaseNotification({ notification, onClick }: BaseNotifica
         </button>
       </div>
 
-      <p className={cn("text")}>{notification.content}</p>
-      {notification.scheduleInfo && (
-        <div className={cn("schedule-info")}>
-          {notification.scheduleInfo.map((schedule, index) => (
-            <p key={index}>
-              {changeLocalFullTime(schedule.scheduleTime)}, {schedule.place}
-            </p>
-          ))}
-        </div>
+      <p className={cn("text")}>{content}</p>
+      {scheduleInfo && (
+        <>
+          <span className={cn("schedule-info")}>
+            {formatKoreanDateTime(scheduleInfo.scheduleTime)},
+          </span>
+          <span className={cn("schedule-info")}>{scheduleInfo.place}</span>
+        </>
       )}
       <div className={cn("button-box")}>
-        {notification.notificationType === "INVITE" && (
+        {notificationType === "INVITE" && (
           <button className={cn("accept-button")} type="button" onClick={handleInviteAcceptClick}>
             초대 수락
           </button>
         )}
-        <p className={cn("notification-date")}>{changeLocalTime(notification.localDateTime)}</p>
+        <p className={cn("notification-date")}>{formatKoreanDateTime(localDateTime)}</p>
       </div>
     </div>
   );

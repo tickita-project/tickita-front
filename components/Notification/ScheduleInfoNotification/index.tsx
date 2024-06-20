@@ -1,20 +1,22 @@
 import { MODAL_TYPE } from "@/constants/modalType";
 import { useModalStore } from "@/store/useModalStore";
 
-import { NotificationListType } from "@/types/type";
+import { CrewNotificationResponseType } from "@/types/type";
 
 import BaseNotification from "../BaseNotification";
 
 interface ScheduleInfoNotificationProps {
-  notification: NotificationListType;
+  notificationData: CrewNotificationResponseType;
 }
 
-export default function ScheduleInfoNotification({ notification }: ScheduleInfoNotificationProps) {
+export default function ScheduleInfoNotification({
+  notificationData,
+}: ScheduleInfoNotificationProps) {
   const { openModal } = useModalStore();
 
   const handleNotificationClick = () => {
-    openModal(MODAL_TYPE.SCHEDULE_DETAILS, notification); // TODO: 일정 상세 모달 열기, 일정 데이터 전달
+    openModal(MODAL_TYPE.SCHEDULE_DETAILS, notificationData?.scheduleInfo?.scheduleId); // TODO: 일정 상세 모달 열기, 일정 데이터 전달
   };
 
-  return <BaseNotification notification={notification} onClick={handleNotificationClick} />;
+  return <BaseNotification notificationData={notificationData} onClick={handleNotificationClick} />;
 }
