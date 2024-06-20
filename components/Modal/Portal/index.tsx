@@ -6,6 +6,7 @@ import { MODAL_TYPE } from "@/constants/modalType";
 import { useModalStore } from "@/store/useModalStore";
 
 import styles from "./Portal.module.scss";
+import CancelInviteModal from "../CancelInvite";
 import ChangeLeaderModal from "../ChangeLeader";
 import CreateGroupModal from "../CreateGroup";
 import DeleteGroupModal from "../DeleteGroup";
@@ -25,6 +26,7 @@ const MODAL_COMPONENTS: Record<ModalType, JSX.Element> = {
   [MODAL_TYPE.EXPORT_MEMBER]: <ExportMemberModal />,
   [MODAL_TYPE.CHANGE_LEADER]: <ChangeLeaderModal />,
   [MODAL_TYPE.EXIT_GROUP]: <ExitGroupModal />,
+  [MODAL_TYPE.CANCEL_INVITE]: <CancelInviteModal />,
 } as const;
 
 export default function Portal() {

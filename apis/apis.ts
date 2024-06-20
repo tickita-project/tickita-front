@@ -6,6 +6,7 @@ import {
   GroupType,
   UserInfoType,
   GroupInfoType,
+  CancelInviteType,
 } from "@/types/type";
 
 import { imageRequestInstance, instance } from "./axios";
@@ -67,5 +68,10 @@ export const changeLeader = async (crewId: number, memberId: number) => {
 
 export const exportMember = async (crewId: number, memberId: number) => {
   const res = await instance.put(`/crew/remove-member/${crewId}/${memberId}`);
+  return res.data;
+};
+
+export const cancelInvite = async (data: CancelInviteType) => {
+  const res = await instance.delete("/notification");
   return res.data;
 };

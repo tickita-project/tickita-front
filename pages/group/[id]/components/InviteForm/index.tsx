@@ -8,7 +8,9 @@ import { z } from "zod";
 
 import Input from "@/components/Input";
 import TitleBox from "@/components/TitleBox";
+import { MODAL_TYPE } from "@/constants/modalType";
 import { useInviteGroupMember } from "@/hooks/useInviteGroupMember";
+import { useModalStore } from "@/store/useModalStore";
 
 import { InviteeType } from "@/types/type";
 
@@ -33,7 +35,7 @@ interface InviteFormProps {
 export default function InviteForm({ inviteeList }: InviteFormProps) {
   const { query } = useRouter();
   const { mutate } = useInviteGroupMember(Number(query.id));
-
+  const { openModal } = useModalStore();
   const {
     register,
     handleSubmit,
@@ -60,6 +62,10 @@ export default function InviteForm({ inviteeList }: InviteFormProps) {
     });
   };
 
+  const handleCancelInviteButtonClick = (inviteeData: InviteeType) => {
+    openModal(MODAL_TYPE.CANCEL_INVITE, inviteeData);
+  };
+
   return (
     <div className={cn("invite-box")}>
       <div className={cn("invite")}>
@@ -84,7 +90,7 @@ export default function InviteForm({ inviteeList }: InviteFormProps) {
             {inviteeList?.map((data) => (
               <li key={data.accountId} className={cn("list")}>
                 <span className={cn("email")}>{data.email}</span>
-                <button type="button">
+                <button type="button" onClick={() => handleCancelInviteButtonClick(data)}>
                   <Image src="/icons/close-icon.svg" width={22} height={22} alt="초대 삭제" />
                 </button>
               </li>

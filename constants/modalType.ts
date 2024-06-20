@@ -8,6 +8,7 @@ export const MODAL_TYPE = {
   EXPORT_MEMBER: "EXPORT_MEMBER", // 멤버 내보내기
   CHANGE_LEADER: "CHANGE_LEADER", // 리더 변경
   EXIT_GROUP: "EXIT_GROUP", // 그룹 탈퇴
+  CANCEL_INVITE: "CANCEL_INVITE", // 초대 취소
 } as const;
 
 export type ModalType = (typeof MODAL_TYPE)[keyof typeof MODAL_TYPE];

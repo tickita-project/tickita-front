@@ -72,7 +72,15 @@ export interface SchedulePostDataType {
 }
 
 export interface InviteeType {
+  notificationId: number;
   accountId: number;
   nickName: string;
   email: string;
+}
+
+export interface CancelInviteType {
+  crewId: number;
+  accountId: number;
+  notificationId: number;
+  crewAccept: "DECLINE";
 }
