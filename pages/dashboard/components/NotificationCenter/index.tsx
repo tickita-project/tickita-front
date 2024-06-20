@@ -28,28 +28,16 @@ export default function NotificationCenter() {
       </h2>
       <div className={cn("box")}>
         {notificationList.length > 0 ? (
-          notificationList.map((value) => {
-            if (value.notificationType === "SCHEDULE_INFO" || value.notificationType === "UPDATE") {
-              return <ScheduleInfoNotification key={value.notificationId} scheduleDetail={value} />;
+          notificationList.map((data) => {
+            if (data.notificationType === "SCHEDULE_INFO" || data.notificationType === "UPDATE") {
+              return <ScheduleInfoNotification key={data.notificationId} notificationData={data} />;
             }
 
-            if (value.notificationType === "REQUEST") {
-              return <CoordinationNotification key={value.notificationId} scheduleDetail={value} />;
+            if (data.notificationType === "REQUEST") {
+              return <CoordinationNotification key={data.notificationId} notificationData={data} />;
             }
 
-            return (
-              <BaseNotification
-                notificationId={value.notificationId}
-                crewId={value.crewId}
-                notificationType={value.notificationType}
-                key={value.notificationId}
-                crewName={value.crewName}
-                content={value.content}
-                scheduleInfo={value.scheduleInfo}
-                localDateTime={value.localDateTime}
-                isChecked={value.isChecked}
-              />
-            );
+            return <BaseNotification key={data.notificationId} notificationData={data} />;
           })
         ) : (
           <EmptyNotification title="아직 수신된 알람이 없어요." />

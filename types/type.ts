@@ -111,7 +111,7 @@ export interface CrewNotificationResponseType {
   notificationId: number;
   notificationType: NotificationType;
   crewId: number;
-  accountId?: number;
+  accountId: number;
   crewName: string;
   scheduleInfo?: {
     scheduleId: number;

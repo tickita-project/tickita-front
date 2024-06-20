@@ -16,21 +16,23 @@ const cn = classNames.bind(styles);
 
 dayjs.locale("ko");
 
-interface BaseNotificationProps extends CrewNotificationResponseType {
+interface BaseNotificationProps {
+  notificationData: CrewNotificationResponseType;
   onClick?: () => void;
 }
 
-export default function BaseNotification({
-  notificationId,
-  crewId,
-  notificationType,
-  crewName,
-  content,
-  scheduleInfo,
-  localDateTime,
-  isChecked,
-  onClick,
-}: BaseNotificationProps) {
+export default function BaseNotification({ notificationData, onClick }: BaseNotificationProps) {
+  const {
+    notificationId,
+    crewId,
+    notificationType,
+    crewName,
+    content,
+    scheduleInfo,
+    localDateTime,
+    isChecked,
+  } = notificationData;
+
   const closeRef = useRef<HTMLButtonElement>(null);
   const { mutate: inviteMutate } = useAcceptInvite();
 
