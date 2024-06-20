@@ -2,10 +2,11 @@ import { useState } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 
 import classNames from "classnames/bind";
 
+import { nextInstance } from "@/apis/axios";
 import { PAGE_PATH } from "@/constants/pagePath";
 import { useGetUserInfo } from "@/hooks/useGetUserInfo";
 import { useOutsideClick } from "@/hooks/useOutsideClick";
@@ -53,8 +54,15 @@ export default function Header() {
     setIsDropDownView((prev) => !prev);
   };
 
-  const handleLogoutButtonClick = () => {
-    // 로그아웃 처리
+  const handleLogoutButtonClick = async () => {
+    const response = await nextInstance.get("/api/logout");
+
+    if (response.status === 500) {
+      alert(response.data.message);
+      return;
+    }
+
+    Router.push(PAGE_PATH.MAIN);
   };
 
   return (
