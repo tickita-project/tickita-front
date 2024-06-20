@@ -112,7 +112,7 @@ export interface NotificationListType {
   ];
   localDateTime: string;
   isChecked: boolean;
-  link: string;
+  link: string | null;
   content: string;
 }
 

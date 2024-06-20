@@ -4,29 +4,20 @@ import Image from "next/image";
 
 import classNames from "classnames/bind";
 
+import { changeLocalFullTime, changeLocalTime } from "@/utils/changeLocalTime";
+
+import { NotificationListType } from "@/types/type";
+
 import styles from "./BaseNotification.module.scss";
 
 const cn = classNames.bind(styles);
 
 interface BaseNotificationProps {
-  type: string;
-  groupName: string;
-  text: string;
-  scheduleInfo?: string;
-  notificationDate: string;
-  isChecked: boolean;
+  notification: NotificationListType;
   onClick?: () => void;
 }
 
-export default function BaseNotification({
-  type,
-  groupName,
-  text,
-  scheduleInfo,
-  notificationDate,
-  isChecked,
-  onClick,
-}: BaseNotificationProps) {
+export default function BaseNotification({ notification, onClick }: BaseNotificationProps) {
   const closeRef = useRef<HTMLButtonElement>(null);
 
   const handleNotificationClick = () => {
@@ -46,11 +37,14 @@ export default function BaseNotification({
   };
 
   return (
-    <div className={cn("container", { checked: isChecked })} onClick={handleNotificationClick}>
+    <div
+      className={cn("container", { checked: notification.isChecked })}
+      onClick={handleNotificationClick}
+    >
       <div className={cn("header")}>
         <div className={cn("label-box")}>
-          <p className={cn("group-name")}>{groupName}</p>
-          {!isChecked && <p className={cn("new-label")}>NEW</p>}
+          <p className={cn("group-name")}>{notification.crewName}</p>
+          {!notification.isChecked && <p className={cn("new-label")}>NEW</p>}
         </div>
 
         <button
@@ -63,15 +57,23 @@ export default function BaseNotification({
         </button>
       </div>
 
-      <p className={cn("text")}>{text}</p>
-      <p className={cn("schedule-info")}>{scheduleInfo}</p>
+      <p className={cn("text")}>{notification.content}</p>
+      {notification.scheduleInfo && (
+        <div className={cn("schedule-info")}>
+          {notification.scheduleInfo.map((schedule, index) => (
+            <p key={index}>
+              {changeLocalFullTime(schedule.scheduleTime)}, {schedule.place}
+            </p>
+          ))}
+        </div>
+      )}
       <div className={cn("button-box")}>
-        {type === "invite" && (
+        {notification.notificationType === "INVITE" && (
           <button className={cn("accept-button")} type="button" onClick={handleInviteAcceptClick}>
             초대 수락
           </button>
         )}
-        <p className={cn("notification-date")}>{notificationDate}</p>
+        <p className={cn("notification-date")}>{changeLocalTime(notification.localDateTime)}</p>
       </div>
     </div>
   );

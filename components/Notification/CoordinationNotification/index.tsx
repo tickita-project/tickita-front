@@ -1,40 +1,19 @@
 import { useRouter } from "next/router";
 
+import { NotificationListType } from "@/types/type";
+
 import BaseNotification from "../BaseNotification";
 
-interface ScheduleInfoType {
-  id: number;
-  type: string;
-  groupName: string;
-  text: string;
-  scheduleInfo?: string;
-  notificationDate: string;
-  isChecked: boolean;
-  link?: string;
-}
-
 interface ScheduleInfoNotificationProps {
-  scheduleDetail: ScheduleInfoType;
+  notification: NotificationListType;
 }
 
-export default function CoordinationNotification({
-  scheduleDetail,
-}: ScheduleInfoNotificationProps) {
+export default function CoordinationNotification({ notification }: ScheduleInfoNotificationProps) {
   const router = useRouter();
 
   const handleNotificationClick = () => {
-    scheduleDetail.link && router.push(scheduleDetail.link); // TODO: 일정 상세 모달 열기, 일정 데이터 전달
+    notification.link && router.push(notification.link); // TODO: 일정 상세 모달 열기, 일정 데이터 전달
   };
 
-  return (
-    <BaseNotification
-      type={scheduleDetail.type}
-      groupName={scheduleDetail.groupName}
-      text={scheduleDetail.text}
-      scheduleInfo={scheduleDetail.scheduleInfo}
-      notificationDate={scheduleDetail.notificationDate}
-      isChecked={scheduleDetail.isChecked}
-      onClick={handleNotificationClick}
-    />
-  );
+  return <BaseNotification notification={notification} onClick={handleNotificationClick} />;
 }
