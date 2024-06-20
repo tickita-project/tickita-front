@@ -6,6 +6,7 @@ import {
   GroupType,
   UserInfoType,
   GroupInfoType,
+  CancelInviteType,
   SchedulePostDataType,
 } from "@/types/type";
 
@@ -41,8 +42,42 @@ export const inviteGroupMember = async (data: InviteDataType) => {
   return res.data;
 };
 
-export const getGroupInfo = async (id: number): Promise<GroupInfoType> => {
-  const res = await instance.get(`/crew/${id}`);
+export const getGroupInfo = async (crewId: number): Promise<GroupInfoType> => {
+  const res = await instance.get(`/crew/${crewId}`);
+  return res.data;
+};
+
+export const editGroupInfo = async (crewId: number, data: CreateGroupDataType) => {
+  const res = await instance.put(`/crew/info/${crewId}`, data);
+  return res.data;
+};
+
+export const deleteGroup = async (crewId: number) => {
+  const res = await instance.delete(`/crew/${crewId}`);
+  return res.data;
+};
+
+export const exitGroup = async (crewId: number) => {
+  const res = await instance.delete(`/crew/leave/${crewId}`);
+  return res.data;
+};
+
+export const changeLeader = async (crewId: number, memberId: number) => {
+  const res = await instance.put(`/crew/delegate-owner/${crewId}?memberId=${memberId}`);
+  return res.data;
+};
+
+export const exportMember = async (crewId: number, memberId: number) => {
+  const res = await instance.put(`/crew/remove-member/${crewId}/${memberId}`);
+  return res.data;
+};
+
+export const cancelInvite = async (data: CancelInviteType) => {
+  const res = await instance.delete("/notification");
+};
+
+export const putUserInfo = async (data: ProfileSetupType): Promise<UserInfoType> => {
+  const res = await instance.put(`/account-info/${data.accountId}`, data);
   return res.data;
 };
 

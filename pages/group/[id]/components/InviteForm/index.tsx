@@ -8,7 +8,11 @@ import { z } from "zod";
 
 import Input from "@/components/Input";
 import TitleBox from "@/components/TitleBox";
+import { MODAL_TYPE } from "@/constants/modalType";
 import { useInviteGroupMember } from "@/hooks/useInviteGroupMember";
+import { useModalStore } from "@/store/useModalStore";
+
+import { InviteeType } from "@/types/type";
 
 import styles from "./InviteForm.module.scss";
 
@@ -23,16 +27,15 @@ export interface InviteDataType {
   email: string;
 }
 
-const mockData = Array.from({ length: 20 }, (_, index) => ({
-  id: index,
-  email: `test${index}@naver.com`,
-}));
+interface InviteFormProps {
+  inviteeList: InviteeType[];
+}
 
 // TODO: 초대한 계정 리스트 가져오기 API 연결
-export default function InviteForm() {
+export default function InviteForm({ inviteeList }: InviteFormProps) {
   const { query } = useRouter();
   const { mutate } = useInviteGroupMember(Number(query.id));
-
+  const { openModal } = useModalStore();
   const {
     register,
     handleSubmit,
@@ -59,6 +62,10 @@ export default function InviteForm() {
     });
   };
 
+  const handleCancelInviteButtonClick = (inviteeData: InviteeType) => {
+    openModal(MODAL_TYPE.CANCEL_INVITE, inviteeData);
+  };
+
   return (
     <div className={cn("invite-box")}>
       <div className={cn("invite")}>
@@ -78,12 +85,12 @@ export default function InviteForm() {
         </form>
       </div>
       <div className={cn("invite-list-box")}>
-        {mockData.length > 0 ? (
+        {inviteeList.length > 0 ? (
           <ul className={cn("invite-list")}>
-            {mockData?.map((data) => (
-              <li key={data.id} className={cn("list")}>
+            {inviteeList?.map((data) => (
+              <li key={data.accountId} className={cn("list")}>
                 <span className={cn("email")}>{data.email}</span>
-                <button type="button">
+                <button type="button" onClick={() => handleCancelInviteButtonClick(data)}>
                   <Image src="/icons/close-icon.svg" width={22} height={22} alt="초대 삭제" />
                 </button>
               </li>

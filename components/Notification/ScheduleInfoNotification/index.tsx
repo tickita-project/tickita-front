@@ -1,3 +1,4 @@
+import { MODAL_TYPE } from "@/constants/modalType";
 import { useModalStore } from "@/store/useModalStore";
 
 import BaseNotification from "../BaseNotification";
@@ -23,7 +24,7 @@ export default function ScheduleInfoNotification({
   const { openModal } = useModalStore();
 
   const handleNotificationClick = () => {
-    openModal("일정 상세 모달", scheduleDetail); // TODO: 일정 상세 모달 열기, 일정 데이터 전달
+    openModal(MODAL_TYPE.SCHEDULE_DETAILS, scheduleDetail); // TODO: 일정 상세 모달 열기, 일정 데이터 전달
   };
 
   return (

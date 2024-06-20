@@ -1,0 +1,57 @@
+.button-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+
+  .info-box {
+    width: 17%;
+    text-align: center;
+    position: relative;
+
+    .info-item {
+      position: absolute;
+      top: -155%;
+      right: -265%;
+      animation: fadeIn 0.5s;
+
+      .info-text {
+        display: flex;
+        align-items: center;
+        width: 16.5rem;
+        height: 4rem;
+        padding: 1rem;
+        background-color: $white;
+        border: 1px solid $gray400;
+        border-radius: 0.5rem;
+        font-size: 0.9375rem;
+        color: $gray800;
+        font-weight: 500;
+        position: relative;
+        z-index: 999;
+
+        .triangle {
+          position: absolute;
+          bottom: -55%;
+          left: 3%;
+          border-bottom: 20px solid transparent;
+          border-top: 20px solid $white;
+          border-left: 20px solid transparent;
+          border-right: 20px solid transparent;
+          // border: 1px solid $gray200;
+        }
+      }
+    }
+  }
+
+  .group-button {
+    width: 80%;
+    height: 4rem;
+    border-radius: 0.5rem;
+    background-color: $blue500;
+    color: $white;
+    font-size: 1.25rem;
+    font-weight: 500;
+    cursor: pointer;
+  }
+}

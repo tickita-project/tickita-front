@@ -5,7 +5,7 @@ import Image from "next/image";
 import classNames from "classnames/bind";
 
 import ProfileSetupForm from "./components/ProfileSetupForm/ProfileSetupForm";
-import { instance } from "@/apis/axios";
+import { basicInstance } from "@/apis/axios";
 import MetaData from "@/components/MetaData";
 
 import styles from "./ProfileSetup.module.scss";
@@ -20,7 +20,7 @@ interface ProfileSetupProps {
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
   const accountId = context.query.id;
 
-  const res = await instance.get(`/account-info/${accountId}`);
+  const res = await basicInstance.get(`/account-info/${accountId}`);
   const { email } = res.data;
 
   return {
