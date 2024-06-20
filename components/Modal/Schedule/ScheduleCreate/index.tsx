@@ -116,19 +116,21 @@ export default function ScheduleCreateModal() {
             ))}
           </select>
         </div>
-        {selectedGroupId && groupInfo && (
+        {
           <div>
             <p className={cn("label")}>참가자 선택</p>
             <div className={cn("members")}>
-              {groupInfo.crewMemberInfoResponses?.map((member: any) => (
-                <label key={member.accountId}>
-                  <input type="checkbox" value={member.accountId} {...register("participants")} />
-                  {member.nickName}
-                </label>
-              ))}
+              {selectedGroupId &&
+                groupInfo &&
+                groupInfo.crewMemberInfoResponses?.map((member: any) => (
+                  <label key={member.accountId}>
+                    <input type="checkbox" value={member.accountId} {...register("participants")} />
+                    {member.nickName}
+                  </label>
+                ))}
             </div>
           </div>
-        )}
+        }
         <button type="submit" disabled={!isValid}>
           일정 생성
         </button>
