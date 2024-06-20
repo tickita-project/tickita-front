@@ -53,7 +53,8 @@ export interface GroupInfoType {
   crewId: number;
   crewName: string;
   labelColor: GroupColorType;
-  crewMemberInfoResponses: GroupMemberInfoType[];
+  crewMembers: GroupMemberInfoType[];
+  waitingMembers: InviteeType[];
 }
 
 export interface ParticipantType {
@@ -71,6 +72,19 @@ export interface SchedulePostDataType {
   participants: ParticipantType[];
 }
 
+export interface InviteeType {
+  notificationId: number;
+  accountId: number;
+  nickName: string;
+  email: string;
+}
+
+export interface CancelInviteType {
+  crewId: number;
+  accountId: number;
+  notificationId: number;
+  crewAccept: "DECLINE";
+}
 export interface VoteNotificationType {
   notificationId: number;
   notificationType: string;

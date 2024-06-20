@@ -1,17 +1,19 @@
 import { create } from "zustand";
 
+import { ModalType } from "@/constants/modalType";
+
 interface ModalStoreType {
   isOpen: boolean;
-  type: string;
+  type: ModalType | null;
   data: any;
-  openModal: (type: string, data?: any) => void;
+  openModal: (type: ModalType, data?: any) => void;
   closeModal: () => void;
 }
 
 export const useModalStore = create<ModalStoreType>((set) => ({
   isOpen: false,
-  type: "",
+  type: null,
   data: null,
   openModal: (type, data) => set(() => ({ isOpen: true, type, data })),
-  closeModal: () => set(() => ({ isOpen: false, type: "", data: null })),
+  closeModal: () => set(() => ({ isOpen: false, type: null, data: null })),
 }));

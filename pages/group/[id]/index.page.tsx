@@ -1,12 +1,12 @@
-import { ReactElement, useState } from "react";
+import { ReactElement } from "react";
 
-import Image from "next/image";
 import { useRouter } from "next/router";
 import { GetServerSidePropsContext } from "next/types";
 
 import { QueryClient, dehydrate } from "@tanstack/react-query";
 import classNames from "classnames/bind";
 
+import ActionButton from "./components/ActionButton";
 import GroupForm from "./components/GroupForm";
 import InviteForm from "./components/InviteForm";
 import MemberList from "./components/MemberList";
@@ -46,21 +46,11 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
 };
 
 export default function Group() {
-  const [isInfoTextView, setIsInfoTextView] = useState(false);
   const { query } = useRouter();
   const { data: groupInfo } = useGetGroupInfo(Number(query.id));
   const { data: userInfo } = useGetUserInfo();
 
-  const isCurrentUserLeader =
-    userInfo?.accountId === groupInfo?.crewMemberInfoResponses[0].accountId;
-
-  const handleInfoTextMouseOver = () => {
-    setIsInfoTextView(true);
-  };
-
-  const handleInfoTextMouseLeave = () => {
-    setIsInfoTextView(false);
-  };
+  const isCurrentUserLeader = userInfo?.accountId === groupInfo?.crewMembers[0].accountId;
 
   if (!groupInfo || !userInfo) {
     // 추후 로딩 처리로 변경
@@ -74,36 +64,12 @@ export default function Group() {
         <MemberList
           isCurrentUserLeader={isCurrentUserLeader}
           currentUserId={userInfo.accountId}
-          memberList={groupInfo.crewMemberInfoResponses}
+          memberList={groupInfo.crewMembers}
         />
-        <InviteForm />
+        <InviteForm inviteeList={groupInfo.waitingMembers} />
         <div className={cn("box")}>
           <GroupForm groupInfo={groupInfo} />
-          <div className={cn("button-box")}>
-            <div
-              onMouseOver={handleInfoTextMouseOver}
-              onMouseLeave={handleInfoTextMouseLeave}
-              className={cn("info-box")}
-            >
-              <Image
-                src="/icons/information-icon.svg"
-                width={40}
-                height={40}
-                alt="그룹 정보 버튼"
-              />
-              {isInfoTextView && (
-                <div className={cn("info-item")}>
-                  <div className={cn("info-text")}>
-                    리더가 그룹을 나가려면 다른 멤버에게 리더를 위임하고 나가야 합니다.
-                    <p className={cn("triangle")} />
-                  </div>
-                </div>
-              )}
-            </div>
-            <button className={cn("group-button")}>
-              {isCurrentUserLeader ? "그룹 삭제" : "그룹 나가기"}
-            </button>
-          </div>
+          <ActionButton isCurrentUserLeader={isCurrentUserLeader} />
         </div>
       </section>
     </>

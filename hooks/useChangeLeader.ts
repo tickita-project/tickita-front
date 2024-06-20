@@ -1,13 +1,12 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { inviteGroupMember } from "@/apis/apis";
+import { changeLeader } from "@/apis/apis";
 import { groupKey } from "@/constants/queryKey";
-import { InviteDataType } from "@/pages/group/[id]/components/InviteForm";
 
-export const useInviteGroupMember = (crewId: number) => {
+export const useChangeLeader = (crewId: number) => {
   const queryClient = useQueryClient();
   const { mutate } = useMutation({
-    mutationFn: (data: InviteDataType) => inviteGroupMember(data),
+    mutationFn: (memberId: number) => changeLeader(crewId, memberId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: groupKey.detail(crewId) });
     },

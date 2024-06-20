@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import Image from "next/image";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -9,6 +11,7 @@ import GroupColorPicker from "@/components/GroupColorPicker";
 import Input from "@/components/Input";
 import TitleBox from "@/components/TitleBox";
 import { CREW_NAME_SCHEMA } from "@/constants/schema";
+import { useEditGroupInfo } from "@/hooks/useEditGroupInfo";
 
 import { GroupInfoType } from "@/types/type";
 
@@ -29,6 +32,7 @@ export default function GroupForm({ groupInfo }: GroupFormProps) {
   const {
     register,
     handleSubmit,
+    reset,
     control,
     formState: { errors, isValid, isDirty },
   } = useForm({
@@ -38,8 +42,23 @@ export default function GroupForm({ groupInfo }: GroupFormProps) {
   });
   const selectColor = useWatch({ name: "labelColor", control });
 
+  const { mutate } = useEditGroupInfo(groupInfo.crewId);
+
+  useEffect(() => {
+    // groupInfo가 변경될 때 폼을 재설정
+    reset({ crewName: groupInfo.crewName, labelColor: groupInfo.labelColor });
+  }, [groupInfo]);
+
   const onSubmit = async (formData: any) => {
     // 그룹 정보 변경 로직 추가 예정
+    mutate(formData, {
+      onSuccess: () => {
+        alert("그룹 정보가 변경되었습니다.");
+      },
+      onError: (error) => {
+        alert(error);
+      },
+    });
   };
 
   return (
