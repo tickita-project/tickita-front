@@ -106,7 +106,9 @@ export default function Header() {
             {isDropDownView && (
               <ul className={cn("dropdown")}>
                 <li>
-                  <Link href={PAGE_PATH.MY_PAGE}>마이페이지</Link>
+                  <Link className={cn("my-page-link")} href={PAGE_PATH.MY_PAGE}>
+                    마이페이지
+                  </Link>
                 </li>
                 <li>
                   <button onClick={handleLogoutButtonClick} className={cn("logout")} type="button">
