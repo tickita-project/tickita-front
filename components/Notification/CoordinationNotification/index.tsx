@@ -1,4 +1,6 @@
-import { useRouter } from "next/router";
+import Router from "next/router";
+
+import { PAGE_PATH } from "@/constants/pagePath";
 
 import { CrewNotificationResponseType } from "@/types/type";
 
@@ -11,10 +13,8 @@ interface ScheduleInfoNotificationProps {
 export default function CoordinationNotification({
   scheduleDetail,
 }: ScheduleInfoNotificationProps) {
-  const router = useRouter();
-
   const handleNotificationClick = () => {
-    scheduleDetail.link && router.push(scheduleDetail.link); // TODO: 일정 상세 모달 열기, 일정 데이터 전달
+    Router.push(PAGE_PATH.MY_PAGE);
   };
 
   return (
