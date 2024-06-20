@@ -1,9 +1,15 @@
+import { useState, useEffect } from "react";
+
 import Image from "next/image";
 
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import classNames from "classnames/bind";
 import { useForm } from "react-hook-form";
 import { useShallow } from "zustand/react/shallow";
 
+import { getGroupInfo } from "@/apis/apis";
+import { useGetGroupInfo } from "@/hooks/useGetGroupInfo";
+import { useGetGroupList } from "@/hooks/useGetGroupList";
 import { useDateStore } from "@/store/useDateStore";
 import { useModalStore } from "@/store/useModalStore";
 
@@ -14,6 +20,7 @@ import styles from "./ScheduleCreateModal.module.scss";
 const cn = classNames.bind(styles);
 
 export default function ScheduleCreateModal() {
+  const queryClient = useQueryClient();
   const { closeModal } = useModalStore();
   const { scheduleStart, scheduleEnd, setScheduleStart, setScheduleEnd } = useDateStore(
     useShallow((state) => ({
@@ -33,6 +40,22 @@ export default function ScheduleCreateModal() {
       endDateTime: scheduleEnd?.format("YYYY-MM-DDTHH:mm"),
     },
   });
+  const { data: groupList } = useGetGroupList();
+
+  // 선택된 그룹 ID 상태
+  const [selectedGroupId, setSelectedGroupId] = useState<number | null>(null);
+  const [groupInfo, setGroupInfo] = useState<any>(null);
+
+  useEffect(() => {
+    if (selectedGroupId !== null) {
+      // 선택된 그룹 ID가 있을 때만 그룹 정보를 가져옴
+      const fetchGroupInfo = async () => {
+        const data = await getGroupInfo(selectedGroupId);
+        setGroupInfo(data);
+      };
+      fetchGroupInfo();
+    }
+  }, [selectedGroupId]);
 
   const handleCloseModal = () => {
     closeModal();
@@ -40,8 +63,9 @@ export default function ScheduleCreateModal() {
     setScheduleEnd(null);
   };
 
-  const handleCreateSchedule = () => {
+  const handleCreateSchedule = (data: SchedulePostDataType) => {
     // 일정 생성 구현
+    console.log(data);
   };
 
   return (
@@ -55,7 +79,7 @@ export default function ScheduleCreateModal() {
           className={cn("title")}
           placeholder="무슨 일정인가요?"
           autoFocus
-          {...register("title")}
+          {...register("title", { required: true })}
         />
         <div className={cn("time-place")}>
           <div className={cn("time-container")}>
@@ -72,9 +96,42 @@ export default function ScheduleCreateModal() {
           </div>
           <div className={cn("place")}>
             <p className={cn("label")}>장소</p>
-            <input type="text" />
+            <input type="text" maxLength={10} {...register("location")} />
           </div>
         </div>
+        <div>
+          <p className={cn("label")}>추가 내용</p>
+          <textarea maxLength={50} {...register("description")}></textarea>
+        </div>
+        <div>
+          <p className={cn("label")}>그룹 선택</p>
+          <select onChange={(e) => setSelectedGroupId(Number(e.target.value))} defaultValue="">
+            <option value="" disabled>
+              그룹을 선택하세요
+            </option>
+            {groupList?.map((group) => (
+              <option key={group.crewId} value={group.crewId}>
+                {group.crewName}
+              </option>
+            ))}
+          </select>
+        </div>
+        {selectedGroupId && groupInfo && (
+          <div>
+            <p className={cn("label")}>참가자 선택</p>
+            <div className={cn("members")}>
+              {groupInfo.crewMemberInfoResponses?.map((member: any) => (
+                <label key={member.accountId}>
+                  <input type="checkbox" value={member.accountId} {...register("participants")} />
+                  {member.nickName}
+                </label>
+              ))}
+            </div>
+          </div>
+        )}
+        <button type="submit" disabled={!isValid}>
+          일정 생성
+        </button>
       </form>
     </div>
   );
