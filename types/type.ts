@@ -46,7 +46,7 @@ export interface GroupMemberInfoType {
   accountId: number;
   nickName: string;
   email: string;
-  imageUrl: string | null;
+  image: string | null;
 }
 
 export interface GroupInfoType {

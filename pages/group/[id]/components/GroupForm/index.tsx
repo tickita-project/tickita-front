@@ -26,9 +26,10 @@ const createGroupSchema = z.object({
 
 interface GroupFormProps {
   groupInfo: GroupInfoType;
+  isCurrentUserLeader: boolean;
 }
 
-export default function GroupForm({ groupInfo }: GroupFormProps) {
+export default function GroupForm({ groupInfo, isCurrentUserLeader }: GroupFormProps) {
   const {
     register,
     handleSubmit,
@@ -73,7 +74,7 @@ export default function GroupForm({ groupInfo }: GroupFormProps) {
           id="crewName"
           placeholder="그룹 이름을 입력해 주세요."
           isRequired
-          readOnly
+          readOnly={!isCurrentUserLeader}
           {...register("crewName")}
           errorMessage={errors.crewName?.message}
         />
@@ -81,7 +82,11 @@ export default function GroupForm({ groupInfo }: GroupFormProps) {
           <h3 className={cn("label")}>
             그룹 색상 <span className={cn("asterisk")}>*</span>
           </h3>
-          <GroupColorPicker readOnly {...register("labelColor")} selectColor={selectColor} />
+          <GroupColorPicker
+            readOnly={!isCurrentUserLeader}
+            {...register("labelColor")}
+            selectColor={selectColor}
+          />
         </div>
         <button type="submit" disabled={!isValid || !isDirty} className={cn("form-button")}>
           저장하기
