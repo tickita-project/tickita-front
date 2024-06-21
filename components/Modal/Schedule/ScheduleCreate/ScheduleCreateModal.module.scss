@@ -4,8 +4,8 @@
   gap: 1rem;
 
   .group-color {
-    width: 1.875rem;
-    height: 1.875rem;
+    width: 1.5625rem;
+    height: 1.5625rem;
     border-radius: .25rem;
   }
 
@@ -16,14 +16,14 @@
 
 @mixin scroll {
   &::-webkit-scrollbar {
-    width: 0.75rem;
+    width: .75rem;
     height: .625rem;
   }
 
   &::-webkit-scrollbar-thumb {
     background: $gray400;
-    border: 1px solid $gray400;
-    border-radius: 5px;
+    border: .0625rem solid $gray400;
+    border-radius: .3125rem;
     max-height: .625rem;
   }
 
@@ -40,7 +40,7 @@
   position: relative;
   top: 50%;
   left: 50%;
-  border-radius: 16px;
+  border-radius: 1rem;
 
   .close-button {
     padding: 0;
@@ -63,7 +63,7 @@
 
     .title {
       display: flex;
-      padding: 0.5rem 0;
+      padding: .5rem 0;
       align-items: center;
       gap: .25rem;
       align-self: stretch;
@@ -119,6 +119,7 @@
         }
 
         .place-input-container {
+          width: 100%;
           display: flex;
           align-items: center;
           gap: .25rem;
@@ -130,7 +131,8 @@
           }
 
           .location-length {
-            margin-left: .25rem;
+            display: flex;
+            margin-left: .625rem;
             @include body2-medium($gray600);
 
             b {
@@ -202,7 +204,7 @@
         height: 3.75rem;
         padding: .375rem 1rem;
         border-radius: .5rem;
-        border: 2px solid $gray900;
+        border: .125rem solid $gray900;
         cursor: pointer;
 
         .selected-group {
@@ -227,7 +229,7 @@
         z-index: 3;
         background-color: $white;
         border-radius: .5rem;
-        border: 2px solid $gray900;
+        border: .125rem solid $gray900;
         padding: .25rem .625rem;
         @include scroll;
 
@@ -262,57 +264,65 @@
       }
 
       .members {
-        width: 100%;
-        height: 9.375rem;
+        max-height: 6.25rem;
+        display: flex;
         flex-wrap: wrap;
         overflow-y: auto;
+        @include scroll;
 
-        &::-webkit-scrollbar {
-          width: 0.75rem;
-        }
-
-        &::-webkit-scrollbar-thumb {
-          background: $gray400;
-          border: 1px solid $gray400;
-          border-radius: 5px;
-          min-height: 1.875rem;
-        }
-
-        &::-webkit-scrollbar-track {
-          display: none
+        .alone-msg {
+          @include body2-medium;
         }
 
         .member-checkbox {
           display: flex;
-          padding: 4px 8px;
+          padding: .25rem .5rem;
           align-items: center;
-          gap: 4px;
+          gap: .25rem;
           border-radius: 1000px;
-          border: 1px solid $gray200;
+          border: .0625rem solid $gray200;
           background: $gray50;
+          cursor: pointer;
+          margin: .25rem;
+          @include body2-medium;
+
+          input {
+            display: none;
+          }
+
+          &:hover {
+            background: $blue100;
+            color: $blue700;
+          }
+
+          &:active {
+            background: $blue300;
+          }
+        }
+
+        .member-checkbox input:checked+.member-checkbox {
+          background: $blue500;
+          color: $white;
         }
       }
     }
 
     .submit {
       display: flex;
-      height: 40px;
-      padding: 8px 20px;
-      justify-content: center;
-      align-items: center;
-      gap: 4px;
-      border-radius: 8px;
+      height: 2.5rem;
+      padding: .5rem 1.25rem;
+      justify-self: flex-end;
+      align-self: flex-end;
+      gap: .25rem;
+      border-radius: .5rem;
       background: $blue500;
       color: $white;
       /* Body 1/Bold */
-      font-size: 16px;
+      font-size: 1rem;
       font-weight: 700;
       line-height: 150%;
       /* 24px */
-      letter-spacing: -0.4px;
-      position: absolute;
-      bottom: 1.25rem;
-      right: 1.25rem;
+      letter-spacing: -0.025rem;
 
       &:disabled {
         background-color: $gray300;

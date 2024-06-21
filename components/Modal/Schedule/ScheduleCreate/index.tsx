@@ -74,7 +74,6 @@ export default function ScheduleCreateModal() {
   };
 
   useEffect(() => {
-    //그룹이 선택되면, 아래 코드가 실행되도록 useEffect 설정
     if (!crewIdWatch) {
       return;
     }
@@ -124,7 +123,7 @@ export default function ScheduleCreateModal() {
                 {...register("location")}
               />
               <p className={cn("location-length")}>
-                <b>{locationWatch.length}</b>/ 20
+                <b>{locationWatch.length} </b> / 20
               </p>
             </div>
           </div>
@@ -138,7 +137,7 @@ export default function ScheduleCreateModal() {
             {...register("description")}
           />
           <p className={cn("text-length")}>
-            <b>{descriptionWatch.length}</b>/ 80
+            <b>{descriptionWatch.length}</b> / 80
           </p>
         </div>
         <div className={cn("group")}>
@@ -184,14 +183,22 @@ export default function ScheduleCreateModal() {
         <div className={cn("member-container")}>
           <p className={cn("label")}>참가자 선택</p>
           <div className={cn("members")}>
-            {groupInfo?.crewMembers.map(
-              (member) =>
-                member.accountId !== userInfo?.accountId && (
-                  <label className={cn("member-checkbox")} key={member.accountId}>
-                    <input type="checkbox" value={member.accountId} {...register("participants")} />
-                    {member.nickName}
-                  </label>
-                ),
+            {groupInfo?.crewMembers.length === 1 ? (
+              <p className={cn("alone-msg")}>그룹에 팀원이 없습니다.</p>
+            ) : (
+              groupInfo?.crewMembers.map(
+                (member) =>
+                  member.accountId !== userInfo?.accountId && (
+                    <label className={cn("member-checkbox")} key={member.accountId}>
+                      <input
+                        type="checkbox"
+                        value={member.accountId}
+                        {...register("participants")}
+                      />
+                      {member.nickName}
+                    </label>
+                  ),
+              )
             )}
           </div>
         </div>
