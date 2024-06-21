@@ -83,6 +83,70 @@
         .label {
           @include headline2-bold;
         }
+
+        .place-input-container {
+          display: flex;
+          align-items: center;
+          gap: .125rem;
+          flex: 1 0 0;
+
+          .place-input {
+            @include body2-medium;
+            text-align: start;
+          }
+        }
+      }
+    }
+
+    .description {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: .25rem;
+      align-self: stretch;
+
+      .label {
+        @include headline2-bold;
+      }
+
+      .text {
+        width: 100%;
+        display: flex;
+        padding: .75rem 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: .25rem;
+        align-self: stretch;
+        border-radius: .5rem;
+        background: $gray100;
+        border: none;
+        resize: none;
+        @include body2-regular;
+        text-align: start;
+      }
+    }
+
+    .group {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: .25rem;
+      align-self: stretch;
+
+      .label {
+        @include headline2-bold;
+      }
+
+      .group-select {
+        display: flex;
+        height: 2.75rem;
+        min-width: 7.5rem;
+        padding: .75rem 1rem;
+        align-items: center;
+        gap: .5rem;
+        align-self: stretch;
+        border-radius: .5rem;
+        border: 2px solid $gray900;
       }
     }
   }

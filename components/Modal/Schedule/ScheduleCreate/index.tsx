@@ -2,13 +2,12 @@ import { useState, useEffect } from "react";
 
 import Image from "next/image";
 
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import classNames from "classnames/bind";
 import { useForm } from "react-hook-form";
 import { useShallow } from "zustand/react/shallow";
 
 import { getGroupInfo } from "@/apis/apis";
-import { useGetGroupInfo } from "@/hooks/useGetGroupInfo";
 import { useGetGroupList } from "@/hooks/useGetGroupList";
 import { useDateStore } from "@/store/useDateStore";
 import { useModalStore } from "@/store/useModalStore";
@@ -20,7 +19,6 @@ import styles from "./ScheduleCreateModal.module.scss";
 const cn = classNames.bind(styles);
 
 export default function ScheduleCreateModal() {
-  const queryClient = useQueryClient();
   const { closeModal } = useModalStore();
   const { scheduleStart, scheduleEnd, setScheduleStart, setScheduleEnd } = useDateStore(
     useShallow((state) => ({
@@ -47,14 +45,16 @@ export default function ScheduleCreateModal() {
   const [groupInfo, setGroupInfo] = useState<any>(null);
 
   useEffect(() => {
-    if (selectedGroupId !== null) {
-      // 선택된 그룹 ID가 있을 때만 그룹 정보를 가져옴
-      const fetchGroupInfo = async () => {
-        const data = await getGroupInfo(selectedGroupId);
-        setGroupInfo(data);
-      };
-      fetchGroupInfo();
+    if (!selectedGroupId) {
+      return;
     }
+
+    const fetchGroupInfo = async () => {
+      const data = await getGroupInfo(selectedGroupId);
+      setGroupInfo(data);
+    };
+
+    fetchGroupInfo();
   }, [selectedGroupId]);
 
   const handleCloseModal = () => {
@@ -96,21 +96,39 @@ export default function ScheduleCreateModal() {
           </div>
           <div className={cn("place")}>
             <p className={cn("label")}>장소</p>
-            <input type="text" maxLength={10} {...register("location")} />
+            <div className={cn("place-input-container")}>
+              <Image src="/icons/location-icon.svg" alt="장소" width={20} height={20} />
+              <input
+                className={cn("place-input")}
+                type="text"
+                maxLength={20}
+                placeholder="(선택) 위워크 10층 미팅룸"
+                {...register("location")}
+              />
+            </div>
           </div>
         </div>
-        <div>
+        <div className={cn("description")}>
           <p className={cn("label")}>추가 내용</p>
-          <textarea maxLength={50} {...register("description")}></textarea>
+          <textarea
+            className={cn("text")}
+            maxLength={50}
+            placeholder="(선택) 설명을 입력해주세요"
+            {...register("description")}
+          />
         </div>
-        <div>
+        <div className={cn("group")}>
           <p className={cn("label")}>그룹 선택</p>
-          <select onChange={(e) => setSelectedGroupId(Number(e.target.value))} defaultValue="">
-            <option value="" disabled>
+          <select
+            className={cn("group-select")}
+            onChange={(e) => setSelectedGroupId(Number(e.target.value))}
+            defaultValue=""
+          >
+            <option className={cn("default-option")} value="" disabled>
               그룹을 선택하세요
             </option>
             {groupList?.slice(7).map((group) => (
-              <option key={group.crewId} value={group.crewId}>
+              <option key={group.crewId} value={group.crewId} className={cn("option")}>
                 {group.crewName}
               </option>
             ))}
@@ -124,14 +142,19 @@ export default function ScheduleCreateModal() {
                 groupInfo &&
                 groupInfo.crewMemberInfoResponses?.map((member: any) => (
                   <label key={member.accountId}>
-                    <input type="checkbox" value={member.accountId} {...register("participants")} />
+                    <input
+                      type="checkbox"
+                      value={member.accountId}
+                      {...register("participants")}
+                      className={cn("")}
+                    />
                     {member.nickName}
                   </label>
                 ))}
             </div>
           </div>
         }
-        <button type="submit" disabled={!isValid}>
+        <button type="submit" disabled={!isValid} className={cn("")}>
           일정 생성
         </button>
       </form>
