@@ -107,23 +107,25 @@ export interface VoteNotificationType {
 
 type NotificationType = "INVITE" | "SCHEDULE_INFO" | "UPDATE" | "EXCLUDE" | "REQUEST";
 
-export interface CrewNotificationResponseType {
+type AlarmType = "CREW" | "SCHEDULE";
+
+export interface NotificationInfoType {
   notificationId: number;
   notificationType: NotificationType;
   crewId: number;
-  accountId: number;
+  labelColor: GroupColorType;
   crewName: string;
   scheduleInfo?: {
     scheduleId: number;
-    scheduleTime: string;
-    place: string;
+    title: string;
   };
   localDateTime: string;
   isChecked: boolean;
   content: string;
+  alarmType: AlarmType;
 }
 
 export interface NotificationDataType {
   count: number;
-  crewNotificationResponse: CrewNotificationResponseType[];
+  notificationInfo: NotificationInfoType[];
 }

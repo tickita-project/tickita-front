@@ -35,8 +35,7 @@
       .group-name {
         padding: 0.25rem 0.5rem;
         border-radius: 0.25rem;
-        background-color: $blue50;
-        color: $blue800;
+        color: $white;
         font-size: 0.875rem;
         font-weight: 500;
       }
@@ -113,8 +112,14 @@
   &:hover .close-button {
     display: block;
   }
-}
 
-.checked {
-  opacity: 0.5;
+  &.checked {
+    opacity: 0.5;
+
+    &:hover {
+      // 호버 이벤트 제거용
+      background-color: $white;
+      opacity: 0.5;
+    }
+  }
 }

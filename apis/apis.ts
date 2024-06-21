@@ -84,10 +84,20 @@ export const getAllNotification = async (): Promise<NotificationDataType> => {
 };
 
 export const cancelInvite = async (data: CancelInviteType) => {
-  const res = await instance.delete("/notification");
+  await instance.delete("/notification");
 };
 
 export const acceptInvite = async (data: AcceptInviteType) => {
   const res = await instance.post(`/notification`, data);
+  return res.data;
+};
+
+export const checkNotification = async (notificationId: number) => {
+  const res = await instance.put(`/notification/${notificationId}`, { isChecked: true });
+  return res.data;
+};
+
+export const deleteNotification = async (notificationId: number) => {
+  const res = await instance.delete(`/notification/${notificationId}`);
   return res.data;
 };

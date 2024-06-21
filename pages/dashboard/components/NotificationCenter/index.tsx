@@ -13,12 +13,9 @@ import styles from "./NotificationCenter.module.scss";
 const cn = classNames.bind(styles);
 
 export default function NotificationCenter() {
-  const { data: notificationInfo } = useGetAllNotification();
-  const notificationList = notificationInfo?.crewNotificationResponse;
-
-  if (!notificationList) {
-    return null;
-  }
+  const { data: notificationData } = useGetAllNotification();
+  const notificationList = notificationData?.notificationInfo ?? [];
+  console.log(notificationData);
 
   return (
     <div className={cn("container")}>

@@ -2,12 +2,12 @@ import Router from "next/router";
 
 import { PAGE_PATH } from "@/constants/pagePath";
 
-import { CrewNotificationResponseType } from "@/types/type";
+import { NotificationInfoType } from "@/types/type";
 
 import BaseNotification from "../BaseNotification";
 
 interface ScheduleInfoNotificationProps {
-  notificationData: CrewNotificationResponseType;
+  notificationData: NotificationInfoType;
 }
 
 export default function CoordinationNotification({
