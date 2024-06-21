@@ -24,7 +24,7 @@ export default function NotificationPopup() {
   const { count, crewNotificationResponse: notificationList } = data;
 
   const handleBellClick = () => {
-    setIsPopupView(!isPopupView);
+    setIsPopupView((prev) => !prev);
   };
 
   return (
