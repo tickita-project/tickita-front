@@ -30,7 +30,7 @@ export default function NotificationPopup() {
   return (
     <div className={cn("container")}>
       <figure onClick={handleBellClick} className={cn("notification-bell")}>
-        {count && (
+        {count > 0 && (
           <figcaption className={cn("notification-count")}>{count < 10 ? count : "9+"}</figcaption>
         )}
         <Image src="/icons/notification-bell.svg" width={26} height={20} alt="알림 종" priority />
