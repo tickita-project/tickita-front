@@ -5,7 +5,7 @@ import Image from "next/image";
 import classNames from "classnames/bind";
 
 import { useAcceptInvite } from "@/hooks/useAcceptInvite";
-import formatKoreanDateTime from "@/utils/formatKoreanDateTime";
+import { formatKoreanDateTime } from "@/utils/formatKoreanDateTime";
 
 import { AcceptInviteType, CrewNotificationResponseType } from "@/types/type";
 
