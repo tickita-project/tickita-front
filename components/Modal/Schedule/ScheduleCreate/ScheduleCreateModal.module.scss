@@ -274,21 +274,21 @@
           @include body2-medium;
         }
 
-        .member-checkbox {
+        input {
+          display: none;
+        }
+
+        .member-label {
           display: flex;
           padding: .25rem .5rem;
           align-items: center;
           gap: .25rem;
-          border-radius: 1000px;
+          border-radius: 62.5rem;
           border: .0625rem solid $gray200;
           background: $gray50;
           cursor: pointer;
           margin: .25rem;
           @include body2-medium;
-
-          input {
-            display: none;
-          }
 
           &:hover {
             background: $blue100;
@@ -300,9 +300,9 @@
           }
         }
 
-        .member-checkbox input:checked+.member-checkbox {
-          background: $blue500;
-          color: $white;
+        input:checked+.member-label {
+          background: $blue500 !important;
+          color: $white !important;
         }
       }
     }

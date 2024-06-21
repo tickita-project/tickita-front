@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import Image from "next/image";
 
@@ -189,14 +189,17 @@ export default function ScheduleCreateModal() {
               groupInfo?.crewMembers.map(
                 (member) =>
                   member.accountId !== userInfo?.accountId && (
-                    <label className={cn("member-checkbox")} key={member.accountId}>
+                    <React.Fragment key={member.accountId}>
                       <input
+                        id={`member-${member.accountId}`}
                         type="checkbox"
                         value={member.accountId}
                         {...register("participants")}
                       />
-                      {member.nickName}
-                    </label>
+                      <label htmlFor={`member-${member.accountId}`} className={cn("member-label")}>
+                        {member.nickName}
+                      </label>
+                    </React.Fragment>
                   ),
               )
             )}
