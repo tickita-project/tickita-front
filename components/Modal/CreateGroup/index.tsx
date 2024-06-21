@@ -75,7 +75,11 @@ export default function CreateGroupModal() {
           <h3 className={cn("label")}>
             그룹 색상 <span className={cn("asterisk")}>*</span>
           </h3>
-          <GroupColorPicker {...register("labelColor")} selectColor={selectColor} />
+          <GroupColorPicker
+            readOnly={false}
+            {...register("labelColor")}
+            selectColor={selectColor}
+          />
         </div>
         <div className={cn("button-box")}>
           <button type="submit" disabled={!isValid || isPending} className={cn("create-button")}>

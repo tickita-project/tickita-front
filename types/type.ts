@@ -46,7 +46,7 @@ export interface GroupMemberInfoType {
   accountId: number;
   nickName: string;
   email: string;
-  imageUrl: string | null;
+  image: string | null;
 }
 
 export interface GroupInfoType {
@@ -85,6 +85,13 @@ export interface CancelInviteType {
   notificationId: number;
   crewAccept: "DECLINE";
 }
+
+export interface AcceptInviteType {
+  crewId: number;
+  notificationId: number;
+  crewAccept: "ACCEPT";
+}
+
 export interface VoteNotificationType {
   notificationId: number;
   notificationType: string;
@@ -96,4 +103,27 @@ export interface VoteNotificationType {
   voteId: number;
   voteTitle: string;
   voteParticipateType: boolean;
+}
+
+type NotificationType = "INVITE" | "SCHEDULE_INFO" | "UPDATE" | "EXCLUDE" | "REQUEST";
+
+export interface CrewNotificationResponseType {
+  notificationId: number;
+  notificationType: NotificationType;
+  crewId: number;
+  accountId: number;
+  crewName: string;
+  scheduleInfo?: {
+    scheduleId: number;
+    scheduleTime: string;
+    place: string;
+  };
+  localDateTime: string;
+  isChecked: boolean;
+  content: string;
+}
+
+export interface NotificationDataType {
+  count: number;
+  crewNotificationResponse: CrewNotificationResponseType[];
 }

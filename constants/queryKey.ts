@@ -15,6 +15,11 @@ export const userInfoKey = {
   info: () => [...userInfoKey.all, "info"] as const,
 };
 
+export const notificationKey = {
+  all: ["notification"] as const,
+  lists: () => [...notificationKey.all, "list"] as const,
+} as const;
+
 export const scheduleKey = {
   all: ["schedule"] as const,
   lists: () => [...scheduleKey.all, "list"] as const,

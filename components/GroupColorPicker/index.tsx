@@ -12,17 +12,18 @@ const cn = classNames.bind(styles);
 
 interface GroupColorPickerProps {
   selectColor: string;
+  readOnly: boolean;
 }
 
 export default forwardRef<HTMLInputElement, GroupColorPickerProps>(function GroupColorPicker(
-  { selectColor, ...rest }: GroupColorPickerProps,
+  { readOnly, selectColor, ...rest }: GroupColorPickerProps,
   ref,
 ) {
   return (
-    <ul className={cn("color-box")}>
+    <ul className={cn("color-box", { "read-only": readOnly })}>
       {GROUP_COLOR_LIST.map((color) => (
         <li key={color} className={cn("color-item")}>
-          <input ref={ref} type="radio" id={color} value={color} {...rest} />
+          <input disabled={readOnly} ref={ref} type="radio" id={color} value={color} {...rest} />
           <label htmlFor={color} className={cn("group-color")} style={{ backgroundColor: color }} />
           {selectColor === color && (
             <Image

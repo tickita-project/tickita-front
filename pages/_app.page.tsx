@@ -12,7 +12,7 @@ import {
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ErrorBoundary } from "react-error-boundary";
 
-import "@/styles/reset.scss";
+import "@/styles/reset.css";
 
 import ErrorFallback from "@/components/ErrorFallBack";
 import Portal from "@/components/Modal/Portal";

@@ -68,7 +68,7 @@ export default function Group() {
         />
         <InviteForm inviteeList={groupInfo.waitingMembers} />
         <div className={cn("box")}>
-          <GroupForm groupInfo={groupInfo} />
+          <GroupForm groupInfo={groupInfo} isCurrentUserLeader={isCurrentUserLeader} />
           <ActionButton isCurrentUserLeader={isCurrentUserLeader} />
         </div>
       </section>
