@@ -22,7 +22,8 @@ export const notificationKey = {
 
 export const scheduleKey = {
   all: ["schedule"] as const,
-  lists: () => [...scheduleKey.all, "list"] as const,
-  details: () => [...scheduleKey.all, "detail"] as const,
-  detail: (id: number) => [...scheduleKey.details(), id] as const,
+  lists: (crewId: number) => [...scheduleKey.all, "list", crewId] as const,
+  details: (crewId: number) => [...scheduleKey.all, "detail", crewId] as const,
+  detail: (crewId: number, scheduleId: number) =>
+    [...scheduleKey.details(crewId), scheduleId] as const,
 };

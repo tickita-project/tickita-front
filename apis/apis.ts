@@ -93,7 +93,7 @@ export const acceptInvite = async (data: AcceptInviteType) => {
   return res.data;
 };
 
-export const postSchedule = async (data: SchedulePostDataType) => {
+export const createSchedule = async (data: SchedulePostDataType) => {
   const res = await instance.post(`/schedule`, data);
   return res.data;
 };

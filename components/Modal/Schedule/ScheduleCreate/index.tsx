@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { useShallow } from "zustand/react/shallow";
 
 import { getGroupInfo } from "@/apis/apis";
+import { useCreateSchedule } from "@/hooks/useCreateSchedule";
 import { useGetGroupList } from "@/hooks/useGetGroupList";
 import { useGetUserInfo } from "@/hooks/useGetUserInfo";
 import { useDateStore } from "@/store/useDateStore";
@@ -42,8 +43,8 @@ export default function ScheduleCreateModal() {
     formState: { isValid },
   } = useForm<SchedulePostDataType>({
     defaultValues: {
-      startDateTime: scheduleStart?.format("YYYY-MM-DDTHH:mm"),
-      endDateTime: scheduleEnd?.format("YYYY-MM-DDTHH:mm"),
+      startDateTime: scheduleStart?.toISOString(),
+      endDateTime: scheduleEnd?.toISOString(),
     },
   });
   const { data: groupList } = useGetGroupList();
@@ -54,6 +55,7 @@ export default function ScheduleCreateModal() {
     "location",
     "description",
   ]);
+  const { mutate, isPending } = useCreateSchedule(crewIdWatch);
 
   const handleGroupSelect = (group: GroupType) => {
     setSelectedGroup(group);
@@ -68,9 +70,15 @@ export default function ScheduleCreateModal() {
     reset();
   };
 
-  const handleCreateSchedule = (data: SchedulePostDataType) => {
-    // 일정 생성 구현
-    console.log(data);
+  const handleCreateSchedule = async (data: SchedulePostDataType) => {
+    mutate(data, {
+      onSuccess: () => {
+        closeModal();
+      },
+      onError: (error) => {
+        alert(error);
+      },
+    });
   };
 
   useEffect(() => {
@@ -205,7 +213,7 @@ export default function ScheduleCreateModal() {
             )}
           </div>
         </div>
-        <button type="submit" disabled={!isValid} className={cn("submit")}>
+        <button type="submit" disabled={!isValid || isPending} className={cn("submit")}>
           일정 등록
         </button>
       </form>
