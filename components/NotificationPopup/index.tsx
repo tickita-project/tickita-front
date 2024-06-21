@@ -13,32 +13,32 @@ import EmptyNotification from "../Notification/EmptyNotification";
 const cn = classNames.bind(styles);
 
 export default function NotificationPopup() {
-  const [isClicked, setIsClicked] = useState(false);
+  const [isPopupView, setIsPopupView] = useState(false);
 
-  const { data: notificationInfo } = useGetAllNotification();
+  const { data } = useGetAllNotification();
 
-  const getNotificationCount = () => {
-    if (!notificationInfo) return;
+  if (!data) {
+    return;
+  }
 
-    return notificationInfo.count < 10 ? notificationInfo.count : "+";
-  };
+  const { count, crewNotificationResponse: notificationList } = data;
 
   const handleBellClick = () => {
-    setIsClicked(!isClicked);
+    setIsPopupView(!isPopupView);
   };
 
   return (
     <div className={cn("container")}>
       <figure onClick={handleBellClick} className={cn("notification-bell")}>
-        {notificationInfo?.count && (
-          <figcaption className={cn("notification-count")}>{getNotificationCount()}</figcaption>
+        {count && (
+          <figcaption className={cn("notification-count")}>{count < 10 ? count : "9+"}</figcaption>
         )}
         <Image src="/icons/notification-bell.svg" width={26} height={20} alt="알림 종" priority />
       </figure>
-      {isClicked && (
+      {isPopupView && (
         <div className={cn("notification-popup")}>
-          {notificationInfo?.crewNotificationResponse.length ? (
-            notificationInfo.crewNotificationResponse?.map((notification) => (
+          {notificationList.length ? (
+            notificationList.map((notification) => (
               <BaseNotification key={notification.notificationId} notificationData={notification} />
             ))
           ) : (
