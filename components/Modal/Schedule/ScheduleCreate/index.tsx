@@ -12,7 +12,7 @@ import { useGetGroupList } from "@/hooks/useGetGroupList";
 import { useDateStore } from "@/store/useDateStore";
 import { useModalStore } from "@/store/useModalStore";
 
-import { SchedulePostDataType } from "@/types/type";
+import { GroupInfoType, SchedulePostDataType } from "@/types/type";
 
 import styles from "./ScheduleCreateModal.module.scss";
 
@@ -29,6 +29,7 @@ export default function ScheduleCreateModal() {
     })),
   );
   const {
+    watch,
     register,
     handleSubmit,
     formState: { errors, isValid },
@@ -39,23 +40,20 @@ export default function ScheduleCreateModal() {
     },
   });
   const { data: groupList } = useGetGroupList();
-
-  // 선택된 그룹 ID 상태
-  const [selectedGroupId, setSelectedGroupId] = useState<number | null>(null);
-  const [groupInfo, setGroupInfo] = useState<any>(null);
+  const crewIdWatch = watch("crewId");
+  const [groupInfo, setGroupInfo] = useState<GroupInfoType | null>(null);
 
   useEffect(() => {
-    if (!selectedGroupId) {
+    //그룹이 선택되면, 아래 코드가 실행되도록 useEffect 설정
+    if (!crewIdWatch) {
       return;
     }
-
     const fetchGroupInfo = async () => {
-      const data = await getGroupInfo(selectedGroupId);
+      const data = await getGroupInfo(crewIdWatch);
       setGroupInfo(data);
     };
-
     fetchGroupInfo();
-  }, [selectedGroupId]);
+  }, [crewIdWatch]);
 
   const handleCloseModal = () => {
     closeModal();
@@ -119,41 +117,33 @@ export default function ScheduleCreateModal() {
         </div>
         <div className={cn("group")}>
           <p className={cn("label")}>그룹 선택</p>
-          <select
-            className={cn("group-select")}
-            onChange={(e) => setSelectedGroupId(Number(e.target.value))}
-            defaultValue=""
-          >
+          <select className={cn("group-select")} {...register("crewId", { required: true })}>
             <option className={cn("default-option")} value="" disabled>
               그룹을 선택하세요
             </option>
-            {groupList?.slice(7).map((group) => (
+            {groupList?.map((group) => (
               <option key={group.crewId} value={group.crewId} className={cn("option")}>
-                {group.crewName}
+                <div
+                  className={cn("group-color")}
+                  style={{ backgroundColor: `${group.labelColor}` }}
+                />
+                <p className={cn("group-name")}>{group.crewName}</p>
               </option>
             ))}
           </select>
         </div>
-        {
-          <div>
-            <p className={cn("label")}>참가자 선택</p>
-            <div className={cn("members")}>
-              {selectedGroupId &&
-                groupInfo &&
-                groupInfo.crewMemberInfoResponses?.map((member: any) => (
-                  <label key={member.accountId}>
-                    <input
-                      type="checkbox"
-                      value={member.accountId}
-                      {...register("participants")}
-                      className={cn("")}
-                    />
-                    {member.nickName}
-                  </label>
-                ))}
-            </div>
+        <div className={cn("member-container")}>
+          <p className={cn("label")}>참가자 선택</p>
+          <div className={cn("members")}>
+            {crewIdWatch &&
+              groupInfo?.crewMembers.map((member: any) => (
+                <label className={cn("member-checkbox")} key={member.accountId}>
+                  <input type="checkbox" value={member.accountId} {...register("participants")} />
+                  {member.nickName}
+                </label>
+              ))}
           </div>
-        }
+        </div>
         <button type="submit" disabled={!isValid} className={cn("")}>
           일정 생성
         </button>
