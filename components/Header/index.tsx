@@ -12,6 +12,7 @@ import { useGetUserInfo } from "@/hooks/useGetUserInfo";
 import { useOutsideClick } from "@/hooks/useOutsideClick";
 
 import styles from "./Header.module.scss";
+import NotificationPopup from "../NotificationPopup";
 import ProfileImage from "../ProfileImage";
 
 const cn = classNames.bind(styles);
@@ -102,16 +103,7 @@ export default function Header() {
             {isDashboardPage ? (
               <span className={cn("guide-text")}>반가워요, </span>
             ) : (
-              <figure className={cn("notification-bell")}>
-                <figcaption className={cn("notification-count")}>9+</figcaption>
-                <Image
-                  src="/icons/notification-bell.svg"
-                  width={26}
-                  height={20}
-                  alt="알림 종"
-                  priority
-                />
-              </figure>
+              <NotificationPopup />
             )}
             <span className={cn("nickname")}>{userInfo?.nickName}</span> 님
           </div>

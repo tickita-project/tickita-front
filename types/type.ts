@@ -125,5 +125,5 @@ export interface CrewNotificationResponseType {
 
 export interface NotificationDataType {
   count: number;
-  crewNotificationResponse: CrewNotificationResponseType[];
+  notificationInfo: CrewNotificationResponseType[];
 }
