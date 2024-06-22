@@ -3,13 +3,15 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { checkNotification } from "@/apis/apis";
 import { notificationKey } from "@/constants/queryKey";
 
-import { NotificationInfoType, NotificationDataType } from "@/types/type";
+import { NotificationInfoType, NotificationDataType, CheckNotificationType } from "@/types/type";
 
 export const useCheckNotification = () => {
   const queryClient = useQueryClient();
   const { mutate } = useMutation({
-    mutationFn: (notificationId: number) => checkNotification(notificationId),
-    onMutate: async (notificationId: number) => {
+    mutationFn: (data: CheckNotificationType) => checkNotification(data),
+    onMutate: async (data: CheckNotificationType) => {
+      const { notificationId } = data;
+
       // 낙관적 업데이트(Optimistic Update)
       await queryClient.cancelQueries({ queryKey: notificationKey.lists() });
 

@@ -10,7 +10,7 @@ import { useCheckNotification } from "@/hooks/useCheckNotification";
 import { useDeleteNotification } from "@/hooks/useDeleteNotification";
 import formatKoreanDateTime from "@/utils/formatKoreanDateTime";
 
-import { AcceptInviteType, NotificationInfoType } from "@/types/type";
+import { AcceptInviteType, CheckNotificationType, NotificationInfoType } from "@/types/type";
 
 import styles from "./BaseNotification.module.scss";
 
@@ -32,6 +32,7 @@ export default function BaseNotification({ notificationData, onClick }: BaseNoti
     scheduleInfo,
     localDateTime,
     isChecked,
+    alarmType,
   } = notificationData;
 
   const { mutate: inviteMutate } = useAcceptInvite();
@@ -55,7 +56,12 @@ export default function BaseNotification({ notificationData, onClick }: BaseNoti
       return;
     }
 
-    checkNotificationMutate(notificationId);
+    const payload = {
+      notificationId,
+      alarmType,
+    } as CheckNotificationType;
+
+    checkNotificationMutate(payload);
   };
 
   const handleInviteAcceptClick = (e: MouseEvent<HTMLElement>) => {

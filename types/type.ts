@@ -127,3 +127,8 @@ export interface NotificationDataType {
   count: number;
   notificationInfo: NotificationInfoType[];
 }
+
+export interface CheckNotificationType {
+  notificationId: number;
+  alarmType: AlarmType;
+}

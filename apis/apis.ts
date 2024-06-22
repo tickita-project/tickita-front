@@ -9,6 +9,7 @@ import {
   CancelInviteType,
   AcceptInviteType,
   NotificationDataType,
+  CheckNotificationType,
 } from "@/types/type";
 
 import { imageRequestInstance, instance } from "./axios";
@@ -94,8 +95,10 @@ export const acceptInvite = async (data: AcceptInviteType) => {
   return res.data;
 };
 
-export const checkNotification = async (notificationId: number) => {
-  const res = await instance.put(`/notification/${notificationId}`, { isChecked: true });
+export const checkNotification = async (data: CheckNotificationType) => {
+  const { notificationId, alarmType } = data;
+
+  const res = await instance.put(`/notification/${notificationId}`, { isChecked: true, alarmType });
   return res.data;
 };
 
