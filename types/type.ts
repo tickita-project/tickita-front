@@ -82,8 +82,6 @@ export interface InviteeType {
 export interface CancelInviteType {
   crewId: number;
   accountId: number;
-  notificationId: number;
-  crewAccept: "DECLINE";
 }
 
 export interface AcceptInviteType {

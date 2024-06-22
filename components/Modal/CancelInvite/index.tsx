@@ -13,21 +13,20 @@ export default function CancelInviteModal() {
   const { mutate } = useCancelInvite(Number(query.id));
 
   const handleCancelInviteButtonClick = () => {
-    // const payload = {
-    //   crewId: Number(query.id),
-    //   accountId: data.accountId,
-    //   notificationId: data.notificationId,
-    //   crewAccept: "DECLINE",
-    // } as CancelInviteType;
-    // mutate(payload, {
-    //   onSuccess: () => {
-    //     alert("초대가 취소되었습니다.");
-    //     closeModal();
-    //   },
-    //   onError: (error) => {
-    //     alert(error);
-    //   },
-    // });
+    const payload = {
+      crewId: Number(query.id),
+      accountId: data.accountId,
+    } as CancelInviteType;
+
+    mutate(payload, {
+      onSuccess: () => {
+        alert("초대가 취소되었습니다.");
+        closeModal();
+      },
+      onError: (error) => {
+        alert(error);
+      },
+    });
   };
 
   return (

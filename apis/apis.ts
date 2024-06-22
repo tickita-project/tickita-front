@@ -84,7 +84,9 @@ export const getAllNotification = async (): Promise<NotificationDataType> => {
 };
 
 export const cancelInvite = async (data: CancelInviteType) => {
-  await instance.delete("/notification");
+  const { crewId, accountId } = data;
+
+  await instance.delete(`notification?crewId=${crewId}&accountId=${accountId}&crewAccept=WAIT`);
 };
 
 export const acceptInvite = async (data: AcceptInviteType) => {

@@ -1,6 +1,7 @@
 import { MouseEvent } from "react";
 
 import Image from "next/image";
+import Router from "next/router";
 
 import classNames from "classnames/bind";
 
@@ -61,8 +62,9 @@ export default function BaseNotification({ notificationData, onClick }: BaseNoti
     } as AcceptInviteType;
 
     inviteMutate(payload, {
-      onSuccess: () => {
+      onSuccess: (response) => {
         alert("그룹 초대 수락 성공");
+        Router.push(`/group/${response.crewId}`);
       },
       onError: (error) => {
         alert(error);
