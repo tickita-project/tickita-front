@@ -61,19 +61,31 @@
     gap: 1rem;
     align-self: stretch;
 
-    .title {
+    .title-container {
       display: flex;
-      padding: .5rem 0;
       align-items: center;
-      gap: .25rem;
-      align-self: stretch;
-      outline: none;
-      @include heading4-medium;
+      gap: .375rem;
 
-      &::placeholder {
-        color: $gray600;
+      .title {
+        display: flex;
+        padding: .5rem 0;
+        align-items: center;
+        gap: .25rem;
+        align-self: stretch;
+        outline: none;
+        @include heading4-medium;
+
+        &::placeholder {
+          color: $gray600;
+        }
+      }
+
+      p {
+        padding-top: .25rem;
+        @include heading4-medium($red500);
       }
     }
+
 
     .time-place {
       display: flex;
@@ -195,6 +207,11 @@
 
       .label {
         @include headline2-bold;
+
+        span {
+          @include headline2-bold($red500);
+
+        }
       }
 
       .group-select {
@@ -264,7 +281,7 @@
       }
 
       .members {
-        max-height: 6.25rem;
+        height: 6.25rem;
         display: flex;
         flex-wrap: wrap;
         overflow-y: auto;
@@ -279,15 +296,16 @@
         }
 
         .member-label {
+          height: 2.8125rem;
           display: flex;
           padding: .25rem .5rem;
           align-items: center;
-          gap: .25rem;
           border-radius: 62.5rem;
           border: .0625rem solid $gray200;
           background: $gray50;
           cursor: pointer;
-          margin: .25rem;
+          margin-bottom: .5rem;
+          margin-right: .75rem;
           @include body2-medium;
 
           &:hover {

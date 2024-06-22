@@ -104,13 +104,17 @@ export default function ScheduleCreateModal() {
         <Image src="/icons/close-icon.svg" alt="모달 닫기" width={30} height={30} />
       </button>
       <form className={cn("create-schedule-form")} onSubmit={handleSubmit(handleCreateSchedule)}>
-        <input
-          type="text"
-          className={cn("title")}
-          placeholder="무슨 일정인가요?"
-          autoFocus
-          {...register("title", { required: true })}
-        />
+        <div className={cn("title-container")}>
+          <p>*</p>
+          <input
+            type="text"
+            className={cn("title")}
+            placeholder="무슨 일정인가요?"
+            autoFocus
+            {...register("title", { required: true })}
+          />
+        </div>
+
         <div className={cn("time-place")}>
           <div className={cn("time-container")}>
             <p className={cn("label")}>시간</p>
@@ -154,7 +158,10 @@ export default function ScheduleCreateModal() {
           </p>
         </div>
         <div className={cn("group")}>
-          <p className={cn("label")}>그룹 선택</p>
+          <p className={cn("label")}>
+            <span>* </span>
+            그룹 선택
+          </p>
           <div
             className={cn("group-select")}
             onClick={() => setIsGroupListVisible((prev) => !prev)}
