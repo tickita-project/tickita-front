@@ -88,6 +88,9 @@ export default function BaseNotification({ notificationData, onClick }: BaseNoti
     e.stopPropagation();
 
     deleteNotificationMutate(notificationId, {
+      onSuccess: () => {
+        alert("알림 삭제 성공");
+      },
       onError: (error) => {
         alert(error);
       },
