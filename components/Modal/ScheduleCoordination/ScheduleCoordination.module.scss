@@ -136,12 +136,12 @@
         font-weight: 500;
       }
 
-      :first-child {
+      th:first-child {
         position: sticky;
         left: 0;
       }
 
-      :last-child {
+      th:last-child {
         position: sticky;
         right: 0;
       }
@@ -151,29 +151,38 @@
       border-top: 1px solid $gray900;
       border-bottom: 1px solid $gray900;
 
+      tr {
+        position: relative;
+      }
+
       td {
         background-color: $white;
         height: 1rem;
         border: 1px solid $gray200;
       }
 
-      :first-child {
+      td:first-child {
         position: sticky;
         left: 0;
       }
 
-      :last-child {
+      td:last-child {
         position: sticky;
         right: 0;
       }
 
       .day-label {
+        z-index: 5;
         width: 5.125rem;
         height: 6.5rem;
         padding: 1.75rem 0.5rem;
         font-size: 0.75rem;
         font-weight: 700;
         text-align: center;
+      }
+
+      .selected {
+        background-color: $blue500;
       }
     }
   }

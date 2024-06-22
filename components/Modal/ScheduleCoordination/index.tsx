@@ -1,3 +1,5 @@
+import { MouseEvent, useState } from "react";
+
 import Image from "next/image";
 
 import classNames from "classnames/bind";
@@ -17,6 +19,33 @@ const sampleSelectedTimes = [
 ];
 
 export default function CreateScheduleCoordination() {
+  const [isDragging, setIsDragging] = useState(false);
+  const [selectedCells, setSelectedCells] = useState<{ [key: string]: boolean }>({});
+  const [selectedRow, setSelectedRow] = useState<string | null>(null);
+
+  const handleMouseDown = (day: string, index: number, hour: string) => (e: MouseEvent) => {
+    setIsDragging(true);
+    setSelectedRow(`${day}-${index}`);
+    setSelectedCells((prev) => ({
+      ...prev,
+      [`${day}-${index}-${hour}`]: true,
+    }));
+  };
+
+  const handleMouseOver = (day: string, index: number, hour: string) => (e: MouseEvent) => {
+    if (isDragging && selectedRow === `${day}-${index}`) {
+      setSelectedCells((prev) => ({
+        ...prev,
+        [`${day}-${index}-${hour}`]: true,
+      }));
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setIsDragging(false);
+    setSelectedRow(null);
+  };
+
   return (
     <div className={cn("container")}>
       <div className={cn("label-container")}>
@@ -46,7 +75,12 @@ export default function CreateScheduleCoordination() {
         </div>
 
         <div className={cn("table-container")}>
-          <table className={cn("schedule-selector")}>
+          <table
+            onMouseDown={() => setIsDragging(true)}
+            onMouseUp={handleMouseLeave}
+            onMouseLeave={handleMouseLeave}
+            className={cn("schedule-selector")}
+          >
             <thead>
               <tr>
                 <th>
@@ -73,24 +107,23 @@ export default function CreateScheduleCoordination() {
             <tbody>
               {sampleDays.map((day) => (
                 <>
-                  <tr key={day}>
-                    <td rowSpan={3} className={cn("day-label")}>
-                      {day}
-                    </td>
-                    {hours.map((hour) => (
-                      <td key={hour} />
-                    ))}
-                  </tr>
-                  <tr key={day}>
-                    {hours.map((hour) => (
-                      <td key={hour} />
-                    ))}
-                  </tr>
-                  <tr key={day}>
-                    {hours.map((hour) => (
-                      <td key={hour} />
-                    ))}
-                  </tr>
+                  {Array.from({ length: 3 }).map((_, index) => (
+                    <tr key={`${day}-${index}`}>
+                      {index === 0 && (
+                        <td rowSpan={3} className={cn("day-label")}>
+                          {day}
+                        </td>
+                      )}
+                      {hours.map((hour) => (
+                        <td
+                          key={`${day}-${index}-${hour}`}
+                          onMouseDown={handleMouseDown(day, index, hour)}
+                          onMouseOver={handleMouseOver(day, index, hour)}
+                          className={cn({ selected: selectedCells[`${day}-${index}-${hour}`] })}
+                        />
+                      ))}
+                    </tr>
+                  ))}
                 </>
               ))}
             </tbody>
