@@ -1,8 +1,12 @@
 import dayjs from "dayjs";
 import "dayjs/locale/ko";
 
-const formatKoreanDateTime = (date: string) => {
-  return dayjs(date).format("YY.MM.DD (ddd) HH:mm");
+dayjs.locale("ko");
+
+export const formatKoreanDateTime = (date: string) => {
+  return dayjs(date).format("YY.MM.DD (dd) HH:mm");
 };
 
-export default formatKoreanDateTime;
+export const formatKoreanDate = (date: string) => {
+  return dayjs(date).format("YY.MM.DD (dd)");
+};

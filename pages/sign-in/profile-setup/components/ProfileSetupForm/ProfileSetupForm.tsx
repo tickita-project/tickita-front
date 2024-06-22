@@ -39,7 +39,7 @@ export default function ProfileSetupForm({ accountId, email }: ProfileSetupFormP
   const profileImageInputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
 
-  const { uploadedImgUrl, imgUrl, handleProfileImageChange } = useGetProfileImage();
+  const { uploadedImgUrl, imgUrl, handleProfileImageChange } = useGetProfileImage(null);
 
   const {
     register,
