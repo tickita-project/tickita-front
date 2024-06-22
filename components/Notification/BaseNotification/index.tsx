@@ -6,9 +6,9 @@ import Router from "next/router";
 import classNames from "classnames/bind";
 
 import { useAcceptInvite } from "@/hooks/useAcceptInvite";
-import { formatKoreanDate } from "@/utils/formatKoreanDateTime";
 import { useCheckNotification } from "@/hooks/useCheckNotification";
 import { useDeleteNotification } from "@/hooks/useDeleteNotification";
+import { formatKoreanDate } from "@/utils/formatKoreanDateTime";
 
 import { AcceptInviteType, CheckNotificationType, NotificationInfoType } from "@/types/type";
 
