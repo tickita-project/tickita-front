@@ -39,10 +39,7 @@ export default function BaseNotification({ notificationData, onClick }: BaseNoti
   const { mutate: deleteNotificationMutate } = useDeleteNotification();
 
   const handleNotificationClick = () => {
-    if (!isChecked) {
-      // 알림 확인 로직
-      checkNotificationMutate(notificationId);
-    }
+    checkNotification();
 
     if (!onClick) {
       // 추가적인 이벤트가 없는 경우 리턴
@@ -50,6 +47,15 @@ export default function BaseNotification({ notificationData, onClick }: BaseNoti
     }
 
     onClick();
+  };
+
+  const checkNotification = () => {
+    if (isChecked) {
+      // 이미 확인한 알람이면 리턴
+      return;
+    }
+
+    checkNotificationMutate(notificationId);
   };
 
   const handleInviteAcceptClick = (e: MouseEvent<HTMLElement>) => {

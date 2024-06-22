@@ -15,7 +15,6 @@ const cn = classNames.bind(styles);
 export default function NotificationCenter() {
   const { data: notificationData } = useGetAllNotification();
   const notificationList = notificationData?.notificationInfo ?? [];
-  console.log(notificationData);
 
   return (
     <div className={cn("container")}>
