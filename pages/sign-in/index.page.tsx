@@ -5,6 +5,8 @@ import Link from "next/link";
 
 import classNames from "classnames/bind";
 
+import MetaData from "@/components/MetaData";
+
 import styles from "./SignIn.module.scss";
 
 const cn = classNames.bind(styles);
@@ -24,6 +26,7 @@ export default function SignIn() {
 
   return (
     <>
+      <MetaData title="로그인 | 티키타" />
       <header className={cn("header")}>
         <Image src="/icons/tickita-logo.svg" alt="로고 이미지" width={60} height={22} />
       </header>
