@@ -32,7 +32,7 @@ const LottiePlayer = dynamic(() => import("react-lottie-player"), { ssr: false }
 
 export async function getServerSideProps(
   context: GetServerSidePropsContext,
-): Promise<GetServerSidePropsResult<any>> {
+): Promise<GetServerSidePropsResult<KakaoProps>> {
   setContext(context);
 
   const { code } = context.query;
@@ -68,26 +68,27 @@ export async function getServerSideProps(
     };
   } catch (error) {
     return {
-      props: { error },
+      redirect: {
+        destination: PAGE_PATH.SIGN_IN,
+        permanent: false,
+      },
     };
   }
 }
 
-export default function Kakao({ id, isComplete, error }: any) {
-  // const router = useRouter();
+export default function Kakao({ id, isComplete }: KakaoProps) {
+  const router = useRouter();
 
-  // useEffect(() => {
-  //   if (!isComplete) {
-  //     router.push({ pathname: PAGE_PATH.PROFILE_SETUP, query: { id } }, PAGE_PATH.PROFILE_SETUP);
-  //     return;
-  //   }
-  //   router.push(PAGE_PATH.DASHBOARD);
-  // }, [isComplete]);
+  useEffect(() => {
+    if (!isComplete) {
+      router.push({ pathname: PAGE_PATH.PROFILE_SETUP, query: { id } }, PAGE_PATH.PROFILE_SETUP);
+      return;
+    }
+    router.push(PAGE_PATH.DASHBOARD);
+  }, [isComplete]);
 
   return (
     <div className={cn("container")}>
-      {error}
-      {error.message}
       <LottiePlayer animationData={loadingLottie} loop play className={cn("loading-lottie")} />
     </div>
   );
