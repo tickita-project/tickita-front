@@ -69,8 +69,12 @@ export default function ScheduleCreateModal() {
     setScheduleEnd(null);
   };
 
-  const handleCreateSchedule = async (data: SchedulePostDataType) => {
-    mutate(data, {
+  const handleCreateSchedule = async (data: any) => {
+    const newScheduleData: SchedulePostDataType = {
+      ...data,
+      participants: data.participants?.map((participant: string) => JSON.parse(participant)) || [],
+    };
+    mutate(newScheduleData, {
       onSuccess: () => {
         closeModal();
       },
