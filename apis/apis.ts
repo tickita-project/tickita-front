@@ -97,3 +97,17 @@ export const createSchedule = async (data: SchedulePostDataType) => {
   const res = await instance.post(`/schedule`, data);
   return res.data;
 };
+
+export const getCrewSchedules = async (
+  crewId: number,
+  startDate: string,
+  endDate: string,
+): Promise<SchedulePostDataType[]> => {
+  const res = await instance.get(`/schedule/filter/${crewId}`, {
+    params: {
+      startDate,
+      endDate,
+    },
+  });
+  return res.data;
+};
