@@ -22,94 +22,6 @@ interface MyPageProps {
   voteNotifications: VoteNotificationType[];
 }
 
-// const mockData: VoteNotificationType[] = [
-//   {
-//     notificationId: 1,
-//     notificationType: "INVITE, SCHEDULE",
-//     crewId: 1,
-//     accountId: 1,
-//     crewName: "11팀",
-//     localDateTime: "2024-06-26T16:27:21.377Z",
-//     isChecked: false,
-//     voteId: 1,
-//     voteTitle: "하남돼지집 이대로 괜찮은가",
-//     voteParticipateType: false,
-//   },
-//   {
-//     notificationId: 1,
-//     notificationType: "INVITE, SCHEDULE",
-//     crewId: 1,
-//     accountId: 1,
-//     crewName: "11팀",
-//     localDateTime: "2024-06-26T16:27:21.377Z",
-//     isChecked: false,
-//     voteId: 2,
-//     voteTitle:
-//       "하남돼지집 이대로 괜찮은가 하남돼지집 이대로 괜찮은가 하남돼지집 이대로 괜찮은가 하남돼지집 이대로 괜찮은가 하남돼지집 이대로 괜찮은가",
-//     voteParticipateType: false,
-//   },
-//   {
-//     notificationId: 1,
-//     notificationType: "INVITE, SCHEDULE",
-//     crewId: 1,
-//     accountId: 1,
-//     crewName: "11팀",
-//     localDateTime: "2024-06-26T16:27:21.377Z",
-//     isChecked: true,
-//     voteId: 3,
-//     voteTitle: "하남돼지집 이대로 괜찮은가",
-//     voteParticipateType: false,
-//   },
-//   {
-//     notificationId: 1,
-//     notificationType: "INVITE, SCHEDULE",
-//     crewId: 1,
-//     accountId: 1,
-//     crewName: "11팀",
-//     localDateTime: "2024-06-26T16:27:21.377Z",
-//     isChecked: true,
-//     voteId: 4,
-//     voteTitle: "하남돼지집 이대로 괜찮은가",
-//     voteParticipateType: false,
-//   },
-//   {
-//     notificationId: 1,
-//     notificationType: "INVITE, SCHEDULE",
-//     crewId: 1,
-//     accountId: 1,
-//     crewName: "11팀",
-//     localDateTime: "2024-06-26T16:27:21.377Z",
-//     isChecked: true,
-//     voteId: 5,
-//     voteTitle: "하남돼지집 이대로 괜찮은가",
-//     voteParticipateType: true,
-//   },
-//   {
-//     notificationId: 1,
-//     notificationType: "INVITE, SCHEDULE",
-//     crewId: 1,
-//     accountId: 1,
-//     crewName: "11팀",
-//     localDateTime: "2024-06-26T16:27:21.377Z",
-//     isChecked: true,
-//     voteId: 6,
-//     voteTitle: "하남돼지집 이대로 괜찮은가",
-//     voteParticipateType: true,
-//   },
-//   {
-//     notificationId: 1,
-//     notificationType: "INVITE, SCHEDULE",
-//     crewId: 1,
-//     accountId: 1,
-//     crewName: "11팀",
-//     localDateTime: "2024-06-26T16:27:21.377Z",
-//     isChecked: true,
-//     voteId: 7,
-//     voteTitle: "하남돼지집 이대로 괜찮은가",
-//     voteParticipateType: true,
-//   },
-// ];
-
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
   setContext(context);
 
@@ -149,7 +61,7 @@ export default function MyPage({ voteNotifications }: MyPageProps) {
             <TitleBox title="일정 조율" />
           </h2>
           <div className={cn("vote-notifications")}>
-            {voteNotifications.length > 0 ? ( // voteNotifications -> mockData
+            {voteNotifications.length > 0 ? (
               voteNotifications.map((notification) => (
                 <VoteNotification key={notification.voteId} notification={notification} />
               ))

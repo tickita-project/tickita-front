@@ -6,9 +6,9 @@ import Router from "next/router";
 import classNames from "classnames/bind";
 
 import { useAcceptInvite } from "@/hooks/useAcceptInvite";
+import { formatKoreanDate } from "@/utils/formatKoreanDateTime";
 import { useCheckNotification } from "@/hooks/useCheckNotification";
 import { useDeleteNotification } from "@/hooks/useDeleteNotification";
-import formatKoreanDateTime from "@/utils/formatKoreanDateTime";
 
 import { AcceptInviteType, CheckNotificationType, NotificationInfoType } from "@/types/type";
 
@@ -120,7 +120,7 @@ export default function BaseNotification({ notificationData, onClick }: BaseNoti
             초대 수락
           </button>
         )}
-        <p className={cn("notification-date")}>{formatKoreanDateTime(localDateTime)}</p>
+        <p className={cn("notification-date")}>{formatKoreanDate(localDateTime)}</p>
       </div>
     </div>
   );
