@@ -13,7 +13,7 @@ import { useGetUserInfo } from "@/hooks/useGetUserInfo";
 import { useDateStore } from "@/store/useDateStore";
 import { useModalStore } from "@/store/useModalStore";
 
-import { GroupInfoType, GroupType, SchedulePostDataType } from "@/types/type";
+import { GroupMemberInfoType, GroupType, SchedulePostDataType } from "@/types/type";
 
 import styles from "./ScheduleCreateModal.module.scss";
 
@@ -21,7 +21,7 @@ const cn = classNames.bind(styles);
 
 export default function ScheduleCreateModal() {
   const [isGroupListVisible, setIsGroupListVisible] = useState(false);
-  const [groupInfo, setGroupInfo] = useState<GroupInfoType | null>(null);
+  const [groupMembers, setGroupMembers] = useState<GroupMemberInfoType[] | null>(null);
   const [selectedGroup, setSelectedGroup] = useState<GroupType | null>(null);
 
   const { closeModal } = useModalStore();
@@ -67,7 +67,6 @@ export default function ScheduleCreateModal() {
     closeModal();
     setScheduleStart(null);
     setScheduleEnd(null);
-    reset();
   };
 
   const handleCreateSchedule = async (data: SchedulePostDataType) => {
@@ -82,14 +81,16 @@ export default function ScheduleCreateModal() {
   };
 
   useEffect(() => {
+    setValue("participants", []);
     if (!crewIdWatch) {
       return;
     }
 
     const fetchGroupInfo = async () => {
       const data = await getGroupInfo(crewIdWatch);
-      setGroupInfo(data);
+      setGroupMembers(data.crewMembers);
     };
+
     fetchGroupInfo();
   }, [crewIdWatch]);
 
@@ -152,7 +153,7 @@ export default function ScheduleCreateModal() {
           <p className={cn("label")}>그룹 선택</p>
           <div
             className={cn("group-select")}
-            onClick={() => setIsGroupListVisible(!isGroupListVisible)}
+            onClick={() => setIsGroupListVisible((prev) => !prev)}
           >
             {selectedGroup ? (
               <div className={cn("selected-group")}>
@@ -177,7 +178,7 @@ export default function ScheduleCreateModal() {
                   >
                     <div
                       className={cn("group-color")}
-                      style={{ backgroundColor: `${group.labelColor}` }}
+                      style={{ backgroundColor: group.labelColor }}
                     />
                     <p className={cn("group-name")}>{group.crewName}</p>
                   </div>
@@ -191,17 +192,21 @@ export default function ScheduleCreateModal() {
         <div className={cn("member-container")}>
           <p className={cn("label")}>참가자 선택</p>
           <div className={cn("members")}>
-            {groupInfo?.crewMembers.length === 1 ? (
+            {groupMembers?.length === 1 ? (
               <p className={cn("alone-msg")}>그룹에 팀원이 없습니다.</p>
             ) : (
-              groupInfo?.crewMembers.map(
+              groupMembers?.map(
                 (member) =>
                   member.accountId !== userInfo?.accountId && (
                     <React.Fragment key={member.accountId}>
                       <input
                         id={`member-${member.accountId}`}
+                        className={cn("member-checkbox")}
                         type="checkbox"
-                        value={member.accountId}
+                        value={JSON.stringify({
+                          accountId: member.accountId,
+                          nickName: member.nickName,
+                        })}
                         {...register("participants")}
                       />
                       <label htmlFor={`member-${member.accountId}`} className={cn("member-label")}>
