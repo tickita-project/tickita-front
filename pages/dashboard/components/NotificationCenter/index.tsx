@@ -14,7 +14,7 @@ const cn = classNames.bind(styles);
 
 export default function NotificationCenter() {
   const { data: notificationInfo } = useGetAllNotification();
-  const notificationList = notificationInfo?.crewNotificationResponse;
+  const notificationList = notificationInfo?.notificationInfo;
 
   if (!notificationList) {
     return null;

@@ -15,13 +15,13 @@ const cn = classNames.bind(styles);
 export default function NotificationPopup() {
   const [isPopupView, setIsPopupView] = useState(false);
 
-  const { data } = useGetAllNotification();
+  const { data: allNotificationList } = useGetAllNotification();
 
-  if (!data) {
+  if (!allNotificationList) {
     return;
   }
 
-  const { count, crewNotificationResponse: notificationList } = data;
+  const { count, notificationInfo: notificationList } = allNotificationList;
 
   const handleBellClick = () => {
     setIsPopupView((prev) => !prev);
