@@ -12,6 +12,6 @@ echo "빌드 실행 중..."
 sudo npm run build
 
 echo "앱 재실행..."
-pm2 restart tickita_app
+pm2 start npm --name "tickita_app" -- start
 
 echo "배포 성공!"
