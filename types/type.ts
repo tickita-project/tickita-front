@@ -82,8 +82,6 @@ export interface InviteeType {
 export interface CancelInviteType {
   crewId: number;
   accountId: number;
-  notificationId: number;
-  crewAccept: "DECLINE";
 }
 
 export interface AcceptInviteType {
@@ -107,23 +105,30 @@ export interface VoteNotificationType {
 
 type NotificationType = "INVITE" | "SCHEDULE_INFO" | "UPDATE" | "EXCLUDE" | "REQUEST";
 
-export interface CrewNotificationResponseType {
+type AlarmType = "CREW" | "SCHEDULE";
+
+export interface NotificationInfoType {
   notificationId: number;
   notificationType: NotificationType;
   crewId: number;
-  accountId: number;
+  labelColor: GroupColorType;
   crewName: string;
   scheduleInfo?: {
     scheduleId: number;
-    scheduleTime: string;
-    place: string;
+    title: string;
   };
   localDateTime: string;
   isChecked: boolean;
   content: string;
+  alarmType: AlarmType;
 }
 
 export interface NotificationDataType {
   count: number;
-  notificationInfo: CrewNotificationResponseType[];
+  notificationInfo: NotificationInfoType[];
+}
+
+export interface CheckNotificationType {
+  notificationId: number;
+  alarmType: AlarmType;
 }

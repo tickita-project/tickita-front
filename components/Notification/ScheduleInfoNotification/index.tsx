@@ -1,12 +1,12 @@
 import { MODAL_TYPE } from "@/constants/modalType";
 import { useModalStore } from "@/store/useModalStore";
 
-import { CrewNotificationResponseType } from "@/types/type";
+import { NotificationInfoType } from "@/types/type";
 
 import BaseNotification from "../BaseNotification";
 
 interface ScheduleInfoNotificationProps {
-  notificationData: CrewNotificationResponseType;
+  notificationData: NotificationInfoType;
 }
 
 export default function ScheduleInfoNotification({

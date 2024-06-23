@@ -34,14 +34,14 @@ export default function GroupForm({ groupInfo, isCurrentUserLeader }: GroupFormP
     register,
     handleSubmit,
     reset,
-    control,
+    watch,
     formState: { errors, isValid, isDirty },
   } = useForm({
     mode: "all",
     defaultValues: { crewName: groupInfo.crewName, labelColor: groupInfo.labelColor },
     resolver: zodResolver(createGroupSchema),
   });
-  const selectColor = useWatch({ name: "labelColor", control });
+  const selectColor = watch("labelColor");
 
   const { mutate } = useEditGroupInfo(groupInfo.crewId);
 
