@@ -24,17 +24,7 @@
 
 .scroll-container {
   height: calc(100vh - 80px);
-  overflow: hidden auto;
-  scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-}
-
-.section {
-  scroll-snap-align: start;
+  overflow: hidden;
 }
 
 .first-section {
