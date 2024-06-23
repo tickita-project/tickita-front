@@ -9,6 +9,7 @@ import {
   CancelInviteType,
   AcceptInviteType,
   NotificationDataType,
+  CheckNotificationType,
   SchedulePostDataType,
 } from "@/types/type";
 
@@ -85,12 +86,25 @@ export const getAllNotification = async (): Promise<NotificationDataType> => {
 };
 
 export const cancelInvite = async (data: CancelInviteType) => {
-  const res = await instance.delete("/notification");
+  const { crewId, accountId } = data;
+
+  await instance.delete(`notification?crewId=${crewId}&accountId=${accountId}&crewAccept=WAIT`);
 };
 
 export const acceptInvite = async (data: AcceptInviteType) => {
   const res = await instance.post(`/notification`, data);
   return res.data;
+};
+
+export const checkNotification = async (data: CheckNotificationType) => {
+  const { notificationId, alarmType } = data;
+
+  const res = await instance.put(`/notification/${notificationId}`, { isChecked: true, alarmType });
+  return res.data;
+};
+
+export const deleteNotification = async (notificationId: number) => {
+  const res = await instance.delete(`/notification/${notificationId}`);
 };
 
 export const createSchedule = async (data: SchedulePostDataType) => {

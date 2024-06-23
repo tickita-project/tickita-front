@@ -1,4 +1,4 @@
-import { forwardRef } from "react";
+import { forwardRef, useId } from "react";
 
 import Image from "next/image";
 
@@ -19,12 +19,25 @@ export default forwardRef<HTMLInputElement, GroupColorPickerProps>(function Grou
   { readOnly, selectColor, ...rest }: GroupColorPickerProps,
   ref,
 ) {
+  const uniqueId = useId();
+
   return (
     <ul className={cn("color-box", { "read-only": readOnly })}>
       {GROUP_COLOR_LIST.map((color) => (
         <li key={color} className={cn("color-item")}>
-          <input disabled={readOnly} ref={ref} type="radio" id={color} value={color} {...rest} />
-          <label htmlFor={color} className={cn("group-color")} style={{ backgroundColor: color }} />
+          <input
+            disabled={readOnly}
+            ref={ref}
+            type="radio"
+            id={`${uniqueId}-${color}`}
+            value={color}
+            {...rest}
+          />
+          <label
+            htmlFor={`${uniqueId}-${color}`}
+            className={cn("group-color")}
+            style={{ backgroundColor: color }}
+          />
           {selectColor === color && (
             <Image
               className={cn("select")}
