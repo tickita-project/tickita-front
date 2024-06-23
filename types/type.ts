@@ -66,10 +66,10 @@ export interface SchedulePostDataType {
   title: string;
   startDateTime: string;
   endDateTime: string;
-  location: string;
-  description: string;
+  location?: string;
+  description?: string;
   crewId: number;
-  participants: ParticipantType[];
+  participants?: ParticipantType[];
 }
 
 export interface InviteeType {

@@ -1,0 +1,351 @@
+@mixin group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  .group-color {
+    width: 1.5625rem;
+    height: 1.5625rem;
+    border-radius: .25rem;
+  }
+
+  .group-name {
+    @include headline2-bold;
+  }
+}
+
+@mixin scroll {
+  &::-webkit-scrollbar {
+    width: .75rem;
+    height: .625rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $gray400;
+    border: .0625rem solid $gray400;
+    border-radius: .3125rem;
+    max-height: .625rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    display: none
+  }
+}
+
+.container {
+  width: 32rem;
+  padding: 1.5rem;
+  background-color: $white;
+  transform: translate(-50%, -50%);
+  position: relative;
+  top: 50%;
+  left: 50%;
+  border-radius: 1rem;
+
+  .close-button {
+    padding: 0;
+    transition: transform 0.5s ease;
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+
+    &:hover {
+      transform: rotate(180deg);
+    }
+  }
+
+  .create-schedule-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    align-self: stretch;
+
+    .title-container {
+      display: flex;
+      align-items: center;
+      gap: .375rem;
+
+      .title {
+        display: flex;
+        padding: .5rem 0;
+        align-items: center;
+        gap: .25rem;
+        align-self: stretch;
+        outline: none;
+        @include heading4-medium;
+
+        &::placeholder {
+          color: $gray600;
+        }
+      }
+
+      p {
+        padding-top: .25rem;
+        @include heading4-medium($red500);
+      }
+    }
+
+
+    .time-place {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      .time-container {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        align-self: stretch;
+
+        .label {
+          @include headline2-bold;
+        }
+
+        .time {
+          display: flex;
+          align-items: center;
+          gap: .125rem;
+          flex: 1 0 0;
+
+          .start,
+          .end {
+            display: flex;
+            align-items: flex-start;
+
+            .date {
+              @include body2-medium;
+            }
+          }
+        }
+      }
+
+      .place {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        align-self: stretch;
+
+        .label {
+          @include headline2-bold;
+        }
+
+        .place-input-container {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          gap: .25rem;
+          flex: 1 0 0;
+
+          .place-input {
+            @include body2-medium;
+            text-align: start;
+          }
+
+          .location-length {
+            display: flex;
+            margin-left: .625rem;
+            @include body2-medium($gray600);
+
+            b {
+              color: $black;
+            }
+          }
+        }
+      }
+    }
+
+    .description {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: .25rem;
+      align-self: stretch;
+      position: relative;
+
+      .label {
+        @include headline2-bold;
+      }
+
+      .text {
+        width: 100%;
+        height: 6.25rem;
+        display: flex;
+        padding: .75rem 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: .25rem;
+        align-self: stretch;
+        border-radius: .5rem;
+        background: $gray100;
+        border: none;
+        resize: none;
+        @include body2-regular;
+        text-align: start;
+      }
+
+      .text-length {
+        @include body2-medium($gray600);
+        position: absolute;
+        bottom: .625rem;
+        right: .9375rem;
+        z-index: 3;
+
+        b {
+          color: $black;
+        }
+      }
+    }
+
+    .group {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: .25rem;
+      align-self: stretch;
+      position: relative;
+
+      .label {
+        @include headline2-bold;
+
+        span {
+          @include headline2-bold($red500);
+
+        }
+      }
+
+      .group-select {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 3.75rem;
+        padding: .375rem 1rem;
+        border-radius: .5rem;
+        border: .125rem solid $gray900;
+        cursor: pointer;
+
+        .selected-group {
+          @include group;
+        }
+
+        .placeholder {
+          @include headline2-bold;
+        }
+      }
+
+      .group-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: .25rem;
+        width: 100%;
+        max-height: 7.5rem;
+        overflow-y: auto;
+        position: absolute;
+        top: 5.625rem;
+        z-index: 3;
+        background-color: $white;
+        border-radius: .5rem;
+        border: .125rem solid $gray900;
+        padding: .25rem .625rem;
+        @include scroll;
+
+        .group-list {
+          width: 100%;
+          height: 3.75rem;
+          padding: .25rem .625rem;
+          border-radius: .375rem;
+          @include group;
+          cursor: pointer;
+
+          &:hover {
+            background-color: $gray200;
+          }
+
+          &:active {
+            background-color: $gray400;
+          }
+        }
+      }
+    }
+
+    .member-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: .25rem;
+      align-self: stretch;
+
+      .label {
+        @include headline2-bold;
+      }
+
+      .members {
+        height: 6.25rem;
+        display: flex;
+        flex-wrap: wrap;
+        overflow-y: auto;
+        @include scroll;
+
+        .alone-msg {
+          @include body2-medium;
+        }
+
+        input {
+          display: none;
+        }
+
+        .member-label {
+          height: 2.8125rem;
+          display: flex;
+          padding: .25rem .5rem;
+          align-items: center;
+          border-radius: 62.5rem;
+          border: .0625rem solid $gray200;
+          background: $gray50;
+          cursor: pointer;
+          margin-bottom: .5rem;
+          margin-right: .75rem;
+          @include body2-medium;
+
+          &:hover {
+            background: $blue100;
+            color: $blue700;
+          }
+
+          &:active {
+            background: $blue300;
+          }
+        }
+
+        input:checked+.member-label {
+          background: $blue500 ;
+          color: $white ;
+        }
+      }
+    }
+
+    .submit {
+      display: flex;
+      height: 2.5rem;
+      padding: .5rem 1.25rem;
+      justify-self: flex-end;
+      align-self: flex-end;
+      gap: .25rem;
+      border-radius: .5rem;
+      background: $blue500;
+      color: $white;
+      /* Body 1/Bold */
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 150%;
+      /* 24px */
+      letter-spacing: -0.025rem;
+
+      &:disabled {
+        background-color: $gray300;
+        color: $gray600;
+      }
+    }
+  }
+}
