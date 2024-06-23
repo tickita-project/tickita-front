@@ -9,6 +9,7 @@ import {
   CancelInviteType,
   AcceptInviteType,
   NotificationDataType,
+  SchedulePostDataType,
 } from "@/types/type";
 
 import { imageRequestInstance, instance } from "./axios";
@@ -89,5 +90,10 @@ export const cancelInvite = async (data: CancelInviteType) => {
 
 export const acceptInvite = async (data: AcceptInviteType) => {
   const res = await instance.post(`/notification`, data);
+  return res.data;
+};
+
+export const createSchedule = async (data: SchedulePostDataType) => {
+  const res = await instance.post(`/schedule`, data);
   return res.data;
 };
