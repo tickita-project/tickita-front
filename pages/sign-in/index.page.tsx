@@ -6,6 +6,7 @@ import Link from "next/link";
 import classNames from "classnames/bind";
 
 import MetaData from "@/components/MetaData";
+import { PAGE_PATH } from "@/constants/pagePath";
 
 import styles from "./SignIn.module.scss";
 
@@ -28,7 +29,9 @@ export default function SignIn() {
     <>
       <MetaData title="로그인 | 티키타" />
       <header className={cn("header")}>
-        <Image src="/icons/tickita-logo.svg" alt="로고 이미지" width={60} height={22} />
+        <Link href={PAGE_PATH.MAIN}>
+          <Image src="/icons/tickita-logo.svg" alt="로고 이미지" width={60} height={22} />
+        </Link>
       </header>
       <main className={cn("container")}>
         <div className={cn("tickita-logo")}>
