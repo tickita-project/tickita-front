@@ -23,7 +23,7 @@ const COORDINATION_STEP = [
     step: 1,
     title: "조율할 일정 만들기",
     description: ["시간 고민하지 말고 먼저 어떤 내용을 이야기할 지 작성해보세요"],
-    imgUrl: "/images/coordination-step1.svg",
+    imgUrl: "/images/coordination-step1.webp",
   },
   {
     step: 2,
