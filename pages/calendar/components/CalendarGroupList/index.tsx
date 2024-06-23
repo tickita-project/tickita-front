@@ -17,7 +17,12 @@ export default function CalendarGroupList() {
       <p className={cn("enter-group")}>현재 가입된 그룹</p>
       <ul className={cn("group-container")}>
         {groupList?.map((group) => (
-          <ColorCheckBox key={group.crewId} color={group.labelColor} title={group.crewName} />
+          <ColorCheckBox
+            key={group.crewId}
+            crewId={group.crewId}
+            color={group.labelColor}
+            title={group.crewName}
+          />
         ))}
       </ul>
     </div>

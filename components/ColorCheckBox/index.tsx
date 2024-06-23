@@ -9,16 +9,22 @@ import styles from "./ColorCheckBox.module.scss";
 const cn = classNames.bind(styles);
 
 interface ColorCheckBoxProps {
+  crewId: number;
   color: GroupColorType;
   title: string;
 }
 
-export default function ColorCheckBox({ color, title }: ColorCheckBoxProps) {
+export default function ColorCheckBox({ crewId, color, title }: ColorCheckBoxProps) {
   const [isChecked, setIsChecked] = useState(false);
   const unquieId = useId();
 
   const handleCheckBoxChange = () => {
-    setIsChecked((prev) => !prev);
+    if (isChecked) {
+      setIsChecked((prev) => !prev);
+      return;
+    } else {
+      setIsChecked((prev) => !prev);
+    }
   };
 
   return (
