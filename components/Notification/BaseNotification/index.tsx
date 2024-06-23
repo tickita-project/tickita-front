@@ -70,7 +70,7 @@ export default function BaseNotification({ notificationData, onClick }: BaseNoti
     const payload = {
       crewId,
       notificationId,
-      crewAccept: "ACCEPT",
+      inviteType: "ACCEPT",
     } as AcceptInviteType;
 
     inviteMutate(payload, {

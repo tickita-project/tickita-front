@@ -11,6 +11,7 @@ import {
   NotificationDataType,
   CheckNotificationType,
   SchedulePostDataType,
+  UpcomingSchedule,
 } from "@/types/type";
 
 import { imageRequestInstance, instance } from "./axios";
@@ -109,5 +110,10 @@ export const deleteNotification = async (notificationId: number) => {
 
 export const createSchedule = async (data: SchedulePostDataType) => {
   const res = await instance.post(`/schedule`, data);
+  return res.data;
+};
+
+export const getUpcomingSchedule = async (): Promise<UpcomingSchedule[]> => {
+  const res = await instance.get("/dashboard/upcoming-events");
   return res.data;
 };
