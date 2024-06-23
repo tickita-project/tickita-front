@@ -57,9 +57,6 @@ export async function getServerSideProps(
       const ACCESS_TOKEN_EXPIRE_AT = new Date(accessTokenExpireAt).toUTCString();
       const REFRESH_TOKEN_EXPIRE_AT = new Date(refreshTokenExpireAt).toUTCString();
 
-      console.log(`raw-access-token = ${accessTokenExpireAt}`);
-      console.log(`access-token = ${ACCESS_TOKEN_EXPIRE_AT}`);
-
       const ACCESS_TOKEN = `ACCESS_TOKEN=${accessToken}; Path=/; HttpOnly; SameSite=Strict; Secure; Expires=${ACCESS_TOKEN_EXPIRE_AT}`;
       const REFRESH_TOKEN = `REFRESH_TOKEN=${refreshToken}; Path=/; HttpOnly; SameSite=Strict; Secure; Expires=${REFRESH_TOKEN_EXPIRE_AT}`;
 
