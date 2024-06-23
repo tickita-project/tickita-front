@@ -1,25 +1,3 @@
-.scroll-container {
-  height: calc(100vh - 80px);
-  overflow: hidden auto;
-  scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
-
-  ::-webkit-scrollbar {
-    background-color: $gray200;
-    height: 0.25rem;
-    width: 0.25rem;
-  }
-
-  ::-webkit-scrollbar-track {
-    background-color: $gray300;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background-color: $gray500;
-    border-radius: 4px;
-  }
-}
-
 .header {
   border-bottom: 1px solid $gray200;
   background-color: $white;
@@ -41,6 +19,17 @@
     color: $blue500;
     font-weight: 700;
     line-height: 150%;
+  }
+}
+
+.scroll-container {
+  height: calc(100vh - 80px);
+  overflow: hidden auto;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+
+  &::-webkit-scrollbar {
+    display: none;
   }
 }
 
