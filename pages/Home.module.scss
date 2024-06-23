@@ -103,7 +103,9 @@
 }
 
 .second-section {
-  padding-top: 7.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   height: calc(100vh - 80px);
 
   .point-letter {
@@ -271,7 +273,7 @@
 
 .fourth-section {
   @include flex-col-center;
-  gap: 6.25rem;
+  gap: 5rem;
   height: calc(100vh - 80px);
 
   .label {
@@ -351,7 +353,7 @@
 
 .fifth-section {
   @include flex-col-center;
-  gap: 6rem;
+  gap: 5rem;
   height: calc(100vh - 80px);
   background-color: $gray900;
 
