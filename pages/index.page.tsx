@@ -208,21 +208,19 @@ export default function Home() {
                 onClick={() => setClickedStep(item.step)}
                 className={cn("accordion", { [styles.active]: clickedStep === item.step })}
               >
-                <div className={cn("text-container")}>
-                  <h3>
-                    <span>{item.step}</span>
-                    {clickedStep === item.step && item.title}
-                  </h3>
-                  {clickedStep === item.step && (
+                <div className={cn("card-in-accordion")}>
+                  <div className={cn("text-container")}>
+                    <h3>
+                      <span>{item.step}</span>
+                      {item.title}
+                    </h3>
                     <div>
                       <p>{item.description[0]}</p>
                       {item.description[1] && <p>{item.description[1]}</p>}
                     </div>
-                  )}
-                </div>
-                {clickedStep === item.step && (
+                  </div>
                   <Image src={item.imgUrl} alt="일정 조율" width={560} height={400} />
-                )}
+                </div>
               </div>
             ))}
           </div>
