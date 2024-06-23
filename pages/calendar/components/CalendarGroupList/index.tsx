@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 
 import classNames from "classnames/bind";
 
@@ -9,7 +9,11 @@ import styles from "./CalendarGroupList.module.scss";
 
 const cn = classNames.bind(styles);
 
-export default function CalendarGroupList() {
+interface CalendarGroupListProps {
+  setSelectedCrewIdList: Dispatch<SetStateAction<number[] | []>>;
+}
+
+export default function CalendarGroupList({ setSelectedCrewIdList }: CalendarGroupListProps) {
   const { data: groupList } = useGetGroupList();
 
   return (
@@ -22,6 +26,7 @@ export default function CalendarGroupList() {
             crewId={group.crewId}
             color={group.labelColor}
             title={group.crewName}
+            setSelectedCrewIdList={setSelectedCrewIdList}
           />
         ))}
       </ul>

@@ -13,7 +13,11 @@ import styles from "./DailyCalendar.module.scss";
 
 const cn = classNames.bind(styles);
 
-export default function DailyCalendar() {
+interface DailyCalendarProps {
+  selectedCrewIdList: number[] | [];
+}
+
+export default function DailyCalendar({ selectedCrewIdList }: DailyCalendarProps) {
   const dragContainerRef = useRef<HTMLDivElement>(null);
   const { focusDate, setScheduleStart, setScheduleEnd } = useDateStore(
     useShallow((state) => ({

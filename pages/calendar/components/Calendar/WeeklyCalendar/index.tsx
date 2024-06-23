@@ -14,7 +14,11 @@ import styles from "./WeeklyCalendar.module.scss";
 
 const cn = classNames.bind(styles);
 
-export default function WeeklyCalendar() {
+interface WeeklyCalendarProps {
+  selectedCrewIdList: number[] | [];
+}
+
+export default function WeeklyCalendar({ selectedCrewIdList }: WeeklyCalendarProps) {
   const [dragStartDayIndex, setDragStartDayIndex] = useState<number | null>(null);
   const [draggedHoursIndex, setDraggedHoursIndex] = useState<number[]>([]);
   const { focusDate, setScheduleStart, setScheduleEnd } = useDateStore(

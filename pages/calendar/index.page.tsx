@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { useRouter } from "next/router";
 import { GetServerSidePropsContext } from "next/types";
@@ -50,13 +50,17 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
 
 export default function CalendarPage() {
   const [calendarType, setCalendarType] = useState<CalendarType>("월");
+  const [selectedCrewIdList, setSelectedCrewIdList] = useState<number[] | []>([]);
+  const [query, setQuery] = useState<{ startDate: string | null; endDate: string | null }>({
+    startDate: null,
+    endDate: null,
+  });
   const router = useRouter();
   const { focusDate } = useDateStore(useShallow((state) => ({ focusDate: state.focusDate })));
 
   useEffect(() => {
     let startDate = null;
     let endDate = null;
-    let query = null;
 
     switch (calendarType) {
       case "월":
@@ -74,13 +78,13 @@ export default function CalendarPage() {
         break;
     }
 
-    query = {
+    setQuery({
       startDate: startDate?.format("YYYY-MM-DDTHH:mm:ss.SSS"),
       endDate: endDate?.format("YYYY-MM-DDTHH:mm:ss.SSS"),
-    };
+    });
 
     router.replace({ query });
-    queryClient.invalidateQueries({ queryKey: scheduleKey.all });
+    queryClient.invalidateQueries({ queryKey: scheduleKey.lists() });
   }, [calendarType, focusDate]);
 
   return (
@@ -88,13 +92,13 @@ export default function CalendarPage() {
       <MetaData title="내 캘린더 | 티키타" />
       <Header />
       <div className={cn("container")}>
-        <CalendarSideBar />
+        <CalendarSideBar setSelectedCrewIdList={setSelectedCrewIdList} />
 
         <main>
           <CalendarHeader calendarType={calendarType} setCalendarType={setCalendarType} />
-          {calendarType === "월" && <MonthlyCalendar />}
-          {calendarType === "주" && <WeeklyCalendar />}
-          {calendarType === "일" && <DailyCalendar />}
+          {calendarType === "월" && <MonthlyCalendar selectedCrewIdList={selectedCrewIdList} />}
+          {calendarType === "주" && <WeeklyCalendar selectedCrewIdList={selectedCrewIdList} />}
+          {calendarType === "일" && <DailyCalendar selectedCrewIdList={selectedCrewIdList} />}
         </main>
       </div>
     </>
