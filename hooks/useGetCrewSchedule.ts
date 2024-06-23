@@ -9,9 +9,10 @@ export default function useGetCrewSchedule(crewId: number, startDate: string, en
     startDate: startDate,
     endDate: endDate,
   };
-  const { data } = useQuery({
+  const { data, refetch } = useQuery({
     queryKey: scheduleKey.list(filter),
     queryFn: () => getCrewSchedules(crewId, startDate, endDate),
+    enabled: false,
   });
-  return { data };
+  return { data, refetch };
 }
