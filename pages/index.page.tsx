@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import classNames from "classnames/bind";
+import { throttle } from "lodash";
 
 import MetaData from "@/components/MetaData";
 import { PAGE_PATH } from "@/constants/pagePath";
@@ -59,53 +60,44 @@ const COORDINATION_STEP = [
 
 export default function Home() {
   const [clickedStep, setClickedStep] = useState(1);
-  const [scrollY, setScrollY] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const timer = useRef<any>(null);
 
-  const handleWheelEvent: EventListener = (e) => {
-    const wheelEvent = e as unknown as WheelEvent;
-    setScrollY(window.scrollY);
+  const handleWheelEvent: EventListener = throttle(
+    (e: Event) => {
+      const wheelEvent = e as unknown as WheelEvent;
+      if (timer.current) {
+        return;
+      }
 
-    if (wheelEvent.deltaY > 0) {
-      downWheel();
-      return;
-    }
-    upWheel();
-  };
+      if (wheelEvent.deltaY > 0) {
+        downWheel();
+        return;
+      }
+      upWheel();
+    },
+    1200,
+    { leading: true, trailing: false },
+  );
 
   const upWheel = () => {
-    if (timer.current) {
-      return;
+    if (containerRef.current) {
+      containerRef.current.scrollBy({
+        left: 0,
+        top: -window.innerHeight + 80,
+        behavior: "smooth",
+      });
     }
-
-    timer.current = setTimeout(() => {
-      if (containerRef.current) {
-        containerRef.current.scrollBy({
-          left: 0,
-          top: -window.innerHeight + 80,
-          behavior: "smooth",
-        });
-      }
-      timer.current = null;
-    }, 200);
   };
 
   const downWheel = () => {
-    if (timer.current) {
-      return;
+    if (containerRef.current) {
+      containerRef.current.scrollBy({
+        left: 0,
+        top: window.innerHeight - 80,
+        behavior: "smooth",
+      });
     }
-
-    timer.current = setTimeout(() => {
-      if (containerRef.current) {
-        containerRef.current.scrollBy({
-          left: 0,
-          top: window.innerHeight - 80,
-          behavior: "smooth",
-        });
-      }
-      timer.current = null;
-    }, 200);
   };
 
   useEffect(() => {
@@ -116,7 +108,7 @@ export default function Home() {
       window.removeEventListener("wheel", handleWheelEvent);
       document.body.classList.remove("scrollbar-hidden");
     };
-  }, [scrollY]);
+  }, []);
 
   return (
     <>
