@@ -9,9 +9,13 @@ export const middleware = (request: NextRequest) => {
     return NextResponse.redirect(new URL(PAGE_PATH.SIGN_IN, request.url));
   }
 
+  if (REFRESH_TOKEN && request.nextUrl.pathname.startsWith(PAGE_PATH.SIGN_IN)) {
+    return NextResponse.redirect(new URL(PAGE_PATH.DASHBOARD, request.url));
+  }
+
   return NextResponse.next();
 };
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/calendar/:path*", "/group/:path*"],
+  matcher: ["/((?!sign-in/.*$).*)"], // "sign-in/kakao"처럼 sign-in 뒤에 path 붙는 경로 제외
 };
