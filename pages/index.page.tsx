@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import dynamic from "next/dynamic";
 import Image from "next/image";
@@ -59,6 +59,64 @@ const COORDINATION_STEP = [
 
 export default function Home() {
   const [clickedStep, setClickedStep] = useState(1);
+  const [scrollY, setScrollY] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const timer = useRef<any>(null);
+
+  const handleWheelEvent: EventListener = (e) => {
+    const wheelEvent = e as unknown as WheelEvent;
+    setScrollY(window.scrollY);
+
+    if (wheelEvent.deltaY > 0) {
+      downWheel();
+      return;
+    }
+    upWheel();
+  };
+
+  const upWheel = () => {
+    if (timer.current) {
+      return;
+    }
+
+    timer.current = setTimeout(() => {
+      if (containerRef.current) {
+        containerRef.current.scrollBy({
+          left: 0,
+          top: -window.innerHeight + 80,
+          behavior: "smooth",
+        });
+      }
+      timer.current = null;
+    }, 200);
+  };
+
+  const downWheel = () => {
+    if (timer.current) {
+      return;
+    }
+
+    timer.current = setTimeout(() => {
+      if (containerRef.current) {
+        containerRef.current.scrollBy({
+          left: 0,
+          top: window.innerHeight - 80,
+          behavior: "smooth",
+        });
+      }
+      timer.current = null;
+    }, 200);
+  };
+
+  useEffect(() => {
+    window.addEventListener("wheel", handleWheelEvent);
+    document.body.classList.add("scrollbar-hidden");
+
+    return () => {
+      window.removeEventListener("wheel", handleWheelEvent);
+      document.body.classList.remove("scrollbar-hidden");
+    };
+  }, [scrollY]);
 
   return (
     <>
@@ -73,7 +131,7 @@ export default function Home() {
         </nav>
       </header>
 
-      <div className={cn("scroll-container")}>
+      <div ref={containerRef} className={cn("scroll-container")}>
         <section className={cn("section", "first-section")}>
           <div className={cn("slogan")}>
             <div className={cn("slogan-line")}>
