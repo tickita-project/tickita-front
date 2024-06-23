@@ -18,7 +18,7 @@ import { getGroupList, getUserInfo } from "@/apis/apis";
 import { setContext } from "@/apis/axios";
 import Header from "@/components/Header";
 import MetaData from "@/components/MetaData";
-import { groupKey, userInfoKey } from "@/constants/queryKey";
+import { groupKey, scheduleKey, userInfoKey } from "@/constants/queryKey";
 import { useDateStore } from "@/store/useDateStore";
 import { calculateMonthDates } from "@/utils/calculateCalendarDates";
 
@@ -29,10 +29,10 @@ import styles from "./Calendar.module.scss";
 const cn = classNames.bind(styles);
 
 dayjs.extend(utc);
+const queryClient = new QueryClient();
 
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
   setContext(context);
-  const queryClient = new QueryClient();
 
   try {
     await queryClient.prefetchQuery({ queryKey: groupKey.lists(), queryFn: getGroupList });
@@ -57,6 +57,7 @@ export default function CalendarPage() {
     let startDate = null;
     let endDate = null;
     let query = null;
+
     switch (calendarType) {
       case "월":
         const days = calculateMonthDates(focusDate);
@@ -79,6 +80,7 @@ export default function CalendarPage() {
     };
 
     router.replace({ query });
+    queryClient.invalidateQueries({ queryKey: scheduleKey.all });
   }, [calendarType, focusDate]);
 
   return (
