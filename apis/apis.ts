@@ -96,7 +96,6 @@ export const acceptInvite = async (data: AcceptInviteType) => {
   return res.data;
 };
 
-
 export const checkNotification = async (data: CheckNotificationType) => {
   const { notificationId, alarmType } = data;
 
@@ -106,6 +105,7 @@ export const checkNotification = async (data: CheckNotificationType) => {
 
 export const deleteNotification = async (notificationId: number) => {
   const res = await instance.delete(`/notification/${notificationId}`);
+};
 
 export const createSchedule = async (data: SchedulePostDataType) => {
   const res = await instance.post(`/schedule`, data);
