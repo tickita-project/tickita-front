@@ -351,7 +351,7 @@
 
 .fifth-section {
   @include flex-col-center;
-  gap: 7.5rem;
+  gap: 6rem;
   height: calc(100vh - 80px);
   background-color: $gray900;
 
