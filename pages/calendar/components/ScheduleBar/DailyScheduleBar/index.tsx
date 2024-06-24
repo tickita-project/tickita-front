@@ -43,7 +43,7 @@ export default function DailyScheduleBar({
       }}
     >
       <p className={cn("start")}>
-        {String(startHour).padStart(2, "0")}시 ~ {String(endHour).padStart(2, "0")}시
+        {start.format("hh")}시 ~ {end.format("hh")}시
       </p>
       <p className={cn("title")}>{title}</p>
     </div>
@@ -65,7 +65,7 @@ export function DailyAllDayScheduleBar({
     <>
       <div className={cn("all-container")} style={{ backgroundColor: crewColor, zIndex: "2" }}>
         <p className={cn("end")}>
-          ~ {end.get("M")}.{end.get("date")} 까지
+          ~ {end.format("MM")}.{end.format("DD")} 까지
         </p>
         <p className={cn("title")}>{title}</p>
       </div>

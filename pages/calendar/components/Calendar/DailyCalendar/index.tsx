@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 
 import classNames from "classnames/bind";
 import dayjs from "dayjs";
@@ -39,10 +39,6 @@ export default function DailyCalendar({ scheduleData }: DailyCalendarProps) {
   };
 
   const { draggedIndex } = useDragSelect(dragContainerRef, handleDragEnd);
-
-  useEffect(() => {
-    console.log(scheduleData);
-  }, []);
 
   return (
     <div className={cn("container")}>
