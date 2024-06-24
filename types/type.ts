@@ -177,3 +177,8 @@ export interface ScheduleDetailType {
 }
 
 export interface CrewSchedulesType extends Array<ScheduleDetailType> {}
+
+export interface DeleteScheduleResponseType {
+  scheduleId: number;
+  message: string;
+}

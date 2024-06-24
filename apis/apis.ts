@@ -16,6 +16,7 @@ import {
   UpcomingSchedule,
   CrewSchedulesType,
   ScheduleDetailType,
+  DeleteScheduleResponseType,
 } from "@/types/type";
 
 import { imageRequestInstance, instance } from "./axios";
@@ -143,5 +144,10 @@ export const deleteAccountInfo = async () => {
 
 export const getScheduleDetail = async (scheduleId: number): Promise<ScheduleDetailType> => {
   const res = await instance.get(`/schedule/${scheduleId}`);
+  return res.data;
+};
+
+export const deleteSchedule = async (scheduleId: number): Promise<DeleteScheduleResponseType> => {
+  const res = await instance.delete(`/schedule/${scheduleId}`);
   return res.data;
 };

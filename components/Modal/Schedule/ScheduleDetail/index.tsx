@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import classNames from "classnames/bind";
 import dayjs from "dayjs";
 
-import { getScheduleDetail } from "@/apis/apis";
+import { deleteSchedule, getScheduleDetail } from "@/apis/apis";
 import { scheduleKey } from "@/constants/queryKey";
 import { useGetUserInfo } from "@/hooks/useGetUserInfo";
 import { useModalStore } from "@/store/useModalStore";
@@ -27,6 +27,13 @@ export default function ScheduleDetailModal() {
   const start = dayjs(data?.startDateTime).format("YYYY.MM.DD HH:mm");
   const end = dayjs(data?.endDateTime).format("YYYY.MM.DD HH:mm");
 
+  const handleDelete = async () => {
+    const data = await deleteSchedule(scheduleId);
+    if (data) {
+      closeModal();
+    }
+  };
+
   return (
     <div className={cn("container")}>
       <div className={cn("header")}>
@@ -36,9 +43,10 @@ export default function ScheduleDetailModal() {
           {data?.coordinate && <p className={cn("coordinated")}>조율된 일정</p>}
         </div>
         <div className={cn("buttons")}>
-          <button className={cn("remove-button")}>
+          <button className={cn("remove-button")} onClick={handleDelete}>
             <Image src="/icons/trash-icon.svg" alt="일정삭제" width={30} height={30} />
           </button>
+
           <button className={cn("close-button")} type="button" onClick={closeModal}>
             <Image src="/icons/close-icon.svg" alt="모달 닫기" width={30} height={30} />
           </button>
