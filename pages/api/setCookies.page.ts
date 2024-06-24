@@ -2,18 +2,17 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 const handler = (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
-    const { accessToken, accessTokenExpireAt, refreshToken, refreshTokenExpireAt } = req.body;
+    const { accessToken, refreshToken, refreshTokenExpireAt } = req.body;
 
     if (!accessToken || !refreshToken) {
       res.status(400).json({ message: "토큰이 존재하지 않습니다" });
       return;
     }
 
-    const ACCESS_TOKEN_EXPIRE_AT = new Date(accessTokenExpireAt).toUTCString();
     const REFRESH_TOKEN_EXPIRE_AT = new Date(refreshTokenExpireAt).toUTCString();
 
     res.setHeader("Set-Cookie", [
-      `ACCESS_TOKEN=${accessToken}; Path=/; HttpOnly; Secure; SameSite=Strict; Expires=${ACCESS_TOKEN_EXPIRE_AT}`,
+      `ACCESS_TOKEN=${accessToken}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-age=300`,
       `REFRESH_TOKEN=${refreshToken}; Path=/; HttpOnly; Secure; SameSite=Strict; Expires=${REFRESH_TOKEN_EXPIRE_AT}`,
     ]);
 
