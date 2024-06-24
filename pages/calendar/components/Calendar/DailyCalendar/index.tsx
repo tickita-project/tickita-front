@@ -54,10 +54,8 @@ export default function DailyCalendar({ scheduleData }: DailyCalendarProps) {
               const end = dayjs(schedule.endDateTime);
               return end.diff(start, "days") >= 1 ? (
                 <DailyAllDayScheduleBar
-                  index={index}
                   key={schedule.scheduleId}
                   scheduleId={schedule.scheduleId}
-                  startDate={schedule.startDateTime}
                   endDate={schedule.endDateTime}
                   title={schedule.title}
                   crewColor={schedule.crewInfo.labelColor}

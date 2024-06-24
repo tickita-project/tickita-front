@@ -25,6 +25,7 @@ export default function UpcomingScheduleList() {
           upcomingScheduleList.map((list) => (
             <UpcomingSchedule
               key={list.scheduleId}
+              scheduleId={list.scheduleId}
               title={list.title}
               color={list.crewInfo.labelColor}
               date={list.startDateTime}

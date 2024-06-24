@@ -164,7 +164,7 @@ export interface Participant {
   nickName: string;
 }
 
-export interface CrewScheduleType {
+export interface ScheduleDetailType {
   scheduleId: number;
   title: string;
   startDateTime: string;
@@ -176,4 +176,9 @@ export interface CrewScheduleType {
   coordinate: boolean;
 }
 
-export interface CrewSchedulesType extends Array<CrewScheduleType> {}
+export interface CrewSchedulesType extends Array<ScheduleDetailType> {}
+
+export interface DeleteScheduleResponseType {
+  scheduleId: number;
+  message: string;
+}
