@@ -1,6 +1,9 @@
 import classNames from "classnames/bind";
 import dayjs, { Dayjs } from "dayjs";
 
+import { MODAL_TYPE } from "@/constants/modalType";
+import { useModalStore } from "@/store/useModalStore";
+
 import { GroupColorType } from "@/types/type";
 
 import styles from "./WeeklyScheduleBar.module.scss";
@@ -22,6 +25,7 @@ export default function WeeklyOneDayScheduleBar({
   endDate,
   crewColor,
 }: ScheduleBarType) {
+  const { openModal } = useModalStore();
   const start = dayjs(startDate);
   const end = dayjs(endDate);
   const startHour = start.get("hour");
@@ -37,6 +41,7 @@ export default function WeeklyOneDayScheduleBar({
         top: `${startHour * 80 + 1}px`,
         height: `${80 * timeDiff - 5}px`,
       }}
+      onClick={() => openModal(MODAL_TYPE.SCHEDULE_DETAILS, scheduleId)}
     >
       <p className={cn("time")}>
         {start.format("HH : mm")} ~ {end.format("HH : mm")}
@@ -62,6 +67,7 @@ export function WeeklyScheduleBar({
   elementWidth,
   weekStartDate,
 }: WeeklyScheduleBarType) {
+  const { openModal } = useModalStore();
   const start = dayjs(startDate);
   const end = dayjs(endDate);
   const zIndex = 2 + start.day();
@@ -83,6 +89,7 @@ export function WeeklyScheduleBar({
         left: `${adjustedStart.day() * elementWidth + 100}px`,
         width: width,
       }}
+      onClick={() => openModal(MODAL_TYPE.SCHEDULE_DETAILS, scheduleId)}
     >
       <p className={cn("time")}>
         {start.format("MM.DD")} ~ {end.format("MM.DD")}
