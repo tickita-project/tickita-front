@@ -39,7 +39,7 @@ export default function WeeklyOneDayScheduleBar({
       }}
     >
       <p className={cn("time")}>
-        {start.format("hh")}.{start.format("mm")} ~ {end.format("hh")}.{end.format("mm")}
+        {start.format("HH : mm")} ~ {end.format("HH : mm")}
       </p>
       <p className={cn("title")}>{title}</p>
     </div>

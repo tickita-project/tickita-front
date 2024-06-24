@@ -8,8 +8,7 @@
   position: absolute;
   opacity: 0.85;
 
-  .start,
-  .end {
+  .time {
     @include caption2-medium($white);
     font-size: 0.9rem;
   }

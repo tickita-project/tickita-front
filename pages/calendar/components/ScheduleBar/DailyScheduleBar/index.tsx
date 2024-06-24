@@ -42,8 +42,8 @@ export default function DailyScheduleBar({
         height: `${56 * timeDiff}px`,
       }}
     >
-      <p className={cn("start")}>
-        {start.format("hh")}시 ~ {end.format("hh")}시
+      <p className={cn("time")}>
+        {start.format("HH : mm")} ~ {end.format("HH : mm")}
       </p>
       <p className={cn("title")}>{title}</p>
     </div>
