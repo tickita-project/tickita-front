@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 import Image from "next/image";
+import Router from "next/router";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AxiosError } from "axios";
@@ -8,8 +9,9 @@ import classNames from "classnames/bind";
 import { useForm } from "react-hook-form";
 import { ZodType, z } from "zod";
 
-import { putUserInfo } from "@/apis/apis";
+import { deleteAccountInfo, putUserInfo } from "@/apis/apis";
 import Input from "@/components/Input";
+import { PAGE_PATH } from "@/constants/pagePath";
 import { NICKNAME_SCHEMA, PHONE_NUMBER_SCHEMA } from "@/constants/schema";
 import useGetProfileImage from "@/hooks/useGetProfileImage";
 
@@ -49,6 +51,19 @@ export default function ProfileEditForm({ userInfo }: ProfileEditFormProps) {
     defaultValues: { nickName: userInfo.nickName, phoneNumber: userInfo.phoneNumber },
     resolver: zodResolver(profileSetupFormSchema),
   });
+
+  const deleteAccount = async () => {
+    try {
+      await deleteAccountInfo();
+
+      alert("회원 탈퇴가 완료되었습니다");
+
+      Router.push(PAGE_PATH.MAIN);
+    } catch (error) {
+      console.error(error);
+      alert("회원 탈퇴에 실패했습니다. 잠시 후 다시 시도해주세요.");
+    }
+  };
 
   const onSubmit = async (data: FieldValuesType) => {
     const formData = { ...data, accountId: Number(userInfo.accountId), imgUrl };
@@ -127,9 +142,14 @@ export default function ProfileEditForm({ userInfo }: ProfileEditFormProps) {
             {...register("phoneNumber")}
           />
         </div>
-        <button type="submit" disabled={!isValid || isUnchanged} className={cn("submit-button")}>
-          프로필 저장하기
-        </button>
+        <div className={cn("button-container")}>
+          <button type="button" onClick={deleteAccount} className={cn("leave-button")}>
+            회원 탈퇴
+          </button>
+          <button type="submit" disabled={!isValid || isUnchanged} className={cn("submit-button")}>
+            프로필 저장하기
+          </button>
+        </div>
       </form>
     </div>
   );

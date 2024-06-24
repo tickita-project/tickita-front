@@ -117,3 +117,8 @@ export const getUpcomingSchedule = async (): Promise<UpcomingSchedule[]> => {
   const res = await instance.get("/dashboard/upcoming-events");
   return res.data;
 };
+
+export const deleteAccountInfo = async () => {
+  const res = await instance.delete("/account-info", {});
+  return res.data;
+};
