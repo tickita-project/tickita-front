@@ -50,7 +50,7 @@ export async function getServerSideProps(
     if (accessToken && refreshToken) {
       const REFRESH_TOKEN_EXPIRE_AT = new Date(refreshTokenExpireAt).toUTCString();
 
-      const ACCESS_TOKEN = `ACCESS_TOKEN=${accessToken}; Path=/; HttpOnly; SameSite=Strict; Secure; Max-age=3000`;
+      const ACCESS_TOKEN = `ACCESS_TOKEN=${accessToken}; Path=/; HttpOnly; SameSite=Strict; Secure; Max-age=300`;
       const REFRESH_TOKEN = `REFRESH_TOKEN=${refreshToken}; Path=/; HttpOnly; SameSite=Strict; Secure; Expires=${REFRESH_TOKEN_EXPIRE_AT}`;
 
       context.res.setHeader("Set-Cookie", [ACCESS_TOKEN, REFRESH_TOKEN]);
