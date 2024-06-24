@@ -43,10 +43,12 @@ export default function ScheduleDetailModal() {
           {data?.coordinate && <p className={cn("coordinated")}>조율된 일정</p>}
         </div>
         <div className={cn("buttons")}>
-          <button className={cn("remove-button")} onClick={handleDelete}>
-            <Image src="/icons/trash-icon.svg" alt="일정삭제" width={30} height={30} />
-          </button>
-
+          {data?.coordinate || (
+            //후에 수정버튼도 여기 추가
+            <button className={cn("remove-button")} onClick={handleDelete}>
+              <Image src="/icons/trash-icon.svg" alt="일정삭제" width={30} height={30} />
+            </button>
+          )}
           <button className={cn("close-button")} type="button" onClick={closeModal}>
             <Image src="/icons/close-icon.svg" alt="모달 닫기" width={30} height={30} />
           </button>
