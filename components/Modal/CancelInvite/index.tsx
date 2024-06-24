@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 
 import { useCancelInvite } from "@/hooks/useCancelInvite";
+import useToast from "@/hooks/useToast";
 import { useModalStore } from "@/store/useModalStore";
 
 import { CancelInviteType } from "@/types/type";
@@ -9,6 +10,7 @@ import ConfirmModal from "../Confirm";
 
 export default function CancelInviteModal() {
   const { closeModal, data } = useModalStore();
+  const { successToast, errorToast } = useToast();
   const { query } = useRouter();
   const { mutate } = useCancelInvite(Number(query.id));
 
@@ -20,11 +22,11 @@ export default function CancelInviteModal() {
 
     mutate(payload, {
       onSuccess: () => {
-        alert("초대가 취소되었습니다.");
+        successToast("초대가 취소되었습니다!");
         closeModal();
       },
-      onError: (error) => {
-        alert(error);
+      onError: () => {
+        errorToast("초대를 취소하는 중 에러가 발생하였습니다!");
       },
     });
   };

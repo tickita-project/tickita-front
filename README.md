@@ -1,4 +1,4 @@
-![title](https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/taskify/profile_image/4-19_2992_1719195407123.png)
+![Image](https://brick-william-6f5.notion.site/image/https%3A%2F%2Fsprint-fe-project.s3.ap-northeast-2.amazonaws.com%2Ftaskify%2Fprofile_image%2F4-19_2992_1719225386240.png?table=block&id=2c83a151-26ff-433e-b14d-8fa66954b060&spaceId=e321b4cb-8569-4a87-9b86-2845eb22f8d7&width=2000&userId=&cache=v2)
 
 # 🗓️ 티키타(Tickita)
 

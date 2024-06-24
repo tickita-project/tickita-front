@@ -10,6 +10,7 @@ import Input from "@/components/Input";
 import TitleBox from "@/components/TitleBox";
 import { MODAL_TYPE } from "@/constants/modalType";
 import { useInviteGroupMember } from "@/hooks/useInviteGroupMember";
+import useToast from "@/hooks/useToast";
 import { useModalStore } from "@/store/useModalStore";
 
 import { InviteeType } from "@/types/type";
@@ -36,6 +37,7 @@ export default function InviteForm({ inviteeList }: InviteFormProps) {
   const { query } = useRouter();
   const { mutate } = useInviteGroupMember(Number(query.id));
   const { openModal } = useModalStore();
+  const { pendingToast, updateErrorToast, updateSuccessToast } = useToast();
   const {
     register,
     handleSubmit,
@@ -53,13 +55,15 @@ export default function InviteForm({ inviteeList }: InviteFormProps) {
       email: formData.email,
     };
 
+    pendingToast("초대장을 보내는 중입니다...");
+
     mutate(payload, {
       onSuccess: () => {
-        alert("초대 메일이 발송되었습니다.");
+        updateSuccessToast("초대 메일이 발송되었습니다.");
         reset();
       },
-      onError: (error) => {
-        alert(error);
+      onError: () => {
+        updateErrorToast("초대를 보내는 중 에러가 발생하였습니다!");
       },
     });
   };

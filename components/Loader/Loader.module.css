@@ -1,0 +1,17 @@
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loader {
+  border: 2px solid #e0e0e0; /* Light grey - border 전체 색상 지정*/
+  border-top: 2px solid #616161; /* Blue - 로딩 영역 색상 지정 */
+  border-radius: 50%; /* 둥근 모서리 효과 */
+  width: 1.25rem; /* 크기 지정 */
+  height: 1.25rem;
+  animation: spin 1s linear infinite;
+}

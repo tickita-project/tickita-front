@@ -151,6 +151,8 @@ export interface ScheduleFilterType {
   endDate: string;
 }
 
+export type ToastType = "success" | "error" | "warning" | "info" | "pending";
+
 export interface CrewInfo {
   crewId: number;
   crewName: string;
