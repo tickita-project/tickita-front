@@ -11,6 +11,12 @@ export const middleware = (request: NextRequest) => {
     }
   }
 
+  if (REFRESH_TOKEN) {
+    if (request.nextUrl.pathname.startsWith(PAGE_PATH.SIGN_IN)) {
+      return NextResponse.redirect(new URL(PAGE_PATH.DASHBOARD, request.url));
+    }
+  }
+
   return NextResponse.next();
 };
 
