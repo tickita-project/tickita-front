@@ -28,6 +28,7 @@ export default function DailyScheduleBar({
   const end = dayjs(endDate);
 
   const startHour = start.get("hour");
+  const endHour = end.get("hour");
   const timeDiff = end.diff(start, "hours");
   const zIndex = 25 - timeDiff;
   return (
@@ -42,10 +43,7 @@ export default function DailyScheduleBar({
       }}
     >
       <p className={cn("start")}>
-        {start.get("date")}.{start.get("hour")}
-      </p>
-      <p className={cn("end")}>
-        ~ {end.get("date")}.{end.get("hour")}
+        {String(startHour).padStart(2, "0")}시 ~ {String(endHour).padStart(2, "0")}시
       </p>
       <p className={cn("title")}>{title}</p>
     </div>

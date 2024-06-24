@@ -1,46 +1,49 @@
 .container {
   width: 18.75rem;
-  border-radius: .75rem;
+  border-radius: 0.75rem;
+  padding-top: 0.65rem;
 
   outline: none;
   cursor: pointer;
   position: absolute;
-  opacity: 0.75;
+  opacity: 0.85;
 
   .start,
+  .end {
+    @include caption2-medium($white);
+    font-size: 0.9rem;
+  }
+
+  .title {
+    @include caption1-medium($white);
+    font-size: 1rem;
+  }
+
+  &:hover {
+    filter: brightness(1.1);
+    transition: 0.75s;
+  }
+}
+
+.all-container {
+  width: 5rem;
+  height: 2.5rem;
+  padding: 6px 0.625rem;
+  margin-right: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  outline: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  gap: 0.125rem;
+  align-self: flex-start;
+
   .end {
     @include caption2-medium($white);
   }
 
   .title {
     @include caption1-medium($white);
-  }
-
-  &:hover {
-    filter: brightness(1.1);
-  }
-}
-
-
-.all-container {
-  width: 5rem;
-  height: 2.5rem;
-  padding: 6px .625rem;
-  margin-right: .25rem;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  outline: none;
-  border-radius: .5rem;
-  cursor: pointer;
-  gap: .125rem;
-  align-self: flex-start;
-
-  .end {
-    @include caption2-medium($white)
-  }
-
-  .title {
-    @include caption1-medium($white)
   }
 }
