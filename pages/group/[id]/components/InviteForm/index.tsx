@@ -39,6 +39,7 @@ export default function InviteForm({ inviteeList }: InviteFormProps) {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     mode: "all",
@@ -55,6 +56,7 @@ export default function InviteForm({ inviteeList }: InviteFormProps) {
     mutate(payload, {
       onSuccess: () => {
         alert("초대 메일이 발송되었습니다.");
+        reset();
       },
       onError: (error) => {
         alert(error);

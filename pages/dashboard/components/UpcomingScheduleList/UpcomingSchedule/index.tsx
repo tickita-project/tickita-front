@@ -2,6 +2,7 @@ import classNames from "classnames/bind";
 
 import { MODAL_TYPE } from "@/constants/modalType";
 import { useModalStore } from "@/store/useModalStore";
+import { formatKoreanDateTime } from "@/utils/formatKoreanDateTime";
 
 import styles from "./UpcomingSchedule.module.scss";
 
@@ -37,7 +38,7 @@ export default function UpcomingSchedule({
             "date-d-day": isToday,
           })}
         >
-          {date}
+          {formatKoreanDateTime(date)}
         </div>
         <div
           className={cn("day-day", {

@@ -8,7 +8,7 @@ export const useCreateSchedule = (crewId: number) => {
   const { mutate, isPending } = useMutation({
     mutationFn: createSchedule,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: scheduleKey.lists(crewId) });
+      queryClient.invalidateQueries({ queryKey: scheduleKey.lists() });
     },
   });
 
