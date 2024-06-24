@@ -34,8 +34,9 @@ export default function DailyScheduleBar({
       style={{
         backgroundColor: crewColor,
         zIndex: zIndex,
-        left: "10px",
-        top: `${startHour * 56 + 1}`,
+        left: "60px",
+        top: `${startHour * 56 + 1}px`,
+        height: `${56 * timeDiff}px`,
       }}
     >
       <p className={cn("start")}>
