@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 
 import classNames from "classnames/bind";
 import dayjs from "dayjs";
@@ -12,8 +12,6 @@ import useScroll from "@/hooks/useScroll";
 import { useDateStore } from "@/store/useDateStore";
 import { useModalStore } from "@/store/useModalStore";
 import { calculateMonthDates } from "@/utils/calculateCalendarDates";
-
-import { CrewSchedulesType } from "@/types/type";
 
 import styles from "./MonthlyCalendar.module.scss";
 
@@ -66,9 +64,6 @@ export default function MonthlyCalendar({ scheduleData }: MonthlyCalendarProps) 
 
   const { draggedIndex } = useDragSelect(dragContainerRef, handleDragEnd);
   const scrollRef = useScroll<HTMLDivElement>(handleScrollDownDebounced, handleScrollUpDebounced);
-  useEffect(() => {
-    console.log(scheduleData);
-  }, []);
 
   return (
     <div className={cn("container")} ref={scrollRef}>
