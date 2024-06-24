@@ -15,11 +15,7 @@ sudo npm ci --only=production # 빌드 결과와 종속성을 캐시하여 반�
 echo "빌드 실행 중..."
 sudo npm run build
 
-
-echo "기존 앱 종료..."
-pm2 stop tickita_app || true
-
 echo "앱 재실행..."
-pm2 start npm --name "tickita_app" -- start
+pm2 restart tickita_app
 
 echo "배포 성공!"
