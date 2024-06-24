@@ -1,6 +1,7 @@
 .container {
-  width: calc(100% - 6.25rem);
-  border-radius: .25rem;
+  width: 18.75rem;
+  border-radius: .75rem;
+  border: 2px solid $gray900;
   outline: none;
   cursor: pointer;
   position: absolute;
@@ -12,6 +13,10 @@
 
   .title {
     @include caption1-medium($white);
+  }
+
+  &:hover {
+    filter: brightness(1.1);
   }
 }
 

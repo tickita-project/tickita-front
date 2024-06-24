@@ -53,11 +53,12 @@ export default function DailyCalendar({ scheduleData }: DailyCalendarProps) {
         {scheduleData.map(
           (queryResult: any) =>
             Array.isArray(queryResult.data) &&
-            queryResult.data.map((schedule: any) => {
+            queryResult.data.map((schedule: any, index: number) => {
               const start = dayjs(schedule.startDateTime);
               const end = dayjs(schedule.endDateTime);
               return end.diff(start, "days") >= 1 ? (
                 <DailyAllDayScheduleBar
+                  index={index}
                   key={schedule.scheduleId}
                   scheduleId={schedule.scheduleId}
                   startDate={schedule.startDateTime}
@@ -83,11 +84,12 @@ export default function DailyCalendar({ scheduleData }: DailyCalendarProps) {
         {scheduleData.map(
           (queryResult: any) =>
             Array.isArray(queryResult.data) &&
-            queryResult.data.map((schedule: any) => {
+            queryResult.data.map((schedule: any, index: number) => {
               const start = dayjs(schedule.startDateTime);
               const end = dayjs(schedule.endDateTime);
               return end.diff(start, "days") === 0 ? (
                 <DailyScheduleBar
+                  index={index}
                   key={schedule.scheduleId}
                   scheduleId={schedule.scheduleId}
                   startDate={schedule.startDateTime}

@@ -8,6 +8,7 @@ import styles from "./DailyScheduleBar.module.scss";
 const cn = classNames.bind(styles);
 
 interface ScheduleBarType {
+  index: number;
   scheduleId: number;
   title: string;
   startDate: string;
@@ -16,6 +17,7 @@ interface ScheduleBarType {
 }
 
 export default function DailyScheduleBar({
+  index,
   scheduleId,
   title,
   startDate,
@@ -34,7 +36,7 @@ export default function DailyScheduleBar({
       style={{
         backgroundColor: crewColor,
         zIndex: zIndex,
-        left: "60px",
+        left: `${70 + index * 130}px`,
         top: `${startHour * 56 + 1}px`,
         height: `${56 * timeDiff}px`,
       }}
@@ -51,6 +53,7 @@ export default function DailyScheduleBar({
 }
 
 export function DailyAllDayScheduleBar({
+  index,
   scheduleId,
   title,
   startDate,
