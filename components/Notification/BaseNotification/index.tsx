@@ -8,6 +8,7 @@ import classNames from "classnames/bind";
 import { useAcceptInvite } from "@/hooks/useAcceptInvite";
 import { useCheckNotification } from "@/hooks/useCheckNotification";
 import { useDeleteNotification } from "@/hooks/useDeleteNotification";
+import useToast from "@/hooks/useToast";
 import { formatKoreanDate } from "@/utils/formatKoreanDateTime";
 
 import { AcceptInviteType, CheckNotificationType, NotificationInfoType } from "@/types/type";
@@ -35,6 +36,7 @@ export default function BaseNotification({ notificationData, onClick }: BaseNoti
     alarmType,
   } = notificationData;
 
+  const { successToast, errorToast } = useToast();
   const { mutate: inviteMutate } = useAcceptInvite();
   const { mutate: checkNotificationMutate } = useCheckNotification();
   const { mutate: deleteNotificationMutate } = useDeleteNotification();
@@ -75,11 +77,11 @@ export default function BaseNotification({ notificationData, onClick }: BaseNoti
 
     inviteMutate(payload, {
       onSuccess: (response) => {
-        alert("그룹 초대 수락 성공");
+        successToast("그룹에 합류하셨습니다!");
         Router.push(`/group/${response.crewId}`);
       },
-      onError: (error) => {
-        alert(error);
+      onError: () => {
+        errorToast("그룹 합류 중 에러가 발생하였습니다!");
       },
     });
   };
@@ -89,10 +91,10 @@ export default function BaseNotification({ notificationData, onClick }: BaseNoti
 
     deleteNotificationMutate(notificationId, {
       onSuccess: () => {
-        alert("알림 삭제 성공");
+        successToast("알림이 삭제되었습니다.");
       },
-      onError: (error) => {
-        alert(error);
+      onError: () => {
+        errorToast("알림 삭제에 실패하였습니다.");
       },
     });
   };

@@ -2,24 +2,26 @@ import Router, { useRouter } from "next/router";
 
 import { PAGE_PATH } from "@/constants/pagePath";
 import { useExitGroup } from "@/hooks/useExitGroup";
+import useToast from "@/hooks/useToast";
 import { useModalStore } from "@/store/useModalStore";
 
 import ConfirmModal from "../Confirm";
 
 export default function ExitGroupModal() {
   const { closeModal } = useModalStore();
+  const { successToast, errorToast } = useToast();
   const { query } = useRouter();
   const { mutate: groupExitMutate } = useExitGroup(Number(query.id));
 
   const handleGroupExitButtonClick = () => {
     groupExitMutate(undefined, {
       onSuccess: () => {
-        alert("그룹 탈출 성공 ㅇ_ㅇ!");
+        successToast("그룹에 정상적으로 나가셨습니다.");
         Router.push(PAGE_PATH.DASHBOARD);
         closeModal();
       },
-      onError: (error) => {
-        alert(error);
+      onError: () => {
+        errorToast("그룹에 나가던 중 에러가 발생하였습니다!");
       },
     });
   };
