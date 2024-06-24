@@ -43,8 +43,8 @@ export default function ScheduleCreateModal() {
     formState: { isValid },
   } = useForm<SchedulePostDataType>({
     defaultValues: {
-      startDateTime: scheduleStart?.toISOString(),
-      endDateTime: scheduleEnd?.toISOString(),
+      startDateTime: scheduleStart?.utc().add(9, "hour").format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
+      endDateTime: scheduleEnd?.utc().add(9, "hour").format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
     },
   });
   const { data: groupList } = useGetGroupList();

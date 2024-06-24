@@ -1,4 +1,4 @@
-import { useState, useId } from "react";
+import { useState, useId, Dispatch, SetStateAction } from "react";
 
 import classNames from "classnames/bind";
 
@@ -9,15 +9,27 @@ import styles from "./ColorCheckBox.module.scss";
 const cn = classNames.bind(styles);
 
 interface ColorCheckBoxProps {
+  crewId: number;
   color: GroupColorType;
   title: string;
+  setSelectedCrewIdList: Dispatch<SetStateAction<number[] | []>>;
 }
 
-export default function ColorCheckBox({ color, title }: ColorCheckBoxProps) {
+export default function ColorCheckBox({
+  crewId,
+  color,
+  title,
+  setSelectedCrewIdList,
+}: ColorCheckBoxProps) {
   const [isChecked, setIsChecked] = useState(false);
   const unquieId = useId();
 
   const handleCheckBoxChange = () => {
+    if (isChecked) {
+      setSelectedCrewIdList((prev) => prev.filter((id) => id !== crewId));
+    } else {
+      setSelectedCrewIdList((prev) => [...prev, crewId]);
+    }
     setIsChecked((prev) => !prev);
   };
 

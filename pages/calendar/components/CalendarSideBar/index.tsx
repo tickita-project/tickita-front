@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
 import Image from "next/image";
 
@@ -12,7 +12,11 @@ import CalendarGroupList from "../CalendarGroupList";
 
 const cn = classNames.bind(styles);
 
-export default function CalendarSideBar() {
+interface CalendarSideBarProps {
+  setSelectedCrewIdList: Dispatch<SetStateAction<number[] | []>>;
+}
+
+export default function CalendarSideBar({ setSelectedCrewIdList }: CalendarSideBarProps) {
   const [isCreateListVisible, setIsCreateListVisible] = useState(false);
   const scheduleContainerRef = useOutsideClick<HTMLDivElement>(() => setIsCreateListVisible(false));
 
@@ -40,7 +44,7 @@ export default function CalendarSideBar() {
       </div>
 
       <DatePicker />
-      <CalendarGroupList />
+      <CalendarGroupList setSelectedCrewIdList={setSelectedCrewIdList} />
     </aside>
   );
 }
