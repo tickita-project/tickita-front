@@ -62,7 +62,7 @@ export default function InviteForm({ inviteeList }: InviteFormProps) {
         updateSuccessToast("초대 메일이 발송되었습니다.");
         reset();
       },
-      onError: (error) => {
+      onError: () => {
         updateErrorToast("초대를 보내는 중 에러가 발생하였습니다!");
       },
     });
