@@ -50,7 +50,7 @@ export default function DailyCalendar({ scheduleData }: DailyCalendarProps) {
         {focusDate.date()} <span>{DAYS[focusDate.day()]}</span>
       </p>
       <div className={cn("all-day-schedules")}>
-        {scheduleData.map((queryResult: any) => {
+        {/* {scheduleData.map((queryResult: any) => {
           queryResult.data.map((schedule: any) => {
             const start = dayjs(schedule.startDateTime);
             const end = dayjs(schedule.endDateTime);
@@ -64,7 +64,7 @@ export default function DailyCalendar({ scheduleData }: DailyCalendarProps) {
               />
             ) : null;
           });
-        })}
+        })} */}
       </div>
       <div className={cn("time-scroll-container")} ref={dragContainerRef}>
         {HOURS.map((hour, i) => (
