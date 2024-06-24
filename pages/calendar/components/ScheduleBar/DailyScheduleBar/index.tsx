@@ -28,22 +28,21 @@ export default function DailyScheduleBar({
   const end = dayjs(endDate);
 
   const startHour = start.get("hour");
-  const endHour = end.get("hour");
   const timeDiff = end.diff(start, "hours");
-  const zIndex = 25 - timeDiff;
+  const zIndex = 2 + startHour;
   return (
     <div
       className={cn("container")}
       style={{
         backgroundColor: crewColor,
         zIndex: zIndex,
-        left: `${70 + index * 130}px`,
+        left: `${70 + index * 180}px`,
         top: `${startHour * 56 + 1}px`,
         height: `${56 * timeDiff}px`,
       }}
     >
-      <p className={cn("start")}>
-        {String(startHour).padStart(2, "0")}시 ~ {String(endHour).padStart(2, "0")}시
+      <p className={cn("time")}>
+        {start.format("HH : mm")} ~ {end.format("HH : mm")}
       </p>
       <p className={cn("title")}>{title}</p>
     </div>
@@ -62,13 +61,11 @@ export function DailyAllDayScheduleBar({
   const end = dayjs(endDate);
 
   return (
-    <>
-      <div className={cn("all-container")} style={{ backgroundColor: crewColor, zIndex: "2" }}>
-        <p className={cn("end")}>
-          ~ {end.get("M")}.{end.get("date")} 까지
-        </p>
-        <p className={cn("title")}>{title}</p>
-      </div>
-    </>
+    <div className={cn("all-container")} style={{ backgroundColor: crewColor, zIndex: "2" }}>
+      <p className={cn("end")}>
+        ~ {end.format("MM")}.{end.format("DD")} 까지
+      </p>
+      <p className={cn("title")}>{title}</p>
+    </div>
   );
 }
