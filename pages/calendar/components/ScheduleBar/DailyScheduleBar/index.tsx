@@ -61,7 +61,7 @@ export function DailyAllDayScheduleBar({
 
   return (
     <>
-      <div className={cn("all-container")} style={{ backgroundColor: crewColor }}>
+      <div className={cn("all-container")} style={{ backgroundColor: crewColor, zIndex: "2" }}>
         <p className={cn("end")}>
           ~ {end.get("M")}.{end.get("date")} 까지
         </p>

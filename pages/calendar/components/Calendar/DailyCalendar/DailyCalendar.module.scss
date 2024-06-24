@@ -19,9 +19,10 @@
   .all-day-schedules {
     width: 100%;
     height: 3.75rem;
+    padding-left: 6.25rem;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   .time-scroll-container {

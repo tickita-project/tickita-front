@@ -17,6 +17,8 @@
 
 
 .all-container {
+  width: 5rem;
+  height: 2.5rem;
   padding: 6px .625rem;
   margin-right: .25rem;
   display: flex;
@@ -26,6 +28,7 @@
   border-radius: .5rem;
   cursor: pointer;
   gap: .125rem;
+  align-self: flex-start;
 
   .end {
     @include caption2-medium($white)

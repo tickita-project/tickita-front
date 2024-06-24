@@ -50,21 +50,24 @@ export default function DailyCalendar({ scheduleData }: DailyCalendarProps) {
         {focusDate.date()} <span>{DAYS[focusDate.day()]}</span>
       </p>
       <div className={cn("all-day-schedules")}>
-        {/* {scheduleData.map((queryResult: any) => {
-          queryResult.data.map((schedule: any) => {
-            const start = dayjs(schedule.startDateTime);
-            const end = dayjs(schedule.endDateTime);
-            end.diff(start, "days") >= 1 ? (
-              <DailyAllDayScheduleBar
-                scheduleId={schedule.scheduleId}
-                startDate={schedule.startDateTime}
-                endDate={schedule.endDateTime}
-                title={schedule.title}
-                crewColor={schedule.crewInfo.labelColor}
-              />
-            ) : null;
-          });
-        })} */}
+        {scheduleData.map(
+          (queryResult: any) =>
+            Array.isArray(queryResult.data) &&
+            queryResult.data.map((schedule: any) => {
+              const start = dayjs(schedule.startDateTime);
+              const end = dayjs(schedule.endDateTime);
+              return end.diff(start, "days") >= 1 ? (
+                <DailyAllDayScheduleBar
+                  key={schedule.scheduleId}
+                  scheduleId={schedule.scheduleId}
+                  startDate={schedule.startDateTime}
+                  endDate={schedule.endDateTime}
+                  title={schedule.title}
+                  crewColor={schedule.crewInfo.labelColor}
+                />
+              ) : null;
+            }),
+        )}
       </div>
       <div className={cn("time-scroll-container")} ref={dragContainerRef}>
         {HOURS.map((hour, i) => (
