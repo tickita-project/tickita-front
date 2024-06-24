@@ -10,11 +10,17 @@ import { useDateStore } from "@/store/useDateStore";
 import { useModalStore } from "@/store/useModalStore";
 import { calculateWeekDates } from "@/utils/calculateCalendarDates";
 
+import { CrewSchedulesType } from "@/types/type";
+
 import styles from "./WeeklyCalendar.module.scss";
 
 const cn = classNames.bind(styles);
 
-export default function WeeklyCalendar() {
+interface WeeklyCalendarProps {
+  scheduleData: any;
+}
+
+export default function WeeklyCalendar({ scheduleData }: WeeklyCalendarProps) {
   const [dragStartDayIndex, setDragStartDayIndex] = useState<number | null>(null);
   const [draggedHoursIndex, setDraggedHoursIndex] = useState<number[]>([]);
   const { focusDate, setScheduleStart, setScheduleEnd } = useDateStore(

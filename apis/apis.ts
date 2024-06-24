@@ -12,6 +12,7 @@ import {
   CheckNotificationType,
   SchedulePostDataType,
   UpcomingSchedule,
+  CrewSchedulesType,
 } from "@/types/type";
 
 import { imageRequestInstance, instance } from "./axios";
@@ -115,6 +116,20 @@ export const createSchedule = async (data: SchedulePostDataType) => {
 
 export const getUpcomingSchedule = async (): Promise<UpcomingSchedule[]> => {
   const res = await instance.get("/dashboard/upcoming-events");
+  return res.data;
+};
+
+export const getCrewSchedules = async (
+  crewId: number,
+  startDate: string,
+  endDate: string,
+): Promise<CrewSchedulesType> => {
+  const res = await instance.get(`/schedule/filter/${crewId}`, {
+    params: {
+      startDate,
+      endDate,
+    },
+  });
   return res.data;
 };
 

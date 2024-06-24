@@ -10,7 +10,7 @@ import { basicInstance, setContext } from "@/apis/axios";
 import { PAGE_PATH } from "@/constants/pagePath";
 import loadingLottie from "@/public/images/login-loading.json";
 
-import styles from "./Kakao.module.scss";
+import styles from "./Google.module.scss";
 
 const cn = classNames.bind(styles);
 
@@ -23,7 +23,7 @@ interface ResponseType {
   refreshTokenExpireAt: string;
 }
 
-interface KakaoProps {
+interface GoogleProps {
   id: number;
   isComplete: boolean;
 }
@@ -32,13 +32,13 @@ const LottiePlayer = dynamic(() => import("react-lottie-player"), { ssr: false }
 
 export async function getServerSideProps(
   context: GetServerSidePropsContext,
-): Promise<GetServerSidePropsResult<KakaoProps>> {
+): Promise<GetServerSidePropsResult<GoogleProps>> {
   setContext(context);
 
   const { code } = context.query;
 
   try {
-    const res = await basicInstance.get("/login/oauth/kakao", {
+    const res = await basicInstance.get("/login/oauth2/code/google", {
       params: {
         code,
       },
@@ -69,7 +69,7 @@ export async function getServerSideProps(
   }
 }
 
-export default function Kakao({ id, isComplete }: KakaoProps) {
+export default function Google({ id, isComplete }: GoogleProps) {
   const router = useRouter();
 
   useEffect(() => {
