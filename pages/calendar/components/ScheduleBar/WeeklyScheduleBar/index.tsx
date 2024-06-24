@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import classNames from "classnames/bind";
 import dayjs from "dayjs";
 
 import { GroupColorType } from "@/types/type";
@@ -28,22 +28,20 @@ export default function WeeklyOneDayScheduleBar({
   const end = dayjs(endDate);
   const startHour = start.get("hour");
   const timeDiff = end.diff(start, "hours");
-
+  const zIndex = 25 - timeDiff;
   return (
     <div
       className={cn("container")}
       style={{
         backgroundColor: crewColor,
-        left: "10px",
+        left: "15px",
+        zIndex: zIndex,
         top: `${startHour * 80 + 1}px`,
         height: `${80 * timeDiff}px`,
       }}
     >
-      <p className={cn("start")}>
-        {start.format("hh")}.{start.format("mm")}
-      </p>
-      <p className={cn("end")}>
-        ~ {end.format("hh")}.{end.format("mm")}
+      <p className={cn("time")}>
+        {start.format("hh")}.{start.format("mm")} ~ {end.format("hh")}.{end.format("mm")}
       </p>
       <p className={cn("title")}>{title}</p>
     </div>

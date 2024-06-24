@@ -13,6 +13,7 @@ import { calculateWeekDates } from "@/utils/calculateCalendarDates";
 import { CrewSchedulesType } from "@/types/type";
 
 import styles from "./WeeklyCalendar.module.scss";
+import WeeklyOneDayScheduleBar from "../../ScheduleBar/WeeklyScheduleBar";
 
 const cn = classNames.bind(styles);
 
@@ -92,6 +93,25 @@ export default function WeeklyCalendar({ scheduleData }: WeeklyCalendarProps) {
                   onPointerUp={handleDragEnd}
                 />
               ))}
+              {scheduleData.map(
+                (queryResult: any) =>
+                  Array.isArray(queryResult.data) &&
+                  queryResult.data.map((schedule: any, index: number) => {
+                    const start = dayjs(schedule.startDateTime);
+                    const end = dayjs(schedule.endDateTime);
+                    return start.day() === date.day() && end.diff(start, "days") === 0 ? (
+                      <WeeklyOneDayScheduleBar
+                        index={index}
+                        key={schedule.scheduleId}
+                        scheduleId={schedule.scheduleId}
+                        startDate={schedule.startDateTime}
+                        endDate={schedule.endDateTime}
+                        title={schedule.title}
+                        crewColor={schedule.crewInfo.labelColor}
+                      />
+                    ) : null;
+                  }),
+              )}
             </div>
           ))}
         </div>
