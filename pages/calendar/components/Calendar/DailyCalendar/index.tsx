@@ -1,6 +1,7 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 import classNames from "classnames/bind";
+import dayjs from "dayjs";
 import { useShallow } from "zustand/react/shallow";
 
 import { DAYS, HOURS } from "@/constants/calendarConstants";
@@ -10,6 +11,7 @@ import { useDateStore } from "@/store/useDateStore";
 import { useModalStore } from "@/store/useModalStore";
 
 import styles from "./DailyCalendar.module.scss";
+import { DailyAllDayScheduleBar } from "../../ScheduleBar/DailyScheduleBar";
 
 const cn = classNames.bind(styles);
 
@@ -38,12 +40,32 @@ export default function DailyCalendar({ scheduleData }: DailyCalendarProps) {
 
   const { draggedIndex } = useDragSelect(dragContainerRef, handleDragEnd);
 
+  useEffect(() => {
+    console.log(scheduleData);
+  }, []);
+
   return (
     <div className={cn("container")}>
       <p className={cn("date")}>
         {focusDate.date()} <span>{DAYS[focusDate.day()]}</span>
       </p>
-      <div className={cn("all-day-schedules")}></div>
+      <div className={cn("all-day-schedules")}>
+        {scheduleData.map((queryResult: any) => {
+          queryResult.data.map((schedule: any) => {
+            const start = dayjs(schedule.startDateTime);
+            const end = dayjs(schedule.endDateTime);
+            end.diff(start, "days") >= 1 ? (
+              <DailyAllDayScheduleBar
+                scheduleId={schedule.scheduleId}
+                startDate={schedule.startDateTime}
+                endDate={schedule.endDateTime}
+                title={schedule.title}
+                crewColor={schedule.crewInfo.labelColor}
+              />
+            ) : null;
+          });
+        })}
+      </div>
       <div className={cn("time-scroll-container")} ref={dragContainerRef}>
         {HOURS.map((hour, i) => (
           <div className={cn("time-block")} key={hour}>

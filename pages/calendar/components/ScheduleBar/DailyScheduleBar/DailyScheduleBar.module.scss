@@ -5,12 +5,13 @@
   cursor: pointer;
   position: absolute;
 
+  .start,
   .end {
-    @include caption2-medium($white)
+    @include caption2-medium($white);
   }
 
   .title {
-    @include caption1-medium($white)
+    @include caption1-medium($white);
   }
 }
 
