@@ -2,9 +2,11 @@ import Image from "next/image";
 
 import { useQuery } from "@tanstack/react-query";
 import classNames from "classnames/bind";
+import dayjs from "dayjs";
 
 import { getScheduleDetail } from "@/apis/apis";
 import { scheduleKey } from "@/constants/queryKey";
+import { useGetUserInfo } from "@/hooks/useGetUserInfo";
 import { useModalStore } from "@/store/useModalStore";
 
 import styles from "./ScheduleDetailModal.module.scss";
@@ -13,6 +15,7 @@ const cn = classNames.bind(styles);
 
 export default function ScheduleDetailModal() {
   const { closeModal, data: scheduleId } = useModalStore();
+  const { data: userInfo } = useGetUserInfo();
 
   const { data } = useQuery({
     queryKey: scheduleKey.detail(scheduleId),
@@ -21,6 +24,8 @@ export default function ScheduleDetailModal() {
 
   const place = data?.location ? data.location : "정해진 장소가 없어요.";
   const description = data?.description ? data.description : "입력된 설명이 없어요.";
+  const start = dayjs(data?.startDateTime).format("YYYY.MM.DD HH:mm");
+  const end = dayjs(data?.endDateTime).format("YYYY.MM.DD HH:mm");
 
   return (
     <div className={cn("container")}>
@@ -37,6 +42,43 @@ export default function ScheduleDetailModal() {
       </div>
       <div className={cn("contents")}>
         <h1 className={cn("title")}>{data?.title}</h1>
+        <div className={cn("time-place")}>
+          <div className={cn("time-container")}>
+            <p className={cn("label")}>시간</p>
+            <p className={cn("time")}>
+              {start} ~ {end}
+            </p>
+          </div>
+          <div className={cn("place-container")}>
+            <p className={cn("label")}>장소</p>
+            <p className={cn("place")}>
+              <Image
+                src="/icons/location-icon.svg"
+                alt="장소"
+                width={20}
+                height={20}
+                className={cn("place-icon")}
+              />
+              {place}
+            </p>
+          </div>
+        </div>
+        <div className={cn("description")}>
+          <p className={cn("label")}>추가 내용</p>
+          <p className={cn("text")}>{description}</p>
+        </div>
+        <div className={cn("participants-container")}>
+          <p className={cn("label")}>참가자</p>
+          <div className={cn("participants")}>
+            {data && data.participants && data.participants.length >= 2 ? (
+              data.participants
+                .filter((participant) => participant.accountId !== userInfo?.accountId)
+                .map((participant) => <p key={participant.accountId}>{participant.nickName}</p>)
+            ) : (
+              <p>참가자가 혼자입니다.</p>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

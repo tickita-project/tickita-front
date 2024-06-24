@@ -61,5 +61,75 @@
       align-self: stretch;
       @include heading4-medium;
     }
+
+    .time-place {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      .time-container,
+      .place-container {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        align-self: stretch;
+
+        .label {
+          @include headline2-bold;
+        }
+
+        .time,
+        .place {
+          padding: 8px 4px;
+          display: flex;
+          align-items: center;
+          text-align: center;
+          gap: 4px;
+          @include body2-medium($blue500);
+
+          .place-icon {
+            filter: invert(31%) sepia(32%) saturate(7322%) hue-rotate(224deg) brightness(102%) contrast(104%);
+          }
+        }
+      }
+    }
+
+    .description {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: .5rem;
+
+      .label {
+        @include headline2-bold;
+      }
+
+      .text {
+        display: flex;
+        padding: .75rem 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: .25rem;
+        align-self: stretch;
+        border-radius: 8px;
+        background: $gray100;
+        @include body2-regular;
+      }
+    }
+
+    .participants-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: .375rem;
+
+      .label {
+        @include headline2-bold;
+      }
+
+      .participants {}
+    }
   }
 }
