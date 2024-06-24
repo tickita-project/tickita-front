@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { useRouter } from "next/router";
 import { GetServerSidePropsContext } from "next/types";
 
-import { QueryClient, dehydrate } from "@tanstack/react-query";
+import { QueryClient, dehydrate, useQueries } from "@tanstack/react-query";
 import classNames from "classnames/bind";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
@@ -14,25 +14,25 @@ import DailyCalendar from "./components/Calendar/DailyCalendar";
 import MonthlyCalendar from "./components/Calendar/MonthlyCalendar";
 import WeeklyCalendar from "./components/Calendar/WeeklyCalendar";
 import CalendarSideBar from "./components/CalendarSideBar";
-import { getGroupList, getUserInfo } from "@/apis/apis";
+import { getCrewSchedules, getGroupList, getUserInfo } from "@/apis/apis";
 import { setContext } from "@/apis/axios";
 import Header from "@/components/Header";
 import MetaData from "@/components/MetaData";
-import { groupKey, userInfoKey } from "@/constants/queryKey";
+import { groupKey, scheduleKey, userInfoKey } from "@/constants/queryKey";
 import { useDateStore } from "@/store/useDateStore";
 import { calculateMonthDates } from "@/utils/calculateCalendarDates";
 
-import { CalendarType } from "@/types/type";
+import { CalendarType, CrewSchedulesType } from "@/types/type";
 
 import styles from "./Calendar.module.scss";
 
 const cn = classNames.bind(styles);
 
 dayjs.extend(utc);
+const queryClient = new QueryClient();
 
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
   setContext(context);
-  const queryClient = new QueryClient();
 
   try {
     await queryClient.prefetchQuery({ queryKey: groupKey.lists(), queryFn: getGroupList });
@@ -50,13 +50,18 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
 
 export default function CalendarPage() {
   const [calendarType, setCalendarType] = useState<CalendarType>("월");
+  const [selectedCrewIdList, setSelectedCrewIdList] = useState<number[] | []>([]);
+  const [query, setQuery] = useState<{ startDate: string; endDate: string }>({
+    startDate: "",
+    endDate: "",
+  });
   const router = useRouter();
   const { focusDate } = useDateStore(useShallow((state) => ({ focusDate: state.focusDate })));
 
   useEffect(() => {
     let startDate = null;
     let endDate = null;
-    let query = null;
+
     switch (calendarType) {
       case "월":
         const days = calculateMonthDates(focusDate);
@@ -73,26 +78,41 @@ export default function CalendarPage() {
         break;
     }
 
-    query = {
+    setQuery({
       startDate: startDate?.format("YYYY-MM-DDTHH:mm:ss.SSS"),
       endDate: endDate?.format("YYYY-MM-DDTHH:mm:ss.SSS"),
-    };
+    });
 
     router.replace({ query });
+    queryClient.invalidateQueries({ queryKey: scheduleKey.lists() });
   }, [calendarType, focusDate]);
+
+  const data = useQueries({
+    queries: selectedCrewIdList.map((crewId) => {
+      const filter = {
+        crewId: crewId,
+        startDate: query.startDate,
+        endDate: query.endDate,
+      };
+      return {
+        queryKey: scheduleKey.list(filter),
+        queryFn: () => getCrewSchedules(crewId, query.startDate, query.endDate),
+      };
+    }),
+  });
 
   return (
     <>
       <MetaData title="내 캘린더 | 티키타" />
       <Header />
       <div className={cn("container")}>
-        <CalendarSideBar />
+        <CalendarSideBar setSelectedCrewIdList={setSelectedCrewIdList} />
 
         <main>
           <CalendarHeader calendarType={calendarType} setCalendarType={setCalendarType} />
-          {calendarType === "월" && <MonthlyCalendar />}
-          {calendarType === "주" && <WeeklyCalendar />}
-          {calendarType === "일" && <DailyCalendar />}
+          {calendarType === "월" && <MonthlyCalendar scheduleData={data} />}
+          {calendarType === "주" && <WeeklyCalendar scheduleData={data} />}
+          {calendarType === "일" && <DailyCalendar scheduleData={data} />}
         </main>
       </div>
     </>
