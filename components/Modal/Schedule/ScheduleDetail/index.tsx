@@ -73,9 +73,13 @@ export default function ScheduleDetailModal() {
             {data && data.participants && data.participants.length >= 2 ? (
               data.participants
                 .filter((participant) => participant.accountId !== userInfo?.accountId)
-                .map((participant) => <p key={participant.accountId}>{participant.nickName}</p>)
+                .map((participant) => (
+                  <p className={cn("participant")} key={participant.accountId}>
+                    {participant.nickName}
+                  </p>
+                ))
             ) : (
-              <p>참가자가 혼자입니다.</p>
+              <p className={cn("alone")}>참가자가 혼자입니다.</p>
             )}
           </div>
         </div>
