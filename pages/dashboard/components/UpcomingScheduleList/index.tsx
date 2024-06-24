@@ -13,7 +13,6 @@ const cn = classNames.bind(styles);
 export default function UpcomingScheduleList() {
   const { data } = useGetUpcomingSchedule();
   const upcomingScheduleList = data ?? [];
-  console.log(data);
 
   return (
     <div className={cn("container")}>

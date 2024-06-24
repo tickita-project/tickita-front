@@ -59,7 +59,6 @@ export default function ProfileEditForm({ userInfo }: ProfileEditFormProps) {
       window.location.reload();
     } catch (error) {
       if (error instanceof AxiosError) {
-        console.error(error);
         alert("프로필 수정을 완료하지 못했습니다."); // TODO: 추후 toast로 변경 예정
       }
     }
