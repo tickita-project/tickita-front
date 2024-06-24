@@ -25,31 +25,48 @@ export default function DailyScheduleBar({
   const start = dayjs(startDate);
   const end = dayjs(endDate);
 
-  const dayDiff = end.diff(start, "days");
-  if (dayDiff >= 1) {
-    return (
-      <div className={cn("allday-container")} style={{ backgroundColor: crewColor }}>
-        <p className={cn("end")}></p>
+  const startHour = start.get("hour");
+  const timeDiff = end.diff(start, "hours");
+  const zIndex = 25 - timeDiff;
+  return (
+    <div
+      className={cn("container")}
+      style={{
+        backgroundColor: crewColor,
+        zIndex: zIndex,
+        left: "10px",
+        top: `${startHour * 56 + 1}`,
+      }}
+    >
+      <p className={cn("start")}>
+        {start.get("date")}.{start.get("hour")}
+      </p>
+      <p className={cn("end")}>
+        ~ {end.get("date")}.{end.get("hour")}
+      </p>
+      <p className={cn("title")}>{title}</p>
+    </div>
+  );
+}
+
+export function DailyAllDayScheduleBar({
+  scheduleId,
+  title,
+  startDate,
+  endDate,
+  crewColor,
+}: ScheduleBarType) {
+  const start = dayjs(startDate);
+  const end = dayjs(endDate);
+
+  return (
+    <>
+      <div className={cn("all-container")} style={{ backgroundColor: crewColor }}>
+        <p className={cn("end")}>
+          ~ {end.get("M")}.{end.get("date")} 까지
+        </p>
         <p className={cn("title")}>{title}</p>
       </div>
-    );
-  } else {
-    const startHour = start.get("hour");
-    const timeDiff = end.diff(start, "hours");
-    const zIndex = 25 - timeDiff;
-    return (
-      <div
-        className={cn("container")}
-        style={{
-          backgroundColor: crewColor,
-          zIndex: zIndex,
-          left: "10px",
-          top: `${startHour * 56 + 1}`,
-        }}
-      >
-        <p className={cn("end")}></p>
-        <p className={cn("title")}>{title}</p>
-      </div>
-    );
-  }
+    </>
+  );
 }

@@ -4,10 +4,18 @@
   outline: none;
   cursor: pointer;
   position: absolute;
+
+  .end {
+    @include caption2-medium($white)
+  }
+
+  .title {
+    @include caption1-medium($white)
+  }
 }
 
 
-.allday-container {
+.all-container {
   padding: 6px .625rem;
   margin-right: .25rem;
   display: flex;

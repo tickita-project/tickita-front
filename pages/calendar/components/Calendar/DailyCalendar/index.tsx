@@ -9,8 +9,6 @@ import useDragSelect from "@/hooks/useDragSelect";
 import { useDateStore } from "@/store/useDateStore";
 import { useModalStore } from "@/store/useModalStore";
 
-import { CrewSchedulesType } from "@/types/type";
-
 import styles from "./DailyCalendar.module.scss";
 
 const cn = classNames.bind(styles);
