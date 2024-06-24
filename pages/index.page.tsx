@@ -60,6 +60,7 @@ const COORDINATION_STEP = [
 
 export default function Home() {
   const [clickedStep, setClickedStep] = useState(1);
+  const [wheelStep, setWheelStep] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const timer = useRef<any>(null);
 
@@ -81,6 +82,7 @@ export default function Home() {
   );
 
   const upWheel = () => {
+    setWheelStep((prev) => prev - 1);
     if (containerRef.current) {
       containerRef.current.scrollBy({
         left: 0,
@@ -91,6 +93,7 @@ export default function Home() {
   };
 
   const downWheel = () => {
+    setWheelStep((prev) => prev + 1);
     if (containerRef.current) {
       containerRef.current.scrollBy({
         left: 0,
@@ -123,7 +126,7 @@ export default function Home() {
         </nav>
       </header>
 
-      <div ref={containerRef} className={cn("scroll-container")}>
+      <main ref={containerRef} className={cn("scroll-container")}>
         <section className={cn("section", "first-section")}>
           <div className={cn("slogan")}>
             <div className={cn("slogan-line")}>
@@ -151,23 +154,26 @@ export default function Home() {
           <Link href={PAGE_PATH.SIGN_IN} className={cn("login-button")}>
             가입하기
           </Link>
-
           <div className={cn("next-arrow-container")}>
             티키타가 궁금하다면?
             <Image
-              src="icons/landing-arrow.svg"
+              src="icons/arrow-bottom.svg"
               alt="화살표"
-              width={60}
+              width={65}
               height={8}
               className={cn("next-arrow")}
             />
           </div>
+
+          {wheelStep === 0 && <div className={cn("wave")} />}
+          {wheelStep === 0 && <div className={cn("wave")} />}
+          {wheelStep === 0 && <div className={cn("wave")} />}
         </section>
 
         <section className={cn("section", "second-section")}>
           <div className={cn("point-letter")}>
             <Image src="icons/landing-point-icon.svg" alt="포인트" width={80} height={8} />
-            <p className={cn("text")}>
+            <p className={cn("text", { "text-effect": wheelStep === 1 })}>
               사람이 많을수록 번거로운 일정 잡기
               <br />
               모두가 겪는 문제에 집중했어요
@@ -176,7 +182,7 @@ export default function Home() {
 
           <div className={cn("card-container")}>
             <div className={cn("green-card-container")}>
-              <div className={cn("card", "green-card")}>
+              <div className={cn("card", "green-card", { "green-card-effect": wheelStep === 1 })}>
                 <h3 className={cn("card-number")}>01</h3>
                 <p className={cn("card-text")}>
                   멤버들끼리 진행 사항 공유가 잘 되지 않아서 <span>소통이 잘 안되는 것 같아요</span>
@@ -185,7 +191,7 @@ export default function Home() {
               <p className={cn("card-bottom-text")}>원활한 소통</p>
             </div>
             <div className={cn("orange-card-container")}>
-              <div className={cn("card", "orange-card")}>
+              <div className={cn("card", "orange-card", { "orange-card-effect": wheelStep === 1 })}>
                 <h3 className={cn("card-number")}>02</h3>
                 <p className={cn("card-text")}>
                   모두의 의견을 들어봐야 해서 만남이 필요한데, 사람이 많으니{" "}
@@ -195,7 +201,7 @@ export default function Home() {
               <p className={cn("card-bottom-text")}>약속 잡기</p>
             </div>
             <div className={cn("pink-card-container")}>
-              <div className={cn("card", "pink-card")}>
+              <div className={cn("card", "pink-card", { "pink-card-effect": wheelStep === 1 })}>
                 <h3 className={cn("card-number")}>03</h3>
                 <p className={cn("card-text")}>
                   그룹 활동도 여러 개 하고 있고 개인 일정도 많아서 뭐가{" "}
@@ -250,6 +256,7 @@ export default function Home() {
               <br />
               클릭 몇 번으로 일정을 잡아보세요
             </h2>
+            <h3 className={cn("info-text")}>이미지를 클릭하여 각 단계를 확인해 보세요!</h3>
           </div>
           <div className={cn("accordion-container")}>
             {COORDINATION_STEP.map((item) => (
@@ -287,7 +294,7 @@ export default function Home() {
           </div>
           <LottiePlayer animationData={calendarLottie} loop play className={cn("video")} />
         </section>
-      </div>
+      </main>
     </>
   );
 }
