@@ -87,7 +87,7 @@ export default function CalendarPage() {
     queryClient.invalidateQueries({ queryKey: scheduleKey.lists() });
   }, [calendarType, focusDate]);
 
-  const data: CrewSchedulesType | [] = useQueries({
+  const data = useQueries({
     queries: selectedCrewIdList.map((crewId) => {
       const filter = {
         crewId: crewId,

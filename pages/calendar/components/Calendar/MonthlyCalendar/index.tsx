@@ -20,7 +20,7 @@ import styles from "./MonthlyCalendar.module.scss";
 const cn = classNames.bind(styles);
 
 interface MonthlyCalendarProps {
-  scheduleData: CrewSchedulesType | [];
+  scheduleData: any;
 }
 
 export default function MonthlyCalendar({ scheduleData }: MonthlyCalendarProps) {
@@ -66,6 +66,9 @@ export default function MonthlyCalendar({ scheduleData }: MonthlyCalendarProps) 
 
   const { draggedIndex } = useDragSelect(dragContainerRef, handleDragEnd);
   const scrollRef = useScroll<HTMLDivElement>(handleScrollDownDebounced, handleScrollUpDebounced);
+  useEffect(() => {
+    console.log(scheduleData);
+  }, []);
 
   return (
     <div className={cn("container")} ref={scrollRef}>

@@ -17,7 +17,7 @@ import styles from "./WeeklyCalendar.module.scss";
 const cn = classNames.bind(styles);
 
 interface WeeklyCalendarProps {
-  scheduleData: CrewSchedulesType | [];
+  scheduleData: any;
 }
 
 export default function WeeklyCalendar({ scheduleData }: WeeklyCalendarProps) {

@@ -16,7 +16,7 @@ import styles from "./DailyCalendar.module.scss";
 const cn = classNames.bind(styles);
 
 interface DailyCalendarProps {
-  scheduleData: CrewSchedulesType | [];
+  scheduleData: any;
 }
 
 export default function DailyCalendar({ scheduleData }: DailyCalendarProps) {
