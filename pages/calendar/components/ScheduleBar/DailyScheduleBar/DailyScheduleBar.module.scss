@@ -2,7 +2,7 @@
   width: 10.625rem;
   border-radius: 0.75rem;
   padding-top: 0.65rem;
-  border-top: 1px solid $gray300;
+  border-top: 2px solid $gray300;
   outline: none;
   cursor: pointer;
   position: absolute;
@@ -20,7 +20,7 @@
   }
 
   &:hover {
-    filter: brightness(1.1);
+    filter: brightness(1.2);
     transition: 0.75s;
   }
 }

@@ -50,8 +50,9 @@
   .weekly-all-day-container {
     width: 100%;
     height: 7.5rem;
+    padding-left: 5rem;
     border-bottom: 1px solid $gray400;
-
+    position: relative;
   }
 
   .time-scroll-container {

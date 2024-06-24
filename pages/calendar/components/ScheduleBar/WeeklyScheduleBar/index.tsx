@@ -1,5 +1,5 @@
 import classNames from "classnames/bind";
-import dayjs from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 
 import { GroupColorType } from "@/types/type";
 
@@ -46,24 +46,47 @@ export default function WeeklyOneDayScheduleBar({
   );
 }
 
+interface WeeklyScheduleBarType extends ScheduleBarType {
+  crewIndex: number;
+  elementWidth: number;
+  weekStartDate: Dayjs;
+}
+
 export function WeeklyScheduleBar({
   scheduleId,
   title,
   startDate,
   endDate,
   crewColor,
-}: ScheduleBarType) {
+  crewIndex,
+  elementWidth,
+  weekStartDate,
+}: WeeklyScheduleBarType) {
   const start = dayjs(startDate);
   const end = dayjs(endDate);
-
   const zIndex = 2 + start.day();
+  const weekEnd = weekStartDate.add(6, "day");
+
+  const adjustedStart = start.isBefore(weekStartDate) ? weekStartDate : start;
+  const adjustedEnd = end.isAfter(weekEnd) ? weekEnd : end;
+  //칸수
+  const daysOccupied = adjustedEnd.diff(adjustedStart, "day");
+  const width = `${daysOccupied * elementWidth}px`;
 
   return (
-    <div className={cn("all-continaer")} style={{ backgroundColor: crewColor, zIndex: zIndex }}>
-      <div className={cn("time")}>
-        <p className={cn("start")}>{start.format("MM.DD HH:mm")}</p>
-        <p className={cn("end")}>~ {end.format("MM.DD HH:mm")}</p>
-      </div>
+    <div
+      className={cn("all-container")}
+      style={{
+        backgroundColor: crewColor,
+        zIndex: zIndex,
+        top: `${crewIndex * 27 + 1}px`,
+        left: `${adjustedStart.day() * elementWidth + 100}px`,
+        width: width,
+      }}
+    >
+      <p className={cn("time")}>
+        {start.format("MM.DD")} ~ {end.format("MM.DD")}
+      </p>
       <p className={cn("title")}>{title}</p>
     </div>
   );
