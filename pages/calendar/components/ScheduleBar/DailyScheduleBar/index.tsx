@@ -16,7 +16,6 @@ interface ScheduleBarType {
   crewColor: GroupColorType;
 }
 
-//일간스케줄바
 export default function DailyScheduleBar({
   index,
   scheduleId,
