@@ -1,10 +1,11 @@
 .container {
   width: 18.75rem;
   border-radius: .75rem;
-  border: 2px solid $gray900;
+
   outline: none;
   cursor: pointer;
   position: absolute;
+  opacity: 0.75;
 
   .start,
   .end {
