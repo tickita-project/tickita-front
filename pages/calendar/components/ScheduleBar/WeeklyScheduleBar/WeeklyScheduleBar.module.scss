@@ -1,0 +1,22 @@
+.container {
+  width: calc(100% - 1.375rem);
+  border-radius: .75rem;
+
+  outline: none;
+  cursor: pointer;
+  position: absolute;
+  opacity: 0.75;
+
+  .start,
+  .end {
+    @include caption2-medium($white);
+  }
+
+  .title {
+    @include caption1-medium($white);
+  }
+
+  &:hover {
+    filter: brightness(1.1);
+  }
+}
