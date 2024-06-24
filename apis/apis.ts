@@ -1,3 +1,5 @@
+import { promises } from "dns";
+
 import { InviteDataType } from "@/pages/group/[id]/components/InviteForm";
 
 import {
@@ -13,6 +15,7 @@ import {
   SchedulePostDataType,
   UpcomingSchedule,
   CrewSchedulesType,
+  ScheduleDetailType,
 } from "@/types/type";
 
 import { imageRequestInstance, instance } from "./axios";
@@ -135,5 +138,10 @@ export const getCrewSchedules = async (
 
 export const deleteAccountInfo = async () => {
   const res = await instance.delete("/account-info", {});
+  return res.data;
+};
+
+export const getScheduleDetail = async (scheduleId: number): Promise<ScheduleDetailType> => {
+  const res = await instance.get(`/schedule/${scheduleId}`);
   return res.data;
 };

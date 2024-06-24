@@ -13,8 +13,6 @@ import { useDateStore } from "@/store/useDateStore";
 import { useModalStore } from "@/store/useModalStore";
 import { calculateMonthDates } from "@/utils/calculateCalendarDates";
 
-import { CrewSchedulesType } from "@/types/type";
-
 import styles from "./MonthlyCalendar.module.scss";
 
 const cn = classNames.bind(styles);
