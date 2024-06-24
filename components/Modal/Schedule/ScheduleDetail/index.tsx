@@ -33,6 +33,7 @@ export default function ScheduleDetailModal() {
         <div className={cn("group")}>
           <div className={cn("color")} style={{ backgroundColor: data?.crewInfo.labelColor }}></div>
           <h2 className={cn("name")}>{data?.crewInfo.crewName}</h2>
+          {data?.coordinate && <p className={cn("coordinated")}>조율된 일정</p>}
         </div>
         <div className={cn("buttons")}>
           <button className={cn("close-button")} type="button" onClick={closeModal}>

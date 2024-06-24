@@ -53,6 +53,15 @@
       .name {
         @include caption1-medium($gray700);
       }
+
+      .coordinated {
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.25rem;
+        background-color: $red100;
+        color: $red800;
+        font-size: 0.875rem;
+        font-weight: 500;
+      }
     }
 
     .buttons {
