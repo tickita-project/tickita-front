@@ -12,7 +12,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
     const REFRESH_TOKEN_EXPIRE_AT = new Date(refreshTokenExpireAt).toUTCString();
 
     res.setHeader("Set-Cookie", [
-      `ACCESS_TOKEN=${accessToken}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-age=300`,
+      `ACCESS_TOKEN=${accessToken}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-age=1800`,
       `REFRESH_TOKEN=${refreshToken}; Path=/; HttpOnly; Secure; SameSite=Strict; Expires=${REFRESH_TOKEN_EXPIRE_AT}`,
     ]);
 
