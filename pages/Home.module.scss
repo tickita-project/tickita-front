@@ -1,5 +1,5 @@
 .header {
-  border-bottom: 1px solid $gray200;
+  border-bottom: 1px solid $gray400;
   background-color: $white;
 
   .nav {
@@ -22,17 +22,70 @@
   }
 }
 
+@keyframes gradient {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+@keyframes wave {
+  2% {
+    transform: translateX(10);
+  }
+
+  25% {
+    transform: translateX(-25%);
+  }
+
+  50% {
+    transform: translateX(-50%);
+  }
+
+  75% {
+    transform: translateX(-25%);
+  }
+
+  100% {
+    transform: translateX(10);
+  }
+}
+
 .scroll-container {
   height: calc(100vh - 80px);
   overflow: hidden;
 }
 
+@keyframes bounceX {
+  0%,
+  100% {
+    transform: translateX(3px);
+  }
+  50% {
+    transform: translateX(0);
+  }
+}
+
 .first-section {
   @include flex-col-center;
+  padding-bottom: 7rem;
   gap: 1.5rem;
   height: calc(100vh - 80px);
   position: relative;
-  background: linear-gradient(to bottom right, transparent, rgba(0, 122, 255, 0.05));
+  background: linear-gradient(
+    315deg,
+    rgba(211, 244, 255, 0.6) 33%,
+    rgba(198, 226, 255, 1) 66%,
+    rgba(211, 253, 255, 1) 100%
+  );
+  animation: gradient 10s ease infinite;
+  background-size: 400% 400%;
+  background-attachment: fixed;
 
   .slogan {
     font-size: 3.5rem;
@@ -48,6 +101,7 @@
     .calendar-icon {
       margin-left: 0.2rem;
       margin-right: 0.5rem;
+      animation: bounceX 1.5s infinite ease-in-out;
     }
 
     .tickita-logo {
@@ -71,12 +125,37 @@
     gap: 1rem;
     position: absolute;
     bottom: 2rem;
-    color: $gray700;
+    color: $gray800;
     font-weight: 700;
     line-height: 150%;
+    z-index: 999;
 
     .next-arrow {
       animation: bounce 2s infinite;
+    }
+  }
+
+  .wave {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 1500% 1500% 0 0;
+    position: fixed;
+    bottom: 0;
+    width: 200%;
+    height: 12em;
+    animation: wave 10s -3s linear infinite;
+    transform: translate3d(0, 0, 0);
+    bottom: 0;
+    left: 0;
+    border: 1px solid $gray200;
+
+    &:nth-of-type(2) {
+      bottom: -1.25em;
+      animation: wave 18s linear reverse infinite;
+    }
+
+    &:nth-of-type(3) {
+      bottom: -2.5em;
+      animation: wave 20s -1s reverse infinite;
     }
   }
 }
@@ -86,6 +165,7 @@
   flex-direction: column;
   justify-content: center;
   height: calc(100vh - 80px);
+  background: linear-gradient(to top, #dfe9f3 0%, white 100%);
 
   .point-letter {
     @include flex-col-center;
@@ -98,14 +178,17 @@
       line-height: 130%;
       letter-spacing: -1px;
       text-align: center;
-      animation: slideUp 1s ease-out forwards;
+    }
+
+    .text-effect {
+      animation: slideUp 1.5s ease-in;
     }
   }
 
   .card-container {
     @include flex-row-center;
     gap: 59px;
-    padding-top: 5.5rem;
+    padding-top: 3.5rem;
     background-image: url("../public/images/postit-line.svg");
     background-repeat: no-repeat;
 
@@ -127,6 +210,10 @@
       .green-card {
         background-image: url("../public/images/green-postit.svg");
       }
+
+      .green-card-effect {
+        animation: slideUp 1s ease-in;
+      }
     }
 
     .orange-card-container {
@@ -137,6 +224,10 @@
       .orange-card {
         background-image: url("../public/images/orange-postit.svg");
       }
+
+      .orange-card-effect {
+        animation: slideUp 1.5s ease-in;
+      }
     }
 
     .pink-card-container {
@@ -146,6 +237,10 @@
 
       .pink-card {
         background-image: url("../public/images/pink-postit.svg");
+      }
+
+      .pink-card-effect {
+        animation: slideUp 1.25s ease-in;
       }
     }
 
@@ -179,7 +274,7 @@
 
 .key-point-container {
   @include flex-col-center;
-  gap: 1.5rem;
+  gap: 1rem;
 
   .label {
     padding: 0.25rem 0.5rem;
@@ -198,6 +293,11 @@
     line-height: 130%;
     letter-spacing: -0.0625rem;
     text-align: center;
+  }
+
+  .info-text {
+    color: $gray700;
+    font-weight: 500;
   }
 }
 
@@ -252,7 +352,7 @@
 
 .fourth-section {
   @include flex-col-center;
-  gap: 5rem;
+  gap: 2.5rem;
   height: calc(100vh - 80px);
 
   .label {
@@ -349,7 +449,7 @@
 
 .fifth-section {
   @include flex-col-center;
-  gap: 5rem;
+  gap: 2.5rem;
   height: calc(100vh - 80px);
   background-color: $gray900;
 
@@ -363,24 +463,18 @@
 
 @keyframes bounce {
   0%,
-  20%,
-  50%,
-  80%,
   100% {
-    transform: translateY(-4px);
+    transform: translateY(0);
   }
-  40% {
-    transform: translateY(0px);
-  }
-  60% {
-    transform: translateY(-3.5px);
+  50% {
+    transform: translateY(-10px);
   }
 }
 
 @keyframes slideUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;

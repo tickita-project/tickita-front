@@ -22,7 +22,7 @@ import { groupKey, scheduleKey, userInfoKey } from "@/constants/queryKey";
 import { useDateStore } from "@/store/useDateStore";
 import { calculateMonthDates } from "@/utils/calculateCalendarDates";
 
-import { CalendarType, CrewSchedulesType } from "@/types/type";
+import { CalendarType } from "@/types/type";
 
 import styles from "./Calendar.module.scss";
 
