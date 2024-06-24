@@ -22,12 +22,6 @@ export const notificationKey = {
   lists: () => [...notificationKey.all, "list"] as const,
 } as const;
 
-interface ScheduleFilterType {
-  crewId: number;
-  startDate: string;
-  endDate: string;
-}
-
 export const scheduleKey = {
   all: ["schedule"] as const, // 전체 관리
   upcoming: () => [...scheduleKey.all, "upcoming"] as const, // 다가오는 일정
