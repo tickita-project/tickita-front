@@ -35,7 +35,7 @@ export default function WeeklyOneDayScheduleBar({
         left: "15px",
         zIndex: zIndex,
         top: `${startHour * 80 + 1}px`,
-        height: `${80 * timeDiff}px`,
+        height: `${80 * timeDiff - 5}px`,
       }}
     >
       <p className={cn("time")}>
@@ -52,4 +52,19 @@ export function WeeklyScheduleBar({
   startDate,
   endDate,
   crewColor,
-}: ScheduleBarType) {}
+}: ScheduleBarType) {
+  const start = dayjs(startDate);
+  const end = dayjs(endDate);
+
+  const zIndex = 2 + start.day();
+
+  return (
+    <div className={cn("all-continaer")} style={{ backgroundColor: crewColor, zIndex: zIndex }}>
+      <div className={cn("time")}>
+        <p className={cn("start")}>{start.format("MM.DD HH:mm")}</p>
+        <p className={cn("end")}>~ {end.format("MM.DD HH:mm")}</p>
+      </div>
+      <p className={cn("title")}>{title}</p>
+    </div>
+  );
+}

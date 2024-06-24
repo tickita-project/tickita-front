@@ -78,9 +78,9 @@ export default function DailyCalendar({ scheduleData }: DailyCalendarProps) {
           </div>
         ))}
         {scheduleData.map(
-          (queryResult: any) =>
+          (queryResult: any, index: number) =>
             Array.isArray(queryResult.data) &&
-            queryResult.data.map((schedule: any, index: number) => {
+            queryResult.data.map((schedule: any) => {
               const start = dayjs(schedule.startDateTime);
               const end = dayjs(schedule.endDateTime);
               return end.diff(start, "days") === 0 ? (
