@@ -12,6 +12,7 @@ import Input from "@/components/Input";
 import TitleBox from "@/components/TitleBox";
 import { CREW_NAME_SCHEMA } from "@/constants/schema";
 import { useEditGroupInfo } from "@/hooks/useEditGroupInfo";
+import useToast from "@/hooks/useToast";
 
 import { GroupInfoType } from "@/types/type";
 
@@ -43,6 +44,7 @@ export default function GroupForm({ groupInfo, isCurrentUserLeader }: GroupFormP
   });
   const selectColor = watch("labelColor");
 
+  const { successToast, errorToast } = useToast();
   const { mutate } = useEditGroupInfo(groupInfo.crewId);
 
   useEffect(() => {
@@ -54,10 +56,10 @@ export default function GroupForm({ groupInfo, isCurrentUserLeader }: GroupFormP
     // 그룹 정보 변경 로직 추가 예정
     mutate(formData, {
       onSuccess: () => {
-        alert("그룹 정보가 변경되었습니다.");
+        successToast("그룹 정보가 변경되었습니다.");
       },
       onError: (error) => {
-        alert(error);
+        errorToast("그룹 정보를 변경하던 중 에러가 발생하였습니다!");
       },
     });
   };

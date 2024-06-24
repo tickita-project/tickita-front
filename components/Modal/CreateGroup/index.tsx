@@ -11,6 +11,7 @@ import Input from "@/components/Input";
 import { GROUP_COLOR_LIST } from "@/constants/groupColorList";
 import { CREW_NAME_SCHEMA } from "@/constants/schema";
 import { useCreateGroup } from "@/hooks/useCreateGroup";
+import useToast from "@/hooks/useToast";
 import { useModalStore } from "@/store/useModalStore";
 
 import { CreateGroupDataType } from "@/types/type";
@@ -36,6 +37,7 @@ export default function CreateGroupModal() {
     resolver: zodResolver(createGroupSchema),
   });
   const { closeModal } = useModalStore();
+  const { errorToast } = useToast();
   const { mutate, isPending } = useCreateGroup();
   const router = useRouter();
   const selectColor = watch("labelColor");
@@ -46,8 +48,8 @@ export default function CreateGroupModal() {
         closeModal();
         router.push(`/group/${response.crewId}`); // 만든 그룹 상세 페이지로 이동
       },
-      onError: (error) => {
-        alert(error);
+      onError: () => {
+        errorToast("그룹 생성에 실패하였습니다!");
       },
     });
   };

@@ -150,3 +150,5 @@ export interface ScheduleFilterType {
   startDate: string;
   endDate: string;
 }
+
+export type ToastType = "success" | "error" | "warning" | "info" | "pending";

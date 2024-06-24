@@ -1,0 +1,8 @@
+.toast-box {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 50%;
+  bottom: 1.5%;
+  transform: translate(-50%, 0);
+}
