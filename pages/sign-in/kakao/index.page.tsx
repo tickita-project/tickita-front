@@ -84,6 +84,7 @@ export default function Kakao({ id, isComplete }: KakaoProps) {
       router.push({ pathname: PAGE_PATH.PROFILE_SETUP, query: { id } }, PAGE_PATH.PROFILE_SETUP);
       return;
     }
+
     router.push(PAGE_PATH.DASHBOARD);
   }, [isComplete]);
 
