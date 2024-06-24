@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import { GetServerSidePropsContext } from "next/types";
 
-import { QueryClient, dehydrate } from "@tanstack/react-query";
+import { QueryClient, dehydrate, useQueries } from "@tanstack/react-query";
 import classNames from "classnames/bind";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
@@ -14,7 +14,7 @@ import DailyCalendar from "./components/Calendar/DailyCalendar";
 import MonthlyCalendar from "./components/Calendar/MonthlyCalendar";
 import WeeklyCalendar from "./components/Calendar/WeeklyCalendar";
 import CalendarSideBar from "./components/CalendarSideBar";
-import { getGroupList, getUserInfo } from "@/apis/apis";
+import { getCrewSchedules, getGroupList, getUserInfo } from "@/apis/apis";
 import { setContext } from "@/apis/axios";
 import Header from "@/components/Header";
 import MetaData from "@/components/MetaData";
@@ -51,9 +51,9 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
 export default function CalendarPage() {
   const [calendarType, setCalendarType] = useState<CalendarType>("월");
   const [selectedCrewIdList, setSelectedCrewIdList] = useState<number[] | []>([]);
-  const [query, setQuery] = useState<{ startDate: string | null; endDate: string | null }>({
-    startDate: null,
-    endDate: null,
+  const [query, setQuery] = useState<{ startDate: string; endDate: string }>({
+    startDate: "",
+    endDate: "",
   });
   const router = useRouter();
   const { focusDate } = useDateStore(useShallow((state) => ({ focusDate: state.focusDate })));
@@ -87,6 +87,20 @@ export default function CalendarPage() {
     queryClient.invalidateQueries({ queryKey: scheduleKey.lists() });
   }, [calendarType, focusDate]);
 
+  const data = useQueries({
+    queries: selectedCrewIdList.map((crewId) => {
+      const filter = {
+        crewId: crewId,
+        startDate: query.startDate,
+        endDate: query.endDate,
+      };
+      return {
+        queryKey: scheduleKey.list(filter),
+        queryFn: () => getCrewSchedules(crewId, query.startDate, query.endDate),
+      };
+    }),
+  });
+
   return (
     <>
       <MetaData title="내 캘린더 | 티키타" />
@@ -96,7 +110,13 @@ export default function CalendarPage() {
 
         <main>
           <CalendarHeader calendarType={calendarType} setCalendarType={setCalendarType} />
-          {calendarType === "월" && <MonthlyCalendar selectedCrewIdList={selectedCrewIdList} />}
+          {calendarType === "월" && (
+            <MonthlyCalendar
+              selectedCrewIdList={selectedCrewIdList}
+              startDate={query.startDate}
+              endDate={query.endDate}
+            />
+          )}
           {calendarType === "주" && <WeeklyCalendar selectedCrewIdList={selectedCrewIdList} />}
           {calendarType === "일" && <DailyCalendar selectedCrewIdList={selectedCrewIdList} />}
         </main>

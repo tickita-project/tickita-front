@@ -132,3 +132,28 @@ export interface CheckNotificationType {
   notificationId: number;
   alarmType: AlarmType;
 }
+
+export interface CrewInfo {
+  crewId: number;
+  crewName: string;
+  labelColor: string;
+}
+
+export interface Participant {
+  accountId: number;
+  nickName: string;
+}
+
+export interface CrewScheduleType {
+  scheduleId: number;
+  title: string;
+  startDateTime: string;
+  endDateTime: string;
+  location: string;
+  description: string;
+  crewInfo: CrewInfo;
+  participants: Participant[];
+  coordinate: boolean;
+}
+
+export interface CrewSchedulesType extends Array<CrewScheduleType> {}

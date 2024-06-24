@@ -13,16 +13,26 @@ import { useDateStore } from "@/store/useDateStore";
 import { useModalStore } from "@/store/useModalStore";
 import { calculateMonthDates } from "@/utils/calculateCalendarDates";
 
+import { CrewSchedulesType } from "@/types/type";
+
 import styles from "./MonthlyCalendar.module.scss";
 
 const cn = classNames.bind(styles);
 
 interface MonthlyCalendarProps {
   selectedCrewIdList: number[] | [];
+  startDate: string | null;
+  endDate: string | null;
 }
 
-export default function MonthlyCalendar({ selectedCrewIdList }: MonthlyCalendarProps) {
+export default function MonthlyCalendar({
+  selectedCrewIdList,
+  startDate,
+  endDate,
+}: MonthlyCalendarProps) {
   const [newSelected, setNewSelected] = useState<number>();
+  const [selectedList, setSelectedList] = useState(selectedCrewIdList);
+  const [scheduleDataList, setScheduleDataList] = useState<CrewSchedulesType | []>([]);
   const dragContainerRef = useRef<HTMLDivElement>(null);
   const { focusDate, setFocusDate, setViewDate, setScheduleStart, setScheduleEnd } = useDateStore(
     useShallow((state) => ({
@@ -66,7 +76,15 @@ export default function MonthlyCalendar({ selectedCrewIdList }: MonthlyCalendarP
   const { draggedIndex } = useDragSelect(dragContainerRef, handleDragEnd);
   const scrollRef = useScroll<HTMLDivElement>(handleScrollDownDebounced, handleScrollUpDebounced);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    // 새로 추가된 crewId를 찾아 newSelected에 설정
+    const newCrewId = selectedCrewIdList.find((id) => !selectedList.includes(id as never));
+    if (newCrewId) {
+      setNewSelected(newCrewId);
+      console.log("새로추가된 id", newCrewId);
+    }
+    setSelectedList(selectedCrewIdList);
+  }, [selectedCrewIdList, selectedList]);
 
   return (
     <div className={cn("container")} ref={scrollRef}>
