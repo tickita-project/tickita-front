@@ -33,6 +33,7 @@
     align-items: flex-start;
     align-self: stretch;
     overflow-y: auto;
+    position: relative;
 
     &::-webkit-scrollbar {
       width: 0.75rem;

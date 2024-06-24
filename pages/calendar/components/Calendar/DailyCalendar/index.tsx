@@ -11,7 +11,7 @@ import { useDateStore } from "@/store/useDateStore";
 import { useModalStore } from "@/store/useModalStore";
 
 import styles from "./DailyCalendar.module.scss";
-import { DailyAllDayScheduleBar } from "../../ScheduleBar/DailyScheduleBar";
+import DailyScheduleBar, { DailyAllDayScheduleBar } from "../../ScheduleBar/DailyScheduleBar";
 
 const cn = classNames.bind(styles);
 
@@ -80,6 +80,24 @@ export default function DailyCalendar({ scheduleData }: DailyCalendarProps) {
             />
           </div>
         ))}
+        {scheduleData.map(
+          (queryResult: any) =>
+            Array.isArray(queryResult.data) &&
+            queryResult.data.map((schedule: any) => {
+              const start = dayjs(schedule.startDateTime);
+              const end = dayjs(schedule.endDateTime);
+              return end.diff(start, "days") === 0 ? (
+                <DailyScheduleBar
+                  key={schedule.scheduleId}
+                  scheduleId={schedule.scheduleId}
+                  startDate={schedule.startDateTime}
+                  endDate={schedule.endDateTime}
+                  title={schedule.title}
+                  crewColor={schedule.crewInfo.labelColor}
+                />
+              ) : null;
+            }),
+        )}
       </div>
     </div>
   );
