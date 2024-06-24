@@ -22,7 +22,7 @@ import { groupKey, scheduleKey, userInfoKey } from "@/constants/queryKey";
 import { useDateStore } from "@/store/useDateStore";
 import { calculateMonthDates } from "@/utils/calculateCalendarDates";
 
-import { CalendarType } from "@/types/type";
+import { CalendarType, CrewSchedulesType } from "@/types/type";
 
 import styles from "./Calendar.module.scss";
 
@@ -87,7 +87,7 @@ export default function CalendarPage() {
     queryClient.invalidateQueries({ queryKey: scheduleKey.lists() });
   }, [calendarType, focusDate]);
 
-  const data = useQueries({
+  const data: CrewSchedulesType | [] = useQueries({
     queries: selectedCrewIdList.map((crewId) => {
       const filter = {
         crewId: crewId,
