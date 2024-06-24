@@ -3,6 +3,8 @@
  * {@link https://tkdodo.eu/blog/effective-react-query-keys}
  */
 
+import { ScheduleFilterType } from "@/types/type";
+
 export const groupKey = {
   all: ["group"] as const,
   lists: () => [...groupKey.all, "list"] as const,

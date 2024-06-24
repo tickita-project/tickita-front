@@ -87,7 +87,7 @@ export interface CancelInviteType {
 export interface AcceptInviteType {
   crewId: number;
   notificationId: number;
-  crewAccept: "ACCEPT";
+  inviteType: "ACCEPT";
 }
 
 export interface VoteNotificationType {
@@ -131,6 +131,24 @@ export interface NotificationDataType {
 export interface CheckNotificationType {
   notificationId: number;
   alarmType: AlarmType;
+}
+
+export interface UpcomingSchedule {
+  scheduleId: number;
+  title: string;
+  startDateTime: string;
+  remainTime: string;
+  crewInfo: {
+    crewId: number;
+    crewName: string;
+    labelColor: GroupColorType;
+  };
+}
+
+export interface ScheduleFilterType {
+  crewId: number;
+  startDate: string;
+  endDate: string;
 }
 
 export interface CrewInfo {

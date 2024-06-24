@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 
 import classNames from "classnames/bind";
+import { throttle } from "lodash";
 
 import MetaData from "@/components/MetaData";
 import { PAGE_PATH } from "@/constants/pagePath";
@@ -59,6 +60,55 @@ const COORDINATION_STEP = [
 
 export default function Home() {
   const [clickedStep, setClickedStep] = useState(1);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const timer = useRef<any>(null);
+
+  const handleWheelEvent: EventListener = throttle(
+    (e: Event) => {
+      const wheelEvent = e as unknown as WheelEvent;
+      if (timer.current) {
+        return;
+      }
+
+      if (wheelEvent.deltaY > 0) {
+        downWheel();
+        return;
+      }
+      upWheel();
+    },
+    1200,
+    { leading: true, trailing: false },
+  );
+
+  const upWheel = () => {
+    if (containerRef.current) {
+      containerRef.current.scrollBy({
+        left: 0,
+        top: -window.innerHeight + 80,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  const downWheel = () => {
+    if (containerRef.current) {
+      containerRef.current.scrollBy({
+        left: 0,
+        top: window.innerHeight - 80,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("wheel", handleWheelEvent);
+    document.body.classList.add("scrollbar-hidden");
+
+    return () => {
+      window.removeEventListener("wheel", handleWheelEvent);
+      document.body.classList.remove("scrollbar-hidden");
+    };
+  }, []);
 
   return (
     <>
@@ -73,7 +123,7 @@ export default function Home() {
         </nav>
       </header>
 
-      <div className={cn("scroll-container")}>
+      <div ref={containerRef} className={cn("scroll-container")}>
         <section className={cn("section", "first-section")}>
           <div className={cn("slogan")}>
             <div className={cn("slogan-line")}>
