@@ -6,7 +6,6 @@ import { GroupColorType } from "@/types/type";
 import styles from "./WeeklyScheduleBar.module.scss";
 
 interface ScheduleBarType {
-  index: number;
   scheduleId: number;
   title: string;
   startDate: string;
@@ -17,7 +16,6 @@ interface ScheduleBarType {
 const cn = classNames.bind(styles);
 
 export default function WeeklyOneDayScheduleBar({
-  index,
   scheduleId,
   title,
   startDate,
@@ -28,7 +26,7 @@ export default function WeeklyOneDayScheduleBar({
   const end = dayjs(endDate);
   const startHour = start.get("hour");
   const timeDiff = end.diff(start, "hours");
-  const zIndex = 25 - timeDiff;
+  const zIndex = startHour + 2;
   return (
     <div
       className={cn("container")}
@@ -48,4 +46,10 @@ export default function WeeklyOneDayScheduleBar({
   );
 }
 
-export function WeeklyScheduleBar({}) {}
+export function WeeklyScheduleBar({
+  scheduleId,
+  title,
+  startDate,
+  endDate,
+  crewColor,
+}: ScheduleBarType) {}

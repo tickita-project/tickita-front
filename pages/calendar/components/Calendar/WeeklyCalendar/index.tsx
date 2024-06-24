@@ -69,6 +69,7 @@ export default function WeeklyCalendar({ scheduleData }: WeeklyCalendarProps) {
           </div>
         ))}
       </div>
+      <div className={cn("weekly-all-day-container")}></div>
       <div className={cn("time-scroll-container")}>
         <div className={cn("label-container")}>
           {HOURS.map((hour) => (
@@ -96,12 +97,11 @@ export default function WeeklyCalendar({ scheduleData }: WeeklyCalendarProps) {
               {scheduleData.map(
                 (queryResult: any) =>
                   Array.isArray(queryResult.data) &&
-                  queryResult.data.map((schedule: any, index: number) => {
+                  queryResult.data.map((schedule: any) => {
                     const start = dayjs(schedule.startDateTime);
                     const end = dayjs(schedule.endDateTime);
                     return start.day() === date.day() && end.diff(start, "days") === 0 ? (
                       <WeeklyOneDayScheduleBar
-                        index={index}
                         key={schedule.scheduleId}
                         scheduleId={schedule.scheduleId}
                         startDate={schedule.startDateTime}

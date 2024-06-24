@@ -6,6 +6,7 @@
   cursor: pointer;
   position: absolute;
   opacity: 0.85;
+  border-top: 1px solid $gray300;
 
   .time {
     @include caption2-medium($white);
