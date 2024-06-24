@@ -13,7 +13,11 @@ import styles from "./DailyCalendar.module.scss";
 
 const cn = classNames.bind(styles);
 
-export default function DailyCalendar() {
+interface DailyCalendarProps {
+  scheduleData: any;
+}
+
+export default function DailyCalendar({ scheduleData }: DailyCalendarProps) {
   const dragContainerRef = useRef<HTMLDivElement>(null);
   const { focusDate, setScheduleStart, setScheduleEnd } = useDateStore(
     useShallow((state) => ({

@@ -110,9 +110,9 @@ export default function CalendarPage() {
 
         <main>
           <CalendarHeader calendarType={calendarType} setCalendarType={setCalendarType} />
-          {calendarType === "월" && <MonthlyCalendar />}
-          {calendarType === "주" && <WeeklyCalendar />}
-          {calendarType === "일" && <DailyCalendar />}
+          {calendarType === "월" && <MonthlyCalendar scheduleData={data} />}
+          {calendarType === "주" && <WeeklyCalendar scheduleData={data} />}
+          {calendarType === "일" && <DailyCalendar scheduleData={data} />}
         </main>
       </div>
     </>

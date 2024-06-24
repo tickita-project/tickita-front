@@ -17,7 +17,11 @@ import styles from "./MonthlyCalendar.module.scss";
 
 const cn = classNames.bind(styles);
 
-export default function MonthlyCalendar() {
+interface MonthlyCalendarProps {
+  scheduleData: any;
+}
+
+export default function MonthlyCalendar({ scheduleData }: MonthlyCalendarProps) {
   const dragContainerRef = useRef<HTMLDivElement>(null);
   const { focusDate, setFocusDate, setViewDate, setScheduleStart, setScheduleEnd } = useDateStore(
     useShallow((state) => ({
