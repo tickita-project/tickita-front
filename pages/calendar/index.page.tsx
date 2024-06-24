@@ -110,15 +110,9 @@ export default function CalendarPage() {
 
         <main>
           <CalendarHeader calendarType={calendarType} setCalendarType={setCalendarType} />
-          {calendarType === "월" && (
-            <MonthlyCalendar
-              selectedCrewIdList={selectedCrewIdList}
-              startDate={query.startDate}
-              endDate={query.endDate}
-            />
-          )}
-          {calendarType === "주" && <WeeklyCalendar selectedCrewIdList={selectedCrewIdList} />}
-          {calendarType === "일" && <DailyCalendar selectedCrewIdList={selectedCrewIdList} />}
+          {calendarType === "월" && <MonthlyCalendar />}
+          {calendarType === "주" && <WeeklyCalendar />}
+          {calendarType === "일" && <DailyCalendar />}
         </main>
       </div>
     </>
