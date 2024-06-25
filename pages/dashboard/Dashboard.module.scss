@@ -1,0 +1,18 @@
+.content {
+  margin: 2rem 2rem 0;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 2rem;
+
+  .calendar {
+    width: 22rem;
+    height: 20rem;
+  }
+
+  .box {
+    display: flex;
+    justify-content: right;
+    gap: 1rem;
+  }
+}

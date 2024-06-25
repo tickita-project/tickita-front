@@ -1,0 +1,160 @@
+/*
+사용 방법
+폰트 패밀리는 전역으로 설정되어 있어서 수정하지 않아도 됩니다.
+폰트 웨이트만 사용하고자 하는 웨이트에 맞게 설정하면 됩니다
+*/
+
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 400;
+  font-style: normal;
+  src:
+    url("https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Regular.woff2") format("woff2"),
+    url("https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Regular.woff") format("woff");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 500;
+  font-style: normal;
+  src:
+    url("https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Medium.woff2") format("woff2"),
+    url("https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Medium.woff") format("woff");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 600;
+  font-style: normal;
+  src:
+    url("https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-SemiBold.woff2") format("woff2"),
+    url("https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-SemiBold.woff") format("woff");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 700;
+  font-style: normal;
+  src:
+    url("https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Bold.woff2") format("woff2"),
+    url("https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Bold.woff") format("woff");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 800;
+  font-style: normal;
+  src:
+    url("https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-ExtraBold.woff2") format("woff2"),
+    url("https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-ExtraBold.woff") format("woff");
+  font-display: swap;
+}
+
+@mixin caption2-medium($color: black) {
+  color: $color;
+  text-align: center;
+  /* Caption 2/Medium */
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 127.3%;
+  /* 14.003px */
+  letter-spacing: -0.0172rem;
+}
+
+@mixin caption1-medium($color: black) {
+  color: $color;
+  text-align: center;
+  /* Caption 1/Medium */
+  font-size: .75rem;
+  font-weight: 500;
+  line-height: 133.4%;
+  /* 16.008px */
+  letter-spacing: -0.3px;
+}
+
+@mixin body2-medium($color: black) {
+  color: $color;
+  text-align: center;
+
+  /* Body 2/Medium */
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 142.9%;
+  /* 20.006px */
+  letter-spacing: -0.0219rem;
+}
+
+@mixin heading2-medium($color: black) {
+  color: $color;
+
+  /* Heading 2/Medium */
+  font-size: 1.75rem;
+  font-weight: 500;
+  line-height: 135.8%;
+  /* 38.024px */
+  letter-spacing: -0.0437rem;
+}
+
+@mixin heading4-medium($color: black) {
+  color: $color;
+
+  /* Heading 4/Medium */
+  font-size: 1.375rem;
+  font-weight: 500;
+  line-height: 136.4%;
+  /* 30.008px */
+  letter-spacing: -0.0344rem;
+}
+
+@mixin headline2-bold($color: black) {
+  color: $color;
+  text-align: center;
+
+  /* Headline 2/Bold */
+  font-size: 1.0625rem;
+  font-weight: 700;
+  line-height: 141.2%;
+  /* 24.004px */
+  letter-spacing: -0.0266rem;
+}
+
+@mixin headline2-medium($color: black) {
+  color: $color;
+  text-align: center;
+
+  /* Headline 2/Medium */
+  font-size: 1.0625rem;
+  font-weight: 500;
+  line-height: 141.2%;
+  /* 24.004px */
+  letter-spacing: -0.0266rem;
+}
+
+@mixin body2-regular($color: black) {
+  color: $color;
+  text-align: center;
+
+  /* Body 2/Regular */
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 142.9%;
+  /* 20.006px */
+  letter-spacing: -0.0219rem;
+}
+
+
+@mixin body2-bold($color: black) {
+  color: $color;
+  text-align: center;
+
+  /* Body 2/Bold */
+  font-size: .875rem;
+  font-weight: 700;
+  line-height: 142.9%;
+  /* 20.006px */
+  letter-spacing: -0.0219rem;
+}

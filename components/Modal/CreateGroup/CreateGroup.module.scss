@@ -1,0 +1,75 @@
+.container {
+  width: 32rem;
+  padding: 1.5rem;
+  background-color: $white;
+  transform: translate(-50%, -50%);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  border-radius: 16px;
+
+  .modal-header {
+    display: flex;
+    justify-content: right;
+    margin-bottom: 3.5rem;
+
+    .modal-close {
+      padding: 0;
+      width: 10%;
+      height: 1.875rem;
+      transition: transform 0.5s ease;
+
+      &:hover {
+        transform: rotate(180deg);
+      }
+    }
+
+    .modal-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      width: 80%;
+      text-align: center;
+      padding-top: 20px;
+    }
+  }
+
+  .create-group-form {
+    padding: 0 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+
+    .label {
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      padding: 0 0.25rem;
+      display: inline-block;
+
+      .asterisk {
+        color: $red500;
+      }
+    }
+
+    .button-box {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+
+      .create-button {
+        height: 4rem;
+        padding: 0.75rem 3rem;
+        border-radius: 12px;
+        background-color: $blue500;
+        color: $white;
+        font-weight: 700;
+        font-size: 1.25rem;
+
+        &:disabled {
+          color: $gray600;
+          background-color: $gray300;
+        }
+      }
+    }
+  }
+}

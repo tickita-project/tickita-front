@@ -1,3 +1,56 @@
 {
-  "extends": ["next/core-web-vitals", "plugin:prettier/recommended"]
+  "plugins": ["import"],
+  "extends": ["next/core-web-vitals", "plugin:prettier/recommended"],
+  "rules": {
+    "import/order": [
+      "error",
+      {
+        "newlines-between": "always",
+        "groups": ["builtin", "external", "internal", "unknown"],
+        "pathGroups": [
+          {
+            "pattern": "react",
+            "group": "builtin"
+          },
+          {
+            "pattern": "next",
+            "group": "builtin"
+          },
+          {
+            "pattern": "react/**",
+            "group": "builtin",
+            "position": "after"
+          },
+          {
+            "pattern": "next/**",
+            "group": "builtin",
+            "position": "after"
+          },
+          {
+            "pattern": "./components/**",
+            "group": "internal"
+          },
+          {
+            "pattern": "@/types/**",
+            "group": "unknown"
+          },
+          {
+            "pattern": "./types/**",
+            "group": "unknown"
+          },
+          {
+            "pattern": "*.scss",
+            "group": "unknown",
+            "position": "after"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": [],
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ],
+    "react-hooks/exhaustive-deps": "off"
+  }
 }

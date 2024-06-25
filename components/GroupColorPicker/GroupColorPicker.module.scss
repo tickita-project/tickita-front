@@ -1,0 +1,66 @@
+@keyframes opacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.color-box {
+  width: 100%;
+  height: 10.7rem;
+  padding: 1.25rem;
+  border-radius: 12px;
+  border: 1px solid $gray200;
+  background-color: $blue50;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+
+  .color-item {
+    width: 3.2rem;
+    height: 3.2rem;
+    position: relative;
+
+    input {
+      display: none;
+    }
+
+    .group-color {
+      display: inline-block;
+      border-radius: 6px;
+      width: 100%;
+      height: 100%;
+
+      &:hover {
+        transform: scale(1.1);
+        transition: 0.75s;
+      }
+    }
+
+    .select {
+      position: absolute;
+      top: 0.35rem;
+      left: 0.4rem;
+      animation: opacity 0.5s forwards;
+    }
+  }
+
+  &.read-only {
+    background-color: $gray300;
+
+    .color-item {
+      cursor: not-allowed;
+    }
+
+    .group-color {
+      opacity: 0.4;
+
+      &:hover {
+        transform: scale(1);
+      }
+    }
+  }
+}

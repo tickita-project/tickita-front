@@ -10,16 +10,16 @@ const nextConfig = {
     // @import 사용 시 styles 폴더를 기본으로 설정
     includePaths: [path.join(__dirname, "styles")],
     // 매번 가져올 파일 추가
-    prependData: `@import "styles/global.scss";`,
+    prependData: `@import "styles/globals.scss";`,
   },
-  // images: {
-  //   remotePatterns: [
-  //     {
-  //       protocol: "https",
-  //       hostname: "s3 도메인 추가 예정",
-  //     },
-  //   ],
-  // },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "tickita-bucket.s3.ap-northeast-2.amazonaws.com",
+      },
+    ],
+  },
 };
 
 export default nextConfig;

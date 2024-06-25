@@ -1,0 +1,30 @@
+// 글씨 길어질 때 ... 처리하는 mixin입니다 매개변수로 줄 수를 적용할 수 있습니다.
+@mixin text-overflow-ellipsis($line-clamp: 1) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $line-clamp;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin text-drag-disable {
+  -webkit-user-select: none;
+  /* Safari */
+  -ms-user-select: none;
+  /* IE 10 and IE 11 */
+  user-select: none;
+  /* Standard syntax */
+}
+
+@mixin flex-row-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-col-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

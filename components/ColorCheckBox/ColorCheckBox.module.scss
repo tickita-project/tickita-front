@@ -1,0 +1,25 @@
+.box {
+  width: 13rem;
+  height: 2.75rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+
+  .group-checkbox {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 0.25rem;
+    appearance: none;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+
+  .group-title {
+    color: $black;
+    font-weight: 500;
+    letter-spacing: -0.02188rem;
+    @include text-overflow-ellipsis(1);
+    flex-shrink: 1;
+    cursor: pointer;
+  }
+}

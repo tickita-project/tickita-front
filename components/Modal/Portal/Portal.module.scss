@@ -1,0 +1,9 @@
+.background {
+  position: fixed;
+  background-color: rgba($color: #000000, $alpha: 0.3);
+  top: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+}

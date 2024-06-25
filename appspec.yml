@@ -1,0 +1,18 @@
+version: 0.0
+os: linux
+
+files:
+  - source: /
+    destination: /home/ubuntu/calander-front
+    overwrite: yes
+file_exists_behavior: OVERWRITE
+permissions:
+  - object: /home/ubuntu/calander-front
+    owner: ubuntu
+    group: ubuntu
+    mode: 755
+hooks:
+  ApplicationStart:
+    - location: deploy.sh
+      timeout: 1500 # 30분
+      runas: ubuntu
