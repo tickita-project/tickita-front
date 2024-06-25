@@ -24,7 +24,7 @@ export default function ScheduleCreateModal() {
   const [groupMembers, setGroupMembers] = useState<GroupMemberInfoType[] | null>(null);
   const [selectedGroup, setSelectedGroup] = useState<GroupType | null>(null);
 
-  const { closeModal } = useModalStore();
+  const { closeModal, data: resetDrag } = useModalStore();
   const { scheduleStart, scheduleEnd, setScheduleStart, setScheduleEnd } = useDateStore(
     useShallow((state) => ({
       scheduleStart: state.scheduleStart,
@@ -67,6 +67,9 @@ export default function ScheduleCreateModal() {
     closeModal();
     setScheduleStart(null);
     setScheduleEnd(null);
+    if (resetDrag) {
+      resetDrag();
+    }
   };
 
   const handleCreateSchedule = async (data: any) => {
@@ -77,6 +80,9 @@ export default function ScheduleCreateModal() {
     mutate(newScheduleData, {
       onSuccess: () => {
         closeModal();
+        if (resetDrag) {
+          resetDrag();
+        }
       },
       onError: (error) => {
         alert(error);

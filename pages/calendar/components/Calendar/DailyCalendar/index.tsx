@@ -35,10 +35,10 @@ export default function DailyCalendar({ scheduleData }: DailyCalendarProps) {
     const endHour = draggedIndex[draggedIndex.length - 1] + 1;
     setScheduleStart(focusDate.hour(startHour).minute(0).second(0));
     setScheduleEnd(focusDate.hour(endHour).minute(0).second(0));
-    openModal(MODAL_TYPE.SCHEDULE_CREATE);
+    openModal(MODAL_TYPE.SCHEDULE_CREATE, () => setDraggedIndex([]));
   };
 
-  const { draggedIndex } = useDragSelect(dragContainerRef, handleDragEnd);
+  const { draggedIndex, setDraggedIndex } = useDragSelect(dragContainerRef, handleDragEnd);
 
   return (
     <div className={cn("container")}>
