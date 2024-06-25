@@ -70,6 +70,8 @@ npm run dev
 
 **프론트엔드 팀은 컨벤션을 세세하게 정해 코드의 일관성을 높이고 코드 리뷰 시간도 단축할 수 있게 노력하였어요!**
 
+<br/>
+
 <details>
     <summary> <strong>코드 컨벤션</strong> </summary>
   <br/>
@@ -263,15 +265,10 @@ npm run dev
 
 </details>
 
+<br/>
+
 **그 외 기술 스택 선정, Github Actions 등 다양한 프로젝트 초기 설정의 내용을 보고 싶다면 아래 링크를 참고해 주세요.**
 
 **<a href="https://brick-william-6f5.notion.site/FE-Convention-dd234c493a0e41c5a652e097313db1f1">👉 FE Convention 보러가기</a>**
 
-<br>
 
-## 💻 프로젝트 내용(페이지 소개)
-
-### 로그인 페이지
-
-**카카오 로그인, 구글 로그인을 지원하고 있습니다.**
-![title](https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/taskify/profile_image/4-19_2992_1719207251120.png)
