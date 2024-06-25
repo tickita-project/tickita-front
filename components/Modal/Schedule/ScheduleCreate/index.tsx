@@ -36,7 +36,6 @@ export default function ScheduleCreateModal() {
 
   const {
     watch,
-    reset,
     register,
     handleSubmit,
     setValue,
@@ -45,6 +44,7 @@ export default function ScheduleCreateModal() {
     defaultValues: {
       startDateTime: scheduleStart?.utc().add(9, "hour").format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
       endDateTime: scheduleEnd?.utc().add(9, "hour").format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
+      participants: [],
     },
   });
   const { data: groupList } = useGetGroupList();
