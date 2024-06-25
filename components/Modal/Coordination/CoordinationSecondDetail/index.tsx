@@ -80,8 +80,8 @@ const CoordinationSecondModal: React.FC<CoordinationSecondModalProps> = ({
     setDisabledCells(newDisabledCells);
   };
 
-  const makeVoteDateLists = (groups: Group) => {
-    return groups.map((group) => {
+  const makeVoteDateLists = (groups: any) => {
+    return groups.map((group: any) => {
       const [year, month, day] = group.day.split("-").map(Number);
       const { earliestHour, latestHour } = calculateEarliestAndLatestTime(group.hours);
 
