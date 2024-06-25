@@ -101,4 +101,3 @@ export default function ScheduleDetailModal() {
     </div>
   );
 }
-//<div className={cn("")}></div>

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 import classNames from "classnames/bind";
 import dayjs from "dayjs";
@@ -59,10 +59,10 @@ export default function MonthlyCalendar({ scheduleData }: MonthlyCalendarProps) 
     const endDate = dates[draggedIndex[draggedIndex.length - 1]].add(24, "hour");
     setScheduleStart(startDate);
     setScheduleEnd(endDate);
-    openModal(MODAL_TYPE.SCHEDULE_CREATE);
+    openModal(MODAL_TYPE.SCHEDULE_CREATE, () => setDraggedIndex([]));
   };
 
-  const { draggedIndex } = useDragSelect(dragContainerRef, handleDragEnd);
+  const { draggedIndex, setDraggedIndex } = useDragSelect(dragContainerRef, handleDragEnd);
   const scrollRef = useScroll<HTMLDivElement>(handleScrollDownDebounced, handleScrollUpDebounced);
   useEffect(() => {
     console.log(scheduleData);
