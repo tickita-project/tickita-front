@@ -24,6 +24,7 @@ export interface ProfileSetupType {
   accountId: number;
   nickName: string;
   phoneNumber: string | null;
+  imgUrl: string | null;
 }
 
 export interface CreateGroupDataType {
@@ -45,14 +46,15 @@ export interface GroupMemberInfoType {
   accountId: number;
   nickName: string;
   email: string;
-  imageUrl: string | null;
+  image: string | null;
 }
 
 export interface GroupInfoType {
   crewId: number;
   crewName: string;
   labelColor: GroupColorType;
-  crewMemberInfoResponses: GroupMemberInfoType[];
+  crewMembers: GroupMemberInfoType[];
+  waitingMembers: InviteeType[];
 }
 
 export interface ParticipantType {
@@ -64,8 +66,119 @@ export interface SchedulePostDataType {
   title: string;
   startDateTime: string;
   endDateTime: string;
+  location?: string;
+  description?: string;
+  crewId: number;
+  participants?: ParticipantType[];
+}
+
+export interface InviteeType {
+  notificationId: number;
+  accountId: number;
+  nickName: string;
+  email: string;
+}
+
+export interface CancelInviteType {
+  crewId: number;
+  accountId: number;
+}
+
+export interface AcceptInviteType {
+  crewId: number;
+  notificationId: number;
+  inviteType: "ACCEPT";
+}
+
+export interface VoteNotificationType {
+  notificationId: number;
+  notificationType: string;
+  crewId: number;
+  accountId: number;
+  crewName: string;
+  localDateTime: string;
+  isChecked: boolean;
+  voteId: number;
+  voteTitle: string;
+  voteParticipateType: boolean;
+}
+
+type NotificationType = "INVITE" | "SCHEDULE_INFO" | "UPDATE" | "EXCLUDE" | "REQUEST";
+
+type AlarmType = "CREW" | "SCHEDULE";
+
+export interface NotificationInfoType {
+  notificationId: number;
+  notificationType: NotificationType;
+  crewId: number;
+  labelColor: GroupColorType;
+  crewName: string;
+  scheduleInfo?: {
+    scheduleId: number;
+    title: string;
+  };
+  localDateTime: string;
+  isChecked: boolean;
+  content: string;
+  alarmType: AlarmType;
+}
+
+export interface NotificationDataType {
+  count: number;
+  notificationInfo: NotificationInfoType[];
+}
+
+export interface CheckNotificationType {
+  notificationId: number;
+  alarmType: AlarmType;
+}
+
+export interface UpcomingSchedule {
+  scheduleId: number;
+  title: string;
+  startDateTime: string;
+  remainTime: string;
+  crewInfo: {
+    crewId: number;
+    crewName: string;
+    labelColor: GroupColorType;
+  };
+}
+
+export interface ScheduleFilterType {
+  crewId: number;
+  startDate: string;
+  endDate: string;
+}
+
+export type ToastType = "success" | "error" | "warning" | "info" | "pending";
+
+export interface CrewInfo {
+  crewId: number;
+  crewName: string;
+  labelColor: string;
+}
+
+export interface Participant {
+  accountId: number;
+  nickName: string;
+}
+
+export interface ScheduleDetailType {
+  scheduleId: number;
+  title: string;
+  startDateTime: string;
+  endDateTime: string;
   location: string;
   description: string;
-  crewId: number;
-  participants: ParticipantType[];
+  crewInfo: CrewInfo;
+  participants: Participant[];
+  coordinate: boolean;
+}
+
+export interface CrewSchedulesType extends Array<ScheduleDetailType> {}
+
+export interface DeleteScheduleResponseType {
+  scheduleId: number;
+  message: string;
 }

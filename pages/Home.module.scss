@@ -1,0 +1,483 @@
+.header {
+  border-bottom: 1px solid $gray400;
+  background-color: $white;
+
+  .nav {
+    max-width: 120rem;
+    height: 5rem;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+  }
+
+  .login-button {
+    padding: 0.5rem 1.25rem;
+    border-radius: 8px;
+    border: 1px solid $blue500;
+    color: $blue500;
+    font-weight: 700;
+    line-height: 150%;
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+@keyframes wave {
+  2% {
+    transform: translateX(10);
+  }
+
+  25% {
+    transform: translateX(-25%);
+  }
+
+  50% {
+    transform: translateX(-50%);
+  }
+
+  75% {
+    transform: translateX(-25%);
+  }
+
+  100% {
+    transform: translateX(10);
+  }
+}
+
+.scroll-container {
+  height: calc(100vh - 80px);
+  overflow: hidden;
+}
+
+@keyframes bounceX {
+  0%,
+  100% {
+    transform: translateX(3px);
+  }
+  50% {
+    transform: translateX(0);
+  }
+}
+
+.first-section {
+  @include flex-col-center;
+  padding-bottom: 7rem;
+  gap: 1.5rem;
+  height: calc(100vh - 80px);
+  position: relative;
+  background: linear-gradient(
+    315deg,
+    rgba(211, 244, 255, 0.6) 33%,
+    rgba(198, 226, 255, 1) 66%,
+    rgba(211, 253, 255, 1) 100%
+  );
+  animation: gradient 10s ease infinite;
+  background-size: 400% 400%;
+  background-attachment: fixed;
+
+  .slogan {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 130%;
+    letter-spacing: -0.105rem;
+    text-align: center;
+
+    .slogan-line {
+      @include flex-row-center;
+    }
+
+    .calendar-icon {
+      margin-left: 0.2rem;
+      margin-right: 0.5rem;
+      animation: bounceX 1.5s infinite ease-in-out;
+    }
+
+    .tickita-logo {
+      margin-left: 1rem;
+    }
+  }
+
+  .login-button {
+    padding: 1rem 2rem;
+    background-color: $blue500;
+    border-radius: 8px;
+    color: $white;
+    font-size: 1.375rem;
+    font-weight: 700;
+    line-height: 130%;
+    letter-spacing: -0.55px;
+  }
+
+  .next-arrow-container {
+    @include flex-col-center;
+    gap: 1rem;
+    position: absolute;
+    bottom: 2rem;
+    color: $gray800;
+    font-weight: 700;
+    line-height: 150%;
+    z-index: 999;
+
+    .next-arrow {
+      animation: bounce 2s infinite;
+    }
+  }
+
+  .wave {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 1500% 1500% 0 0;
+    position: fixed;
+    bottom: 0;
+    width: 200%;
+    height: 12em;
+    animation: wave 10s -3s linear infinite;
+    transform: translate3d(0, 0, 0);
+    bottom: 0;
+    left: 0;
+    border: 1px solid $gray200;
+
+    &:nth-of-type(2) {
+      bottom: -1.25em;
+      animation: wave 18s linear reverse infinite;
+    }
+
+    &:nth-of-type(3) {
+      bottom: -2.5em;
+      animation: wave 20s -1s reverse infinite;
+    }
+  }
+}
+
+.second-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: calc(100vh - 80px);
+  background: linear-gradient(to top, #dfe9f3 0%, white 100%);
+
+  .point-letter {
+    @include flex-col-center;
+    gap: 2.5rem;
+    margin-bottom: 4rem;
+
+    .text {
+      font-size: 2.5rem;
+      font-weight: 700;
+      line-height: 130%;
+      letter-spacing: -1px;
+      text-align: center;
+    }
+
+    .text-effect {
+      animation: slideUp 1.5s ease-in;
+    }
+  }
+
+  .card-container {
+    @include flex-row-center;
+    gap: 59px;
+    padding-top: 3.5rem;
+    background-image: url("../public/images/postit-line.svg");
+    background-repeat: no-repeat;
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2.75rem;
+      width: 17.5rem;
+      height: 17.5rem;
+      padding: 1.5rem 1.5rem 4.6875rem;
+    }
+
+    .green-card-container {
+      @include flex-col-center;
+      gap: 1.25rem;
+      rotate: -10deg;
+
+      .green-card {
+        background-image: url("../public/images/green-postit.svg");
+      }
+
+      .green-card-effect {
+        animation: slideUp 1s ease-in;
+      }
+    }
+
+    .orange-card-container {
+      @include flex-col-center;
+      gap: 1.25rem;
+      rotate: 5deg;
+
+      .orange-card {
+        background-image: url("../public/images/orange-postit.svg");
+      }
+
+      .orange-card-effect {
+        animation: slideUp 1.5s ease-in;
+      }
+    }
+
+    .pink-card-container {
+      @include flex-col-center;
+      gap: 1.25rem;
+      rotate: -8deg;
+
+      .pink-card {
+        background-image: url("../public/images/pink-postit.svg");
+      }
+
+      .pink-card-effect {
+        animation: slideUp 1.25s ease-in;
+      }
+    }
+
+    .card-number {
+      color: $white;
+      font-size: 2.5rem;
+      font-weight: 550;
+      line-height: 135%;
+      letter-spacing: -0.0625rem;
+    }
+
+    .card-text {
+      color: $white;
+      font-size: 1.25rem;
+      line-height: 140%;
+      letter-spacing: -0.5px;
+
+      span {
+        font-weight: 700;
+      }
+    }
+
+    .card-bottom-text {
+      color: $blue500;
+      font-size: 1.5rem;
+      font-weight: 700;
+      line-height: 135%;
+    }
+  }
+}
+
+.key-point-container {
+  @include flex-col-center;
+  gap: 1rem;
+
+  .label {
+    padding: 0.25rem 0.5rem;
+    border-radius: 999px;
+    border: 1px solid $white;
+    color: $white;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 140%;
+  }
+
+  .description {
+    color: $white;
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 130%;
+    letter-spacing: -0.0625rem;
+    text-align: center;
+  }
+
+  .info-text {
+    color: $gray700;
+    font-weight: 500;
+  }
+}
+
+.third-section {
+  @include flex-col-center;
+  gap: 5rem;
+  height: calc(100vh - 80px);
+  background-color: $blue500;
+
+  .function-container {
+    @include flex-row-center;
+    gap: 3rem;
+
+    .function {
+      @include flex-col-center;
+      gap: 3.625rem;
+      width: 25rem;
+      height: 25rem;
+      background-color: $white;
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+
+      .text-container {
+        display: flex;
+        flex-direction: column;
+        align-items: baseline;
+        gap: 0.5rem;
+        width: 100%;
+
+        .text-title {
+          font-size: 1.75rem;
+          font-weight: 700;
+          line-height: 135%;
+        }
+
+        .text-description {
+          color: $gray700;
+          line-height: 150%;
+        }
+      }
+
+      .video {
+        @include flex-row-center;
+        width: 22.5rem;
+        height: 12.75rem;
+        background-color: $blue200;
+        border-radius: 12px;
+      }
+    }
+  }
+}
+
+.fourth-section {
+  @include flex-col-center;
+  gap: 2.5rem;
+  height: calc(100vh - 80px);
+
+  .label {
+    border: 1px solid $blue500;
+    color: $blue500;
+  }
+
+  .description {
+    color: $black;
+  }
+
+  .accordion-container {
+    width: 67.5rem;
+    height: 36.125rem;
+    display: flex;
+    gap: 0.5rem;
+
+    .accordion {
+      display: flex;
+      align-items: center;
+      width: 7rem;
+      border-radius: 8px;
+      border: 1px solid $gray500;
+      transition: all 0;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      transition: width 0.5s ease-in-out;
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba($color: #000000, $alpha: 0.3);
+      }
+
+      .card-in-accordion {
+        padding: 1.75rem 2rem;
+        width: 37.5rem;
+        height: 35rem;
+
+        .text-container {
+          display: flex;
+          flex-direction: column;
+          align-items: baseline;
+          gap: 0.5rem;
+          width: 35rem;
+          height: 8rem;
+
+          h3 {
+            @include flex-row-center;
+            gap: 0.75rem;
+            font-size: 1.75rem;
+            font-weight: 700;
+            line-height: 135%;
+
+            span {
+              @include flex-row-center;
+              width: 2rem;
+              height: 2rem;
+              color: $white;
+              font-size: 1.0625rem;
+              font-weight: 500;
+              line-height: 140%;
+              background-color: $blue500;
+              border-radius: 999px;
+              text-align: center;
+            }
+          }
+
+          p {
+            padding-left: 2.75rem;
+            color: $gray700;
+            line-height: 150%;
+          }
+        }
+      }
+    }
+
+    .accordion.active {
+      width: 37.5rem;
+      opacity: 1;
+      transition: width 0.5s ease-in-out;
+
+      &::after {
+        background-color: transparent;
+      }
+    }
+  }
+}
+
+.fifth-section {
+  @include flex-col-center;
+  gap: 2.5rem;
+  height: calc(100vh - 80px);
+  background-color: $gray900;
+
+  .video {
+    width: 65rem;
+    height: 36.5625rem;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

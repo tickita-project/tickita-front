@@ -20,6 +20,7 @@ export default function ProfileImage({ imageUrl }: ProfileImageProps) {
           width={44}
           height={44}
           alt="유저 프로필 이미지"
+          // layout=""
         />
       </figure>
     );

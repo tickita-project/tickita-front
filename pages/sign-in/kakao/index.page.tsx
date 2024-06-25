@@ -1,10 +1,10 @@
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import { useEffect } from "react";
 
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 
 import classNames from "classnames/bind";
-import Lottie from "react-lottie-player";
 
 import { basicInstance, setContext } from "@/apis/axios";
 import { PAGE_PATH } from "@/constants/pagePath";
@@ -28,6 +28,8 @@ interface KakaoProps {
   isComplete: boolean;
 }
 
+const LottiePlayer = dynamic(() => import("react-lottie-player"), { ssr: false });
+
 export async function getServerSideProps(
   context: GetServerSidePropsContext,
 ): Promise<GetServerSidePropsResult<KakaoProps>> {
@@ -42,20 +44,13 @@ export async function getServerSideProps(
       },
     });
 
-    const {
-      id,
-      isComplete,
-      accessToken,
-      accessTokenExpireAt,
-      refreshToken,
-      refreshTokenExpireAt,
-    }: ResponseType = res.data;
+    const { id, isComplete, accessToken, refreshToken, refreshTokenExpireAt }: ResponseType =
+      res.data;
 
     if (accessToken && refreshToken) {
-      const ACCESS_TOKEN_EXPIRE_AT = new Date(accessTokenExpireAt).toUTCString();
       const REFRESH_TOKEN_EXPIRE_AT = new Date(refreshTokenExpireAt).toUTCString();
 
-      const ACCESS_TOKEN = `ACCESS_TOKEN=${accessToken}; Path=/; HttpOnly; SameSite=Strict; Secure; Expires=${ACCESS_TOKEN_EXPIRE_AT}`;
+      const ACCESS_TOKEN = `ACCESS_TOKEN=${accessToken}; Path=/; HttpOnly; SameSite=Strict; Secure; Max-age=1800`;
       const REFRESH_TOKEN = `REFRESH_TOKEN=${refreshToken}; Path=/; HttpOnly; SameSite=Strict; Secure; Expires=${REFRESH_TOKEN_EXPIRE_AT}`;
 
       context.res.setHeader("Set-Cookie", [ACCESS_TOKEN, REFRESH_TOKEN]);
@@ -88,7 +83,7 @@ export default function Kakao({ id, isComplete }: KakaoProps) {
 
   return (
     <div className={cn("container")}>
-      <Lottie animationData={loadingLottie} loop play className={cn("loading-lottie")} />
+      <LottiePlayer animationData={loadingLottie} loop play className={cn("loading-lottie")} />
     </div>
   );
 }

@@ -1,3 +1,5 @@
+import { promises } from "dns";
+
 import { InviteDataType } from "@/pages/group/[id]/components/InviteForm";
 
 import {
@@ -6,6 +8,15 @@ import {
   GroupType,
   UserInfoType,
   GroupInfoType,
+  CancelInviteType,
+  AcceptInviteType,
+  NotificationDataType,
+  CheckNotificationType,
+  SchedulePostDataType,
+  UpcomingSchedule,
+  CrewSchedulesType,
+  ScheduleDetailType,
+  DeleteScheduleResponseType,
 } from "@/types/type";
 
 import { imageRequestInstance, instance } from "./axios";
@@ -40,7 +51,103 @@ export const inviteGroupMember = async (data: InviteDataType) => {
   return res.data;
 };
 
-export const getGroupInfo = async (id: number): Promise<GroupInfoType> => {
-  const res = await instance.get(`/crew/${id}`);
+export const getGroupInfo = async (crewId: number): Promise<GroupInfoType> => {
+  const res = await instance.get(`/crew/${crewId}`);
+  return res.data;
+};
+
+export const editGroupInfo = async (crewId: number, data: CreateGroupDataType) => {
+  const res = await instance.put(`/crew/info/${crewId}`, data);
+  return res.data;
+};
+
+export const deleteGroup = async (crewId: number) => {
+  const res = await instance.delete(`/crew/${crewId}`);
+  return res.data;
+};
+
+export const exitGroup = async (crewId: number) => {
+  const res = await instance.delete(`/crew/leave/${crewId}`);
+  return res.data;
+};
+
+export const changeLeader = async (crewId: number, memberId: number) => {
+  const res = await instance.put(`/crew/delegate-owner/${crewId}?memberId=${memberId}`);
+  return res.data;
+};
+
+export const exportMember = async (crewId: number, memberId: number) => {
+  const res = await instance.put(`/crew/remove-member/${crewId}/${memberId}`);
+  return res.data;
+};
+
+export const putUserInfo = async (data: ProfileSetupType): Promise<UserInfoType> => {
+  const res = await instance.put(`/account-info/${data.accountId}`, data);
+  return res.data;
+};
+
+export const getAllNotification = async (): Promise<NotificationDataType> => {
+  const res = await instance.get("/notification");
+  return res.data;
+};
+
+export const cancelInvite = async (data: CancelInviteType) => {
+  const { crewId, accountId } = data;
+
+  await instance.delete(`notification?crewId=${crewId}&accountId=${accountId}&crewAccept=WAIT`);
+};
+
+export const acceptInvite = async (data: AcceptInviteType) => {
+  const res = await instance.post(`/notification`, data);
+  return res.data;
+};
+
+export const checkNotification = async (data: CheckNotificationType) => {
+  const { notificationId, alarmType } = data;
+
+  const res = await instance.put(`/notification/${notificationId}`, { isChecked: true, alarmType });
+  return res.data;
+};
+
+export const deleteNotification = async (notificationId: number) => {
+  const res = await instance.delete(`/notification/${notificationId}`);
+};
+
+export const createSchedule = async (data: SchedulePostDataType) => {
+  const res = await instance.post(`/schedule`, data);
+  return res.data;
+};
+
+export const getUpcomingSchedule = async (): Promise<UpcomingSchedule[]> => {
+  const res = await instance.get("/dashboard/upcoming-events");
+  return res.data;
+};
+
+export const getCrewSchedules = async (
+  crewId: number,
+  startDate: string,
+  endDate: string,
+): Promise<CrewSchedulesType> => {
+  const res = await instance.get(`/schedule/filter/${crewId}`, {
+    params: {
+      startDate,
+      endDate,
+    },
+  });
+  return res.data;
+};
+
+export const deleteAccountInfo = async () => {
+  const res = await instance.delete("/account-info", {});
+  return res.data;
+};
+
+export const getScheduleDetail = async (scheduleId: number): Promise<ScheduleDetailType> => {
+  const res = await instance.get(`/schedule/${scheduleId}`);
+  return res.data;
+};
+
+export const deleteSchedule = async (scheduleId: number): Promise<DeleteScheduleResponseType> => {
+  const res = await instance.delete(`/schedule/${scheduleId}`);
   return res.data;
 };

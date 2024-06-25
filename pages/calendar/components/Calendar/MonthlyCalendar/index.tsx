@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import classNames from "classnames/bind";
 import dayjs from "dayjs";
@@ -17,7 +17,11 @@ import styles from "./MonthlyCalendar.module.scss";
 
 const cn = classNames.bind(styles);
 
-export default function MonthlyCalendar() {
+interface MonthlyCalendarProps {
+  scheduleData: any;
+}
+
+export default function MonthlyCalendar({ scheduleData }: MonthlyCalendarProps) {
   const dragContainerRef = useRef<HTMLDivElement>(null);
   const { focusDate, setFocusDate, setViewDate, setScheduleStart, setScheduleEnd } = useDateStore(
     useShallow((state) => ({
@@ -60,6 +64,9 @@ export default function MonthlyCalendar() {
 
   const { draggedIndex } = useDragSelect(dragContainerRef, handleDragEnd);
   const scrollRef = useScroll<HTMLDivElement>(handleScrollDownDebounced, handleScrollUpDebounced);
+  useEffect(() => {
+    console.log(scheduleData);
+  }, []);
 
   return (
     <div className={cn("container")} ref={scrollRef}>

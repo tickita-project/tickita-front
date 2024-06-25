@@ -1,0 +1,75 @@
+@mixin label {
+  @include flex-row-center;
+  width: fit-content;
+  height: 1.25rem;
+  padding: 1rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 1rem;
+  border-bottom: 1px solid $gray200;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &.isVoted {
+    opacity: 0.5;
+  }
+}
+
+.label-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .left-labels {
+    display: flex;
+    gap: 0.5rem;
+
+    .group-label {
+      @include label;
+      background-color: $blue50;
+      color: $blue800;
+    }
+
+    .new-label {
+      @include label;
+      background-color: $red100;
+      color: $red800;
+    }
+  }
+
+  .vote-done-label {
+    display: flex;
+    gap: 0.1875rem;
+    align-items: center;
+    height: 1.25rem;
+    padding: 1rem 0;
+    color: $green600;
+  }
+}
+
+.vote-title {
+  @include text-overflow-ellipsis(2);
+  font-weight: 700;
+  margin: 0.25rem 0;
+  line-height: 150%;
+}
+
+.end-date {
+  color: $gray800;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  letter-spacing: -0.0219rem;
+  text-align: end;
+}

@@ -2,15 +2,17 @@ import { useState } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 
 import classNames from "classnames/bind";
 
+import { nextInstance } from "@/apis/axios";
 import { PAGE_PATH } from "@/constants/pagePath";
 import { useGetUserInfo } from "@/hooks/useGetUserInfo";
 import { useOutsideClick } from "@/hooks/useOutsideClick";
 
 import styles from "./Header.module.scss";
+import NotificationPopup from "../NotificationPopup";
 import ProfileImage from "../ProfileImage";
 
 const cn = classNames.bind(styles);
@@ -52,8 +54,15 @@ export default function Header() {
     setIsDropDownView((prev) => !prev);
   };
 
-  const handleLogoutButtonClick = () => {
-    // 로그아웃 처리
+  const handleLogoutButtonClick = async () => {
+    const response = await nextInstance.get("/api/logout");
+
+    if (response.status === 500) {
+      alert(response.data.message);
+      return;
+    }
+
+    Router.push(PAGE_PATH.MAIN);
   };
 
   return (
@@ -94,16 +103,7 @@ export default function Header() {
             {isDashboardPage ? (
               <span className={cn("guide-text")}>반가워요, </span>
             ) : (
-              <figure className={cn("notification-bell")}>
-                <figcaption className={cn("notification-count")}>9+</figcaption>
-                <Image
-                  src="/icons/notification-bell.svg"
-                  width={26}
-                  height={20}
-                  alt="알림 종"
-                  priority
-                />
-              </figure>
+              <NotificationPopup />
             )}
             <span className={cn("nickname")}>{userInfo?.nickName}</span> 님
           </div>
@@ -114,7 +114,9 @@ export default function Header() {
             {isDropDownView && (
               <ul className={cn("dropdown")}>
                 <li>
-                  <Link href={PAGE_PATH.MY_PAGE}>마이페이지</Link>
+                  <Link className={cn("my-page-link")} href={PAGE_PATH.MY_PAGE}>
+                    마이페이지
+                  </Link>
                 </li>
                 <li>
                   <button onClick={handleLogoutButtonClick} className={cn("logout")} type="button">

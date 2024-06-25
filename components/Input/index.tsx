@@ -23,7 +23,12 @@ export default forwardRef<HTMLInputElement, InputProps>(function Input(
         {isRequired && <span className={cn("required-field")}>*</span>}
         {isRequired === false && <span className={cn("selective-field")}>(선택)</span>}
       </label>
-      <input ref={ref} id={id} {...restProps} className={cn({ "error-style": errorMessage })} />
+      <input
+        ref={ref}
+        id={id}
+        {...restProps}
+        className={cn(restProps.className, { "error-style": errorMessage })}
+      />
       {errorMessage && <span className={cn("error-message")}>{errorMessage}</span>}
     </div>
   );

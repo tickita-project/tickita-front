@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import Image from "next/image";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -9,6 +11,8 @@ import GroupColorPicker from "@/components/GroupColorPicker";
 import Input from "@/components/Input";
 import TitleBox from "@/components/TitleBox";
 import { CREW_NAME_SCHEMA } from "@/constants/schema";
+import { useEditGroupInfo } from "@/hooks/useEditGroupInfo";
+import useToast from "@/hooks/useToast";
 
 import { GroupInfoType } from "@/types/type";
 
@@ -23,23 +27,41 @@ const createGroupSchema = z.object({
 
 interface GroupFormProps {
   groupInfo: GroupInfoType;
+  isCurrentUserLeader: boolean;
 }
 
-export default function GroupForm({ groupInfo }: GroupFormProps) {
+export default function GroupForm({ groupInfo, isCurrentUserLeader }: GroupFormProps) {
   const {
     register,
     handleSubmit,
-    control,
+    reset,
+    watch,
     formState: { errors, isValid, isDirty },
   } = useForm({
     mode: "all",
     defaultValues: { crewName: groupInfo.crewName, labelColor: groupInfo.labelColor },
     resolver: zodResolver(createGroupSchema),
   });
-  const selectColor = useWatch({ name: "labelColor", control });
+  const selectColor = watch("labelColor");
+
+  const { successToast, errorToast } = useToast();
+  const { mutate } = useEditGroupInfo(groupInfo.crewId);
+
+  useEffect(() => {
+    // groupInfo가 변경될 때 폼을 재설정
+    reset({ crewName: groupInfo.crewName, labelColor: groupInfo.labelColor });
+  }, [groupInfo]);
 
   const onSubmit = async (formData: any) => {
     // 그룹 정보 변경 로직 추가 예정
+    mutate(formData, {
+      onSuccess: () => {
+        successToast("그룹 정보가 변경되었습니다.");
+      },
+      onError: (error) => {
+        errorToast("그룹 정보를 변경하던 중 에러가 발생하였습니다!");
+      },
+    });
   };
 
   return (
@@ -54,6 +76,7 @@ export default function GroupForm({ groupInfo }: GroupFormProps) {
           id="crewName"
           placeholder="그룹 이름을 입력해 주세요."
           isRequired
+          readOnly={!isCurrentUserLeader}
           {...register("crewName")}
           errorMessage={errors.crewName?.message}
         />
@@ -61,7 +84,11 @@ export default function GroupForm({ groupInfo }: GroupFormProps) {
           <h3 className={cn("label")}>
             그룹 색상 <span className={cn("asterisk")}>*</span>
           </h3>
-          <GroupColorPicker {...register("labelColor")} selectColor={selectColor} />
+          <GroupColorPicker
+            readOnly={!isCurrentUserLeader}
+            {...register("labelColor")}
+            selectColor={selectColor}
+          />
         </div>
         <button type="submit" disabled={!isValid || !isDirty} className={cn("form-button")}>
           저장하기

@@ -31,7 +31,7 @@
   .nav {
     max-width: 120rem;
     height: 5rem;
-    padding: 1.12rem 2rem;
+    padding: 0 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -94,38 +94,6 @@
           padding-right: 0.25rem;
         }
 
-        .notification-bell {
-          margin-right: 0.4rem;
-          display: flex;
-          gap: 0.25rem;
-          position: relative;
-          cursor: pointer;
-          border-radius: 50%;
-          padding: 0.5rem 0.8rem;
-
-          &:hover {
-            background-color: $gray300;
-            transition: 0.75s;
-          }
-
-          .notification-count {
-            color: $white;
-            font-size: 0.625rem;
-            font-weight: 500;
-            background-color: $red500;
-            height: 1.4rem;
-            width: 1.4rem;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: absolute;
-            right: 0.1rem;
-            top: 0.15rem;
-            letter-spacing: -0.05rem;
-          }
-        }
-
         .nickname {
           color: $blue600;
         }
@@ -165,6 +133,14 @@
             &:last-child {
               border-top: none;
               border-radius: 0 0 0.5rem 0.5rem;
+            }
+
+            .my-page-link {
+              display: inline-block;
+              width: 100%;
+              height: 100%;
+              line-height: 2.5rem;
+              text-align: center;
             }
 
             .logout {
