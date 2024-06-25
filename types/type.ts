@@ -199,3 +199,8 @@ export interface VoteDataType {
   endTime: Date | undefined;
   accountIds: number[];
 }
+
+export interface VoteSelectDataType {
+  crewId: number | undefined;
+  voteStateIds: number[] | undefined;
+}
