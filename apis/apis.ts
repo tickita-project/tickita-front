@@ -18,6 +18,7 @@ import {
   ScheduleDetailType,
   DeleteScheduleResponseType,
   VoteDataType,
+  VoteSelectDataType,
 } from "@/types/type";
 
 import { imageRequestInstance, instance } from "./axios";
@@ -104,7 +105,7 @@ export const acceptInvite = async (data: AcceptInviteType) => {
 };
 
 export const getVoteInfo = async (crewId: number, voteSubjectId: number) => {
-  const res = await instance.get(`/vote/${crewId}/${voteSubjectId}`);
+  const res = await instance.get(`/vote/crewId=${crewId}/voteSubjectId=${voteSubjectId}`);
   return res.data;
 };
 
@@ -125,6 +126,11 @@ export const getDisableTime = async (participantId: number[], selectedDates: str
 
 export const postVote = async (data: VoteDataType) => {
   const res = await instance.post("/vote", data);
+  return res.data;
+};
+
+export const postSelectVote = async (data: VoteSelectDataType, voteSubjectId: number) => {
+  const res = await instance.post(`/vote/${voteSubjectId}`, data);
   return res.data;
 };
 
