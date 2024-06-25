@@ -127,3 +127,20 @@ export interface NotificationDataType {
   count: number;
   notificationInfo: CrewNotificationResponseType[];
 }
+
+export interface VoteDate {
+  voteDate: Date;
+  voteStartTime: Date;
+  voteEndTime: Date;
+}
+
+export interface VoteDataType {
+  crewId: number | null;
+  title: string;
+  content: string;
+  place: string;
+  voteDateLists: VoteDate[];
+  endDate: Date | undefined;
+  endTime: Date | undefined;
+  accountIds: number[];
+}
