@@ -9,6 +9,7 @@ import {
   CancelInviteType,
   AcceptInviteType,
   NotificationDataType,
+  VoteDataType,
 } from "@/types/type";
 
 import { imageRequestInstance, instance } from "./axios";
@@ -89,5 +90,30 @@ export const cancelInvite = async (data: CancelInviteType) => {
 
 export const acceptInvite = async (data: AcceptInviteType) => {
   const res = await instance.post(`/notification`, data);
+  return res.data;
+};
+
+export const getVoteInfo = async (crewId: number, voteSubjectId: number) => {
+  const res = await instance.get(`/vote/${crewId}/${voteSubjectId}`);
+  return res.data;
+};
+
+export const getDisableTime = async (participantId: number[], selectedDates: string[]) => {
+  const params = new URLSearchParams();
+
+  participantId.forEach((id) => {
+    params.append("participantId", String(id));
+  });
+
+  selectedDates.forEach((date) => {
+    params.append("selectedDates", date);
+  });
+
+  const res = await instance.get("/vote/participant", { params });
+  return res.data;
+};
+
+export const postVote = async (data: VoteDataType) => {
+  const res = await instance.post("/vote", data);
   return res.data;
 };
