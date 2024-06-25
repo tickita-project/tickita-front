@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 
 import classNames from "classnames/bind";
 import dayjs from "dayjs";
