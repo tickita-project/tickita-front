@@ -1,73 +1,104 @@
-import { useState } from "react";
-
 import Image from "next/image";
 
+import { useQuery } from "@tanstack/react-query";
 import classNames from "classnames/bind";
-import { useShallow } from "zustand/react/shallow";
+import dayjs from "dayjs";
 
-import { useDateStore } from "@/store/useDateStore";
+import { deleteSchedule, getScheduleDetail } from "@/apis/apis";
+import { scheduleKey } from "@/constants/queryKey";
+import { useGetUserInfo } from "@/hooks/useGetUserInfo";
 import { useModalStore } from "@/store/useModalStore";
 
-import styles from "./ScheduleModal.module.scss";
+import styles from "./ScheduleDetailModal.module.scss";
 
 const cn = classNames.bind(styles);
 
 export default function ScheduleDetailModal() {
-  const { closeModal } = useModalStore();
-  const { scheduleStart, scheduleEnd, setScheduleStart, setScheduleEnd } = useDateStore(
-    useShallow((state) => ({
-      scheduleStart: state.scheduleStart,
-      scheduleEnd: state.scheduleEnd,
-      setScheduleStart: state.setScheduleStart,
-      setScheduleEnd: state.setScheduleEnd,
-    })),
-  );
+  const { closeModal, data: scheduleId } = useModalStore();
+  const { data: userInfo } = useGetUserInfo();
 
-  const handleCloseModal = () => {
-    closeModal();
-    setScheduleStart(null);
-    setScheduleEnd(null);
-  };
+  const { data } = useQuery({
+    queryKey: scheduleKey.detail(scheduleId),
+    queryFn: () => getScheduleDetail(scheduleId),
+  });
 
-  const handleSubmit = (mode: "create" | "edit") => {
-    //create 이면 post, edit이면 put 요청 추가
-    handleCloseModal();
+  const place = data?.location ? data.location : "정해진 장소가 없어요.";
+  const description = data?.description ? data.description : "입력된 설명이 없어요.";
+  const start = dayjs(data?.startDateTime).format("YYYY.MM.DD HH:mm");
+  const end = dayjs(data?.endDateTime).format("YYYY.MM.DD HH:mm");
+
+  const handleDelete = async () => {
+    const data = await deleteSchedule(scheduleId);
+    if (data) {
+      closeModal();
+    }
   };
 
   return (
     <div className={cn("container")}>
-      <form className={cn("create-schedule-form")}>
-        <input type="text" className={cn("schedule-name")} placeholder="무슨 일정인가요?" />
-      </form>
-      <div className={cn("time-location-container")}>
-        <div className={cn("time-container")}>
-          <p>시간</p>
-          <div className={cn("time")}>
-            <div className={cn("start")}>
-              <p className={cn("date")}>{scheduleStart?.format("YYYY-MM-DDTHH:mm:ss")}</p>
-              <p className={cn("time")}></p>
-            </div>
-
-            <div className={cn("end")}>
-              <p className={cn("date")}>{scheduleEnd?.format("YYYY-MM-DDTHH:mm:ss")}</p>
-            </div>
+      <div className={cn("header")}>
+        <div className={cn("group")}>
+          <div className={cn("color")} style={{ backgroundColor: data?.crewInfo.labelColor }}></div>
+          <h2 className={cn("name")}>{data?.crewInfo.crewName}</h2>
+          {data?.coordinate && <p className={cn("coordinated")}>조율된 일정</p>}
+        </div>
+        <div className={cn("buttons")}>
+          {data?.coordinate || (
+            //후에 수정버튼도 여기 추가
+            <button className={cn("remove-button")} onClick={handleDelete}>
+              <Image src="/icons/trash-icon.svg" alt="일정삭제" width={30} height={30} />
+            </button>
+          )}
+          <button className={cn("close-button")} type="button" onClick={closeModal}>
+            <Image src="/icons/close-icon.svg" alt="모달 닫기" width={30} height={30} />
+          </button>
+        </div>
+      </div>
+      <div className={cn("contents")}>
+        <h1 className={cn("title")}>{data?.title}</h1>
+        <div className={cn("time-place")}>
+          <div className={cn("time-container")}>
+            <p className={cn("label")}>시간</p>
+            <p className={cn("time")}>
+              {start} ~ {end}
+            </p>
+          </div>
+          <div className={cn("place-container")}>
+            <p className={cn("label")}>장소</p>
+            <p className={cn("place")}>
+              <Image
+                src="/icons/location-icon.svg"
+                alt="장소"
+                width={20}
+                height={20}
+                className={cn("place-icon")}
+              />
+              {place}
+            </p>
           </div>
         </div>
-        <div className={cn("location-container")}>
-          <p>장소</p>
-          <div className={cn("location")}>
-            <Image src="/icons/location-icon.svg" width={20} height={20} alt="장소" />
-            <input
-              className={cn("location-input")}
-              type="text"
-              placeholder="(예시) 위워크 을지로점 10층 C미팅룸"
-            />
+        <div className={cn("description")}>
+          <p className={cn("label")}>추가 내용</p>
+          <p className={cn("text")}>{description}</p>
+        </div>
+        <div className={cn("participants-container")}>
+          <p className={cn("label")}>참가자</p>
+          <div className={cn("participants")}>
+            {data && data.participants && data.participants.length >= 2 ? (
+              data.participants
+                .filter((participant) => participant.accountId !== userInfo?.accountId)
+                .map((participant) => (
+                  <p className={cn("participant")} key={participant.accountId}>
+                    {participant.nickName}
+                  </p>
+                ))
+            ) : (
+              <p className={cn("alone")}>참가자가 혼자입니다.</p>
+            )}
           </div>
         </div>
       </div>
-      <button className={cn("close-modal")} type="button" onClick={handleCloseModal}>
-        취소
-      </button>
     </div>
   );
 }
+//<div className={cn("")}></div>

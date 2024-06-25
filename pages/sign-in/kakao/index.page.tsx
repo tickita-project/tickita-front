@@ -44,20 +44,13 @@ export async function getServerSideProps(
       },
     });
 
-    const {
-      id,
-      isComplete,
-      accessToken,
-      accessTokenExpireAt,
-      refreshToken,
-      refreshTokenExpireAt,
-    }: ResponseType = res.data;
+    const { id, isComplete, accessToken, refreshToken, refreshTokenExpireAt }: ResponseType =
+      res.data;
 
     if (accessToken && refreshToken) {
-      const ACCESS_TOKEN_EXPIRE_AT = new Date(accessTokenExpireAt).toUTCString();
       const REFRESH_TOKEN_EXPIRE_AT = new Date(refreshTokenExpireAt).toUTCString();
 
-      const ACCESS_TOKEN = `ACCESS_TOKEN=${accessToken}; Path=/; HttpOnly; SameSite=Strict; Secure; Expires=${ACCESS_TOKEN_EXPIRE_AT}`;
+      const ACCESS_TOKEN = `ACCESS_TOKEN=${accessToken}; Path=/; HttpOnly; SameSite=Strict; Secure; Max-age=1800`;
       const REFRESH_TOKEN = `REFRESH_TOKEN=${refreshToken}; Path=/; HttpOnly; SameSite=Strict; Secure; Expires=${REFRESH_TOKEN_EXPIRE_AT}`;
 
       context.res.setHeader("Set-Cookie", [ACCESS_TOKEN, REFRESH_TOKEN]);
@@ -84,6 +77,7 @@ export default function Kakao({ id, isComplete }: KakaoProps) {
       router.push({ pathname: PAGE_PATH.PROFILE_SETUP, query: { id } }, PAGE_PATH.PROFILE_SETUP);
       return;
     }
+
     router.push(PAGE_PATH.DASHBOARD);
   }, [isComplete]);
 

@@ -7,6 +7,7 @@ import classNames from "classnames/bind";
 import ProfileSetupForm from "./components/ProfileSetupForm/ProfileSetupForm";
 import { basicInstance } from "@/apis/axios";
 import MetaData from "@/components/MetaData";
+import { PAGE_PATH } from "@/constants/pagePath";
 
 import styles from "./ProfileSetup.module.scss";
 
@@ -20,12 +21,23 @@ interface ProfileSetupProps {
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
   const accountId = context.query.id;
 
-  const res = await basicInstance.get(`/account-info/${accountId}`);
-  const { email } = res.data;
+  try {
+    const res = await basicInstance.get(`/account-info/${accountId}`);
+    const { email } = res.data;
 
-  return {
-    props: { accountId, email },
-  };
+    return {
+      props: { accountId, email },
+    };
+  } catch (error) {
+    console.error(error);
+
+    return {
+      redirect: {
+        destination: PAGE_PATH.SIGN_IN,
+        permanent: false,
+      },
+    };
+  }
 };
 
 export default function ProfileSetup({ accountId, email }: ProfileSetupProps) {

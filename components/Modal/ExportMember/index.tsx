@@ -1,23 +1,25 @@
 import { useRouter } from "next/router";
 
 import { useExportMember } from "@/hooks/useExportMember";
+import useToast from "@/hooks/useToast";
 import { useModalStore } from "@/store/useModalStore";
 
 import ConfirmModal from "../Confirm";
 
 export default function ExportMemberModal() {
   const { closeModal, data } = useModalStore();
+  const { successToast, errorToast } = useToast();
   const { query } = useRouter();
   const { mutate } = useExportMember(Number(query.id));
 
   const handleExportMemberButtonClick = () => {
     mutate(data.id, {
       onSuccess: () => {
-        alert("멤버가 추방되었습니다.");
+        successToast("멤버가 추방되었습니다.");
         closeModal();
       },
-      onError: (error) => {
-        alert(error);
+      onError: () => {
+        errorToast("멤버 추방에 실패하였습니다!");
       },
     });
   };

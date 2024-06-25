@@ -16,6 +16,7 @@ import "@/styles/reset.css";
 
 import ErrorFallback from "@/components/ErrorFallBack";
 import Portal from "@/components/Modal/Portal";
+import Toast from "@/components/Toast";
 
 // 페이지 컴포넌트에 레이아웃을 추가할 수 있도록 확장한 타입
 export type NextPageWithLayout = NextPage & {
@@ -53,6 +54,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
         <ErrorBoundary FallbackComponent={ErrorFallback} onReset={reset}>
           {getLayout(<Component {...pageProps} />)}
           <Portal />
+          <Toast limit={3} autoClose={3000} />
         </ErrorBoundary>
       </HydrationBoundary>
     </QueryClientProvider>

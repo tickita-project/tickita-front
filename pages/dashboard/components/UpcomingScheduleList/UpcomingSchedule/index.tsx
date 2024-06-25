@@ -2,12 +2,14 @@ import classNames from "classnames/bind";
 
 import { MODAL_TYPE } from "@/constants/modalType";
 import { useModalStore } from "@/store/useModalStore";
+import { formatKoreanDateTime } from "@/utils/formatKoreanDateTime";
 
 import styles from "./UpcomingSchedule.module.scss";
 
 const cn = classNames.bind(styles);
 
 interface UpcomingScheduleProps {
+  scheduleId: number;
   title: string;
   color: string;
   date: string;
@@ -15,6 +17,7 @@ interface UpcomingScheduleProps {
 }
 
 export default function UpcomingSchedule({
+  scheduleId,
   title,
   color,
   date,
@@ -24,7 +27,7 @@ export default function UpcomingSchedule({
   const isToday = daysRemaining === "D-DAY";
 
   const handleUpcomingScheduleClick = () => {
-    openModal(MODAL_TYPE.SCHEDULE_DETAILS, "일정 데이터");
+    openModal(MODAL_TYPE.SCHEDULE_DETAILS, scheduleId);
   };
 
   return (
@@ -37,7 +40,7 @@ export default function UpcomingSchedule({
             "date-d-day": isToday,
           })}
         >
-          {date}
+          {formatKoreanDateTime(date)}
         </div>
         <div
           className={cn("day-day", {

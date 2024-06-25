@@ -66,10 +66,10 @@ export interface SchedulePostDataType {
   title: string;
   startDateTime: string;
   endDateTime: string;
-  location: string;
-  description: string;
+  location?: string;
+  description?: string;
   crewId: number;
-  participants: ParticipantType[];
+  participants?: ParticipantType[];
 }
 
 export interface InviteeType {
@@ -82,14 +82,12 @@ export interface InviteeType {
 export interface CancelInviteType {
   crewId: number;
   accountId: number;
-  notificationId: number;
-  crewAccept: "DECLINE";
 }
 
 export interface AcceptInviteType {
   crewId: number;
   notificationId: number;
-  crewAccept: "ACCEPT";
+  inviteType: "ACCEPT";
 }
 
 export interface VoteNotificationType {
@@ -107,25 +105,82 @@ export interface VoteNotificationType {
 
 type NotificationType = "INVITE" | "SCHEDULE_INFO" | "UPDATE" | "EXCLUDE" | "REQUEST";
 
-export interface CrewNotificationResponseType {
+type AlarmType = "CREW" | "SCHEDULE";
+
+export interface NotificationInfoType {
   notificationId: number;
   notificationType: NotificationType;
   crewId: number;
-  accountId: number;
+  labelColor: GroupColorType;
   crewName: string;
   scheduleInfo?: {
     scheduleId: number;
-    scheduleTime: string;
-    place: string;
+    title: string;
   };
   localDateTime: string;
   isChecked: boolean;
   content: string;
+  alarmType: AlarmType;
 }
 
 export interface NotificationDataType {
   count: number;
-  notificationInfo: CrewNotificationResponseType[];
+  notificationInfo: NotificationInfoType[];
+}
+
+export interface CheckNotificationType {
+  notificationId: number;
+  alarmType: AlarmType;
+}
+
+export interface UpcomingSchedule {
+  scheduleId: number;
+  title: string;
+  startDateTime: string;
+  remainTime: string;
+  crewInfo: {
+    crewId: number;
+    crewName: string;
+    labelColor: GroupColorType;
+  };
+}
+
+export interface ScheduleFilterType {
+  crewId: number;
+  startDate: string;
+  endDate: string;
+}
+
+export type ToastType = "success" | "error" | "warning" | "info" | "pending";
+
+export interface CrewInfo {
+  crewId: number;
+  crewName: string;
+  labelColor: string;
+}
+
+export interface Participant {
+  accountId: number;
+  nickName: string;
+}
+
+export interface ScheduleDetailType {
+  scheduleId: number;
+  title: string;
+  startDateTime: string;
+  endDateTime: string;
+  location: string;
+  description: string;
+  crewInfo: CrewInfo;
+  participants: Participant[];
+  coordinate: boolean;
+}
+
+export interface CrewSchedulesType extends Array<ScheduleDetailType> {}
+
+export interface DeleteScheduleResponseType {
+  scheduleId: number;
+  message: string;
 }
 
 export interface VoteDate {

@@ -2,24 +2,26 @@ import Router, { useRouter } from "next/router";
 
 import { PAGE_PATH } from "@/constants/pagePath";
 import { useDeleteGroup } from "@/hooks/useDeleteGroup";
+import useToast from "@/hooks/useToast";
 import { useModalStore } from "@/store/useModalStore";
 
 import ConfirmModal from "../Confirm";
 
 export default function DeleteGroupModal() {
   const { closeModal } = useModalStore();
+  const { successToast, errorToast } = useToast();
   const { query } = useRouter();
   const { mutate: groupDeleteMutate } = useDeleteGroup(Number(query.id));
 
   const handleGroupDeleteButtonClick = () => {
     groupDeleteMutate(undefined, {
       onSuccess: () => {
-        alert("그룹이 삭제되었습니다.");
+        successToast("그룹이 삭제되었습니다.");
         Router.push(PAGE_PATH.DASHBOARD);
         closeModal();
       },
-      onError: (error) => {
-        alert(error);
+      onError: () => {
+        errorToast("그룹 삭제에 실패하였습니다!");
       },
     });
   };

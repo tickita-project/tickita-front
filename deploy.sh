@@ -5,6 +5,7 @@ git add .
 git commit -m "자동 커밋: 자동 배포를 위한 변경사항 커밋"
 
 echo "최신 변경 사항 가져오기..."
+git fetch
 git pull origin develop
 
 echo "의존성 설치..."
@@ -15,6 +16,6 @@ echo "빌드 실행 중..."
 sudo npm run build
 
 echo "앱 재실행..."
-pm2 start npm --name "tickita_app" -- start
+pm2 restart tickita_app
 
 echo "배포 성공!"

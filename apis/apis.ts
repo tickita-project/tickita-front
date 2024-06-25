@@ -1,3 +1,5 @@
+import { promises } from "dns";
+
 import { InviteDataType } from "@/pages/group/[id]/components/InviteForm";
 
 import {
@@ -9,6 +11,12 @@ import {
   CancelInviteType,
   AcceptInviteType,
   NotificationDataType,
+  CheckNotificationType,
+  SchedulePostDataType,
+  UpcomingSchedule,
+  CrewSchedulesType,
+  ScheduleDetailType,
+  DeleteScheduleResponseType,
   VoteDataType,
 } from "@/types/type";
 
@@ -85,7 +93,9 @@ export const getAllNotification = async (): Promise<NotificationDataType> => {
 };
 
 export const cancelInvite = async (data: CancelInviteType) => {
-  const res = await instance.delete("/notification");
+  const { crewId, accountId } = data;
+
+  await instance.delete(`notification?crewId=${crewId}&accountId=${accountId}&crewAccept=WAIT`);
 };
 
 export const acceptInvite = async (data: AcceptInviteType) => {
@@ -115,5 +125,55 @@ export const getDisableTime = async (participantId: number[], selectedDates: str
 
 export const postVote = async (data: VoteDataType) => {
   const res = await instance.post("/vote", data);
+  return res.data;
+};
+
+export const checkNotification = async (data: CheckNotificationType) => {
+  const { notificationId, alarmType } = data;
+
+  const res = await instance.put(`/notification/${notificationId}`, { isChecked: true, alarmType });
+  return res.data;
+};
+
+export const deleteNotification = async (notificationId: number) => {
+  const res = await instance.delete(`/notification/${notificationId}`);
+};
+
+export const createSchedule = async (data: SchedulePostDataType) => {
+  const res = await instance.post(`/schedule`, data);
+  return res.data;
+};
+
+export const getUpcomingSchedule = async (): Promise<UpcomingSchedule[]> => {
+  const res = await instance.get("/dashboard/upcoming-events");
+  return res.data;
+};
+
+export const getCrewSchedules = async (
+  crewId: number,
+  startDate: string,
+  endDate: string,
+): Promise<CrewSchedulesType> => {
+  const res = await instance.get(`/schedule/filter/${crewId}`, {
+    params: {
+      startDate,
+      endDate,
+    },
+  });
+  return res.data;
+};
+
+export const deleteAccountInfo = async () => {
+  const res = await instance.delete("/account-info", {});
+  return res.data;
+};
+
+export const getScheduleDetail = async (scheduleId: number): Promise<ScheduleDetailType> => {
+  const res = await instance.get(`/schedule/${scheduleId}`);
+  return res.data;
+};
+
+export const deleteSchedule = async (scheduleId: number): Promise<DeleteScheduleResponseType> => {
+  const res = await instance.delete(`/schedule/${scheduleId}`);
   return res.data;
 };

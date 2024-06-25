@@ -11,12 +11,20 @@ import { useModalStore } from "@/store/useModalStore";
 import { calculateWeekDates } from "@/utils/calculateCalendarDates";
 
 import styles from "./WeeklyCalendar.module.scss";
+import WeeklyOneDayScheduleBar, { WeeklyScheduleBar } from "../../ScheduleBar/WeeklyScheduleBar";
 
 const cn = classNames.bind(styles);
 
-export default function WeeklyCalendar() {
+interface WeeklyCalendarProps {
+  scheduleData: any;
+}
+
+export default function WeeklyCalendar({ scheduleData }: WeeklyCalendarProps) {
   const [dragStartDayIndex, setDragStartDayIndex] = useState<number | null>(null);
   const [draggedHoursIndex, setDraggedHoursIndex] = useState<number[]>([]);
+  const dateContainerRef = useRef<HTMLDivElement | null>(null);
+  const [dateContainerWidth, setDateContainerWidth] = useState<number>(0);
+
   const { focusDate, setScheduleStart, setScheduleEnd } = useDateStore(
     useShallow((state) => ({
       focusDate: state.focusDate,
@@ -52,15 +60,46 @@ export default function WeeklyCalendar() {
     setDragStartDayIndex(null);
   };
 
+  useEffect(() => {
+    if (dateContainerRef.current) {
+      setDateContainerWidth(dateContainerRef.current.offsetWidth);
+    }
+  }, []);
+
   return (
     <div className={cn("container")}>
       <div className={cn("week-dates")}>
         {dates.map((date, idx) => (
-          <div key={idx} className={cn("date-container")}>
+          <div key={idx} className={cn("date-container")} ref={dateContainerRef}>
             <p className={cn("day")}>{DAYS[date.day()]}</p>
             <p className={cn("date", { today: date.isSame(dayjs(), "date") })}>{date.date()}</p>
           </div>
         ))}
+      </div>
+      <div className={cn("weekly-all-day-container")}>
+        {dates.map((date) =>
+          scheduleData.map(
+            (queryResult: any, index: number) =>
+              Array.isArray(queryResult.data) &&
+              queryResult.data.map((schedule: any) => {
+                const start = dayjs(schedule.startDateTime);
+                const end = dayjs(schedule.endDateTime);
+                return start.day() === date.day() && start.date() !== end.date() ? (
+                  <WeeklyScheduleBar
+                    key={schedule.scheduleId}
+                    crewIndex={index}
+                    scheduleId={schedule.scheduleId}
+                    startDate={schedule.startDateTime}
+                    endDate={schedule.endDateTime}
+                    title={schedule.title}
+                    crewColor={schedule.crewInfo.labelColor}
+                    elementWidth={dateContainerWidth - 10}
+                    weekStartDate={dates[0]}
+                  />
+                ) : null;
+              }),
+          ),
+        )}
       </div>
       <div className={cn("time-scroll-container")}>
         <div className={cn("label-container")}>
@@ -86,6 +125,24 @@ export default function WeeklyCalendar() {
                   onPointerUp={handleDragEnd}
                 />
               ))}
+              {scheduleData.map(
+                (queryResult: any) =>
+                  Array.isArray(queryResult.data) &&
+                  queryResult.data.map((schedule: any) => {
+                    const start = dayjs(schedule.startDateTime);
+                    const end = dayjs(schedule.endDateTime);
+                    return start.day() === date.day() && start.date() === end.date() ? (
+                      <WeeklyOneDayScheduleBar
+                        key={schedule.scheduleId}
+                        scheduleId={schedule.scheduleId}
+                        startDate={schedule.startDateTime}
+                        endDate={schedule.endDateTime}
+                        title={schedule.title}
+                        crewColor={schedule.crewInfo.labelColor}
+                      />
+                    ) : null;
+                  }),
+              )}
             </div>
           ))}
         </div>
