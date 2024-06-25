@@ -1,7 +1,8 @@
-import { useState, useEffect, RefObject } from "react";
+import { useState, useEffect, RefObject, Dispatch, SetStateAction } from "react";
 
 interface UseDragSelectReturn {
   draggedIndex: number[];
+  setDraggedIndex: Dispatch<SetStateAction<number[]>>;
 }
 
 function useDragSelect<T extends HTMLElement>(
@@ -74,7 +75,7 @@ function useDragSelect<T extends HTMLElement>(
     };
   }, [isDragging, startIndex, endIndex, containerRef, handleDragEnd]);
 
-  return { draggedIndex };
+  return { draggedIndex, setDraggedIndex };
 }
 
 export default useDragSelect;
