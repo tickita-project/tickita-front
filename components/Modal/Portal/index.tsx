@@ -8,6 +8,7 @@ import { useModalStore } from "@/store/useModalStore";
 import styles from "./Portal.module.scss";
 import CancelInviteModal from "../CancelInvite";
 import ChangeLeaderModal from "../ChangeLeader";
+import CoordinationModal from "../Coordination/CoordinationContainer";
 import CreateGroupModal from "../CreateGroup";
 import DeleteGroupModal from "../DeleteGroup";
 import ExitGroupModal from "../ExitGroup";
@@ -18,7 +19,7 @@ const cn = classNames.bind(styles);
 
 const MODAL_COMPONENTS: Record<ModalType, JSX.Element> = {
   [MODAL_TYPE.CREATE_GROUP]: <CreateGroupModal />,
-  [MODAL_TYPE.SCHEDULE_COORDINATION]: <ScheduleDetailModal />, // 타입때문에 임시로 ScheduleDetailModal 사용, 추후 변경 필요
+  [MODAL_TYPE.SCHEDULE_COORDINATION]: <CoordinationModal />, // 타입때문에 임시로 ScheduleDetailModal 사용, 추후 변경 필요
   [MODAL_TYPE.SCHEDULE_DETAILS]: <ScheduleDetailModal />, // 타입때문에 임시로 ScheduleDetailModal 사용, 추후 변경 필요
   [MODAL_TYPE.SCHEDULE_CREATE]: <ScheduleDetailModal />, // 타입때문에 임시로 ScheduleDetailModal 사용, 추후 변경 필요
   [MODAL_TYPE.SCHEDULE_EDIT]: <ScheduleDetailModal />, // 타입때문에 임시로 ScheduleDetailModal 사용, 추후 변경 필요
