@@ -34,6 +34,11 @@ export default function WeeklyCalendar({ scheduleData }: WeeklyCalendarProps) {
   );
   const { openModal } = useModalStore();
 
+  const resetDraggedIndex = () => {
+    setDraggedHoursIndex([]);
+    setDragStartDayIndex(null);
+  };
+
   const dates = calculateWeekDates(focusDate);
 
   const handleDragStart = (dayIndex: number, hourIndex: number) => {
@@ -54,10 +59,8 @@ export default function WeeklyCalendar({ scheduleData }: WeeklyCalendarProps) {
       setScheduleEnd(
         dates[dragStartDayIndex].add(draggedHoursIndex[draggedHoursIndex.length - 1] + 1, "hour"),
       );
-      openModal(MODAL_TYPE.SCHEDULE_CREATE);
+      openModal(MODAL_TYPE.SCHEDULE_CREATE, resetDraggedIndex);
     }
-    setDraggedHoursIndex([]);
-    setDragStartDayIndex(null);
   };
 
   useEffect(() => {
