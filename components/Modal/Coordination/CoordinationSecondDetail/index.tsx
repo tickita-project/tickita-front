@@ -142,16 +142,26 @@ const CoordinationSecondModal: React.FC<CoordinationSecondModalProps> = ({
       }));
       setCurrentGroup((prev) => {
         if (prev) {
+          const hoursArray = [...prev.hours, hour];
+          const uniqueHours = Array.from(new Set(hoursArray));
+    
           return {
             ...prev,
             endIndex: index,
             endHour: hour,
-            hours: [...new Set([...prev.hours, hour])],
+            hours: uniqueHours,
           };
         }
         return null;
       });
     }
+  };
+  const formatDate = (date: Date | null): string => {
+    if (!date) return "";
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
   };
 
   const handleMouseUp = () => {
@@ -309,21 +319,21 @@ const CoordinationSecondModal: React.FC<CoordinationSecondModalProps> = ({
           <label className={cn("label")}>마감 날짜:</label>
           <input
             type="date"
-            value={endDate}
+            value={formatDate(endDate as Date)}
             min={todayDateString}
-            onChange={(e) => setEndDate(e.target.value)}
+            onChange={(e) => setEndDate(new Date(e.target.value))}
             className={cn("date-input")}
           />
           <label className={cn("label")}>마감 시간:</label>
           <input
             type="time"
-            value={endTime}
-            onChange={(e) => setEndTime(e.target.value)}
+            value={formatDate(endTime as Date)}
+            onChange={(e) => setEndTime(new Date(e.target.value))}
             className={cn("time-input")}
           />
         </div>
         <p className={cn("description")}>
-          <span>{endDate}</span>일 <span>{endTime}</span>시 까지만 투표받을게요
+          <span>{formatDate(endDate as Date)}</span>일 <span>{formatDate(endTime as Date)}</span>시 까지만 투표받을게요
         </p>
       </section>
 
