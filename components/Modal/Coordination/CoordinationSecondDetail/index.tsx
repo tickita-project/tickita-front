@@ -144,7 +144,6 @@ const CoordinationSecondModal: React.FC<CoordinationSecondModalProps> = ({
         if (prev) {
           const hoursArray = [...prev.hours, hour];
           const uniqueHours = Array.from(new Set(hoursArray));
-    
           return {
             ...prev,
             endIndex: index,
@@ -333,7 +332,8 @@ const CoordinationSecondModal: React.FC<CoordinationSecondModalProps> = ({
           />
         </div>
         <p className={cn("description")}>
-          <span>{formatDate(endDate as Date)}</span>일 <span>{formatDate(endTime as Date)}</span>시 까지만 투표받을게요
+          <span>{formatDate(endDate as Date)}</span>일 <span>{formatDate(endTime as Date)}</span>시
+          까지만 투표받을게요
         </p>
       </section>
 
