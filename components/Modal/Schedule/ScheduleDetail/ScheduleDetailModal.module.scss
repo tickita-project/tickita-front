@@ -70,6 +70,7 @@
       gap: .625rem;
 
       .remove-button {
+        height: 1.875rem;
         padding: 0;
         transition: transform 0.5s ease;
 
@@ -79,6 +80,7 @@
       }
 
       .close-button {
+        height: 1.875rem;
         transition: transform 0.5s ease;
 
         &:hover {
