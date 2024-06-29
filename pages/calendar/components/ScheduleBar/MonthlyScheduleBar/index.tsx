@@ -3,6 +3,9 @@ import dayjs, { Dayjs } from "dayjs";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 
+import { MODAL_TYPE } from "@/constants/modalType";
+import { useModalStore } from "@/store/useModalStore";
+
 import { GroupColorType } from "@/types/type";
 
 import styles from "./MonthlyScheduleBar.module.scss";
@@ -20,6 +23,7 @@ interface MonthlyScheduleBarType {
   endDate: string;
   crewColor: GroupColorType;
   crewIndex: number;
+  dateWidth: number;
 }
 
 export default function MonthlyScheduleBar({
@@ -31,21 +35,47 @@ export default function MonthlyScheduleBar({
   endDate,
   crewColor,
   crewIndex,
+  dateWidth,
 }: MonthlyScheduleBarType) {
+  const { openModal } = useModalStore();
+  const start = dayjs(startDate);
+  const end = dayjs(endDate);
   const { scheduleBarStart, scheduleBarEnd } = getScheduleBarStartEndDate(
-    dayjs(startDate),
-    dayjs(endDate),
+    start,
+    end,
     monthStart,
     monthEnd,
   );
   const dividedArray = divideScheduleByWeek(scheduleBarStart, scheduleBarEnd);
-}
+  const startWeekDiff = scheduleBarStart.diff(monthStart, "week"); //첫 바가 몇번째 주
 
-interface WeekScheduleBarProps {
-  start: Dayjs;
-  end: Dayjs;
+  dividedArray.map((week, index) => {
+    const dates = week.start.diff(week.end, "date") + 1; // 일주일중 몇일 인지 (width)
+    const day = week.start.day();
+    return (
+      <div
+        key={index}
+        className={cn("container")}
+        style={{
+          backgroundColor: crewColor,
+          width: `${dateWidth * dates}px`,
+          top: `${startWeekDiff * 108 + (crewIndex + 1) * 25}px`,
+          left: `${dateWidth * day + 1}px`,
+          zIndex: `${day + 2}px`,
+        }}
+        onClick={() => openModal(MODAL_TYPE.SCHEDULE_DETAILS, scheduleId)}
+      >
+        {index === 0 && (
+          <p className={cn("time")}>
+            {start.format("HH : mm")} ~ {end.format("HH : mm")}
+          </p>
+        )}
+
+        <p className={cn("title")}>{title}</p>
+      </div>
+    );
+  });
 }
-function WeekScheduleBar({ start, end }: WeekScheduleBarProps) {}
 
 function getScheduleBarStartEndDate(
   scheduleStart: Dayjs,
