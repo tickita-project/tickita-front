@@ -40,6 +40,7 @@ $border: .0625rem solid $gray400;
     grid-template-rows: repeat(6, 1fr);
     background-color: $gray400;
     grid-gap: .0625rem;
+    position: relative;
 
     .date-container {
       position: relative;

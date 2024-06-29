@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import classNames from "classnames/bind";
 import dayjs from "dayjs";
@@ -14,6 +14,7 @@ import { useModalStore } from "@/store/useModalStore";
 import { calculateMonthDates } from "@/utils/calculateCalendarDates";
 
 import styles from "./MonthlyCalendar.module.scss";
+import MonthlyScheduleBar from "../../ScheduleBar/MonthlyScheduleBar";
 
 const cn = classNames.bind(styles);
 
@@ -23,6 +24,8 @@ interface MonthlyCalendarProps {
 
 export default function MonthlyCalendar({ scheduleData }: MonthlyCalendarProps) {
   const dragContainerRef = useRef<HTMLDivElement>(null);
+  const dateContainerRef = useRef<HTMLDivElement | null>(null);
+  const [dateContainerWidth, setDateContainerWidth] = useState<number>(0);
   const { focusDate, setFocusDate, setViewDate, setScheduleStart, setScheduleEnd } = useDateStore(
     useShallow((state) => ({
       focusDate: state.focusDate,
@@ -65,6 +68,12 @@ export default function MonthlyCalendar({ scheduleData }: MonthlyCalendarProps) 
   const { draggedIndex, setDraggedIndex } = useDragSelect(dragContainerRef, handleDragEnd);
   const scrollRef = useScroll<HTMLDivElement>(handleScrollDownDebounced, handleScrollUpDebounced);
 
+  useEffect(() => {
+    if (dateContainerRef.current) {
+      setDateContainerWidth(dateContainerRef.current.offsetWidth);
+    }
+  }, []);
+
   return (
     <div className={cn("container")} ref={scrollRef}>
       <div className={cn("month-header")}>
@@ -80,12 +89,34 @@ export default function MonthlyCalendar({ scheduleData }: MonthlyCalendarProps) 
           const isToday = date.isSame(dayjs(), "date");
           const isSelected = draggedIndex.includes(i);
           return (
-            <div key={i} className={cn("date-container", { selected: isSelected })} data-index={i}>
+            <div
+              key={i}
+              className={cn("date-container", { selected: isSelected })}
+              data-index={i}
+              ref={dateContainerRef}
+            >
               <p className={cn("date", { today: isToday, "other-month": !isThisMonthDay })}>
                 {date.date()}
               </p>
             </div>
           );
+        })}
+        {scheduleData.map((queryResult: any, index: number) => {
+          Array.isArray(queryResult.data) &&
+            queryResult.data.map((schedule: any) => {
+              <MonthlyScheduleBar
+                key={schedule.scheduleId}
+                monthStart={dates[0]}
+                monthEnd={dates[41]}
+                scheduleId={schedule.scheduleId}
+                startDate={schedule.startDate}
+                endDate={schedule.endDate}
+                title={schedule.title}
+                crewColor={schedule.crewInfo.labelColor}
+                crewIndex={index}
+                dateWidth={dateContainerWidth}
+              />;
+            });
         })}
       </div>
     </div>

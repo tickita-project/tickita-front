@@ -47,34 +47,40 @@ export default function MonthlyScheduleBar({
     monthEnd,
   );
   const dividedArray = divideScheduleByWeek(scheduleBarStart, scheduleBarEnd);
+  console.log(dividedArray);
   const startWeekDiff = scheduleBarStart.diff(monthStart, "week"); //첫 바가 몇번째 주
 
-  dividedArray.map((week, index) => {
-    const dates = week.start.diff(week.end, "date") + 1; // 일주일중 몇일 인지 (width)
-    const day = week.start.day();
-    return (
-      <div
-        key={index}
-        className={cn("container")}
-        style={{
-          backgroundColor: crewColor,
-          width: `${dateWidth * dates}px`,
-          top: `${startWeekDiff * 108 + (crewIndex + 1) * 25}px`,
-          left: `${dateWidth * day + 1}px`,
-          zIndex: `${day + 2}px`,
-        }}
-        onClick={() => openModal(MODAL_TYPE.SCHEDULE_DETAILS, scheduleId)}
-      >
-        {index === 0 && (
-          <p className={cn("time")}>
-            {start.format("HH : mm")} ~ {end.format("HH : mm")}
-          </p>
-        )}
+  return (
+    <>
+      {dividedArray.map((week, index) => {
+        const dates = week.start.diff(week.end, "date") + 1; // 일주일중 몇일 인지 (width)
+        const day = week.start.day();
+        return (
+          <div
+            key={index}
+            className={cn("container")}
+            style={{
+              backgroundColor: crewColor,
+              width: `${dateWidth * dates}px`,
+              top: `${startWeekDiff * 108 + (crewIndex + 1) * 25}px`,
+              left: `${dateWidth * day + 1}px`,
+              zIndex: `${day + 2}px`,
+            }}
+            onClick={() => openModal(MODAL_TYPE.SCHEDULE_DETAILS, scheduleId)}
+          >
+            {index === 0 && (
+              <p className={cn("time")}>
+                {start.format("HH : mm")} ~ {end.format("HH : mm")}
+              </p>
+            )}
 
-        <p className={cn("title")}>{title}</p>
-      </div>
-    );
-  });
+            <p className={cn("title")}>{title}</p>
+          </div>
+        );
+      })}
+      ;
+    </>
+  );
 }
 
 function getScheduleBarStartEndDate(
