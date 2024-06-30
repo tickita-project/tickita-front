@@ -53,13 +53,7 @@ export default function DailyCalendar({ scheduleData }: DailyCalendarProps) {
               const start = dayjs(schedule.startDateTime);
               const end = dayjs(schedule.endDateTime);
               return end.diff(start, "days") >= 1 ? (
-                <DailyAllDayScheduleBar
-                  key={schedule.scheduleId}
-                  scheduleId={schedule.scheduleId}
-                  endDate={schedule.endDateTime}
-                  title={schedule.title}
-                  crewColor={schedule.crewInfo.labelColor}
-                />
+                <DailyAllDayScheduleBar key={schedule.scheduleId} scheduleDetail={schedule} />
               ) : null;
             }),
         )}
@@ -85,11 +79,7 @@ export default function DailyCalendar({ scheduleData }: DailyCalendarProps) {
                 <DailyScheduleBar
                   index={index}
                   key={schedule.scheduleId}
-                  scheduleId={schedule.scheduleId}
-                  startDate={schedule.startDateTime}
-                  endDate={schedule.endDateTime}
-                  title={schedule.title}
-                  crewColor={schedule.crewInfo.labelColor}
+                  scheduleDetail={schedule}
                 />
               ) : null;
             }),

@@ -4,32 +4,21 @@ import dayjs from "dayjs";
 import { MODAL_TYPE } from "@/constants/modalType";
 import { useModalStore } from "@/store/useModalStore";
 
-import { GroupColorType } from "@/types/type";
+import { ScheduleDetailType } from "@/types/type";
 
 import styles from "./DailyScheduleBar.module.scss";
 
 const cn = classNames.bind(styles);
 
-interface DailyScheduleBarType {
+interface DailyScheduleBarProps {
   index: number;
-  scheduleId: number;
-  title: string;
-  startDate: string;
-  endDate: string;
-  crewColor: GroupColorType;
+  scheduleDetail: ScheduleDetailType;
 }
 
-export default function DailyScheduleBar({
-  index,
-  scheduleId,
-  title,
-  startDate,
-  endDate,
-  crewColor,
-}: DailyScheduleBarType) {
+export default function DailyScheduleBar({ index, scheduleDetail }: DailyScheduleBarProps) {
   const { openModal } = useModalStore();
-  const start = dayjs(startDate);
-  const end = dayjs(endDate);
+  const start = dayjs(scheduleDetail.startDateTime);
+  const end = dayjs(scheduleDetail.endDateTime);
 
   const startHour = start.get("hour");
   const timeDiff = end.diff(start, "hours");
@@ -38,48 +27,40 @@ export default function DailyScheduleBar({
     <div
       className={cn("container")}
       style={{
-        backgroundColor: crewColor,
+        backgroundColor: scheduleDetail.crewInfo.labelColor,
         zIndex: zIndex,
         left: `${70 + index * 180}px`,
         top: `${startHour * 56 + 1}px`,
         height: `${56 * timeDiff}px`,
       }}
-      onClick={() => openModal(MODAL_TYPE.SCHEDULE_DETAILS, scheduleId)}
+      onClick={() => openModal(MODAL_TYPE.SCHEDULE_DETAILS, scheduleDetail.scheduleId)}
     >
       <p className={cn("time")}>
         {start.format("HH : mm")} ~ {end.format("HH : mm")}
       </p>
-      <p className={cn("title")}>{title}</p>
+      <p className={cn("title")}>{scheduleDetail.title}</p>
     </div>
   );
 }
 
 interface DailyAllDayScheduleBarType {
-  scheduleId: number;
-  title: string;
-  endDate: string;
-  crewColor: GroupColorType;
+  scheduleDetail: ScheduleDetailType;
 }
 
-export function DailyAllDayScheduleBar({
-  scheduleId,
-  title,
-  endDate,
-  crewColor,
-}: DailyAllDayScheduleBarType) {
+export function DailyAllDayScheduleBar({ scheduleDetail }: DailyAllDayScheduleBarType) {
   const { openModal } = useModalStore();
-  const end = dayjs(endDate);
+  const end = dayjs(scheduleDetail.endDateTime);
 
   return (
     <div
       className={cn("all-container")}
-      style={{ backgroundColor: crewColor, zIndex: "2" }}
-      onClick={() => openModal(MODAL_TYPE.SCHEDULE_DETAILS, scheduleId)}
+      style={{ backgroundColor: scheduleDetail.crewInfo.labelColor, zIndex: "2" }}
+      onClick={() => openModal(MODAL_TYPE.SCHEDULE_DETAILS, scheduleDetail.scheduleId)}
     >
       <p className={cn("end")}>
         ~ {end.format("MM")}.{end.format("DD")} 까지
       </p>
-      <p className={cn("title")}>{title}</p>
+      <p className={cn("title")}>{scheduleDetail.title}</p>
     </div>
   );
 }
