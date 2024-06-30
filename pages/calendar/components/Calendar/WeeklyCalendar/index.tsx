@@ -90,12 +90,8 @@ export default function WeeklyCalendar({ scheduleData }: WeeklyCalendarProps) {
                 return start.day() === date.day() && start.date() !== end.date() ? (
                   <WeeklyScheduleBar
                     key={schedule.scheduleId}
+                    scheduleDetails={schedule}
                     crewIndex={index}
-                    scheduleId={schedule.scheduleId}
-                    startDate={schedule.startDateTime}
-                    endDate={schedule.endDateTime}
-                    title={schedule.title}
-                    crewColor={schedule.crewInfo.labelColor}
                     elementWidth={dateContainerWidth - 10}
                     weekStartDate={dates[0]}
                   />
@@ -137,11 +133,7 @@ export default function WeeklyCalendar({ scheduleData }: WeeklyCalendarProps) {
                     return start.day() === date.day() && start.date() === end.date() ? (
                       <WeeklyOneDayScheduleBar
                         key={schedule.scheduleId}
-                        scheduleId={schedule.scheduleId}
-                        startDate={schedule.startDateTime}
-                        endDate={schedule.endDateTime}
-                        title={schedule.title}
-                        crewColor={schedule.crewInfo.labelColor}
+                        scheduleDetails={schedule}
                       />
                     ) : null;
                   }),
