@@ -47,7 +47,6 @@ export default function MonthlyScheduleBar({
     monthEnd,
   );
   const dividedArray = divideScheduleByWeek(scheduleBarStart, scheduleBarEnd);
-  console.log(dividedArray);
   const startWeekDiff = scheduleBarStart.diff(monthStart, "week"); //첫 바가 몇번째 주
 
   return (

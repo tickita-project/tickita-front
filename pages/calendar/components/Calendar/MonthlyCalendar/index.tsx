@@ -104,18 +104,20 @@ export default function MonthlyCalendar({ scheduleData }: MonthlyCalendarProps) 
         {scheduleData.map((queryResult: any, index: number) => {
           Array.isArray(queryResult.data) &&
             queryResult.data.map((schedule: any) => {
-              <MonthlyScheduleBar
-                key={schedule.scheduleId}
-                monthStart={dates[0]}
-                monthEnd={dates[41]}
-                scheduleId={schedule.scheduleId}
-                startDate={schedule.startDate}
-                endDate={schedule.endDate}
-                title={schedule.title}
-                crewColor={schedule.crewInfo.labelColor}
-                crewIndex={index}
-                dateWidth={dateContainerWidth}
-              />;
+              return (
+                <MonthlyScheduleBar
+                  key={schedule.scheduleId}
+                  monthStart={dates[0]}
+                  monthEnd={dates[41]}
+                  scheduleId={schedule.scheduleId}
+                  startDate={schedule.startDateTime}
+                  endDate={schedule.endDateTime}
+                  title={schedule.title}
+                  crewColor={schedule.crewInfo.labelColor}
+                  crewIndex={index}
+                  dateWidth={dateContainerWidth}
+                />
+              );
             });
         })}
       </div>
