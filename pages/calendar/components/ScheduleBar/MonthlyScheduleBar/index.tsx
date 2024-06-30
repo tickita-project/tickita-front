@@ -63,7 +63,7 @@ export default function MonthlyScheduleBar({
               width: `${dateWidth * dates}px`,
               top: `${startWeekDiff * 108 + (crewIndex + 1) * 25}px`,
               left: `${dateWidth * day + 1}px`,
-              zIndex: `${day + 2}px`,
+              zIndex: `${day + 2}`,
             }}
             onClick={() => openModal(MODAL_TYPE.SCHEDULE_DETAILS, scheduleId)}
           >

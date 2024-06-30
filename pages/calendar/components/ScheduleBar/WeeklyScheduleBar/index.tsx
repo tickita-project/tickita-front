@@ -4,30 +4,20 @@ import dayjs, { Dayjs } from "dayjs";
 import { MODAL_TYPE } from "@/constants/modalType";
 import { useModalStore } from "@/store/useModalStore";
 
-import { GroupColorType } from "@/types/type";
+import { GroupColorType, ScheduleDetailType } from "@/types/type";
 
 import styles from "./WeeklyScheduleBar.module.scss";
 
-interface ScheduleBarType {
-  scheduleId: number;
-  title: string;
-  startDate: string;
-  endDate: string;
-  crewColor: GroupColorType;
+interface WeeklyOneDayScheduleBarProps {
+  scheduleDetails: ScheduleDetailType;
 }
 
 const cn = classNames.bind(styles);
 
-export default function WeeklyOneDayScheduleBar({
-  scheduleId,
-  title,
-  startDate,
-  endDate,
-  crewColor,
-}: ScheduleBarType) {
+export default function WeeklyOneDayScheduleBar({ scheduleDetails }: WeeklyOneDayScheduleBarProps) {
   const { openModal } = useModalStore();
-  const start = dayjs(startDate);
-  const end = dayjs(endDate);
+  const start = dayjs(scheduleDetails.startDateTime);
+  const end = dayjs(scheduleDetails.endDateTime);
   const startHour = start.get("hour");
   const timeDiff = end.diff(start, "hours");
   const zIndex = startHour + 2;
@@ -35,41 +25,37 @@ export default function WeeklyOneDayScheduleBar({
     <div
       className={cn("container")}
       style={{
-        backgroundColor: crewColor,
+        backgroundColor: scheduleDetails.crewInfo.labelColor,
         left: "15px",
         zIndex: zIndex,
         top: `${startHour * 80 + 1}px`,
         height: `${80 * timeDiff - 5}px`,
       }}
-      onClick={() => openModal(MODAL_TYPE.SCHEDULE_DETAILS, scheduleId)}
+      onClick={() => openModal(MODAL_TYPE.SCHEDULE_DETAILS, scheduleDetails.scheduleId)}
     >
       <p className={cn("time")}>
         {start.format("HH : mm")} ~ {end.format("HH : mm")}
       </p>
-      <p className={cn("title")}>{title}</p>
+      <p className={cn("title")}>{scheduleDetails.title}</p>
     </div>
   );
 }
 
-interface WeeklyScheduleBarType extends ScheduleBarType {
+interface WeeklyScheduleBarProps extends WeeklyOneDayScheduleBarProps {
   crewIndex: number;
   elementWidth: number;
   weekStartDate: Dayjs;
 }
 
 export function WeeklyScheduleBar({
-  scheduleId,
-  title,
-  startDate,
-  endDate,
-  crewColor,
+  scheduleDetails,
   crewIndex,
   elementWidth,
   weekStartDate,
-}: WeeklyScheduleBarType) {
+}: WeeklyScheduleBarProps) {
   const { openModal } = useModalStore();
-  const start = dayjs(startDate);
-  const end = dayjs(endDate);
+  const start = dayjs(scheduleDetails.startDateTime);
+  const end = dayjs(scheduleDetails.endDateTime);
   const zIndex = 2 + start.day();
   const weekEnd = weekStartDate.add(6, "day");
 
@@ -83,18 +69,18 @@ export function WeeklyScheduleBar({
     <div
       className={cn("all-container")}
       style={{
-        backgroundColor: crewColor,
+        backgroundColor: scheduleDetails.crewInfo.labelColor,
         zIndex: zIndex,
         top: `${crewIndex * 27 + 1}px`,
         left: `${adjustedStart.day() * elementWidth + 100}px`,
         width: width,
       }}
-      onClick={() => openModal(MODAL_TYPE.SCHEDULE_DETAILS, scheduleId)}
+      onClick={() => openModal(MODAL_TYPE.SCHEDULE_DETAILS, scheduleDetails.scheduleId)}
     >
       <p className={cn("time")}>
         {start.format("MM.DD")} ~ {end.format("MM.DD")}
       </p>
-      <p className={cn("title")}>{title}</p>
+      <p className={cn("title")}>{scheduleDetails.title}</p>
     </div>
   );
 }
