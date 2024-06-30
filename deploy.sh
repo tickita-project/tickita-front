@@ -6,7 +6,7 @@ git commit -m "자동 커밋: 자동 배포를 위한 변경사항 커밋"
 
 echo "최신 변경 사항 가져오기..."
 git fetch
-git pull origin develop
+git pull origin main
 
 echo "의존성 설치..."
 export NODE_ENV=production # 배포 환경에서만 필요한 의존성 설치

@@ -6,7 +6,9 @@ import dayjs from "dayjs";
 
 import { deleteSchedule, getScheduleDetail } from "@/apis/apis";
 import { scheduleKey } from "@/constants/queryKey";
+import useDeleteSchedule from "@/hooks/useDeleteSchedule";
 import { useGetUserInfo } from "@/hooks/useGetUserInfo";
+import useToast from "@/hooks/useToast";
 import { useModalStore } from "@/store/useModalStore";
 
 import styles from "./ScheduleDetailModal.module.scss";
@@ -16,6 +18,8 @@ const cn = classNames.bind(styles);
 export default function ScheduleDetailModal() {
   const { closeModal, data: scheduleId } = useModalStore();
   const { data: userInfo } = useGetUserInfo();
+  const { mutate } = useDeleteSchedule(scheduleId);
+  const { successToast, errorToast } = useToast();
 
   const { data } = useQuery({
     queryKey: scheduleKey.detail(scheduleId),
@@ -27,11 +31,16 @@ export default function ScheduleDetailModal() {
   const start = dayjs(data?.startDateTime).format("YYYY.MM.DD HH:mm");
   const end = dayjs(data?.endDateTime).format("YYYY.MM.DD HH:mm");
 
-  const handleDelete = async () => {
-    const data = await deleteSchedule(scheduleId);
-    if (data) {
-      closeModal();
-    }
+  const handleDelete = () => {
+    mutate(scheduleId, {
+      onSuccess: () => {
+        successToast("일정이 삭제되었습니다!");
+        closeModal();
+      },
+      onError: () => {
+        errorToast("일정 삭제중 오류가 발생했습니다!");
+      },
+    });
   };
 
   return (
@@ -101,4 +110,3 @@ export default function ScheduleDetailModal() {
     </div>
   );
 }
-//<div className={cn("")}></div>
