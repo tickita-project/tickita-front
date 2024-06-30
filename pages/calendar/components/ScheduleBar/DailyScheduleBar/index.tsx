@@ -33,7 +33,7 @@ export default function DailyScheduleBar({ index, scheduleDetail }: DailySchedul
         top: `${startHour * 56 + 1}px`,
         height: `${56 * timeDiff}px`,
       }}
-      onClick={() => openModal(MODAL_TYPE.SCHEDULE_DETAILS, scheduleDetail.scheduleId)}
+      onClick={() => openModal(MODAL_TYPE.SCHEDULE_DETAILS, scheduleDetail)}
     >
       <p className={cn("time")}>
         {start.format("HH : mm")} ~ {end.format("HH : mm")}
@@ -55,7 +55,7 @@ export function DailyAllDayScheduleBar({ scheduleDetail }: DailyAllDayScheduleBa
     <div
       className={cn("all-container")}
       style={{ backgroundColor: scheduleDetail.crewInfo.labelColor, zIndex: "2" }}
-      onClick={() => openModal(MODAL_TYPE.SCHEDULE_DETAILS, scheduleDetail.scheduleId)}
+      onClick={() => openModal(MODAL_TYPE.SCHEDULE_DETAILS, scheduleDetail)}
     >
       <p className={cn("end")}>
         ~ {end.format("MM")}.{end.format("DD")} 까지

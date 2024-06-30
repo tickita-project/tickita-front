@@ -1,11 +1,9 @@
 import Image from "next/image";
 
-import { useQuery } from "@tanstack/react-query";
 import classNames from "classnames/bind";
 import dayjs from "dayjs";
 
-import { deleteSchedule, getScheduleDetail } from "@/apis/apis";
-import { scheduleKey } from "@/constants/queryKey";
+import { deleteSchedule } from "@/apis/apis";
 import { useGetUserInfo } from "@/hooks/useGetUserInfo";
 import { useModalStore } from "@/store/useModalStore";
 
@@ -14,21 +12,18 @@ import styles from "./ScheduleDetailModal.module.scss";
 const cn = classNames.bind(styles);
 
 export default function ScheduleDetailModal() {
-  const { closeModal, data: scheduleId } = useModalStore();
+  const { closeModal, data: scheduleDetail } = useModalStore();
   const { data: userInfo } = useGetUserInfo();
 
-  const { data } = useQuery({
-    queryKey: scheduleKey.detail(scheduleId),
-    queryFn: () => getScheduleDetail(scheduleId),
-  });
-
-  const place = data?.location ? data.location : "정해진 장소가 없어요.";
-  const description = data?.description ? data.description : "입력된 설명이 없어요.";
-  const start = dayjs(data?.startDateTime).format("YYYY.MM.DD HH:mm");
-  const end = dayjs(data?.endDateTime).format("YYYY.MM.DD HH:mm");
+  const place = scheduleDetail?.location ? scheduleDetail.location : "정해진 장소가 없어요.";
+  const description = scheduleDetail?.description
+    ? scheduleDetail.description
+    : "입력된 설명이 없어요.";
+  const start = dayjs(scheduleDetail?.startDateTime).format("YYYY.MM.DD HH:mm");
+  const end = dayjs(scheduleDetail?.endDateTime).format("YYYY.MM.DD HH:mm");
 
   const handleDelete = async () => {
-    const data = await deleteSchedule(scheduleId);
+    const data = await deleteSchedule(scheduleDetail);
     if (data) {
       closeModal();
     }
@@ -38,12 +33,15 @@ export default function ScheduleDetailModal() {
     <div className={cn("container")}>
       <div className={cn("header")}>
         <div className={cn("group")}>
-          <div className={cn("color")} style={{ backgroundColor: data?.crewInfo.labelColor }}></div>
-          <h2 className={cn("name")}>{data?.crewInfo.crewName}</h2>
-          {data?.coordinate && <p className={cn("coordinated")}>조율된 일정</p>}
+          <div
+            className={cn("color")}
+            style={{ backgroundColor: scheduleDetail?.crewInfo.labelColor }}
+          ></div>
+          <h2 className={cn("name")}>{scheduleDetail?.crewInfo.crewName}</h2>
+          {scheduleDetail?.coordinate && <p className={cn("coordinated")}>조율된 일정</p>}
         </div>
         <div className={cn("buttons")}>
-          {data?.coordinate || (
+          {scheduleDetail?.coordinate || (
             //후에 수정버튼도 여기 추가
             <button className={cn("remove-button")} onClick={handleDelete}>
               <Image src="/icons/trash-icon.svg" alt="일정삭제" width={30} height={30} />
@@ -55,7 +53,7 @@ export default function ScheduleDetailModal() {
         </div>
       </div>
       <div className={cn("contents")}>
-        <h1 className={cn("title")}>{data?.title}</h1>
+        <h1 className={cn("title")}>{scheduleDetail?.title}</h1>
         <div className={cn("time-place")}>
           <div className={cn("time-container")}>
             <p className={cn("label")}>시간</p>
@@ -84,10 +82,12 @@ export default function ScheduleDetailModal() {
         <div className={cn("participants-container")}>
           <p className={cn("label")}>참가자</p>
           <div className={cn("participants")}>
-            {data && data.participants && data.participants.length >= 2 ? (
-              data.participants
-                .filter((participant) => participant.accountId !== userInfo?.accountId)
-                .map((participant) => (
+            {scheduleDetail &&
+            scheduleDetail.participants &&
+            scheduleDetail.participants.length >= 2 ? (
+              scheduleDetail.participants
+                .filter((participant: any) => participant.accountId !== userInfo?.accountId)
+                .map((participant: any) => (
                   <p className={cn("participant")} key={participant.accountId}>
                     {participant.nickName}
                   </p>

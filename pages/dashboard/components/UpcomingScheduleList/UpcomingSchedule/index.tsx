@@ -1,5 +1,6 @@
 import classNames from "classnames/bind";
 
+import { getScheduleDetail } from "@/apis/apis";
 import { MODAL_TYPE } from "@/constants/modalType";
 import { useModalStore } from "@/store/useModalStore";
 import { formatKoreanDateTime } from "@/utils/formatKoreanDateTime";
@@ -26,8 +27,11 @@ export default function UpcomingSchedule({
   const { openModal } = useModalStore();
   const isToday = daysRemaining === "D-DAY";
 
-  const handleUpcomingScheduleClick = () => {
-    openModal(MODAL_TYPE.SCHEDULE_DETAILS, scheduleId);
+  const handleUpcomingScheduleClick = async () => {
+    const data = await getScheduleDetail(scheduleId);
+    if (data) {
+      openModal(MODAL_TYPE.SCHEDULE_DETAILS, data);
+    }
   };
 
   return (
