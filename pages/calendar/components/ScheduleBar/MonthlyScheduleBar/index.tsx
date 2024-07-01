@@ -6,7 +6,7 @@ import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 import { MODAL_TYPE } from "@/constants/modalType";
 import { useModalStore } from "@/store/useModalStore";
 
-import { GroupColorType } from "@/types/type";
+import { ScheduleDetailType } from "@/types/type";
 
 import styles from "./MonthlyScheduleBar.module.scss";
 
@@ -17,11 +17,7 @@ dayjs.extend(isSameOrAfter);
 interface MonthlyScheduleBarType {
   monthStart: Dayjs;
   monthEnd: Dayjs;
-  scheduleId: number;
-  title: string;
-  startDate: string;
-  endDate: string;
-  crewColor: GroupColorType;
+  scheduleDetail: ScheduleDetailType;
   crewIndex: number;
   dateWidth: number;
 }
@@ -29,17 +25,13 @@ interface MonthlyScheduleBarType {
 export default function MonthlyScheduleBar({
   monthStart,
   monthEnd,
-  scheduleId,
-  title,
-  startDate,
-  endDate,
-  crewColor,
+  scheduleDetail,
   crewIndex,
   dateWidth,
 }: MonthlyScheduleBarType) {
   const { openModal } = useModalStore();
-  const start = dayjs(startDate);
-  const end = dayjs(endDate);
+  const start = dayjs(scheduleDetail.startDateTime);
+  const end = dayjs(scheduleDetail.endDateTime);
   const { scheduleBarStart, scheduleBarEnd } = getScheduleBarStartEndDate(
     start,
     end,
@@ -59,13 +51,13 @@ export default function MonthlyScheduleBar({
             key={index}
             className={cn("container")}
             style={{
-              backgroundColor: crewColor,
+              backgroundColor: scheduleDetail.crewInfo.labelColor,
               width: `${dateWidth * dates}px`,
               top: `${startWeekDiff * 108 + (crewIndex + 1) * 25}px`,
               left: `${dateWidth * day + 1}px`,
               zIndex: `${day + 2}`,
             }}
-            onClick={() => openModal(MODAL_TYPE.SCHEDULE_DETAILS, scheduleId)}
+            onClick={() => openModal(MODAL_TYPE.SCHEDULE_DETAILS, scheduleDetail)}
           >
             {index === 0 && (
               <p className={cn("time")}>
@@ -73,7 +65,7 @@ export default function MonthlyScheduleBar({
               </p>
             )}
 
-            <p className={cn("title")}>{title}</p>
+            <p className={cn("title")}>{scheduleDetail.title}</p>
           </div>
         );
       })}

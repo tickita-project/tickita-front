@@ -109,11 +109,7 @@ export default function MonthlyCalendar({ scheduleData }: MonthlyCalendarProps) 
                   key={schedule.scheduleId}
                   monthStart={dates[0]}
                   monthEnd={dates[41]}
-                  scheduleId={schedule.scheduleId}
-                  startDate={schedule.startDateTime}
-                  endDate={schedule.endDateTime}
-                  title={schedule.title}
-                  crewColor={schedule.crewInfo.labelColor}
+                  scheduleDetail={scheduleData}
                   crewIndex={index}
                   dateWidth={dateContainerWidth}
                 />
