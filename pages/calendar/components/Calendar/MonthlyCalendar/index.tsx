@@ -107,9 +107,7 @@ export default function MonthlyCalendar({ scheduleData }: MonthlyCalendarProps) 
               return (
                 <MonthlyScheduleBar
                   key={schedule.scheduleId}
-                  monthStart={dates[0]}
-                  monthEnd={dates[41]}
-                  scheduleDetail={scheduleData}
+                  scheduleDetail={schedule}
                   crewIndex={index}
                   dateWidth={dateContainerWidth}
                 />
